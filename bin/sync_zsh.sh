@@ -30,14 +30,15 @@ if [[ -d ${HOME}/.oh-my-zsh ]]; then
 	# install autosuggestions and syntax_highlignt
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] && git clone git://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-git clone https://github.com/paulirish/git-open.git $ZSH_CUSTOM/plugins/git-open
-	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open" ] && git clone https://github.com/paulirish/git-open.git $ZSH_CUSTOM/plugins/git-open "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open"
+	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open" ] && git clone https://github.com/paulirish/git-open.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open"
 	[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 fi
 
 # get zshrc
 echo "cp my zshrc to ~/.zshrc" >&2
 cp "${WORKDIR}/zsh/zshrc" "${HOME}/.zshrc"
+echo "cp my inner config to ~/.config" >&2
+cp -r "${WORKDIR}/config" "${HOME}/.config"
 source "${HOME}/.zshrc"
 
 ## mkdir MYPATH
