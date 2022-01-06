@@ -58,8 +58,6 @@ export HISTFILE=~/.zsh_history
 
 # User locale config
 [ -f ${HOME}/.config/locale.sh ] && . ${HOME}/.config/locale.sh
-unsetopt correct_all
-unsetopt correct
 
 # User specific aliases and functions
 [ -f ${HOME}/.config/alias.sh ] && . ${HOME}/.config/alias.sh
@@ -94,6 +92,8 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 source $ZSH/oh-my-zsh.sh
+unsetopt correct_all
+unsetopt correct
 # This speeds up pasting w/ autosuggest
 # https://github.com/zsh-users/zsh-autosuggestions/issues/238
 pasteinit() {

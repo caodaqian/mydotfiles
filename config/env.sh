@@ -30,14 +30,15 @@ export TMUX_TMPDIR=${MYTMPDIR}/tmux
 ## GO env
 export GO111MODULE=on
 export GOPATH=${HOME}/.gopath
-export GOPROXY=https://goproxy.cn,https://proxy.golang.org,https://mirrors.aliyun.com/goproxy,direct
+export GOPROXY=${GOPROXY:-'https://goproxy.cn,https://proxy.golang.org,https://mirrors.aliyun.com/goproxy,direct'}
+export GOSUMDB=sum.golang.google.cn
 export GOBIN=$GOPATH/bin
 export GOTMPDIR=${MYTMPDIR}/go
 export PATH=${GOBIN}:${PATH}
 
 ## JAVA env
-export JAVA_HOME=/usr/local/opt/openjdk
-export JRE_HOME=/usr/local/opt/openjdk/jre
+export JAVA_HOME=${JAVA_HOME:-'/usr/local/opt/openjdk'}
+export JRE_HOME=${JRE_HOME:-'/usr/local/opt/openjdk/jre'}
 export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
 export PATH=${JAVA_HOME}/bin:${PATH}
 
@@ -67,7 +68,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 export PATH=${HOME}/.local/bin:${PATH}
 
 ## node config
-export NODE_HOME=${HOME}/.local/shard/nodejs
+export NODE_HOME=${NODE_HOME:-"${HOME}/.local/shard/nodejs"}
 export PATH={$NODE_HOME}/bin:${PATH}
 
 ## ranger config
