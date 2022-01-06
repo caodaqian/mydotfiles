@@ -69,7 +69,7 @@ export PATH=${HOME}/.local/bin:${PATH}
 
 ## node config
 export NODE_HOME=${NODE_HOME:-"${HOME}/.local/shard/nodejs"}
-export PATH={$NODE_HOME}/bin:${PATH}
+export PATH=${NODE_HOME}/bin:${PATH}
 
 ## ranger config
 export RANGER_LOAD_DEFAULT_RC=false
