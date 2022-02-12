@@ -6,7 +6,6 @@ Linux setting sync
 
 - [SyncBasicSettings](#syncbasicsettings)
   - [前置安装](#前置安装)
-  - [涉及编程环境](#涉及编程环境)
     - [zsh 自动安装的插件](#zsh-自动安装的插件)
     - [ranger 自动安装](#ranger-自动安装)
     - [tmux 自动安装](#tmux-自动安装)
@@ -17,50 +16,46 @@ Linux setting sync
 ## 前置安装
 
 - git
-- openssh-devel
-- Development Tools
 - sudo
-- wget
-- vim8.0+/neovim0.5+
-- nodejs
-- bash-language-server
-- intelephense
-- neovim-node-host
-- ncurses-devel
-- libevent
+- zsh
+- fzf
 - tmux
-- tpm
+- vim8.0+/neovim0.5+
+- wget
+- curl
+- intelephense
+- nodejs
 - python3
 - pip3
-- fzf
-- zsh
-
-## 涉及编程环境
-
-- Golang
-- PHP *coc-nvim*
-- Python3 *coc-nvim*
+- ranger
 
 ### zsh 自动安装的插件
 
 - powerlevel10k
 - zsh-autosuggestions
 - zsh-syntax_highlignting
+- git-open
 
 ### ranger 自动安装
 
-- ranger
 - ranger_devicons
 
 ### tmux 自动安装
 
-- tmux
 - ohmytmux
-- tpm
 
 ## 推荐应用
 
-- tmate
-- tmux-resurrect 保存/恢复 tmux 打开的会话
-- tmux-continum 自动定时保存和自动恢复会话
-- when-changed
+- tmate，多人协同会话
+- tmux-resurrect，保存/恢复 tmux 打开的会话
+- tmux-continum，自动定时保存和自动恢复会话
+- when-changed，文件监控执行
+- supervisor，进程监控拉起
+- ncdu，better du
+- duf，better df
+- bat，better cat
+- htop，better top
+- tldr，better man
+- jq，json 格式化以及查询
+- iftop，流量监测
+- cloc，代码统计工具

@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 ######################################
@@ -14,7 +14,6 @@ fi
 ######################################
 
 # init
-echo -ne "\e[5 q"
 export TERM=xterm-256color
 export TERM_ITALICS=true
 export CLICOLOR=1
@@ -40,7 +39,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="false"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM=$ZSH/custom
 setopt AUTO_CD
-#setopt INTERACTIVE_COMMENTS
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
@@ -73,17 +71,18 @@ plugins=(
 	common-aliases
 	git-open
 	sudo
-	thefuck
 	vscode
 	zsh-interactive-cd
-    encode64
-    git
-    jsontools
-    tmux
-    urltools
-    wd
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+	encode64
+	git
+	jsontools
+	tmux
+	urltools
+	fzf
+	wd
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	supervisor
 )
 
 ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -96,20 +95,20 @@ unsetopt correct
 # This speeds up pasting w/ autosuggest
 # https://github.com/zsh-users/zsh-autosuggestions/issues/238
 pasteinit() {
-  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+	OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+	zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
 }
-
 pastefinish() {
-  zle -N self-insert $OLD_SELF_INSERT
+	zle -N self-insert $OLD_SELF_INSERT
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
 
 # User configuration
+unalias duf
 TRAPWINCH() {
-  zle && { zle reset-prompt; zle -R }
+	zle && { zle reset-prompt; zle -R }
 }
 
 
@@ -118,7 +117,6 @@ TRAPWINCH() {
 bindkey '^R' fzf-history-widget
 bindkey '^T' fzf-file-widget
 bindkey '^F' find-in-file
-bindkey '^I' $fzf_default_completion
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

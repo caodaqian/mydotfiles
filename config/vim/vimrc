@@ -124,12 +124,13 @@ cabbrev w!! w !sudo tee % >/dev/null
 cnoremap w!! w !sudo tee % >/dev/null
 
 " -- basic mapping --------------------------------------------------------------
-let mapleader=";"
-let maplocalleader=";"
+let mapleader=" "
+let maplocalleader=" "
 map S :w<CR>
 map Q :q<CR>
 map <C-Q> :q!<CR>
-map <leader>r :source $MYVIMRC<CR>
+map <leader>R :source $MYVIMRC<CR>
+inoremap jj <esc>
 map sl :set nosplitright<CR>:vsplit<CR>
 map sr :set splitright<CR>:vsplit<CR>
 map su :set nosplitbelow<CR>:split<CR>
@@ -138,16 +139,16 @@ nnoremap < <<
 nnoremap > >>
 nnoremap H <home>
 nnoremap L <end>
-inoremap <C-H> <home>
-inoremap <C-L> <end>
+inoremap <C-H> <left>
+inoremap <C-L> <right>
+inoremap <C-J> <up>
+inoremap <C-K> <down>
 inoremap <C-E> <C-right>
 inoremap <C-B> <C-left>
-inoremap jj <esc>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-nnoremap /<space> :nohlsearch<CR>
 noremap <silent> <leader>y "+y
 noremap <silent> <leader>Y "+Y
 noremap <silent> <leader>p "+p
@@ -235,15 +236,18 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arzg/vim-colors-xcode'
 Plug 'vim-airline/vim-airline'
+
+" -- welcome page ---------------------
 Plug 'mhinz/vim-startify'
 
 " -- markdown -------------------------
-Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'iamcco/markdown-preview.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'dhruvasagar/vim-table-mode'
 
 " -- dir plugin -----------------------
 Plug 'francoiscabrol/ranger.vim'
+
+" -- buffer close ---------------------
 Plug 'rbgrouleff/bclose.vim'
 
 " -- text crary -----------------------
@@ -251,20 +255,21 @@ Plug 'gcmt/wildfire.vim'
 Plug 'tpope/vim-surround'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/vim-cursorword'
 Plug 'lfv89/vim-interestingwords'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'voldikss/vim-translator'
+Plug 'justinmk/vim-sneak'
+
+" -- code check -----------------------
+Plug 'dense-analysis/ale'
 
 " -- code write -----------------------
 Plug 'fatih/vim-go', { 'tag': '*', 'for': 'go' }
-Plug 'dgryski/vim-godef'
 Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
-Plug 'scrooloose/syntastic'
 Plug 'neoclide/jsonc.vim', { 'for': ['json', 'jsonc'] }
 Plug 'hail2u/vim-css3-syntax', { 'for': ['php', 'html', 'javascript', 'css'] }
 Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript'] }
@@ -272,16 +277,19 @@ Plug 'mattn/emmet-vim' " this plug for html
 
 " -- code crary -----------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tmhedberg/SimpylFold'
-Plug 'Chiel92/vim-autoformat'
+Plug 'tmhedberg/SimpylFold' " this plug for python fold
 Plug 'relastle/vim-nayvy'
 Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'go'] }
+Plug 'jiangmiao/auto-pairs'
+
+" -- window ---------------------------
+Plug 'voldikss/vim-floaterm'
 
 call plug#end()
 
 " -- indentLine setting -------------------------------------------------
 noremap <F5> :IndentLinesToggle<CR>
-let g:indentLine_char_list = ['¦', '┆', '┊', '|']
+let g:indentLine_char_list = ['┆', '┊', '|']
 let g:indentLine_enabled = 1
 let g:indentLine_faster = 1
 
@@ -293,19 +301,29 @@ nmap ga <Plug>(EasyAlign)
 let g:SimpylFold_docstring_preview=1
 
 " -- markdown ------------------------------------------------------------------
+let g:mkdp_auto_start = 1
+let g:mkdp_refresh_slow = 1
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_echo_preview_url = 1
+let g:mkdp_port = '5499'
 nmap <silent> <leader>mp <Plug>MarkdownPreview
 imap <silent> <leader>mp <Plug>MarkdownPreview
-nmap <silent> <leader>smp <Plug>StopMarkdownPreview
-imap <silent> <leader>smp <Plug>StopMarkdownPreview
+nmap <silent> <leader>mps <Plug>StopMarkdownPreview
+imap <silent> <leader>mps <Plug>StopMarkdownPreview
 
 " -- vim-table-mode setting ----------------------------------------------------
 let g:table_mode_corner='|'
 
+" -- bclose setting ------------------------------------------------------------
+nnoremap <Leader>bd :Bclose<CR>
+
 " -- vim-interestingwords setting ----------------------------------------------
-nnoremap <silent> gh :call InterestingWords('n')<cr>
-nnoremap <silent> gnh :call UncolorAllWords()<cr>
-nnoremap <silent> n :call WordNavigation('forward')<cr>
-nnoremap <silent> N :call WordNavigation('backward')<cr>
+nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
+nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+nnoremap <silent> n :call WordNavigation(1)<cr>
+nnoremap <silent> N :call WordNavigation(0)<cr>
+let g:interestingWordsRandomiseColors = 1
 
 " -- fzf settings -------------------------------------------------------------
 if exists('$TMUX')
@@ -313,8 +331,15 @@ if exists('$TMUX')
 else
 	let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 endif
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>l :Lines<CR>
 
-" -- vim-startify setting ------------------------------------------------------
+" -- sneak setting ------------------------------------------------------------
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+
+" -- vim-startify setting -----------------------------------------------------
 let g:startify_change_to_dir=0
 let g:startify_fortune_use_unicode=1
 let g:startify_session_autoload=1
@@ -326,167 +351,7 @@ let g:startify_lists = [
         \ { 'type': 'commands',  'header': ['   Commands']       },
         \ ]
 
-" -- coc.nvim setting ----------------------------------------------------------
-let g:coc_global_extensions = [
-	\ 'coc-calc',
-	\ 'coc-clangd',
-	\ 'coc-cmake',
-	\ 'coc-css',
-	\ 'coc-dash-complete',
-	\ 'coc-docker',
-	\ 'coc-dot-complete',
-	\ 'coc-explorer',
-	\ 'coc-flutter-tools',
-	\ 'coc-fzf-preview',
-	\ 'coc-git',
-	\ 'coc-gitignore',
-	\ 'coc-go',
-	\ 'coc-highlight',
-	\ 'coc-html',
-	\ 'coc-json',
-	\ 'coc-just-complete',
-	\ 'coc-lists',
-	\ 'coc-markdownlint',
-	\ 'coc-marketplace',
-	\ 'coc-phpls',
-	\ 'coc-prettier',
-	\ 'coc-pyright',
-	\ 'coc-python',
-	\ 'coc-sh',
-	\ 'coc-snippets',
-	\ 'coc-sql',
-	\ 'coc-syntax',
-	\ 'coc-tabnine',
-	\ 'coc-translator',
-	\ 'coc-tslint-plugin',
-	\ 'coc-tsserver',
-	\ 'coc-vimlsp',
-	\ 'coc-xml',
-	\ 'coc-yaml']
-set hidden
-set updatetime=200
-
-if has("patch-8.1.1564")
-	" Recently vim can merge signcolumn and number column into one
-	set signcolumn=number
-else
-	set signcolumn=yes
-endif
-inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-		let col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" Use <c-space> to trigger completion.
-if has('nvim')
-	inoremap <silent><expr> <c-space> coc#refresh()
-else
-	inoremap <silent><expr> <c-@> coc#refresh()
-endif
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-if exists('*complete_info')
-	inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" Use K to show documentation in preview window
-nnoremap <silent> <LEADER>h :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-	if (index(['vim','help'], &filetype) >= 0)
-			execute 'h '.expand('<cword>')
-	else
-			call CocAction('doHover')
-	endif
-endfunction
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-" Formatting selected code.
-xmap <leader>F	<Plug>(coc-format-selected)
-nmap <leader>F	<Plug>(coc-format-selected)
-" fold by coc
-augroup mygroup
-	autocmd!
-	" Setup formatexpr specified filetype(s).
-	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-	" Update signature help on jump placeholder.
-	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-" Remap for do codeAction of selected region
-function! s:cocActionsOpenFromSelected(type) abort
-	execute 'CocCommand actions.open ' . a:type
-endfunction
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-
-" explorer config
-nnoremap ff :CocCommand explorer<CR>
-let g:coc_explorer_global_presets = {
-	\   '.vim': {
-	\     'root-uri': '~/.vim',
-	\   },
-	\   'cocConfig': {
-	\      'root-uri': '~/.config/coc',
-	\   },
-	\   'tab': {
-	\     'position': 'tab',
-	\     'quit-on-open': v:true,
-	\   },
-	\   'tab:$': {
-	\     'position': 'tab:$',
-	\     'quit-on-open': v:true,
-	\   },
-	\   'floating': {
-	\     'position': 'floating',
-	\     'open-action-strategy': 'sourceWindow',
-	\   },
-	\   'floatingTop': {
-	\     'position': 'floating',
-	\     'floating-position': 'center-top',
-	\     'open-action-strategy': 'sourceWindow',
-	\   },
-	\   'floatingLeftside': {
-	\     'position': 'floating',
-	\     'floating-position': 'left-center',
-	\     'floating-width': 50,
-	\     'open-action-strategy': 'sourceWindow',
-	\   },
-	\   'floatingRightside': {
-	\     'position': 'floating',
-	\     'floating-position': 'right-center',
-	\     'floating-width': 50,
-	\     'open-action-strategy': 'sourceWindow',
-	\   },
-	\   'simplify': {
-	\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
-	\   },
-	\   'buffer': {
-	\     'sources': [{'name': 'buffer', 'expand': v:true}]
-	\   },
-	\ }
-" Use preset argument to open it
-nnoremap <space>ed :CocCommand explorer --preset .vim<CR>
-nnoremap <space>ef :CocCommand explorer --preset floating<CR>
-nnoremap <space>ec :CocCommand explorer --preset cocConfig<CR>
-nnoremap <space>eb :CocCommand explorer --preset buffer<CR>
-" List all presets
-nnoremap <space>el :CocList explPresets
-
-" -- vim-go ------------------------------------------------------------------
+" -- vim-go -------------------------------------------------------------------
 let g:go_version_warning = 0
 let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
 let g:go_autodetect_gopath = 1
@@ -533,9 +398,6 @@ vmap <silent> <Leader>t <Plug>TranslateV
 " Display translation in a window
 nmap <silent> <Leader>w <Plug>TranslateW
 vmap <silent> <Leader>w <Plug>TranslateWV
-" Replace the text with translation
-nmap <silent> <Leader>r <Plug>TranslateR
-vmap <silent> <Leader>r <Plug>TranslateRV
 " Translate the text in clipboard
 nmap <silent> <Leader>x <Plug>TranslateX
 
@@ -565,5 +427,199 @@ let g:airline_theme='dracula'
 
 " -- ranger ------------------------------------------------------------------
 let g:ranger_map_keys = 0
-map <leader>f :RangerNewTab<CR>
+map <leader>r :RangerNewTab<CR>
 let g:ranger_replace_netrw = 1
+
+" -- float term --------------------------------------------------------------
+let g:floaterm_autoclose = 1
+let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_keymap_prev   = '<F8>'
+let g:floaterm_keymap_next   = '<F9>'
+let g:floaterm_keymap_toggle = '<F12>'
+noremap <silent> <leader>q = :FloatermNew<cr>
+
+" -- ale setting -------------------------------------------------------------
+let g:ale_fix_on_save = 1
+
+" -- coc.nvim setting --------------------------------------------------------
+let g:coc_global_extensions = [
+	\ 'coc-calc',
+	\ 'coc-clangd',
+	\ 'coc-cmake',
+	\ 'coc-css',
+	\ 'coc-dash-complete',
+	\ 'coc-dot-complete',
+	\ 'coc-docker',
+	\ 'coc-explorer',
+	\ 'coc-flutter-tools',
+	\ 'coc-fzf-preview',
+	\ 'coc-floaterm',
+	\ 'coc-git',
+	\ 'coc-gitignore',
+	\ 'coc-go',
+	\ 'coc-highlight',
+	\ 'coc-html',
+	\ 'coc-json',
+	\ 'coc-just-complete',
+	\ 'coc-lists',
+	\ 'coc-markdownlint',
+	\ 'coc-marketplace',
+	\ 'coc-phpls',
+	\ 'coc-prettier',
+	\ 'coc-java',
+	\ 'coc-pylsp',
+	\ 'coc-pyright',
+	\ 'coc-python',
+	\ 'coc-sh',
+	\ 'coc-snippets',
+	\ 'coc-sql',
+	\ 'coc-syntax',
+	\ 'coc-tabnine',
+	\ 'coc-translator',
+	\ 'coc-tslint-plugin',
+	\ 'coc-tsserver',
+	\ 'coc-vimlsp',
+	\ 'coc-xml',
+	\ 'coc-yaml']
+set hidden
+set updatetime=200
+
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+	" Recently vim can merge signcolumn and number column into one
+	set signcolumn=number
+else
+	set signcolumn=yes
+endif
+inoremap <silent><expr> <TAB>
+			\ pumvisible() ? "\<C-n>" :
+			\ <SID>check_back_space() ? "\<TAB>" :
+			\ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+if has('nvim')
+	inoremap <silent><expr> <c-space> coc#refresh()
+else
+	inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+if exists('*complete_info')
+	inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+	inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+" Use leaderK to show documentation in preview window.
+nnoremap <silent> <LEADER>h :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+	if (index(['vim','help'], &filetype) >= 0)
+			execute 'h '.expand('<cword>')
+	else
+			call CocAction('doHover')
+	endif
+endfunction
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Symbol renaming.
+nmap <leader>n <Plug>(coc-rename)
+" fold by coc
+augroup mygroup
+	autocmd!
+	" Setup formatexpr specified filetype(s).
+	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+	" Update signature help on jump placeholder.
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocActionAsync('format')
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" explorer config
+let g:coc_explorer_global_presets = {
+	\   '.vim': {
+	\     'root-uri': '~/.vim',
+	\   },
+	\   'cocConfig': {
+	\      'root-uri': '~/.config/coc',
+	\   },
+	\   'tab': {
+	\     'position': 'tab',
+	\     'quit-on-open': v:true,
+	\   },
+	\   'tab:$': {
+	\     'position': 'tab:$',
+	\     'quit-on-open': v:true,
+	\   },
+	\   'floating': {
+	\     'position': 'floating',
+	\     'open-action-strategy': 'sourceWindow',
+	\   },
+	\   'floatingTop': {
+	\     'position': 'floating',
+	\     'floating-position': 'center-top',
+	\     'open-action-strategy': 'sourceWindow',
+	\   },
+	\   'floatingLeftside': {
+	\     'position': 'floating',
+	\     'floating-position': 'left-center',
+	\     'floating-width': 50,
+	\     'open-action-strategy': 'sourceWindow',
+	\   },
+	\   'floatingRightside': {
+	\     'position': 'floating',
+	\     'floating-position': 'right-center',
+	\     'floating-width': 50,
+	\     'open-action-strategy': 'sourceWindow',
+	\   },
+	\   'simplify': {
+	\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+	\   },
+	\   'buffer': {
+	\     'sources': [{'name': 'buffer', 'expand': v:true}]
+	\   },
+	\ }
+" Use preset argument to open it
+nnoremap ff :CocCommand explorer<CR>
+nnoremap <space>ef :CocCommand explorer --preset floating<CR>
+let g:loaded_netrw = 1
+function! AuCocNvimInit()
+	if @% == '' || @% == '.'
+		exe ':CocCommand explorer'
+	endif
+endfunction
+autocmd User CocNvimInit call AuCocNvimInit()
