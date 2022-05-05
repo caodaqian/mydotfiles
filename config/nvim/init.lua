@@ -3,5 +3,5 @@ require "mapping"
 require "colorscheme"
 require "plugins"
 
-require "themes"
 require "plugs"
+require "lsp"
