@@ -1,0 +1,71 @@
+" -- display -------------------------------------------------------------------
+set title		" change the terminal title
+set lazyredraw	" do not redraw when executing macros
+set report=0	" always report changes
+set cursorline	" highlight current line
+set termguicolors
+if has("autocmd")
+	augroup vim
+		autocmd!
+		autocmd filetype vim set textwidth=80
+	augroup END
+	augroup windows
+		autocmd!
+		autocmd VimResized * :wincmd = " resize splits when the window is resized
+	augroup END
+endif
+if has("gui_running")
+	set cursorcolumn	" highlight current column
+endif
+if exists("+relativenumber")
+	if v:version >= 400
+		set number
+	endif
+	set relativenumber  " show relative line numbers
+	set numberwidth=3   " narrow number column
+	" cycles between relative / absolute / no numbering
+	if v:version >= 400
+		function! RelativeNumberToggle()
+			if (&number == 1 && &relativenumber == 1)
+				set nonumber
+				set relativenumber relativenumber?
+			elseif (&number == 0 && &relativenumber == 1)
+				set norelativenumber
+				set number number?
+			elseif (&number == 1 && &relativenumber == 0)
+				set norelativenumber
+				set nonumber number?
+			else
+				set number
+				set relativenumber relativenumber?
+			endif
+		endfunc
+	else
+		function! RelativeNumberToggle()
+			if (&relativenumber == 1)
+				set number number?
+			elseif (&number == 1)
+				set nonumber number?
+			else
+				set relativenumber relativenumber?
+			endif
+		endfunc
+	endif
+	nnoremap <silent> <leader>n :call RelativeNumberToggle()<CR>
+else				  " fallback
+	set number		  " show line numbers
+	" inverts numbering
+	nnoremap <silent> <leader>n :set number! number?<CR>
+endif
+set showmode	  " always show the current editing mode
+set linebreak	  " yet if enabled break at word boundaries
+set showcmd		" show partial command line (default)
+set cmdheight=1 " height of the command line
+set wrap
+set shortmess=astT	" abbreviate messages
+set shortmess+=c
+set backspace=indent,eol,start
+set scrolloff=5
+" -- mark badwhitespace -----------------------------------------------
+highlight BadWhitespace ctermbg=grey guibg=grey
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.php,*.go,*.sh match BadWhitespace /\s\+$/

@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/cdq/.config/nvim'
+let g:netrw_dirhist_9='/home/cdq/.config'
+let g:netrw_dirhist_8='/home/cdq/.config/nvim'
+let g:netrw_dirhist_7='/home/cdq/.config/nvim/configs/plugs'
+let g:netrw_dirhist_6='/home/cdq/.config/nvim'
+let g:netrw_dirhist_5='/home/cdq/Github/mydotfiles/bin'
+let g:netrw_dirhist_4='/home/cdq/Github/mydotfiles'
+let g:netrw_dirhist_3='/home/cdq/Github/mydotfiles/bin'
+let g:netrw_dirhist_2='/home/cdq/Github/mydotfiles'
+let g:netrw_dirhist_1='/home/cdq/Github/mydotfiles/config'

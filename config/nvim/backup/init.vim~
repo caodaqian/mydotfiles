@@ -1,0 +1,175 @@
+" reject dup source
+if get(s:, 'loaded', 0) != 0
+	finish
+else
+	let s:loaded = 1
+endif
+
+" get dir
+let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+" define load script function
+function! g:LoadScript(globalpath)
+	for path in split(fnamemodify(resolve(expand(s:home.'/'.a:globalpath)), ':p'))
+		" echo path
+		if filereadable(path)
+			exec 'so '.path
+		endif
+	endfor
+endfunction
+
+" load my modules
+" load basic configs
+call LoadScript("configs/basic/*.vim")
+" load plug configs
+call LoadScript("configs/plugs/*.vim")
+
+
+
+" -- vim-easy-align setting ----------------------------------------------------
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" -- SimplyFold setting --------------------------------------------------------
+let g:SimpylFold_docstring_preview=1
+
+" -- markdown ------------------------------------------------------------------
+let g:mkdp_auto_start = 1
+let g:mkdp_refresh_slow = 1
+let g:mkdp_open_to_the_world = 1
+let g:mkdp_echo_preview_url = 1
+let g:mkdp_port = '5499'
+nmap <silent> <leader>mp <Plug>MarkdownPreview
+imap <silent> <leader>mp <Plug>MarkdownPreview
+nmap <silent> <leader>mps <Plug>StopMarkdownPreview
+imap <silent> <leader>mps <Plug>StopMarkdownPreview
+
+" -- vim-table-mode setting ----------------------------------------------------
+let g:table_mode_corner='|'
+
+" -- bclose setting ------------------------------------------------------------
+nnoremap <Leader>bd :Bclose<CR>
+
+" -- vim-interestingwords setting ----------------------------------------------
+nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
+vnoremap <silent> <leader>k :call InterestingWords('v')<cr>
+nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
+nnoremap <silent> n :call WordNavigation(1)<cr>
+nnoremap <silent> N :call WordNavigation(0)<cr>
+let g:interestingWordsRandomiseColors = 1
+
+" -- fzf settings -------------------------------------------------------------
+if exists('$TMUX')
+	let g:fzf_layout = { 'tmux': '-p90%,60%' }
+else
+	let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+endif
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>l :Lines<CR>
+
+" -- sneak setting ------------------------------------------------------------
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+
+" -- vim-startify setting -----------------------------------------------------
+let g:startify_change_to_dir=0
+let g:startify_fortune_use_unicode=1
+let g:startify_session_autoload=1
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+" -- vim-go -------------------------------------------------------------------
+let g:go_version_warning = 0
+let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
+let g:godef_split=2
+
+" -- airline setting ----------------------------------------------------------
+set laststatus=2
+let g:airline_symbols_ascii = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#show_line_numbers = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
+let g:airline#extensions#branch#displayed_head_limit = 10
+let g:airline#extensions#branch#sha1_len = 8
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#bufferline#overwrite_variables = 1
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#keymap#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let python_highlight_all=1
+if has('win32')
+		set guifont=Hermit:h14
+		set guifontwide=Microsoft_YaHei_Mono:h14
+endif
+
+" -- translation setting -----------------------------------------------------
+" Echo translation in the cmdline
+nmap <silent> <Leader>t <Plug>Translate
+vmap <silent> <Leader>t <Plug>TranslateV
+" Display translation in a window
+nmap <silent> <Leader>w <Plug>TranslateW
+vmap <silent> <Leader>w <Plug>TranslateWV
+" Translate the text in clipboard
+nmap <silent> <Leader>x <Plug>TranslateX
+
+" -- one --------------------------------------------------------------------
+let g:one_allow_italics = 1
+" -- dracula ----------------------------------------------------------------
+" -- ayu --------------------------------------------------------------------
+let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
+" -- xcode ------------------------------------------------------------------
+let green_comments = 1
+let match_paren_style = 1
+" -- theme main -------------------------------------------------------------
+"colorscheme one
+"let g:airline_theme='one'
+colorscheme dracula
+let g:airline_theme='dracula'
+"colorscheme ayu
+"let g:airline_theme='ayu'
+"colorscheme xcodedark
+"let g:airline_theme='xcodedark'
+"colorscheme xcodedarkhc
+"colorscheme xcodelight
+"colorscheme xcodelighthc
+"colorscheme xcodewwdc
+
+" -- ranger ------------------------------------------------------------------
+let g:ranger_map_keys = 0
+map <leader>r :RangerNewTab<CR>
+let g:ranger_replace_netrw = 1
+
+" -- float term --------------------------------------------------------------
+ "let g:floaterm_autoclose = 1
+ "let g:floaterm_keymap_new    = '<F7>'
+ "let g:floaterm_keymap_prev   = '<F8>'
+ "let g:floaterm_keymap_next   = '<F9>'
+ "let g:floaterm_keymap_toggle = '<F12>'
+ "noremap <silent> <leader>q = :FloatermNew<cr>
+
+" -- ale setting -------------------------------------------------------------
+let g:ale_fix_on_save = 1
+
