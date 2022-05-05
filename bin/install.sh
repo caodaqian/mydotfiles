@@ -11,11 +11,12 @@ set -eu
 WORKDIR=$(dirname $(dirname $(realpath "$0")))
 
 ## sync config
-if [ ! -d ${HOME}/.config ]; then
-	echo "load my config"
-	cp -r "${WORKDIR}/config" "${HOME}/.config"
-fi
-. "$HOME/.config/*.sh"
+echo "load my config"
+cp -r "${WORKDIR}/config" "${HOME}/.config"
+for file in "$HOME/.config/env/*.sh"
+do
+	. $file
+done
 
 ## install zsh
 if [ -z "$(zsh --version 2>/dev/null)" ]; then
@@ -31,7 +32,7 @@ fi
 
 if [ -d ${HOME}/.oh-my-zsh ]; then
 	echo "install zsh plugins autosuggestions syntax-highlighting git-open powerlevel10k"
-	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] && git clone git://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open" ] && git clone https://github.com/paulirish/git-open.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open"
 	[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"

@@ -54,13 +54,13 @@ export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 
 # User locale config
-[ -f ${HOME}/.config/locale.sh ] && . ${HOME}/.config/locale.sh
+[ -f ${HOME}/.config/env/locale.sh ] && . ${HOME}/.config/env/locale.sh
 
 # User specific aliases and functions
-[ -f ${HOME}/.config/alias.sh ] && . ${HOME}/.config/alias.sh
+[ -f ${HOME}/.config/env/alias.sh ] && . ${HOME}/.config/env/alias.sh
 
 # env config
-[ -f ${HOME}/.config/env.sh ] && . ${HOME}/.config/env.sh
+[ -f ${HOME}/.config/env/env.sh ] && . ${HOME}/.config/env/env.sh
 zle -N find-in-file
 export DEFAULT_USER=$USER
 export MANPATH="/usr/local/man:$MANPATH"
