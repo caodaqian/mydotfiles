@@ -39,6 +39,7 @@ local options = {
     -- display config
     showmode = true, -- we don't need to see things like -- INSERT -- anymore
     showtabline = 2, -- always show tabs
+    laststatus = 2,
     title = true, -- change the terminal title
     lazyredraw = true, -- do not redraw when executing macros
     cursorline = true, -- highlight current line
@@ -74,7 +75,7 @@ vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 
 -- WSL yank support
 vim.cmd [[
-let s:clip = '/mnt/c/Windows/System32/clip.exe' 
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
 if executable(s:clip)
 		augroup WSLYank
 				autocmd!

@@ -2,7 +2,7 @@
 ## @Author      : caodaqian
 ## @CreateTime  : 2020-09-08 21:24:58
 ## @LastEditors : caodaqian
-## @LastEditTime: 2021-11-05 18:22:15
+## @LastEditTime: 2022-05-06 12:19:02
 ## @Description : environment config
 ##########################################
 
@@ -16,7 +16,7 @@ else
 	export MYVIMRC=${HOME}/.config/nvim/init.vim
 	export VIMDIR=${HOME}/.config/nvim
 fi
-export MYTMPDIR=${HOME}/.tmp
+export MYTMPDIR=${HOME}/.tmp && [ ! -d "${MYTMPDIR}" ] && mkdir -p "${MYTMPDIR}"
 if [[ $(uname -s) == "Linux" ]]; then
 	COLOR_OPTION='--color=auto'
 elif [[ $(uname -s) == "Darwin" ]]; then
@@ -25,7 +25,7 @@ fi
 export LESSCHARSET=utf-8
 
 ## tmux config
-export TMUX_TMPDIR=${MYTMPDIR}/tmux
+export TMUX_TMPDIR=${MYTMPDIR}/tmux && [ ! -d "${TMUX_TMPDIR}" ] && mkdir -p "${TMUX_TMPDIR}"
 
 ## GO env
 export GO111MODULE=on
@@ -33,7 +33,7 @@ export GOPATH=${HOME}/.gopath
 export GOPROXY=${GOPROXY:-'https://goproxy.cn,https://proxy.golang.org,https://mirrors.aliyun.com/goproxy,direct'}
 export GOSUMDB=sum.golang.google.cn
 export GOBIN=$GOPATH/bin
-export GOTMPDIR=${MYTMPDIR}/go
+export GOTMPDIR=${MYTMPDIR}/go && [ ! -d "${GOTMPDIR}" ] && mkdir -p "${GOTMPDIR}"
 export PATH=${GOBIN}:${PATH}
 
 ## JAVA env

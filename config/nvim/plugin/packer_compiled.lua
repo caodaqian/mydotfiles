@@ -134,6 +134,11 @@ _G.packer_plugins = {
     path = "/Users/caodaqian/.local/share/nvim/site/pack/packer/start/cmp-spell",
     url = "https://github.com/f3fora/cmp-spell"
   },
+  ["cmp-treesitter"] = {
+    loaded = true,
+    path = "/Users/caodaqian/.local/share/nvim/site/pack/packer/start/cmp-treesitter",
+    url = "https://github.com/ray-x/cmp-treesitter"
+  },
   cmp_luasnip = {
     loaded = true,
     path = "/Users/caodaqian/.local/share/nvim/site/pack/packer/start/cmp_luasnip",

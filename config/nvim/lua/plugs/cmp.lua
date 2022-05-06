@@ -135,8 +135,7 @@ end
 
 require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
 require("luasnip.loaders.from_vscode").load({
-    paths = { -- load custom snippets
-    vim.fn.stdpath("config") .. "/my-snippets"}
+    paths = {vim.fn.stdpath("config") .. "/my-snippets"}
 }) -- Load snippets from my-snippets folder
 
 cmp_config = {
@@ -187,6 +186,7 @@ cmp_config = {
             emoji = "(Emoji)",
             path = "(Path)",
             calc = "(Calc)",
+            treesitter = "(TS)",
             cmp_tabnine = "(Tabnine)",
             vsnip = "(Snippet)",
             luasnip = "(Snippet)",
@@ -275,7 +275,7 @@ cmp_config = {
             end
         end, {"i", "s"}),
 
-        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-p>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping(function(fallback)
             if cmp.visible() and cmp.confirm(cmp_config.confirm_opts) then

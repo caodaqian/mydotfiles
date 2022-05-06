@@ -1,0 +1,7 @@
+.local-history/
+.viminfo
+i3/config.save
+nvim/plugin
+**/.local_history/
+config/ranger/plugins/
+

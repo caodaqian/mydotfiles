@@ -1,4 +1,3 @@
--- cursor color: #61AFEF
 local colorscheme = "catppuccin"
 
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)

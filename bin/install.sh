@@ -1,81 +1,97 @@
 #!/bin/sh
+
 ##########################################
-## @Author      : caodaqian
-## @CreateTime  : 2020-11-07 23:43:07
+# @Author      : caodaqian
+# @CreateTime  : 2020-11-07 23:43:07
 ## @LastEditors : caodaqian
-## @LastEditTime: 2022-02-13 00:19:54
-## @Description : sync ranger config
+## @LastEditTime: 2022-05-06 13:16:34
+# @Description : install my dotfiles
 ##########################################
 
 set -eu
 WORKDIR=$(dirname $(dirname $(realpath "$0")))
 
-## sync config
-echo "load my config"
-cp -r "${WORKDIR}/config" "${HOME}/.config"
-for file in "$HOME/.config/env/*.sh"
-do
-	. $file
+echo $WORKDIR
+mkdir -p "${HOME}/.config"
+for dir in "${WORKDIR}/config"/*; do
+	dir=$(basename "$dir")
+	echo "handle with $dir ..."
+	if [ -d "${WORKDIR}/config/${dir}" ]; then
+		echo "link ${WORKDIR}/config/${dir} to ${HOME}/.config/${dir}"
+		ln -sF "${WORKDIR}/config/${dir}" "${HOME}/.config/${dir}"
+	fi
 done
 
-## install zsh
+# install zshrc and omz plugins
 if [ -z "$(zsh --version 2>/dev/null)" ]; then
 	echo "Can't find zsh, must install zsh firstly" >&2
 	exit 1
-fi
-
-## install oh-my-zsh
-if [ ! -d "${HOME}/.oh-my-zsh" ]; then
-	echo "Can't find .oh-my-zsh, then will install oh-my-zsh, maybe you should try again after installing oh-my-zsh"
-	sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" "" --unattended
-fi
-
-if [ -d ${HOME}/.oh-my-zsh ]; then
-	echo "install zsh plugins autosuggestions syntax-highlighting git-open powerlevel10k"
+elif [ ! -d "${HOME}/.oh-my-zsh" ]; then
+	# check oh-my-zsh
+	echo "Can't find .oh-my-zsh, must install omz firstly" >&2
+	exit 1
+else
+	# install omz plugins
+	echo "install ohmyzsh plugins"
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open" ] && git clone https://github.com/paulirish/git-open.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open"
 	[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+
+	# get zshrc
+	echo "link zshrc to ~/.zshrc"
+	ln -is "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
 fi
 
-# get zshrc
-echo "cp my zshrc to ~/.zshrc"
-cp "${WORKDIR}/zsh/zshrc" "${HOME}/.zshrc"
-source "${HOME}/.zshrc"
-
-## install ranger plugin
+# install ranger plugin
 if [ -n "$(ranger --version 2>/dev/null)" ]; then
-	git clone https://github.com/alexanderjeurissen/ranger_devicons "${HOME}/.config/ranger/plugins/ranger_devicons"
+	if [ ! -d "${HOME}/.config/ranger/plugins/ranger_devicons" ]; then
+		echo "install ranger plugin"
+		git clone https://github.com/alexanderjeurissen/ranger_devicons "${HOME}/.config/ranger/plugins/ranger_devicons"
+	fi
 else
-	echo "ranger not found, please install it firstly" >&2
+	echo "ranger not found, must install ranger firstly" >&2
 	exit 1
 fi
 
-## install tmux
+# install tmux config
 if [ -z "$(tmux -V 2>/dev/null)" ]; then
 	echo "must install tmux firstly" >&2
 	exit 1
-fi
-
-## sync tmux.conf.local
-if [[ ! -d ${HOME}/.tmux ]]; then
+elif [ ! -d ${HOME}/.tmux ]; then
+	# sync tmux.conf.local
 	echo "install oh-my-tmux"
 	git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
 	ln -s -f "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
 	ln -s -f "${HOME}/.config/tmux/tmux.conf.local" "${HOME}/.tmux.conf.local"
 fi
 
-## sync vim config
+# install pacman config
+if [ -z "$(pacman -v 2>/dev/null)" ]; then
+	echo "not find pacman" >&2
+else
+	echo "link pacman.conf to /etc/pacman.conf"
+	sudo ln -s "${WORKDIR}/config/pacman/pacman.conf" "/etc/pacman.conf"
+fi
+
+# sync vim config
 if [ -n "$(nvim --version 2>/dev/null)" ]; then
+	echo "link vim config to ~/.vimrc"
 	ln -s -f "${HOME}/.config/vim/vimrc" "${VIMDIR}/vimrc"
 fi
 
-## sync top config
-if [ ! -f "${HOME}/.toprc"]; then
+# install top config
+if [ ! -f "${HOME}/.toprc" ]; then
+	echo "link toprc to ~/.toprc"
 	ln -s -f "${HOME}/.config/top/toprc" "${HOME}/.toprc"
 fi
 
-## mkdir MYPATH
-[ ! -d "${MYTMPDIR}" ] && mkdir -p "${MYTMPDIR}"
-[ ! -d "${GOTMPDIR}" ] && mkdir -p "${GOTMPDIR}"
-[ ! -d "${TMUX_TMPDIR}" ] && mkdir -p "${TMUX_TMPDIR}"
+# install xrc config
+if [ ! -f "${HOME}/.Xresources" ]; then
+	echo "link xrc to ~/.Xresources"
+	ln -s -f "${HOME}/.config/X/Xresources" "${HOME}/.Xresources"
+fi
+if [ ! -f "${HOME}/.xprofile" ]; then
+	echo "link xprofile to ~/.xprofile"
+	ln -s -f "${HOME}/.config/X/xprofile" "${HOME}/.xprofile"
+fi

@@ -72,14 +72,14 @@ return packer.startup(function(use)
     use "wbthomason/packer.nvim" -- Have packer manage itself
     use "lewis6991/impatient.nvim" -- Speed up loading Lua modules
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+    use "nvim-lua/popup.nvim"
     use "rcarriga/nvim-notify" -- notify
     use "kyazdani42/nvim-web-devicons" -- icons
 
     -- Telescope
     use {
         "nvim-telescope/telescope.nvim",
-        tag = "nvim-0.6",
-        requires = "nvim-lua/popup.nvim"
+        requires = "nvim-lua/plenary.nvim"
     }
     use {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -98,10 +98,8 @@ return packer.startup(function(use)
     use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate"
-        -- commit = "44b7c8100269161e20d585f24bce322f6dcdf8d2" -- TODO: update to latest
     }
-    use {"nvim-treesitter/nvim-treesitter-textobjects" -- commit = "c81382328ad47c154261d1528d7c921acad5eae5"
-    } -- enhance texetobject selection
+    use {"nvim-treesitter/nvim-treesitter-textobjects"} -- enhance texetobject selection
     use "romgrk/nvim-treesitter-context" -- show class/function at the top
     use "m-demare/hlargs.nvim"
     use "SmiteshP/nvim-gps" -- statusline shows class structure
@@ -148,6 +146,7 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-nvim-lua"
     use "f3fora/cmp-spell" -- spell check
+    use "ray-x/cmp-treesitter"
 
     -- snippets
     use "L3MON4D3/LuaSnip" -- snippet engine
