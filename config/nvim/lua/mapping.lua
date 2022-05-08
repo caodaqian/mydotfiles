@@ -42,8 +42,8 @@ keymap("n", "L", "<end>", opts)
 -- Resize with arrows
 keymap("n", "<C-S-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-S-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-S-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-S-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-S-Left>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-S-Right>", ":vertical resize -2<CR>", opts)
 -- Navigate buffers
 -- keymap("n", "R", ":bnext<CR>", opts)
 -- keymap("n", "E", ":bprevious<CR>", opts)
