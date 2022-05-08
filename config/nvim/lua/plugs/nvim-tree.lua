@@ -77,7 +77,7 @@ nvim_tree.setup({
   open_on_tab = false,
   sort_by = "name",
   view = {
-    width = 30,
+    width = 40,
     height = 30,
     hide_root_folder = false,
     side = "left",
@@ -107,6 +107,7 @@ nvim_tree.setup({
     },
     icons = {
       webdev_colors = true,
+	  git_placement = "before"
     },
   },
   hijack_directories = {
@@ -189,8 +190,9 @@ require "nvim-tree.events".on_file_created(function(file) vim.cmd("edit " .. fil
 -- require"nvim-tree.events".on_file_created(function(file) vim.cmd("edit "..vim.fn.fnamemodify(file.fname, ":p")) end)
 
 -- auto close feature
--- vim.cmd(
---   [[
---     autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
--- ]]
--- )
+vim.cmd([[
+    autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+]])
+
+vim.api.nvim_set_keymap("n", "ff", "<cmd>NvimTreeToggle<CR>", {noremap = true, silent = true})
+

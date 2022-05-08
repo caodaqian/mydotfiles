@@ -13,7 +13,7 @@ if [[ -z "$(nvim --version 2>/dev/null)" ]]; then
 	export VIMDIR=${HOME}/.vim
 else
 	export EDITOR=nvim
-	export MYVIMRC=${HOME}/.config/nvim/init.vim
+	export MYVIMRC=${HOME}/.config/nvim/init.lua
 	export VIMDIR=${HOME}/.config/nvim
 fi
 export MYTMPDIR=${HOME}/.tmp && [ ! -d "${MYTMPDIR}" ] && mkdir -p "${MYTMPDIR}"

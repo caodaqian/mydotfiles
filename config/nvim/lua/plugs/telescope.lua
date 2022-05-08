@@ -111,27 +111,7 @@ telescope.setup {
             }
         }
     },
-    pickers = {
-        find_files = {
-            theme = "dropdown",
-            previewer = true,
-            find_command = {"fzf"}
-        }
-
-        -- Default configuration for builtin pickers goes here:
-        -- picker_name = {
-        --   picker_config_key = value,
-        --   ...
-        -- }
-        -- Now the picker_config_key will be applied every time you call this
-        -- builtin picker
-    },
     extensions = {
-        -- Your extension configuration goes here:
-        -- extension_name = {
-        --   extension_config_key = value,
-        -- }
-
         -- fzf syntax
         -- Token	Match type	Description
         -- sbtrkt	fuzzy-match	Items that match sbtrkt
@@ -153,6 +133,10 @@ telescope.setup {
     }
 }
 
+telescope.load_extension('live_grep_raw')
 telescope.load_extension('fzf')
 telescope.load_extension("ui-select")
 telescope.load_extension('dap')
+telescope.load_extension('vim_bookmarks')
+telescope.load_extension('aerial')
+

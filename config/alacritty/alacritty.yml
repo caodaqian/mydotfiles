@@ -36,7 +36,7 @@ window:
   #     - buttonless: Title bar, transparent background and no title bar buttons
   #decorations: full
 
-  opacity: 0.7
+  opacity: 0.8
 
   # Startup Mode (changes require restart)
   # Values for `startup_mode`:

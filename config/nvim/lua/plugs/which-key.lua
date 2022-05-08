@@ -14,13 +14,13 @@ local setup = {
         -- the presets plugin, adds help for a bunch of default keybindings in Neovim
         -- No actual key bindings are created
         presets = {
-            operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-            motions = false, -- adds help for motions
-            text_objects = false, -- help for text objects triggered after entering an operator
+            operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+            motions = true, -- adds help for motions
+            text_objects = true, -- help for text objects triggered after entering an operator
             windows = true, -- default bindings on <c-w>
             nav = true, -- misc bindings to work with windows
-            z = false, -- bindings for folds, spelling and others prefixed with z
-            g = false -- bindings for prefixed with g
+            z = true, -- bindings for folds, spelling and others prefixed with z
+            g = true -- bindings for prefixed with g
         }
     },
     -- add operators that will trigger motion and text object completion
@@ -39,8 +39,8 @@ local setup = {
         group = "+" -- symbol prepended to a group
     },
     popup_mappings = {
-        scroll_down = "<c-d>", -- binding to scroll down inside the popup
-        scroll_up = "<c-u>" -- binding to scroll up inside the popup
+        scroll_down = "<c-k>", -- binding to scroll down inside the popup
+        scroll_up = "<c-j>" -- binding to scroll up inside the popup
     },
     window = {
         border = "rounded", -- none, single, double, shadow
@@ -77,7 +77,7 @@ local setup = {
 
 local opts = {
     mode = "n", -- NORMAL mode
-    prefix = "<Space>",
+    prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
@@ -85,77 +85,46 @@ local opts = {
 }
 
 local mappings = {
-    ["a"] = {"<cmd>Alpha<cr>", "Welcome"},
+    ["w"] = {"<cmd>Alpha<cr>", "Welcome"},
+
+    ["Q"] = {"<cmd>%bd|e#<CR>", "Close Other Buffers"},
+
+	-- telescope
     ["r"] = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
-    -- ["b"] = {
-    --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-    --   "Buffers",
-    -- },
-    -- ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-    -- ["w"] = { "<cmd>w!<CR>", "Save" },
-    -- ["q"] = { "<cmd>q!<CR>", "Quit" },
-    -- ["/"] = { "<cmd>lua require('Comment').toggle()<CR>", "Comment" },
-    ["C"] = {"<cmd>%bd|e#<CR>", "Close Other Buffers"},
-    -- ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-    ["f"] = {"<cmd>lua require('telescope.builtin').find_files()<cr>",
-    -- "<cmd>lua require('telescope').extensions.frecenncy.frecency(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
-             "Find files"},
-    -- ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-    ["F"] = {"<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw(require('telescope.themes').get_ivy())<cr>",
-             "Find Text"},
-    ["s"] = {"<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", "Find Document Symbols"},
-    ["S"] = {"<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>",
-    -- "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>",
-             "Find Symobls"},
-    ["p"] = {"<cmd>Telescope projects<cr>", "Projects"},
+	["f"] = {"<cmd>Telescope find_files<cr>", "find files"},
+    ["F"] = {"<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw(require('telescope.themes').get_ivy())<cr>", "find text"},
+	["b"] = {"<cmd>Telescope buffers<cr>", "find buffers"},
+	["m"] = {"<cmd>Telescope vim_bookmarks all<cr>", "find bookmarks"},
 
-    ["P"] = {"<cmd>SessionManager load_session<cr>", "Projects"},
 
-    ["t"] = {"<cmd>UltestSummary<CR>", "Unit Test"},
-
+	-- aerial
     ["o"] = {"<cmd>AerialToggle<CR>", "Outline"},
-    ["v"] = {"<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_ivy())<cr>",
-             "Clipboard Manager"},
 
-    c = {
-        name = "CMake",
-        g = {"<cmd>CMake configure<CR>", "Configure"},
-        t = {"<cmd>CMake select_target<CR>", "SelectTarget"},
-        T = {"<cmd>CMake select_build_type<CR>", "SelectBuildType"},
-        b = {"<cmd>CMake build<CR>", "BuildTarget"},
-        a = {"<cmd>CMake build_all<CR>", "BuildAll"},
-        r = {"<cmd>CMake build_and_run<CR>", "Run"},
-        d = {"<cmd>CMake build_and_debug<CR>", "DebugTarget"},
-        c = {"<cmd>CMake cancel<CR>", "Cancel"},
-        s = {"<cmd>CMake set_target_args<CR>", "SetArg"}
-    },
+	-- sessions
+	S = {
+		name = "Session",
+		r = {"<cmd>SessionManager load_session<cr>", "select and load session"},
+		s = {"<cmd>SessionManager load_session<cr>", "select and load session"}
+	},
 
-    d = {
-        name = "Debug",
-        R = {"<cmd>lua require'dap'.run_to_cursor()<cr>", "Run to Cursor"},
-        E = {"<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", "Evaluate Input"},
-        X = {"<cmd>lua require'dap'.terminate()<cr>", "Terminate"},
-        -- C = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input '[Condition] > ')<cr>", "Conditional Breakpoint" },
-        T = {"<cmd>lua require'dapui'.toggle('sidebar')<cr>", "Toggle Sidebar"},
-        p = {"<cmd>lua require'dap'.pause()<cr>", "Pause"},
-        r = {"<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl"},
-        q = {"<cmd>lua require'dap'.close()<cr>", "Quit"}
+	-- toggle terminal
+	["t"] = {"<cmd>ToggleTerm<cr>", "open terminal"},
 
-        -- b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
-        -- c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-        -- d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
-        -- e = { "<cmd>lua require'dapui'.eval()<cr>", "Evaluate" },
-        -- g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
-        -- h = { "<cmd>lua require'dap.ui.widgets'.hover()<cr>", "Hover Variables" },
-        -- S = { "<cmd>lua require'dap.ui.widgets'.scopes()<cr>", "Scopes" },
-        -- i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-        -- o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-        -- t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-        -- u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-    },
+	-- window shift
+	W = {
+		name = "window",
+		m = {"<cmd>WinShift<cr>", "move window"}
+	},
 
-    T = {
-        name = "Trouble",
+	T = {
+		name = "Test",
+		c = {"<cmd>RunTestClear<cr>", "clear test buffer"},
+		r = {"<cmd>RunTest<cr>", "run test"},
+    	t = {"<cmd>UltestSummary<CR>", "Unit Test"},
+	},
+
+    q = {
+        name = "question",
         t = {"<cmd>Trouble<cr>", "ToggleTrouble"},
         d = {"<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics"},
         w = {"<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics"},
@@ -164,38 +133,37 @@ local mappings = {
         g = {"<cmd>Gitsigns setloclist<cr>", "Open changed hunk"}
     },
 
-    -- g = {
-    --   name = "Git",
-    --   b = { "<cmd>VGit buffer_gutter_blame_preview<cr>", "File Blame" },
-    --   d = { "<cmd>VGit buffer_diff_preview<cr>", "Diff File" },
-    --   D = { "<cmd>VGit project_diff_preview<cr>", "Diff Project" },
-    --   s = { "<cmd>VGit buffer_stage<cr>", "Stage File" },
-    --   u = { "<cmd>VGit buffer_unstage<cr>", "Unstage File" },
-    --   r = { "<cmd>VGit buffer_reset<cr>", "Reset File" },
-    --   f = { "<cmd>VGit buffer_history_preview <cr>", "Reset File" },
-    --
-    --   B = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    --   c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-    -- },
+	-- Debug
+    D = {
+        name = "Debug",
+        r = {"<cmd>lua require'dap'.run_to_cursor()<cr>", "Run to Cursor"},
+        e = {"<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", "Evaluate Input"},
+        x = {"<cmd>lua require'dap'.terminate()<cr>", "Terminate"},
+        T = {"<cmd>lua require'dapui'.toggle('sidebar')<cr>", "Toggle Sidebar"},
+        t = {"<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl"},
+		p = {"<cmd>lua require'dap'.pause()<cr>", "Pause"},
+        q = {"<cmd>lua require'dap'.close()<cr>", "Quit"},
+		k = {"<cmd>lua require'dapui'.eval()<cr>", "Dap UI eval"}
+    },
 
     g = {
         name = "Git",
-        g = {"<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit"},
+        -- g = {"<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit"},
         f = {"<cmd>DiffviewFileHistory<CR>", "File History"},
-        p = {"<cmd>DiffviewOpen<CR>", "Diff Project"},
+        x = {"<cmd>DiffviewOpen<CR>", "Diff Project"},
         n = {"<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk"},
         N = {"<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk"},
         l = {"<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame"},
         r = {"<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk"},
         R = {"<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer"},
         s = {"<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk"},
-        S = {"<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Hunk"},
+        S = {"<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer"},
         u = {"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk"},
         U = {"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk"},
         o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
         c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
-        d = {"<cmd>Gitsigns diffthis HEAD<cr>", "Diff"}
+        d = {"<cmd>Gitsigns diffthis HEAD<cr>", "Diff HEAD"}
     },
 
     R = {
@@ -203,12 +171,6 @@ local mappings = {
         f = {"<cmd>lua require('spectre').open_file_search()<CR>", "Replace File"},
         p = {"<cmd>lua require('spectre').open()<CR>", "Replace Project"},
         s = {"<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Search"}
-        -- -- 全项目替换
-        -- vim.keybinds.gmap("n", "<leader>rp", "", vim.keybinds.opts)
-        -- -- 只替换当前文件
-        -- vim.keybinds.gmap("n", "<leader>rf", , vim.keybinds.opts)
-        -- -- 全项目中搜索当前单词
-        -- vim.keybinds.gmap("n", "<leader>rw", , vim.keybinds.opts)
     },
 
     l = {
@@ -227,18 +189,14 @@ local mappings = {
         S = {"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols"}
     },
 
-    -- h = {
-    --   a = { "<cmd>HSHighlight 1<cr>", "Hightlight 1" },
-    --   b = { "<cmd>HSHighlight 2<cr>", "Hightlight 2" },
-    --   c = { "<cmd>HSHighlight 3<cr>", "Hightlight 3" },
-    --   d = { "<cmd>HSHighlight 4<cr>", "Hightlight 4" },
-    --   e = { "<cmd>HSHighlight 5<cr>", "Hightlight 5" },
-    --   f = { "<cmd>HSHighlight 6<cr>", "Hightlight 6" },
-    --   u = { "<cmd>HSRmHighlight<cr>", "RemoveHighlight" },
-    --   U = { "<cmd>HSRmHighlight rm_all<cr>", "RemoveAllHighlight" },
-    -- },
+	h = {
+		name = "Editor Handler",
+		h = {"<cmd>InterestingWords('n')<cr>", "High Light the word"},
+		H = {"<cmd>UncolorAllWords<cr>", "No HighLight all words"},
+		t = {"<cmd>TranslateW<cr>", "Translate this word"}
+	},
 
-    h = {
+    H = {
         name = "Help",
         -- b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
         c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
@@ -249,17 +207,6 @@ local mappings = {
         k = {"<cmd>Telescope keymaps<cr>", "Keymaps"},
         C = {"<cmd>Telescope commands<cr>", "Commands"}
     }
-
-    -- t = {
-    --   name = "Terminal",
-    --   n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-    --   u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-    --   t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-    --   p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-    --   f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-    --   h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-    --   v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-    -- },
 }
 
 which_key.setup(setup)

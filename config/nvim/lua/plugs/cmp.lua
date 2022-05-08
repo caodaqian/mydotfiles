@@ -276,7 +276,7 @@ cmp_config = {
         end, {"i", "s"}),
 
         ["<C-p>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
+        ["<C-l>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping(function(fallback)
             if cmp.visible() and cmp.confirm(cmp_config.confirm_opts) then
                 if jumpable(1) then

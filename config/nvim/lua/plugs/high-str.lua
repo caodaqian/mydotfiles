@@ -21,7 +21,7 @@ high_str.setup({
 -- keybingds
 vim.api.nvim_set_keymap(
     "v",
-    "<leader>hh",
+    "<leader>h",
     ":<c-u>HSHighlight 1<CR>",
     {
         noremap = true,
@@ -37,5 +37,4 @@ vim.api.nvim_set_keymap(
         silent = true
     }
 )
-
 

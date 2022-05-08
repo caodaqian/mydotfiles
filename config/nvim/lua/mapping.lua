@@ -22,8 +22,6 @@ vim.g.mapleader = leader_key
 vim.g.maplocalleader = leader_key
 
 -- Normal --
--- load config
-keymap("n", "<leader>R", ":source $MYVIMRC<CR>", opts)
 -- quick save or exit
 keymap("n", "S", ":w<CR>", opts)
 keymap("n", "Q", ":q<CR>", opts)
@@ -42,10 +40,10 @@ keymap("n", "sd", ":set splitbelow<CR>:split<CR>", opts)
 keymap("n", "H", "<home>", opts)
 keymap("n", "L", "<end>", opts)
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<C-S-Up>", ":resize -2<CR>", opts)
+keymap("n", "<C-S-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-S-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-S-Right>", ":vertical resize +2<CR>", opts)
 -- Navigate buffers
 -- keymap("n", "R", ":bnext<CR>", opts)
 -- keymap("n", "E", ":bprevious<CR>", opts)

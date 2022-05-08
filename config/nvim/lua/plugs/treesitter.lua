@@ -7,17 +7,25 @@ end
 configs.setup {
     ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
-    ignore_install = {""}, -- List of parsers to ignore installing
+    ignore_install = {}, -- List of parsers to ignore installing
     highlight = {
-        -- TODO: enable highlight
         enable = true, -- false will disable the whole extension
-        disable = {}, -- list of language that will be disabled
-        additional_vim_regex_highlighting = false
+        additional_vim_regex_highlighting = false,
+        disable = {"lua"}
     },
     indent = {
-        enable = false,
-        disable = {""}
-    }, -- TODO: enable indent
+        enable = true,
+        disable = {}
+    },
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = '<CR>',
+			node_incremental = '<CR>',
+			node_decremental = '<BS>',
+			scope_incremental = '<TAB>',
+		}
+	},
     context_commentstring = {
         enable = true,
         config = {
@@ -70,20 +78,20 @@ configs.setup {
             enable = true,
             border = 'none',
             peek_definition_code = {
-                ["<leader>pf"] = "@function.outer",
-                ["<leader>pF"] = "@class.outer"
+                ["<leader>df"] = "@function.outer",
+                ["<leader>dF"] = "@class.outer"
             }
         }
     },
     textsubjects = {
-        enable = false,
+        enable = true,
         keymaps = {
             ["."] = "textsubjects-smart",
             [";"] = "textsubjects-big"
         }
     },
     playground = {
-        enable = false,
+        enable = true,
         disable = {},
         updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
         persist_queries = false, -- Whether the query persists across vim sessions
@@ -101,12 +109,12 @@ configs.setup {
         }
     },
     rainbow = {
-        enable = false,
+        enable = true,
         extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
         max_file_lines = 1000 -- Do not enable for files with more than 1000 lines, int
     },
     autotag = {
-        enable = false
+        enable = true
     },
     -- matchup plugin
     -- https://github.com/andymass/vim-matchup
@@ -116,6 +124,6 @@ configs.setup {
     },
     -- autopairs plugin
     autopairs = {
-        enable = false
+        enable = true
     }
 }
