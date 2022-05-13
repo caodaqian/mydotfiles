@@ -1,0 +1,9 @@
+PATH=/usr/local/bin:${PATH}
+# env config
+[ -f ${HOME}/.config/env/env.sh ] && . ${HOME}/.config/env/env.sh
+
+# User locale config
+[ -f ${HOME}/.config/env/locale.sh ] && . ${HOME}/.config/env/locale.sh
+
+# User specific aliases and functions
+[ -f ${HOME}/.config/env/alias.sh ] && . ${HOME}/.config/env/alias.sh

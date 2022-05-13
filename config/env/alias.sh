@@ -7,7 +7,7 @@
 ##########################################
 
 # User specific aliases and functions
-if [[ -z "$(nvim --version)" ]]; then
+if [ -z "$(nvim --version 2>/dev/null)" ]; then
 	alias vi='vim'
 else
 	alias vi='nvim'
@@ -91,7 +91,7 @@ alias ra='ranger'
 
 ## backup
 function backup() {
-	if [[ ! $# -eq 1 ]]; then
+	if [ ! $# -eq 1 ]; then
 		echo "usage: backup filename"
 	else
 		mv "$1" "$1.bak"
@@ -99,7 +99,7 @@ function backup() {
 }
 alias bcp='backup'
 function unbackup() {
-	if [[ ! $# -eq 1 ]]; then
+	if [ ! $# -eq 1 ]; then
 		echo "usage: backup filename"
 	else
 		mv "$1" "${1%*.bak}"

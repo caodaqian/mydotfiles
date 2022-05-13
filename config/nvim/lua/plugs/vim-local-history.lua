@@ -1,6 +1,6 @@
 vim.cmd([[
   let g:local_history_enabled=1     "0: Never (Disable local history plugin),1: Always (Save also a single file which is not in the workspace folder)2: Workspace (Save only files within workspace folder)
-  let g:local_history_path="./.local_history"
+  let g:local_history_path="/tmp/.local_history"
   let g:local_history_width=30
   let g:local_history_new_change_delay=300    "5mins
   let g:local_history_mappings = {

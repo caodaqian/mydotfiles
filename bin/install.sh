@@ -17,8 +17,7 @@ for dir in "${WORKDIR}/config"/*; do
 	dir=$(basename "$dir")
 	echo "handle with $dir ..."
 	if [ -d "${WORKDIR}/config/${dir}" ]; then
-		echo "link ${WORKDIR}/config/${dir} to ${HOME}/.config/${dir}"
-		ln -sF "${WORKDIR}/config/${dir}" "${HOME}/.config/${dir}"
+		ln -svF "${WORKDIR}/config/${dir}" "${HOME}/.config/${dir}"
 	fi
 done
 
@@ -40,7 +39,8 @@ else
 
 	# get zshrc
 	echo "link zshrc to ~/.zshrc"
-	ln -is "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
+	ln -svf "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
+	ln -svf "${WORKDIR}/config/zsh/zshenv" "${HOME}/.zshenv"
 fi
 
 # install ranger plugin
@@ -62,8 +62,8 @@ elif [ ! -d ${HOME}/.tmux ]; then
 	# sync tmux.conf.local
 	echo "install oh-my-tmux"
 	git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
-	ln -s -f "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
-	ln -s -f "${HOME}/.config/tmux/tmux.conf.local" "${HOME}/.tmux.conf.local"
+	ln -svf "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
+	ln -svf "${HOME}/.config/tmux/tmux.conf.local" "${HOME}/.tmux.conf.local"
 fi
 
 # install pacman config
@@ -71,27 +71,27 @@ if [ -z "$(pacman -v 2>/dev/null)" ]; then
 	echo "not find pacman" >&2
 else
 	echo "link pacman.conf to /etc/pacman.conf"
-	sudo ln -s "${WORKDIR}/config/pacman/pacman.conf" "/etc/pacman.conf"
+	sudo ln -svf "${WORKDIR}/config/pacman/pacman.conf" "/etc/pacman.conf"
 fi
 
 # sync vim config
 if [ -n "$(nvim --version 2>/dev/null)" ]; then
 	echo "link vim config to ~/.vimrc"
-	ln -s -f "${HOME}/.config/vim/vimrc" "${VIMDIR}/vimrc"
+	ln -svf "${HOME}/.config/vim/vimrc" "${VIMDIR}/vimrc"
 fi
 
 # install top config
 if [ ! -f "${HOME}/.toprc" ]; then
 	echo "link toprc to ~/.toprc"
-	ln -s -f "${HOME}/.config/top/toprc" "${HOME}/.toprc"
+	ln -svf "${HOME}/.config/top/toprc" "${HOME}/.toprc"
 fi
 
 # install xrc config
 if [ ! -f "${HOME}/.Xresources" ]; then
 	echo "link xrc to ~/.Xresources"
-	ln -s -f "${HOME}/.config/X/Xresources" "${HOME}/.Xresources"
+	ln -svf "${HOME}/.config/X/Xresources" "${HOME}/.Xresources"
 fi
 if [ ! -f "${HOME}/.xprofile" ]; then
 	echo "link xprofile to ~/.xprofile"
-	ln -s -f "${HOME}/.config/X/xprofile" "${HOME}/.xprofile"
+	ln -svf "${HOME}/.config/X/xprofile" "${HOME}/.xprofile"
 fi
