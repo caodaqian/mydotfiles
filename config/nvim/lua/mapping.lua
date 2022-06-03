@@ -53,6 +53,8 @@ keymap("n", "E", ":BufferLineCyclePrev<CR>", opts)
 -- Move text up and down
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+-- nvim tree
+keymap("n", "ff", "<cmd>NvimTreeToggle<CR>", opts)
 
 -- Insert --
 -- Press jj fast to enter
@@ -64,11 +66,6 @@ keymap("i", "<C-j>", "<down>", opts)
 keymap("i", "<C-k>", "<up>", opts)
 keymap("i", "<C-E>", "<C-right>", opts)
 keymap("i", "<C-B>", "<C-left>", opts)
--- Better window navigation
-keymap("i", "<C-h>", "<C-w>h", opts)
-keymap("i", "<C-j>", "<C-w>j", opts)
-keymap("i", "<C-k>", "<C-w>k", opts)
-keymap("i", "<C-l>", "<C-w>l", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -98,6 +95,6 @@ keymap("v", "p", '"_dP', opts)
 
 -- sudo then write ------------------------------------------------------------
 vim.cmd [[
-cabbrev w!! w !sudo tee % >/dev/null
-cnoremap w!! w !sudo tee % >/dev/null
+	cabbrev w!! w !sudo tee % >/dev/null
+	cnoremap w!! w !sudo tee % >/dev/null
 ]]

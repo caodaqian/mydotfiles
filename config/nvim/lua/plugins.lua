@@ -118,7 +118,10 @@ return packer.startup(function(use)
 		"nvim-telescope/telescope-dap.nvim",
 		require = "nvim-lua/dap.nvim"
 	}
-	use "stevearc/aerial.nvim" -- file explore scroll with cursor
+	use 'nvim-telescope/telescope-hop.nvim'
+	use 'nvim-telescope/telescope-packer.nvim'
+	use "LinArcX/telescope-env.nvim"
+	-- use "nvim-telescope/telescope-file-browser.nvim"
 
 	-- Treesittetr
 	use {
@@ -139,11 +142,12 @@ return packer.startup(function(use)
 	use "j-hui/fidget.nvim" -- show lsp progress
 
 	-- Editor enhance
+	use "stevearc/aerial.nvim" -- file explore scroll with cursor
 	use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-	use "Shatur/neovim-session-manager"
+	--use "Shatur/neovim-session-manager"
 	use "folke/which-key.nvim" -- which  key
 	use "ethanholz/nvim-lastplace" -- auto return back to the last modified positon when open a file
-  	use "nvim-pack/nvim-spectre" -- search and replace pane
+	use "nvim-pack/nvim-spectre" -- search and replace pane
 	use "haringsrob/nvim_context_vt" -- show if, for, function... end as virtual text
 	use "tpope/vim-repeat" --  . command enhance
 	use "tpope/vim-surround" -- vim surround
@@ -179,10 +183,9 @@ return packer.startup(function(use)
 	use "theHamsta/nvim-dap-virtual-text"
 	use "rcarriga/nvim-dap-ui"
 	use { "jbyuki/one-small-step-for-vimkind", module = "osv" } -- debug any Lua code running in a Neovim instance
-	-- use "nvim-telescope/telescope-file-browser.nvim"
 
 	-- Git
-	use {"lewis6991/gitsigns.nvim",tag = "v0.4"}
+	use "lewis6991/gitsigns.nvim"
 	use 'sindrets/diffview.nvim'
 
 	-- UI
@@ -196,17 +199,13 @@ return packer.startup(function(use)
 		as = "catppuccin"
 	})
 	use {
-		"projekt0n/github-nvim-theme",
-		tag = "v0.0.4"
+		"projekt0n/github-nvim-theme"
 	}
 	use "folke/tokyonight.nvim"
 
 	-- file explore
 	use "kyazdani42/nvim-tree.lua" -- file explore
-	use {
-		"akinsho/bufferline.nvim", -- tab
-		tag = "v1.2.0"
-	}
+	use "akinsho/bufferline.nvim" -- tab
 	use "nvim-lualine/lualine.nvim" -- status line
 
 	-- welcome page
@@ -229,9 +228,9 @@ return packer.startup(function(use)
 	} -- NOTE:: glow required : https://github.com/charmbracelet/glow
 	use "voldikss/vim-translator"
 	use "mtdl9/vim-log-highlighting"
-	use {"lfv89/vim-interestingwords"}
-	use "Pocco81/HighStr.nvim"
+	--use "Pocco81/HighStr.nvim"
 	use "ravenxrz/vim-local-history"
+	--use "aserowy/tmux.nvim"
 
 	-- code test
 	use "vim-test/vim-test"

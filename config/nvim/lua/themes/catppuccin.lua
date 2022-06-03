@@ -4,10 +4,11 @@ if not status_ok then
 end
 
 catppuccin.setup({
-	transparent_background = false,
+	transparent_background = true,
 	term_colors = false,
 	styles = { -- TODO: style setting doesn't work
-		comments = "underline",
+		comments = "italic",
+		conditionals = "italic",
 		functions = "bold",
 		keywords = "NONE",
 		strings = "underline",
@@ -38,13 +39,13 @@ catppuccin.setup({
 		telescope = true,
 		nvimtree = {
 			enabled = true,
-			show_root = false,
-			transparent_panel = false
+			show_root = true,
+			transparent_panel = true,
 		},
 		neotree = {
-			enabled = false,
-			show_root = false,
-			transparent_panel = false
+			enabled = true,
+			show_root = true,
+			transparent_panel = true,
 		},
 		which_key = true,
 		indent_blankline = {
@@ -59,7 +60,7 @@ catppuccin.setup({
 		bufferline = true,
 		markdown = true,
 		lightspeed = false,
-		ts_rainbow = false,
+		ts_rainbow = true,
 		hop = true,
 		notify = true,
 		telekasten = true,

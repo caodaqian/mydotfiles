@@ -16,7 +16,7 @@ aerial.setup({
 	--   auto    - aerial window will stay open as long as there is a visible
 	--             buffer to attach to
 	--   global  - same as 'persist', and will always show symbols for the current buffer
-	close_behavior = "auto",
+	close_behavior = "close",
 
 	-- Set to false to remove the default keybindings for the aerial buffer
 	default_bindings = true,
@@ -36,7 +36,7 @@ aerial.setup({
 	-- A list of all symbols to display. Set to false to display all symbols.
 	-- This can be a filetype map (see :help aerial-filetype-map)
 	-- To see all available values, see :help SymbolKind
-	filter_kind = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct" },
+	filter_kind = { "Constant", "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct" },
 
 	-- Enum: split_width, full_width, last, none
 	-- Determines line highlighting mode when multiple splits are visible.
@@ -107,7 +107,7 @@ aerial.setup({
 
 	-- When you fold code with za, zo, or zc, update the aerial tree as well.
 	-- Only works when manage_folds = true
-	link_folds_to_tree = false,
+	link_folds_to_tree = true,
 
 	-- Fold code when you open/collapse symbols in the tree.
 	-- Only works when manage_folds = true
@@ -115,7 +115,7 @@ aerial.setup({
 
 	-- Use symbol tree for folding. Set to true or false to enable/disable
 	-- 'auto' will manage folds if your previous foldmethod was 'manual'
-	manage_folds = false,
+	manage_folds = true,
 
 	-- These control the width of the aerial window.
 	-- They can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
@@ -138,17 +138,24 @@ aerial.setup({
 
 	-- Automatically open aerial when entering supported buffers.
 	-- This can be a function (see :help aerial-open-automatic)
-	open_automatic = false,
+	open_automatic = function(bufnr)
+		-- Enforce a minimum line count
+		return vim.api.nvim_buf_line_count(bufnr) > 80
+		-- Enforce a minimum symbol count
+		and aerial.num_symbols(bufnr) > 4
+		-- A useful way to keep aerial closed when closed manually
+		and not aerial.was_closed()
+	end,
 
 	-- Set to true to only open aerial at the far right/left of the editor
 	-- Default behavior opens aerial relative to current window
-	placement_editor_edge = false,
+	placement_editor_edge = true,
 
 	-- Run this command after jumping to a symbol (false will disable)
 	post_jump_cmd = "normal! zz",
 
 	-- When true, aerial will automatically close after jumping to a symbol
-	close_on_select = false,
+	close_on_select = true,
 
 	-- Show box drawing characters for the tree hierarchy
 	show_guides = true,

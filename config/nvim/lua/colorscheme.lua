@@ -10,6 +10,7 @@ if colorscheme == "onedark" then
     require "themes.onedark"
 elseif colorscheme == "catppuccin" then
     require "themes.catppuccin"
+	vim.g.catppuccin_flavour = "frappe"
 elseif colorscheme == "dracula" then
     require "themes.dracula"
 elseif colorscheme == "github-nvim-theme" then

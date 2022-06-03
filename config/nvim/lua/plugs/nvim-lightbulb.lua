@@ -15,7 +15,7 @@ lightbulb.setup {
         priority = 10,
     },
     float = {
-        enabled = false,
+        enabled = true,
         -- Text to show in the popup float
         text = "💡",
         -- Available keys for window options:

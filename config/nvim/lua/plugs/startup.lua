@@ -8,7 +8,7 @@ end
 vim.g.startup_disable_on_startup = true
 
 startup.setup({
-  theme = "startify",
+	theme = "startify",
   -- section_1 = { -- for the structure of a section see below
   --   -- "text" -> text that will be displayed
   --   -- "mapping" -> create mappings for commands that can be used

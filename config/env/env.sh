@@ -26,6 +26,8 @@ export LESSCHARSET=utf-8
 
 ## tmux config
 export TMUX_TMPDIR=${MYTMPDIR}/tmux && [ ! -d "${TMUX_TMPDIR}" ] && mkdir -p "${TMUX_TMPDIR}"
+export ZSH_TMUX_AUTOSTART=false
+export ZSH_TMUX_AUTOSTART_ONCE=false
 
 ## GO env
 export GO111MODULE=on
