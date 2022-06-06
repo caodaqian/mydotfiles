@@ -1,6 +1,5 @@
 local status_ok, startup = pcall(require, "startup")
 if not status_ok then
-  vim.notify("startup spellsitter not found")
 	return
 end
 

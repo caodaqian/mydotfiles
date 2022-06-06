@@ -1,6 +1,5 @@
 local status_ok, nvim_lastposition = pcall(require, "nvim-lastplace")
 if not status_ok then
-    vim.notify("nvim_lastposition not found!")
     return
 end
 

@@ -1,6 +1,6 @@
 require "options"
-require "mapping"
-require "colorscheme"
 require "plugins"
+require "colorscheme"
 require "plugs"
+require "mapping"
 require "autocommand"

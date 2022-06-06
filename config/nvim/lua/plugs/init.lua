@@ -27,14 +27,14 @@ M.setup = function()
 				local file = "plugs." .. cut_suffix_fname
 				local status_ok, _ = pcall(require, file)
 				if not status_ok then
-					vim.notify('Failed loading ' .. fname, vim.log.levels.ERROR)
+					vim.notify('Failed loading ' .. fname, vim.log.levels.WARN)
 				end
 			end
 		elseif vim.fn.isdirectory(fname) ~= 0 then
 			local module = "plugs." .. fname
 			local status_ok, _ = pcall(require, module)
 			if not status_ok then
-				vim.notify('Failed loading ' .. fname, vim.log.levels.ERROR)
+				vim.notify('Failed loading ' .. fname, vim.log.levels.WARN)
 			end
 		end
 	end

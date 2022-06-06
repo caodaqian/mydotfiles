@@ -1,6 +1,5 @@
 local status_ok, hlargs = pcall(require, "hlargs")
 if not status_ok then
-	vim.notify("hlargs not found!")
 	return
 end
 

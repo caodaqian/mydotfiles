@@ -1,60 +1,72 @@
 local dap = require('dap')
 
+local dbg_path = require("dap-install.config.settings").options["installation_path"] .. "ccppr_vsc/"
 dap.adapters.cppdbg = {
-    id = 'cppdbg',
-    type = "executable",
-    command = os.getenv('HOME') ..
-        '/.config/nvim/lua/plugs/dap/debugger/ms-vscode.cpptools-1.7.1/debugAdapters/bin/OpenDebugAD7'
+  id = 'cppdbg',
+  type = "executable",
+  command = dbg_path .. "extension/debugAdapters/bin/OpenDebugAD7",
 }
-dap.configurations.cpp = { -- launch exe
-{
+dap.configurations.cpp = {
+  -- launch exe
+  {
     name = "Launch file",
     type = "cppdbg",
     request = "launch",
     program = function()
-        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    args = function()
+      local input = vim.fn.input("Input args: ")
+      return require("user.dap.dap-util").str2argtable(input)
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = true,
-    setupCommands = {{
+    setupCommands = {
+      {
         description = 'enable pretty printing',
         text = '-enable-pretty-printing',
         ignoreFailures = false
-    }}
-}, -- attach process
-{
+      },
+    },
+  },
+  -- attach process
+  {
     name = "Attach process",
     type = "cppdbg",
     request = "attach",
     processId = require('dap.utils').pick_process,
     program = function()
-        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = "${workspaceFolder}",
-    setupCommands = {{
+    setupCommands = {
+      {
         description = 'enable pretty printing',
         text = '-enable-pretty-printing',
         ignoreFailures = false
-    }}
-}, -- attach server
-{
+      },
+    },
+  },
+  -- attach server
+  {
     name = 'Attach to gdbserver :1234',
     type = 'cppdbg',
     request = 'launch',
     MIMode = 'gdb',
     miDebuggerServerAddress = 'localhost:1234',
-    miDebuggerPath = '/usr/bin/gdb',
-    cwd = '${workspaceFolder}',
+    miDebuggerPath = '/usr/bin/gdb', cwd = '${workspaceFolder}',
     program = function()
-        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
-    setupCommands = {{
+    setupCommands = {
+      {
         text = '-enable-pretty-printing',
         description = 'enable pretty printing',
         ignoreFailures = false
-    }}
-}}
+      },
+    },
+  },
+}
 
 -- setup other language
 dap.configurations.c = dap.configurations.cpp
-

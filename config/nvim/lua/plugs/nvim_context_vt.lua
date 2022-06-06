@@ -1,6 +1,5 @@
 local status_ok, nvim_context_vt = pcall(require, "nvim_context_vt")
 if not status_ok then
-	vim.notify('nvim_context_vte not found!')
 	return
 end
 

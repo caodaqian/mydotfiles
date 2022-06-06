@@ -1,6 +1,5 @@
 local status_ok, bufferline = pcall(require, "bufferline")
 if not status_ok then
-	vim.notify("bufferline not found!")
 	return
 end
 
@@ -10,10 +9,10 @@ bufferline.setup({
 		numbers = "ordinal", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
 		--- @deprecated, please specify numbers as a function to customize the styling
 		-- number_style = "superscript", --| "subscript" | "" | { "none", "subscript" }, -- buffer_id at index 1, ordinal at index 2
-		close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-		right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+		close_command = "lua require'bufdelete'.bufdelete(%d)", -- can be a string | function, see "Mouse actions"
+		right_mouse_command = "lua require'bufdelete'.bufdelete(%d)", -- can be a string | function, see "Mouse actions"
 		left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-		middle_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+		middle_mouse_command = "lua require'bufdelete'.bufdelete(%d)", -- can be a string | function, see "Mouse actions"
 		-- NOTE: this plugin is designed with this icon in mind,
 		-- and so changing this is NOT recommended, this is intended
 		-- as an escape hatch for people who cannot bear it for whatever reason
@@ -36,7 +35,7 @@ bufferline.setup({
 		max_name_length = 18,
 		max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
 		tab_size = 18,
-		diagnostics = 'nvim_lsp', --| false | "nvim_lsp" | "coc",
+		diagnostics = 'nvim_lsp', -- | false | "nvim_lsp" | "coc",
 		diagnostics_update_in_insert = false,
 		diagnostics_indicator = function(count, level, diagnostics_dict, context)
 			return "(" .. count .. ")"
@@ -61,18 +60,22 @@ bufferline.setup({
 				return true
 			end
 		end,
-		offsets = { { filetype = "NvimTree", text = "File Explorer", text_align = "center" } }, -- | function , text_align = "left" | "center" | "right"}},
-		show_buffer_icons = true, --| false, -- disable filetype icons for buffers
-		show_buffer_close_icons = true, --| false,
-		show_close_icon = true, --| false,
+		offsets = {{
+			filetype = "NvimTree",
+			text = "File Explorer",
+			text_align = "center"
+		}}, -- | function , text_align = "left" | "center" | "right"}},
+		show_buffer_icons = true, -- | false, -- disable filetype icons for buffers
+		show_buffer_close_icons = true, -- | false,
+		show_close_icon = true, -- | false,
 		show_tab_indicators = true, -- | false,
 		persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
 		-- can also be a table containing 2 custom separators
 		-- [focused and unfocused]. eg: { '|', '|' }
-		separator_style = "thin", --| "slant" | "thick" | "thin" | { 'any', 'any' },
-		enforce_regular_tabs = false, --| true,
+		separator_style = "thin", -- | "slant" | "thick" | "thin" | { 'any', 'any' },
+		enforce_regular_tabs = false, -- | true,
 		always_show_bufferline = true, -- | false,
-		sort_by = 'directory', -- ,'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+		sort_by = 'directory' -- ,'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
 		--   -- add custom logic
 		--   return buffer_a.modified > buffer_b.modified
 		-- end

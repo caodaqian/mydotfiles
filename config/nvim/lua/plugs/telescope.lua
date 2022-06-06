@@ -1,6 +1,5 @@
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-	vim.notify("telescope not found!")
 	return
 end
 
@@ -149,7 +148,11 @@ telescope.setup {
 		},
 		["ui-select"] = { require("telescope.themes").get_dropdown {
 			-- even more opts
-		} }
+			}
+		},
+		live_grep_raw = {
+			auto_quoting = true, -- enable/disable auto-quoting
+		}
 	}
 }
 
@@ -158,7 +161,7 @@ telescope.load_extension('fzf')
 telescope.load_extension("ui-select")
 telescope.load_extension('dap')
 telescope.load_extension('vim_bookmarks')
-telescope.load_extension('aerial')
+--telescope.load_extension('aerial')
 telescope.load_extension('hop')
 -- <cr>	append environment name to buffer
 -- <c-a>	append environment value to buffer

@@ -1,5 +1,9 @@
+local status_ok, winshift = pcall(require, "winshift")
+if not status_ok then
+	return
+end
 -- Lua
-require("winshift").setup({
+winshift.setup({
   highlight_moving_win = true,  -- Highlight the window being moved
   focused_hl_group = "Visual",  -- The highlight group used for the moving window
   moving_win_options = {

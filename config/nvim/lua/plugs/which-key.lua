@@ -99,8 +99,9 @@ local mappings = {
 	['p'] = { "<cmd>Telescope packer<cr>", "find pakcer" },
 
 
-	-- aerial
-	["o"] = { "<cmd>AerialToggle<CR>", "Outline" },
+	-- Outline
+	-- ["o"] = { "<cmd>AerialToggle<CR>", "Outline" },
+	["o"] = { "<cmd>SymbolsOutline<cr>", "Outline" },
 
 	-- sessions
 	--S = {
@@ -139,10 +140,11 @@ local mappings = {
 	D = {
 		name = "Debug",
 		c = { "<cmd>Telescope dap commands<cr>", "Dap command" },
-		l = { "<cmd>Telescope dap list_breakpoints", "list breakpoints" },
-		v = { "<cmd>Telescope dap variables", "list variables" },
-		C = { "<cmd>Telescope dap configurations", "list configurations" },
-		f = { "<cmd>Telescope dap frame", "frame" },
+		l = { "<cmd>Telescope dap list_breakpoints<cr>", "list breakpoints" },
+		b = { "<cmd>lua require'dap'.toggle_breakpoint(); require'user.dap.dap-util'.store_breakpoints(true)<cr>" },
+		v = { "<cmd>Telescope dap variables<cr>", "list variables" },
+		C = { "<cmd>Telescope dap configurations<cr>", "list configurations" },
+		f = { "<cmd>Telescope dap frame<cr>", "frame" },
 		r = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run to Cursor" },
 		e = { "<cmd>lua require'dapui'.eval(vim.fn.input '[Expression] > ')<cr>", "Evaluate Input" },
 		x = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },

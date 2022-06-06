@@ -40,7 +40,6 @@
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
-	vim.notify("nvim-tree not found!")
 	return
 end
 
@@ -56,9 +55,9 @@ nvim_tree.setup({
 	open_on_setup_file = false,
 	open_on_tab = false,
 	sort_by = "name",
-	update_cwd = false,
-	reload_on_bufenter = false,
-	respect_buf_cwd = false,
+	update_cwd = true,
+	reload_on_bufenter = true,
+	respect_buf_cwd = true,
 	view = {
 		width = 40,
 		height = 30,
@@ -75,6 +74,8 @@ nvim_tree.setup({
 				{ key = "h", action = "close_node" },
 				{ key = "v", action = "vsplit" },
 				{ key = "O", action = "cd" },
+				{ key = "H", action = "toggle_git_ignored" },
+				{ key = "D", action = "toggle_dotfiles" },
 			},
 		},
 	},
@@ -172,7 +173,7 @@ nvim_tree.setup({
 			max_folder_discovery = 300,
 		},
 		open_file = {
-			quit_on_open = true,
+			quit_on_open = false,
 			resize_window = true,
 			window_picker = {
 				enable = true,

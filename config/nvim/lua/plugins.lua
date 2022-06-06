@@ -25,7 +25,7 @@ end
 
 -- Have packer use a popup window
 packer.init {
-	max_job = 50,
+	max_job = 30,
 	profiil = {
 		enable = true
 	},
@@ -128,7 +128,7 @@ return packer.startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate"
 	}
-	use "nvim-treesitter/nvim-treesitter-textobjects" -- enhance texetobject selection
+	--use "nvim-treesitter/nvim-treesitter-textobjects" -- enhance texetobject selection
 	use "romgrk/nvim-treesitter-context" -- show class/function at the top
 	use "m-demare/hlargs.nvim"
 	use "SmiteshP/nvim-gps" -- statusline shows class structure
@@ -140,9 +140,26 @@ return packer.startup(function(use)
 	use "kosayoda/nvim-lightbulb" -- code action
 	use "ray-x/lsp_signature.nvim" -- show function signature when typing
 	use "j-hui/fidget.nvim" -- show lsp progress
+	-- use {
+	-- 	'ray-x/navigator.lua',
+	-- 	requires = {
+	-- 		{ 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+	-- 		{ 'neovim/nvim-lspconfig' },
+	-- 	},
+	-- }
+	use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
+
+	-- optional
+	use {
+		'junegunn/fzf',
+		run = function()
+			vim.fn['fzf#install']()
+		end
+	}
 
 	-- Editor enhance
-	use "stevearc/aerial.nvim" -- file explore scroll with cursor
+	-- use "stevearc/aerial.nvim" -- file explore scroll with cursor
+	use "simrat39/symbols-outline.nvim"
 	use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
 	--use "Shatur/neovim-session-manager"
 	use "folke/which-key.nvim" -- which  key
@@ -153,20 +170,19 @@ return packer.startup(function(use)
 	use "tpope/vim-surround" -- vim surround
 	use "akinsho/toggleterm.nvim" -- toggle terminal
 	use "lukas-reineke/indent-blankline.nvim" -- indent blankline
-	use {
-		"phaazon/hop.nvim", -- like easymotion, but more powerful
-		branch = "v1" -- optional but strongly recommended
-	}
+	use "phaazon/hop.nvim" -- like easymotion, but more powerful
 	use "norcalli/nvim-colorizer.lua" -- show color
 	use "sindrets/winshift.nvim" -- rerange window layout
 	use "djoshea/vim-autoread" -- like tail -f, but for vim
 	use "folke/trouble.nvim" -- better quick fix
+	use "RRethy/vim-illuminate" -- highlight undercursor word
 
 	-- cmp plugins
 	use "hrsh7th/nvim-cmp" -- The completion plugin
 	use "hrsh7th/cmp-buffer" -- buffer completions
 	use "hrsh7th/cmp-path" -- path completions
 	use "hrsh7th/cmp-cmdline" -- cmdline completions
+	use "petertriho/cmp-git" -- git completions
 	use "saadparwaiz1/cmp_luasnip" -- snippet completions
 	use "hrsh7th/cmp-nvim-lsp"
 	use "hrsh7th/cmp-nvim-lua"
@@ -202,10 +218,15 @@ return packer.startup(function(use)
 		"projekt0n/github-nvim-theme"
 	}
 	use "folke/tokyonight.nvim"
+	use "yamatsum/nvim-cursorline"
+	use "dstein64/nvim-scrollview"
+	use "luukvbaal/stabilize.nvim"
+	use "beauwilliams/focus.nvim"
 
 	-- file explore
 	use "kyazdani42/nvim-tree.lua" -- file explore
 	use "akinsho/bufferline.nvim" -- tab
+	use 'famiu/bufdelete.nvim'
 	use "nvim-lualine/lualine.nvim" -- status line
 
 	-- welcome page
