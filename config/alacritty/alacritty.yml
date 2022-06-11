@@ -7,9 +7,9 @@ env:
   TERM: alacritty
 
 window:
-  dimensions:
-    columns: 180
-    lines: 50
+  #dimensions:
+  #  columns: 180
+  #  lines: 50
 
   # Window position (changes require restart)
   #

@@ -25,7 +25,7 @@ end
 
 -- Have packer use a popup window
 packer.init {
-	max_job = 30,
+	max_job = 10,
 	profiil = {
 		enable = true
 	},
