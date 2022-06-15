@@ -4,4 +4,5 @@ i3/config.save
 nvim/plugin
 **/.local_history/
 config/ranger/plugins/
+config/nvim/plugin/packer_compiled.lua
 
