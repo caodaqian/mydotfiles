@@ -74,19 +74,6 @@ keymap('n', '<S-F5>', "<cmd>lua require'dap'.close()<cr>", opts)
 keymap("n", "<F10>", "<cmd>lua require'dap'.step_over()<cr>", opts)
 keymap("n", "<F11>", "<cmd>lua require'dap'.step_into()<cr>", opts)
 keymap("n", "<S-F11>", "<cmd>lua require'dap'.step_out()<cr>", opts)
--- require lsp
---keymap("n", "gR", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-keymap("n", "=", "<cmd>Format<cr>", opts)
-keymap("n", "gr", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-keymap("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-keymap("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-keymap("n", "<leader>dj", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-keymap("n", "<leader>dk", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-keymap("n", "gl", '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-keymap("n", "<leader>dq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 
 -- Insert --
 -- Press jj fast to enter

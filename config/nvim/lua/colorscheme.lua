@@ -1,18 +1,13 @@
-local colorscheme = "catppuccin"
+local colorscheme_list = {"catppuccin", "dracula", "onedark", "github-nvim-theme"}
 
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not status_ok then
-    vim.notify("colorscheme " .. colorscheme .. " not found!")
-    return
-end
+for i = 1, #colorscheme_list do
+	local colorscheme = colorscheme_list[i]
+	require("themes." .. colorscheme)
 
-if colorscheme == "onedark" then
-    require "themes.onedark"
-elseif colorscheme == "catppuccin" then
-    require "themes.catppuccin"
-	vim.g.catppuccin_flavour = "frappe"
-elseif colorscheme == "dracula" then
-    require "themes.dracula"
-elseif colorscheme == "github-nvim-theme" then
-    require "themes.github-nvim-theme"
+	local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+	if not status_ok then
+		vim.notify("colorscheme " .. colorscheme .. " not found!")
+	else
+		return
+	end
 end

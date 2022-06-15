@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 catppuccin.setup({
-	transparent_background = true,
+	transparent_background = false,
 	term_colors = false,
 	styles = { -- TODO: style setting doesn't work
 		comments = "italic",
@@ -31,7 +31,7 @@ catppuccin.setup({
 				information = "underline"
 			}
 		},
-		lsp_trouble = false,
+		lsp_trouble = true,
 		cmp = true,
 		lsp_saga = false,
 		gitgutter = false,

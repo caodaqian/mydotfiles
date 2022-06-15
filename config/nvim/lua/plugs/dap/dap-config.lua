@@ -70,17 +70,17 @@ local function config_debuggers()
   -- load from json file
   require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'cpp' } })
   -- config per launage
-  -- require("user.dap.dap-cpp")
-  -- require("user.dap.di-go")
+  -- require("plugs.dap.dap-cpp")
+  -- require("plugs.dap.di-go")
 
-  require("user.dap.dap-cpp")
-  require("user.dap.dap-go")
-  require("user.dap.dap-python")
-  require("user.dap.dap-lua")
-  -- require("user.dap.dap-cpp")
-  -- require("config.dap.python").setup()
-  -- require("config.dap.rust").setup()
-  -- require("config.dap.go").setup()
+  require("plugs.dap.dap-cpp")
+  require("plugs.dap.dap-go")
+  require("plugs.dap.dap-python")
+  require("plugs.dap.dap-lua")
+  -- require("plugs.dap.dap-cpp")
+  -- require("plugs.dap.python").setup()
+  -- require("plugs.dap.rust").setup()
+  -- require("plugs.dap.go").setup()
 end
 
 function M.setup()

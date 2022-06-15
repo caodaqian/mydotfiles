@@ -15,6 +15,7 @@ else
 	export EDITOR=nvim
 	export MYVIMRC=${HOME}/.config/nvim/init.lua
 	export VIMDIR=${HOME}/.config/nvim
+	export PATH=${PATH}:${HOME}/.local/share/nvim/lsp_servers/python
 fi
 export MYTMPDIR=${HOME}/.tmp && [ ! -d "${MYTMPDIR}" ] && mkdir -p "${MYTMPDIR}"
 if [[ $(uname -s) == "Linux" ]]; then

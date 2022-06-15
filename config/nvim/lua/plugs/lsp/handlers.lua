@@ -66,13 +66,36 @@ local function lsp_highlight_document(client)
     ]], false)
 	end
 end
+-- require lsp
+local function lsp_keymaps(bufnr)
+	print(bufnr)
+	local opts = { noremap = true, silent = false }
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", vim.lsp.buf.declaration, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", vim.lsp.buf.definition, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", vim.lsp.buf.references, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "K", vim.lsp.buf.hover, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gh", vim.lsp.buf.hover, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", vim.lsp.buf.implementation, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "=", vim.lsp.buf.formatting, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<F2>", vim.lsp.buf.rename, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dj", vim.diagnostic.goto_prev({ border = "rounded" }), opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dk", vim.diagnostic.goto_next({ border = "rounded" }), opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", vim.diagnostic.open_float, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>dq", vim.diagnostic.setloclist, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>E', vim.diagnostic.open_float, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', vim.diagnostic.goto_prev, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', vim.diagnostic.goto_next, opts)
+	vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>Q', vim.diagnostic.setloclist, opts)
+end
 
 M.on_attach = function(client, bufnr)
 	-- if client.name == "tsserver" or client.name == "clangd" then
 	-- client.resolved_capabilities.document_formatting = false
 	-- end
-	vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-	lsp_highlight_document(client)
+	lsp_keymaps(bufnr)
+	-- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+	-- lsp_highlight_document(client)
 
 	-- add outline support for evey lanuage
 	-- require("aerial").on_attach(client, bufnr)

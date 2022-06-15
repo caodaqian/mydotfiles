@@ -65,8 +65,8 @@ local function jumpable(dir)
 		while node ~= nil and node.next ~= nil and node ~= snippet do
 			local n_next = node.next
 			local next_pos = n_next and n_next.mark:pos_begin()
-			local candidate = n_next ~= snippet and next_pos and (pos[1] < next_pos[1]) or
-				(pos[1] == next_pos[1] and pos[2] < next_pos[2])
+			local candidate = n_next ~= snippet and next_pos and (pos[1] < next_pos[1])
+			or (pos[1] == next_pos[1] and pos[2] < next_pos[2])
 
 			-- Past unmarked exit node, exit early
 			if n_next == nil or n_next == snippet.next then
@@ -134,22 +134,22 @@ if not status_luasnip_ok then
 end
 
 require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
-require("luasnip.loaders.from_vscode").load({
-	paths = { vim.fn.stdpath("config") .. "/my-snippets" }
-}) -- Load snippets from my-snippets folder
+require("luasnip.loaders.from_vscode").load({ paths = { -- load custom snippets
+	vim.fn.stdpath("config") .. "/my-snippets"
+} }) -- Load snippets from my-snippets folder
 
-Cmp_config = {
+cmp_config = {
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
-		select = false
+		select = false,
 	},
 	completion = {
 		---@usage The minimum length of a word to complete on.
-		keyword_length = 1
+		keyword_length = 1,
 	},
 	experimental = {
-		ghost_text = false,
-		native_menu = false
+		ghost_text = true,
+		native_menu = false,
 	},
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
@@ -179,71 +179,62 @@ Cmp_config = {
 			TypeParameter = " ",
 			Unit = "塞",
 			Value = " ",
-			Variable = " "
+			Variable = " ",
 		},
 		source_names = {
 			nvim_lsp = "(LSP)",
+			treesitter = "(TS)",
 			emoji = "(Emoji)",
 			path = "(Path)",
 			calc = "(Calc)",
-			treesitter = "(TS)",
 			cmp_tabnine = "(Tabnine)",
 			vsnip = "(Snippet)",
 			luasnip = "(Snippet)",
 			buffer = "(Buffer)",
-			spell = "(Spell)"
+			spell = "(Spell)",
 		},
 		duplicates = {
 			buffer = 1,
 			path = 1,
 			nvim_lsp = 0,
-			luasnip = 1
+			luasnip = 1,
 		},
 		duplicates_default = 0,
 		format = function(entry, vim_item)
-			local max_width = Cmp_config.formatting.max_width
+			local max_width = cmp_config.formatting.max_width
 			if max_width ~= 0 and #vim_item.abbr > max_width then
 				vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. "…"
 			end
-			vim_item.kind = Cmp_config.formatting.kind_icons[vim_item.kind]
-			vim_item.menu = Cmp_config.formatting.source_names[entry.source.name]
-			vim_item.dup = Cmp_config.formatting.duplicates[entry.source.name] or
-				Cmp_config.formatting.duplicates_default
+			vim_item.kind = cmp_config.formatting.kind_icons[vim_item.kind]
+			vim_item.menu = cmp_config.formatting.source_names[entry.source.name]
+			vim_item.dup = cmp_config.formatting.duplicates[entry.source.name]
+			or cmp_config.formatting.duplicates_default
 			return vim_item
-		end
+		end,
 	},
 	snippet = {
 		expand = function(args)
 			require("luasnip").lsp_expand(args.body)
-		end
+		end,
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered()
+		documentation = cmp.config.window.bordered(),
 	},
-	sources = { {
-		name = "nvim_lsp"
-	}, {
-		name = "path"
-	}, {
-		name = "luasnip"
-	}, {
-		name = "cmp_tabnine"
-	}, {
-		name = "nvim_lua"
-	}, {
-		name = "buffer"
-	}, {
-		name = "spell"
-	}, {
-		name = "calc"
-	}, {
-		name = "emoji"
-	}, {
-		name = "treesitter"
-	}, {
-		name = "crates"
-	} },
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "path" },
+		{ name = "luasnip" },
+		{ name = "cmp_tabnine" },
+		{ name = "nvim_lua" },
+		{ name = "buffer" },
+		{ name = "spell" },
+		{ name = "calc" },
+		{ name = "emoji" },
+		{ name = "treesitter" },
+		{ name = "crates" },
+		{ name = "nvim_lsp_signture_help" },
+	},
 	mapping = cmp.mapping.preset.insert {
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
@@ -264,7 +255,7 @@ Cmp_config = {
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
+		end, {"i", "s",}),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
@@ -273,12 +264,11 @@ Cmp_config = {
 			else
 				fallback()
 			end
-		end, { "i", "s" }),
-
+		end, {"i", "s",}),
 		["<C-p>"] = cmp.mapping.complete(),
-		["<C-l>"] = cmp.mapping.abort(),
+		["<C-e>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping(function(fallback)
-			if cmp.visible() and cmp.confirm(Cmp_config.confirm_opts) then
+			if cmp.visible() and cmp.confirm(cmp_config.confirm_opts) then
 				if jumpable(1) then
 					luasnip.jump(1)
 				end
@@ -292,36 +282,34 @@ Cmp_config = {
 			else
 				fallback()
 			end
-		end)
-	}
+		end),
+	},
 }
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = { {
-		name = 'buffer'
-	} }
+	sources = {{ name = 'buffer' }}
 })
 
 cmp.setup.cmdline('?', {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = { {
-		name = 'buffer'
-	} }
+	sources = {
+		{ name = 'buffer' }
+	}
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({ {
-		name = 'cmdline'
-	} }, { {
-		name = 'path'
-	} })
+	sources = cmp.config.sources({
+		{ name = 'cmdline' }
+	}, {
+		{ name = 'path' }
+	})
 })
 
 -- disable autocompletion for guihua
 vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
 vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
 
-cmp.setup(Cmp_config)
+cmp.setup(cmp_config)
