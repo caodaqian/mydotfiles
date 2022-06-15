@@ -150,13 +150,13 @@ telescope.setup {
 			-- even more opts
 			}
 		},
-		live_grep_raw = {
+		live_grep_args = {
 			auto_quoting = true, -- enable/disable auto-quoting
 		}
 	}
 }
 
-telescope.load_extension('live_grep_raw')
+telescope.load_extension('live_grep_args')
 telescope.load_extension('fzf')
 telescope.load_extension("ui-select")
 telescope.load_extension('dap')
