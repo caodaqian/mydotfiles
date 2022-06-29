@@ -1,5 +1,6 @@
 # Compiled Python files
 *.pyc
+**/__pycache__/**
 
 # Folder view configuration files
 .DS_Store
@@ -25,3 +26,6 @@ logs/**
 # vscode
 **/.vscode/**
 __debug_bin
+
+# idea
+**/.idea/**

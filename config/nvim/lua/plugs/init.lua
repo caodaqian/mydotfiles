@@ -39,8 +39,15 @@ M.setup = function()
 	for _, v in pairs(unload_plugins) do
 		helper_set[v] = true
 	end
+
 	for _, fname in pairs(vim.fn.readdir(config_dir)) do
-		if ends_with(fname, ".lua") then
+		if vim.fn.isdirectory(vim.fn.stdpath('config') .. '/lua/plugs/' .. fname) ~= 0 then
+			local module = "plugs." .. fname
+			local status_ok, _ = pcall(require, module)
+			if not status_ok then
+				vim.notify('Failed loading ' .. fname, vim.log.levels.WARN)
+			end
+		elseif ends_with(fname, ".lua") then
 			local cut_suffix_fname = fname:sub(1, #fname - #'.lua')
 			if helper_set[cut_suffix_fname] == nil then
 				local file = "plugs." .. cut_suffix_fname
@@ -48,12 +55,6 @@ M.setup = function()
 				if not status_ok then
 					vim.notify('Failed loading ' .. fname, vim.log.levels.WARN)
 				end
-			end
-		elseif vim.fn.isdirectory(fname) ~= 0 then
-			local module = "plugs." .. fname
-			local status_ok, _ = pcall(require, module)
-			if not status_ok then
-				vim.notify('Failed loading ' .. fname, vim.log.levels.WARN)
 			end
 		end
 	end

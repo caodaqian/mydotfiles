@@ -233,8 +233,12 @@ return packer.startup(function(use)
 	-- code test
 	use "vim-test/vim-test"
 	use {
-		"rcarriga/vim-ultest",
-		run = ":UpdateRemotePlugins"
+		"nvim-neotest/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim"
+		}
 	}
 	use {
 		'michaelb/sniprun',
