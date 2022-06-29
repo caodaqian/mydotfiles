@@ -92,7 +92,7 @@ local mappings = {
 	-- telescope
 	["r"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 	["f"] = { "<cmd>Telescope find_files<cr>", "find files" },
-	["F"] = { "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw(require('telescope.themes').get_ivy())<cr>", "find text" },
+	["F"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>", "find text" },
 	["b"] = { "<cmd>Telescope buffers<cr>", "find buffers" },
 	["m"] = { "<cmd>Telescope vim_bookmarks all<cr>", "find bookmarks" },
 	['e'] = { "<cmd>Telescope Telescope env<cr>", "find ENV" },
