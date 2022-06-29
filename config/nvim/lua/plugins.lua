@@ -172,7 +172,7 @@ return packer.startup(function(use)
 
 	-- Debugger
 	use "ravenxrz/DAPInstall.nvim" -- help us install several debuggers
-	use "ravenxrz/nvim-dap" -- commit = "f9480362549e2b50a8616fe4530deaabbc4f889b"
+	use "mfussenegger/nvim-dap"
 	use "theHamsta/nvim-dap-virtual-text"
 	use "rcarriga/nvim-dap-ui"
 	use { "jbyuki/one-small-step-for-vimkind", module = "osv" } -- debug any Lua code running in a Neovim instance
