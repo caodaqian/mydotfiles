@@ -208,7 +208,6 @@ return packer.startup(function(use)
 
 	-- welcome page
 	use "goolord/alpha-nvim"
-	-- use "startup-nvim/startup.nvim"
 
 	-- comments
 	use "folke/todo-comments.nvim" -- todo-comments

@@ -25,6 +25,7 @@ winshift.setup({
       "NvimTree",
     },
     buftype = {   -- List of ignored buftypes
+      "NvimTree",
       "terminal",
       "quickfix",
     },

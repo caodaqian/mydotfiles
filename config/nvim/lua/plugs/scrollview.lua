@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 scroll.setup({
-	excluded_filetypes ={"toggleterm", "telescope", "floaterm", "aerial"}, 
+	excluded_filetypes ={"toggleterm", "telescope", "floaterm", "aerial", "NvimTree"},
 	current_only = false,
 	winblend = 75,
 	base = 'right',

@@ -36,7 +36,7 @@ window:
   #     - buttonless: Title bar, transparent background and no title bar buttons
   #decorations: full
 
-  opacity: 0.8
+  opacity: 0.85
 
   # Startup Mode (changes require restart)
   # Values for `startup_mode`:
@@ -69,7 +69,7 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: CaskaydiaCove Nerd Font Mono
+    family: CaskaydiaCove Nerd Font
     style: Book
 
   # Bold font face
@@ -106,7 +106,7 @@ font:
   #style: Bold Italic
 
   # Point size
-  size: 16.0
+  size: 17.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -122,70 +122,74 @@ font:
   #  x: 0
   #  y: 0
 
-  use_thin_strokes: true
+  use_thin_strokes: false
   builtin_box_drawing: true
 
 # If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: false
+draw_bold_text_with_bright_colors: true
 
-colors:
-  # Default colors
-  primary:
-    background: "#1e2127"
-    foreground: "#abb2bf"
+#colors:
+#  # Default colors
+#  primary:
+#    background: "#1e2127"
+#    foreground: "#abb2bf"
+#
+#      # Normal colors
+#      # Nord
+#  normal:
+#    black:   "#1e2127"
+#    red:     "#e06c75"
+#    green:   "#98c379"
+#    yellow:  "#d19a66"
+#    blue:    "#61afef"
+#    magenta: "#c678dd"
+#    cyan:    "#56b6c2"
+#    white:   "#828791"
+#
+#      # Bright colors
+#  bright:
+#    black:   "#5c6370"
+#    red:     "#e06c75"
+#    green:   "#98c379"
+#    yellow:  "#d19a66"
+#    blue:    "#61afef"
+#    magenta: "#c678dd"
+#    cyan:    "#56b6c2"
+#    white:   "#e6efff"
+#
+#  dim:
+#    black:   "#1e2127"
+#    red:     "#e06c75"
+#    green:   "#98c379"
+#    yellow:  "#d19a66"
+#    blue:    "#61afef"
+#    magenta: "#c678dd"
+#    cyan:    "#56b6c2"
+#    white:   "#828791"
+#
+#  cursor:
+#    text: "#3B4252"
+#    cursor: "#ECEFF4"
+#
+#vi_mode_cursor:
+#  text: "#3B4252"
+#  cursor: "#ECEFF4"
+#
+#search:
+#matches:
+#  foreground: '#000000'
+#  background: '#ffffff'
+#focused_match:
+#  foreground: '#ffffff'
+#  background: '#000000'
+#
+#bar:
+#  background: "#1e2127"
+#  foreground: "#abb2bf"
 
-      # Normal colors
-      # Nord
-  normal:
-    black:   "#1e2127"
-    red:     "#e06c75"
-    green:   "#98c379"
-    yellow:  "#d19a66"
-    blue:    "#61afef"
-    magenta: "#c678dd"
-    cyan:    "#56b6c2"
-    white:   "#828791"
-
-      # Bright colors
-  bright:
-    black:   "#5c6370"
-    red:     "#e06c75"
-    green:   "#98c379"
-    yellow:  "#d19a66"
-    blue:    "#61afef"
-    magenta: "#c678dd"
-    cyan:    "#56b6c2"
-    white:   "#e6efff"
-
-  dim:
-    black:   "#1e2127"
-    red:     "#e06c75"
-    green:   "#98c379"
-    yellow:  "#d19a66"
-    blue:    "#61afef"
-    magenta: "#c678dd"
-    cyan:    "#56b6c2"
-    white:   "#828791"
-
-  cursor:
-    text: "#3B4252"
-    cursor: "#ECEFF4"
-
-vi_mode_cursor:
-  text: "#3B4252"
-  cursor: "#ECEFF4"
-
-search:
-matches:
-  foreground: '#000000'
-  background: '#ffffff'
-focused_match:
-  foreground: '#ffffff'
-  background: '#000000'
-
-bar:
-  background: "#1e2127"
-  foreground: "#abb2bf"
+## load theme
+import:
+  - .config/alacritty/themes/dracula.yaml
 
 # Keyboard regex hints
 #hints:

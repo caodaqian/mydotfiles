@@ -59,6 +59,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 plugins=(
+	z
 	command-not-found
 	common-aliases
 	git-open
@@ -102,13 +103,15 @@ unalias duf
 TRAPWINCH() {
 	zle && { zle reset-prompt; zle -R }
 }
+bindkey '^B' backward-word
+bindkey '^F' forward-word
+zle -N self-insert url-quote-magic
 
 
 # fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey '^R' fzf-history-widget
 bindkey '^T' fzf-file-widget
-bindkey '^F' find-in-file
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
