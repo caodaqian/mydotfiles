@@ -16,7 +16,7 @@ alias cls='clear'
 alias ls='ls $COLOR_OPTION'
 alias la='ls -ah $COLOR_OPTION'
 alias ll='ls -lh $COLOR_OPTION'
-alias l='ls -lA $COLOR_OPTION'
+alias l='ls -la $COLOR_OPTION'
 alias grep='grep $COLOR_OPTION'
 alias egrep='egrep $COLOR_OPTION'
 alias diff='diff -aNur'
@@ -98,9 +98,6 @@ alias man='tldr'
 
 ## exa
 alias ls='exa'
-alias la='exa -ah'
-alias ll='exa -lh'
-alias l='exa -lA'
 
 ## backup
 function backup() {
