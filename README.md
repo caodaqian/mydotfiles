@@ -31,7 +31,7 @@ Linux setting sync
 - dust，better du
 - duf，better df
 - bat，better cat
-- htop，better top
+- btop，better top
 - tldr，better man
 - exa, better ls
 

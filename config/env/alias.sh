@@ -84,8 +84,8 @@ alias ra='ranger'
 ## bat
 alias cat='bat -p'
 
-## htop
-alias top='htop'
+## btop
+alias top='btop'
 
 ## duf
 alias df='duf'

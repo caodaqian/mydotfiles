@@ -3,6 +3,7 @@
 i3/config.save
 nvim/plugin
 **/.local_history/
+config/btop/btop.log
 config/ranger/plugins/
 config/ranger/bookmarks
 config/ranger/history

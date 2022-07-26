@@ -97,6 +97,8 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
+# User specific aliases and functions
+[ -f ${HOME}/.config/env/alias.sh ] && . ${HOME}/.config/env/alias.sh
 
 # User configuration
 unalias duf

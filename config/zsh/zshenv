@@ -5,5 +5,3 @@ PATH=/usr/local/bin:${PATH}
 # User locale config
 [ -f ${HOME}/.config/env/locale.sh ] && . ${HOME}/.config/env/locale.sh
 
-# User specific aliases and functions
-[ -f ${HOME}/.config/env/alias.sh ] && . ${HOME}/.config/env/alias.sh
