@@ -27,7 +27,13 @@ Linux setting sync
 - nodejs
 - python3
 - pip3
-- ranger
+- ranger, better file explorer
+- dust，better du
+- duf，better df
+- bat，better cat
+- htop，better top
+- tldr，better man
+- exa, better ls
 
 ### zsh 自动安装的插件
 
@@ -43,19 +49,14 @@ Linux setting sync
 ### tmux 自动安装
 
 - ohmytmux
+- tmux-resurrect，保存/恢复 tmux 打开的会话
+- tmux-continum，自动定时保存和自动恢复会话
 
 ## 推荐应用
 
 - tmate，多人协同会话
-- tmux-resurrect，保存/恢复 tmux 打开的会话
-- tmux-continum，自动定时保存和自动恢复会话
 - when-changed，文件监控执行
 - supervisor，进程监控拉起
-- ncdu，better du
-- duf，better df
-- bat，better cat
-- htop，better top
-- tldr，better man
 - jq，json 格式化以及查询
 - iftop，流量监测
 - cloc，代码统计工具

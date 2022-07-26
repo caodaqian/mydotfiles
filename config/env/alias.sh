@@ -36,18 +36,12 @@ alias hrunning='mapred job -set-max-task-running'
 ## git
 alias ga='git add'
 alias gaa='git add --all'
-alias gapa='git add --patch'
-alias gau='git add --update'
-alias gav='git add --verbose'
-alias gap='git apply'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gbd='git branch -d'
-alias gbda='git branch --no-color --merged | command grep -vE "^(\+|\*|\s*(master|develop|dev)\s*$)" | command xargs -n 1 git branch -d'
 alias gbD='git branch -D'
 alias gbl='git blame -b -w'
-alias gbnm='git branch --no-merged'
-alias gbr='git branch --remote'
+alias gbnm='git branch --no-merged' alias gbr='git branch --remote'
 alias gc!='git commit -v --amend'
 alias gcn!='git commit -v --no-edit --amend'
 alias gca='git commit -v -a'
@@ -64,8 +58,6 @@ alias gdca='git diff --cached'
 alias gdcw='git diff --cached --word-diff'
 alias gf='git fetch'
 alias gfa='git fetch --all --prune'
-alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
-alias ggpull='git pull origin "$(git_current_branch)"'
 alias gl='git log --stat --graph --decorate --all'
 alias glp='git log --stat --graph --decorate --all -p'
 alias glo='git log --oneline --decorate --graph --all'
@@ -88,6 +80,27 @@ alias tkss='tmux kill-server -t'
 
 ## ranger
 alias ra='ranger'
+
+## bat
+alias cat='bat -p'
+
+## htop
+alias top='htop'
+
+## duf
+alias df='duf'
+
+## dust
+alias du='dust'
+
+## tldr
+alias man='tldr'
+
+## exa
+alias ls='exa'
+alias la='exa -ah'
+alias ll='exa -lh'
+alias l='exa -lA'
 
 ## backup
 function backup() {

@@ -75,3 +75,6 @@ export PATH=${NODE_HOME}/bin:${PATH}
 
 ## ranger config
 export RANGER_LOAD_DEFAULT_RC=false
+
+## linuxbrew
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
