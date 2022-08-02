@@ -19,7 +19,6 @@ litee_lib.setup({
 -- configure litee-calltree.nvim
 -- commands: LTOpenToCalltree to open calltree
 litee_calltree.setup({
-   -- NOTE: the plugin is in-progressing
   on_open = "pannel", -- pannel | popout
   hide_cursor = false,
   keymaps = {
@@ -40,3 +39,4 @@ litee_calltree.setup({
     focus = "f"
   },
 })
+

@@ -44,7 +44,7 @@ M.setup = function()
 			local module = "plugs." .. fname
 			local status_ok, _ = pcall(require, module)
 			if not status_ok then
-				vim.notify('Failed loading ' .. fname, vim.log.levels.WARN)
+				vim.notify('Failed loading ' .. fname, vim.log.levels.ERROR)
 			end
 		elseif ends_with(fname, ".lua") then
 			local cut_suffix_fname = fname:sub(1, #fname - #'.lua')
@@ -52,7 +52,7 @@ M.setup = function()
 				local file = "plugs." .. cut_suffix_fname
 				local status_ok, _ = pcall(require, file)
 				if not status_ok then
-					vim.notify('Failed loading ' .. fname, vim.log.levels.WARN)
+					vim.notify('Failed loading ' .. fname, vim.log.levels.ERROR)
 				end
 			end
 		end

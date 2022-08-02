@@ -25,11 +25,11 @@ end
 
 -- Have packer use a popup window
 packer.init {
-	max_job = 10,
+	max_job = 30,
 	profiil = {
 		enable = true
 	},
-	autoremove = true,
+	autoremove = false,
 }
 
 --  useage
@@ -126,14 +126,6 @@ return packer.startup(function(use)
 	-- }
 	use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
 
-	-- optional
-	use {
-		'junegunn/fzf',
-		run = function()
-			vim.fn['fzf#install']()
-		end
-	}
-
 	-- Editor enhance
 	-- use "stevearc/aerial.nvim" -- file explore scroll with cursor
 	use "simrat39/symbols-outline.nvim"
@@ -198,7 +190,7 @@ return packer.startup(function(use)
 	use "yamatsum/nvim-cursorline"
 	use "dstein64/nvim-scrollview"
 	use "luukvbaal/stabilize.nvim"
-	use "beauwilliams/focus.nvim"
+	--use "beauwilliams/focus.nvim"
 
 	-- file explore
 	use "kyazdani42/nvim-tree.lua" -- file explore
@@ -236,7 +228,12 @@ return packer.startup(function(use)
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim"
+			"antoinemadec/FixCursorHold.nvim",
+			-- adapters
+			"nvim-neotest/neotest-go",
+			"nvim-neotest/neotest-python",
+			"nvim-neotest/neotest-vim-test",
+			"nvim-neotest/neotest-plenary",
 		}
 	}
 	use {
