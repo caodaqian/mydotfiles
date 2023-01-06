@@ -102,7 +102,7 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 [ -f ${HOME}/.config/env/alias.sh ] && . ${HOME}/.config/env/alias.sh
 
 # User configuration
-unalias duf
+unalias duf 2>/dev/null
 TRAPWINCH() {
 	zle && { zle reset-prompt; zle -R }
 }

@@ -42,7 +42,7 @@ keymap("n", "sd", ":set splitbelow<CR>:split<CR>", opts)
 keymap("n", "H", "<home>", opts)
 keymap("n", "L", "<end>", opts)
 -- Resize with arrows
-keymap("n", "<C-S-Up>", ":resize -2<CR>", opts)
+keymap("n", "<C-S-Up>", ":resize -1<CR>", opts)
 keymap("n", "<C-S-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-S-Left>", ":vertical resize +2<CR>", opts)
 keymap("n", "<C-S-Right>", ":vertical resize -2<CR>", opts)

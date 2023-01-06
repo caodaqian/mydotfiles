@@ -22,11 +22,11 @@ nvim_context_vt.setup({
 
 	-- Disable display of virtual text below blocks for indentation based languages like Python
 	-- Default: false
-	disable_virtual_lines = false,
+	disable_virtual_lines = true,
 
 	-- Same as above but only for spesific filetypes
 	-- Default: {}
-	disable_virtual_lines_ft = { 'yaml' },
+	disable_virtual_lines_ft = { 'yaml', "python" },
 
 	-- How many lines required after starting position to show virtual text
 	-- Default: 1 (equals two lines total)

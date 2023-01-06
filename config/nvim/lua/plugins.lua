@@ -25,10 +25,15 @@ end
 
 -- Have packer use a popup window
 packer.init {
-	max_job = 30,
-	profiil = {
-		enable = true
+	--max_job = 10,
+	display = {
+		open_fn = function()
+			return require('packer.util').float { border = "rounded" }
+		end,
 	},
+	--profiil = {
+	--	enable = true
+	--},
 	autoremove = false,
 }
 
@@ -170,7 +175,12 @@ return packer.startup(function(use)
 	use { "jbyuki/one-small-step-for-vimkind", module = "osv" } -- debug any Lua code running in a Neovim instance
 
 	-- Git
-	use "lewis6991/gitsigns.nvim"
+	use { "lewis6991/gitsigns.nvim",
+		event = { "CursorMoved", "CursorMovedI" },
+		config = function()
+   				require("gitsigns")
+   		end
+	}
 	use 'sindrets/diffview.nvim'
 
 	-- UI

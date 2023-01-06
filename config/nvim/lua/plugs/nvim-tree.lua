@@ -60,7 +60,6 @@ nvim_tree.setup({
 	respect_buf_cwd = true,
 	view = {
 		width = 40,
-		height = 30,
 		hide_root_folder = false,
 		side = "left",
 		preserve_window_proportions = false,
@@ -134,7 +133,7 @@ nvim_tree.setup({
 	},
 	update_focused_file = {
 		enable = true,
-		update_cwd = true,
+		update_cwd = false,
 		ignore_list = {},
 	},
 	ignore_ft_on_setup = {},
@@ -213,6 +212,6 @@ require "nvim-tree.events".on_file_created(function(file) vim.cmd("edit " .. fil
 -- require"nvim-tree.events".on_file_created(function(file) vim.cmd("edit "..vim.fn.fnamemodify(file.fname, ":p")) end)
 
 -- auto close feature
-vim.cmd([[
-	autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-]])
+--vim.cmd([[
+--	autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+--]])

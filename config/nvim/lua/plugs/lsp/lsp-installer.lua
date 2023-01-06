@@ -31,6 +31,10 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
 	if status_ok then
 		opts = vim.tbl_deep_extend("force", newopts, opts)
 	end
+    if server.name == "pyright" then
+        local pyright_opts = require("plugs.lsp.settings.pyright")
+        opts = vim.tbl_deep_extend("force", pyright_opts, opts)
+	end
     --if server.name == "clangd" then
     --    local clangd_opts = require("plugs.lsp.settings.clangd")
     --    opts = vim.tbl_deep_extend("force", clangd_opts, opts)

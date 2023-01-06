@@ -23,30 +23,31 @@ local options = {
     smartindent = true, -- make indenting smarter again
     wildmenu = true, -- enable tab completion menu
     wildignorecase = true,
-    synmaxcol = 1000, -- scroll lines that are too long just slow when a line is too long
+    synmaxcol = 240, -- scroll lines that are too long just slow when a line is too long
     ttyfast = true,
     scrolloff = 8, -- keep 8 height offset from above and bottom
     sidescrolloff = 8, -- keep 8 width offset from left and right
     signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
-    numberwidth = 4, -- set number column width to 2 {default 4}
+    numberwidth = 5, -- set number column width to 2 {default 4}
     backup = false, -- creates a backup file
     cmdheight = 1, -- keep status bar position close to bottom
     completeopt = {"menuone", "noselect"}, -- mostly just for cmp
     conceallevel = 0, -- so that `` is visible in markdown files
     hlsearch = true, -- highlight all matches on previous search pattern
     mouse = "a", -- allow the mouse to be used in neovim
-    pumheight = 10, -- pop up menu height
     -- display config
-    showmode = true, -- we don't need to see things like -- INSERT -- anymore
+    pumheight = 15, -- popup menu height
+	ruler = true,     -- Show the cursor position all the time
+    showmode = true, -- we don't need to see things like -- INSERT -- anymore if false
     showtabline = 2, -- always show tabs
-    laststatus = 2,
+    laststatus = 3,
     title = true, -- change the terminal title
     lazyredraw = true, -- do not redraw when executing macros
     cursorline = true, -- highlight current line
     cursorcolumn = false, -- cursor column.
     termguicolors = true, -- set term gui colors (most terminals support this)
-    number = false, -- set numbered lines
-    relativenumber = true, -- set relative numbered lines
+    number = true, -- set numbered lines
+    relativenumber = false, -- set relative numbered lines
     showcmd = true, -- show partial command line (default)
     wrap = true, -- display lines as one long line
     wrapscan = true, -- wrap around when searching
@@ -55,32 +56,24 @@ local options = {
     swapfile = false, -- creates a swapfile
     timeoutlen = 500, -- time to wait for a mapped sequence to complete (in milliseconds)
     undofile = true, -- enable persistent undo
-    updatetime = 300, -- faster completion (4000ms default)
+    updatetime = 700, -- faster completion (4000ms default)
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     spell = false, -- add spell support
     spelllang = {'en_us'}, -- support which languages?
-    diffopt = "vertical,filler,internal,context:4" -- vertical diff split view
+    diffopt = "vertical,filler,internal,context:4", -- vertical diff split view
+	hidden = true,    -- Required to keep multiple buffers open multiple buffers
 }
 
-vim.opt.shortmess:append "c"
 
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
-vim.cmd "syntax on"
+vim.opt.shortmess:append "c"
+vim.opt.iskeyword:append("-")
+
+vim.cmd "syntax enable"
 vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
-
--- WSL yank support
-vim.cmd [[
-let s:clip = '/mnt/c/Windows/System32/clip.exe'
-if executable(s:clip)
-		augroup WSLYank
-				autocmd!
-				autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-		augroup END
-endif
-]]
-
+vim.cmd [[set formatoptions-=cro]]
+vim.cmd [[set nocompatible]]
+vim.cmd [[set t_Co=256]]
