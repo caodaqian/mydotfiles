@@ -111,6 +111,7 @@ return packer.startup(function(use)
 		run = ":TSUpdate"
 	}
 	--use "nvim-treesitter/nvim-treesitter-textobjects" -- enhance texetobject selection
+	use "nvim-treesitter/nvim-treesitter-refactor"
 	use "romgrk/nvim-treesitter-context" -- show class/function at the top
 	use "m-demare/hlargs.nvim"
 	use "SmiteshP/nvim-gps" -- statusline shows class structure
