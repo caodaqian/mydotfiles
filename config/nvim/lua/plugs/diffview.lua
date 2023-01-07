@@ -31,14 +31,14 @@ require 'diffview'.setup {
       width = 35,
       height = 16,
     },
-    log_options = {
-		single_file = {
-			diff_merges = "combined",
-		},
-		multi_file = {
-			diff_merges = "first-parent",
-		},
-    },
+    ---log_options = {
+	---	single_file = {
+	---		diff_merges = "combined",
+	---	},
+	---	multi_file = {
+	---		diff_merges = "first-parent",
+	---	},
+    ---},
   },
   default_args = { -- Default args prepended to the arg-list for the listed commands
     DiffviewOpen = {},
