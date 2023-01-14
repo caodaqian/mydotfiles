@@ -16,6 +16,7 @@ fi
 # init
 export TERM=xterm-256color
 export TERM_ITALICS=true
+autoload -U colors && colors
 export CLICOLOR=1
 
 # Path to your oh-my-zsh installation.
@@ -39,6 +40,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="false"
 HIST_STAMPS="yyyy-mm-dd"
 ZSH_CUSTOM=$ZSH/custom
 setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
@@ -47,6 +50,7 @@ setopt HIST_REDUCE_BLANKS
 setopt EXTENDED_HISTORY
 setopt ALWAYS_TO_END
 setopt COMPLETE_IN_WORD
+setopt CDABLE_VARS
 setopt PROMPT_SUBST
 setopt AUTO_MENU
 export HISTSIZE=10000

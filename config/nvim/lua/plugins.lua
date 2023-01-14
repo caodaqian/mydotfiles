@@ -25,11 +25,16 @@ end
 
 -- Have packer use a popup window
 packer.init {
-	--max_job = 10,
+	max_job = 24,
 	display = {
 		open_fn = function()
 			return require('packer.util').float { border = "rounded" }
 		end,
+	},
+	git = {
+		subcommands = {
+			update = "pull --ff-only --progress --rebase=true",
+		},
 	},
 	--profiil = {
 	--	enable = true
@@ -91,6 +96,7 @@ return packer.startup(function(use)
 		run = "make"
 	}
 	use "nvim-telescope/telescope-ui-select.nvim"
+	use "nvim-telescope/telescope-symbols.nvim"
 	use "nvim-telescope/telescope-live-grep-raw.nvim"
 	use {
 		"tom-anders/telescope-vim-bookmarks.nvim",
@@ -103,19 +109,23 @@ return packer.startup(function(use)
 	use 'nvim-telescope/telescope-hop.nvim'
 	use 'nvim-telescope/telescope-packer.nvim'
 	use "LinArcX/telescope-env.nvim"
-	-- use "nvim-telescope/telescope-file-browser.nvim"
+	use "nvim-telescope/telescope-file-browser.nvim"
 
 	-- Treesittetr
 	use {
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate"
 	}
-	--use "nvim-treesitter/nvim-treesitter-textobjects" -- enhance texetobject selection
 	use "nvim-treesitter/nvim-treesitter-refactor"
-	use "romgrk/nvim-treesitter-context" -- show class/function at the top
-	use "m-demare/hlargs.nvim"
+	use {
+		"romgrk/nvim-treesitter-context", -- show class/function at the top
+		config = function ()
+			require('treesitter-context').setup()
+		end
+	}
 	use "SmiteshP/nvim-gps" -- statusline shows class structure
-	use "andymass/vim-matchup"
+	use "andymass/vim-matchup" -- highlight, navigate, and operate on sets of matching text
+	use 'nvim-treesitter/playground'  -- View treesitter information directly in Neovim
 
 	-- LSP
 	use "neovim/nvim-lspconfig" -- enable LSP
@@ -123,24 +133,15 @@ return packer.startup(function(use)
 	use "kosayoda/nvim-lightbulb" -- code action
 	use "ray-x/lsp_signature.nvim" -- show function signature when typing
 	use "j-hui/fidget.nvim" -- show lsp progress
-	-- use {
-	-- 	'ray-x/navigator.lua',
-	-- 	requires = {
-	-- 		{ 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
-	-- 		{ 'neovim/nvim-lspconfig' },
-	-- 	},
-	-- }
-	use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
+	use 'glepnir/lspsaga.nvim'
 
 	-- Editor enhance
-	-- use "stevearc/aerial.nvim" -- file explore scroll with cursor
+	-- use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
 	use "simrat39/symbols-outline.nvim"
 	use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-	--use "Shatur/neovim-session-manager"
-	use "folke/which-key.nvim" -- which  key
+	use "folke/which-key.nvim" -- which key
 	use "ethanholz/nvim-lastplace" -- auto return back to the last modified positon when open a file
 	use "nvim-pack/nvim-spectre" -- search and replace pane
-	use "haringsrob/nvim_context_vt" -- show if, for, function... end as virtual text
 	use "tpope/vim-repeat" --  . command enhance
 	use "tpope/vim-surround" -- vim surround
 	use "akinsho/toggleterm.nvim" -- toggle terminal
@@ -179,10 +180,9 @@ return packer.startup(function(use)
 	use { "lewis6991/gitsigns.nvim",
 		event = { "CursorMoved", "CursorMovedI" },
 		config = function()
-   				require("gitsigns")
-   		end
+			require("gitsigns")
+		end
 	}
-	use 'sindrets/diffview.nvim'
 
 	-- UI
 	-- Colorschemes
@@ -198,15 +198,18 @@ return packer.startup(function(use)
 		"projekt0n/github-nvim-theme"
 	}
 	use "folke/tokyonight.nvim"
+	-- better display
 	use "yamatsum/nvim-cursorline"
 	use "dstein64/nvim-scrollview"
+	use "karb94/neoscroll.nvim" -- smart scroll
 	use "luukvbaal/stabilize.nvim"
+	use "haringsrob/nvim_context_vt" -- show if, for, function... end as virtual text
 	--use "beauwilliams/focus.nvim"
 
 	-- file explore
-	use "kyazdani42/nvim-tree.lua" -- file explore
+	--use "kyazdani42/nvim-tree.lua" -- file explore
 	use "akinsho/bufferline.nvim" -- tab
-	use 'famiu/bufdelete.nvim'
+	--use 'famiu/bufdelete.nvim'
 	use "nvim-lualine/lualine.nvim" -- status line
 
 	-- welcome page
@@ -217,8 +220,8 @@ return packer.startup(function(use)
 	use "terrortylor/nvim-comment"
 
 	-- litee family
-	use "ldelossa/litee.nvim"
-	use "ldelossa/litee-calltree.nvim"
+	--use "ldelossa/litee.nvim"
+	--use "ldelossa/litee-calltree.nvim"
 
 	-- tools
 	use {
@@ -228,9 +231,8 @@ return packer.startup(function(use)
 	} -- NOTE:: glow required : https://github.com/charmbracelet/glow
 	use "voldikss/vim-translator"
 	use "mtdl9/vim-log-highlighting"
-	--use "Pocco81/HighStr.nvim"
 	use "ravenxrz/vim-local-history"
-	--use "aserowy/tmux.nvim"
+	use 'sindrets/diffview.nvim'
 
 	-- code test
 	use "vim-test/vim-test"

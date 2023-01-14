@@ -146,14 +146,47 @@ telescope.setup {
 			-- jump to entry where hoop loop was started from
 			reset_selection = true,
 		},
-		["ui-select"] = { require("telescope.themes").get_dropdown {
-			-- even more opts
-			}
-		},
+		["ui-select"] = { require("telescope.themes").get_dropdown {} },
 		live_grep_args = {
 			auto_quoting = true, -- enable/disable auto-quoting
+		},
+		file_browser = {
+			theme = "dropdown",
+			-- disables netrw and use telescope-file-browser in its place
+			hijack_netrw = true,
+			mappings = {
+				["i"] = {
+					-- your custom insert mode mappings
+				},
+				["n"] = {
+					-- your custom normal mode mappings
+				},
+			},
+		},
+		playground = {
+			enable = true,
+			disable = {},
+			updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+			persist_queries = false, -- Whether the query persists across vim sessions
+			keybindings = {
+				toggle_query_editor = 'o',
+				toggle_hl_groups = 'i',
+				toggle_injected_languages = 't',
+				toggle_anonymous_nodes = 'a',
+				toggle_language_display = 'I',
+				focus_language = 'f',
+				unfocus_language = 'F',
+				update = 'R',
+				goto_node = '<cr>',
+				show_help = '?',
+			},
 		}
-	}
+	},
+	query_linter = {
+		enable = true,
+		use_virtual_text = true,
+		lint_events = { "BufWrite", "CursorHold" },
+	},
 }
 
 telescope.load_extension('live_grep_args')
@@ -172,3 +205,4 @@ telescope.load_extension('env')
 --<C-b>	Open with file_browser
 --<C-g>	Open with live_grep
 telescope.load_extension('packer')
+telescope.load_extension('file_browser')

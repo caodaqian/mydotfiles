@@ -92,11 +92,12 @@ local mappings = {
 	-- telescope
 	["r"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 	["f"] = { "<cmd>Telescope find_files<cr>", "find files" },
-	["F"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>", "find text" },
+	["F"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>",
+		"find text" },
 	["b"] = { "<cmd>Telescope buffers<cr>", "find buffers" },
 	["m"] = { "<cmd>Telescope vim_bookmarks all<cr>", "find bookmarks" },
-	['e'] = { "<cmd>Telescope Telescope env<cr>", "find ENV" },
-	['p'] = { "<cmd>Telescope packer<cr>", "find pakcer" },
+	['e'] = { "<cmd>Telescope env<cr>", "find ENV" },
+	['s'] = { "<cmd>Telescope symbol<cr>", "input emoji symbol"},
 
 
 	-- Outline
@@ -132,8 +133,8 @@ local mappings = {
 		d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
 		w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 		q = { "<cmd>Trouble quickfix<cr>", "Quick Fix" },
-		u = { "<cmd>Trouble lsp_references<cr>", "Usage" },
-		g = { "<cmd>Gitsigns setloclist<cr>", "Open changed hunk" }
+		r = { "<cmd>Trouble lsp_references<cr>", "references of word" },
+		f = { "<cmd>Trouble lsp_definitions<cr>", "references of word" },
 	},
 
 	-- Debug
@@ -214,7 +215,9 @@ local mappings = {
 		-- r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 		R = { "<cmd>Telescope registers<cr>", "Registers" },
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-		C = { "<cmd>Telescope commands<cr>", "Commands" }
+		C = { "<cmd>Telescope commands<cr>", "Commands" },
+		P = { "<cmd>Telescope packer<cr>", "find pakcer" },
+		T = {"<cmd>TSHighlightCapturesUnderCursor<cr>" },
 	}
 }
 
