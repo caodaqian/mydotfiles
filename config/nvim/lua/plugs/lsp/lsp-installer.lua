@@ -35,25 +35,5 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
         local pyright_opts = require("plugs.lsp.settings.pyright")
         opts = vim.tbl_deep_extend("force", pyright_opts, opts)
 	end
-    --if server.name == "clangd" then
-    --    local clangd_opts = require("plugs.lsp.settings.clangd")
-    --    opts = vim.tbl_deep_extend("force", clangd_opts, opts)
-	--elseif server.name == "jsonls" then
-    --    local jsonls_opts = require("plugs.lsp.settings.jsonls")
-    --    opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
-	--elseif server.name == "sumneko_lua" then
-    --    local sumneko_opts = require("plugs.lsp.settings.sumneko_lua")
-    --    opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
-	--elseif server.name == "pyright" then
-    --    local pyright_opts = require("plugs.lsp.settings.pyright")
-    --    opts = vim.tbl_deep_extend("force", pyright_opts, opts)
-	--elseif server.name == "bashls" then
-	--	local bashls_opts = require("plugs.lsp.settings.bashls")
-	--	opts = vim.tbl_deep_extend("force", bashls_opts, opts)
-	--elseif server.name == "eslint" then
-	--	local eslint_opts = require("plugs.lsp.settings.eslint")
-	--	opts = vim.tbl_deep_extend("force", eslint_opts, opts)
-    --end
-
 	lspconfig[server.name].setup(opts)
 end

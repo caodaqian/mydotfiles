@@ -150,19 +150,6 @@ telescope.setup {
 		live_grep_args = {
 			auto_quoting = true, -- enable/disable auto-quoting
 		},
-		file_browser = {
-			theme = "dropdown",
-			-- disables netrw and use telescope-file-browser in its place
-			hijack_netrw = true,
-			mappings = {
-				["i"] = {
-					-- your custom insert mode mappings
-				},
-				["n"] = {
-					-- your custom normal mode mappings
-				},
-			},
-		},
 		playground = {
 			enable = true,
 			disable = {},
@@ -202,7 +189,5 @@ telescope.load_extension('hop')
 telescope.load_extension('env')
 --<C-o>	Open online repository
 --<C-f>	Open with find_files
---<C-b>	Open with file_browser
 --<C-g>	Open with live_grep
 telescope.load_extension('packer')
-telescope.load_extension('file_browser')

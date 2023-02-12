@@ -109,7 +109,7 @@ return packer.startup(function(use)
 	use 'nvim-telescope/telescope-hop.nvim'
 	use 'nvim-telescope/telescope-packer.nvim'
 	use "LinArcX/telescope-env.nvim"
-	use "nvim-telescope/telescope-file-browser.nvim"
+	--use "nvim-telescope/telescope-file-browser.nvim"
 
 	-- Treesittetr
 	use {
@@ -152,6 +152,13 @@ return packer.startup(function(use)
 	use "djoshea/vim-autoread" -- like tail -f, but for vim
 	use "folke/trouble.nvim" -- better quick fix
 	use "RRethy/vim-illuminate" -- highlight undercursor word
+	use {
+		'francoiscabrol/ranger.vim',
+		requires = 'rbgrouleff/bclose.vim',
+		config = function()
+			vim.g.ranger_replace_netrw = 1
+		end
+	}
 
 	-- cmp plugins
 	use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -179,9 +186,6 @@ return packer.startup(function(use)
 	-- Git
 	use { "lewis6991/gitsigns.nvim",
 		event = { "CursorMoved", "CursorMovedI" },
-		config = function()
-			require("gitsigns")
-		end
 	}
 
 	-- UI
@@ -204,12 +208,10 @@ return packer.startup(function(use)
 	use "karb94/neoscroll.nvim" -- smart scroll
 	use "luukvbaal/stabilize.nvim"
 	use "haringsrob/nvim_context_vt" -- show if, for, function... end as virtual text
-	--use "beauwilliams/focus.nvim"
 
 	-- file explore
 	--use "kyazdani42/nvim-tree.lua" -- file explore
 	use "akinsho/bufferline.nvim" -- tab
-	--use 'famiu/bufdelete.nvim'
 	use "nvim-lualine/lualine.nvim" -- status line
 
 	-- welcome page
@@ -218,10 +220,6 @@ return packer.startup(function(use)
 	-- comments
 	use "folke/todo-comments.nvim" -- todo-comments
 	use "terrortylor/nvim-comment"
-
-	-- litee family
-	--use "ldelossa/litee.nvim"
-	--use "ldelossa/litee-calltree.nvim"
 
 	-- tools
 	use {

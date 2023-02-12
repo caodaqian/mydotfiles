@@ -21,6 +21,9 @@
 	# prevent crlf (then you will have to deal with the problem -- dos2unix, etc)
 	#safecrlf = true
 	editor = $EDITOR
+	paper = cat
+[branch]
+	autosetupmerge = true
 [push]
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = simple

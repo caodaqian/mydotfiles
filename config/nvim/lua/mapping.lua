@@ -57,7 +57,8 @@ keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- nvim tree
 --keymap("n", "ff", "<cmd>NvimTreeToggle<CR>", opts)
-keymap("n", "ff", "<cmd>Telescope file_browser<cr>", opts)
+keymap("n", "ff", "<cmd>RangerWorkingDirectory<cr>", opts)
+
 -- hop
 -- enhance f motion
 vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", opts)
