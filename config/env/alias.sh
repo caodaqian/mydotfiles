@@ -99,6 +99,9 @@ alias man='tldr'
 ## exa
 alias ls='exa'
 
+## fzf
+alias -g F='| fzf'
+
 ## backup
 function backup() {
 	if [ ! $# -eq 1 ]; then
