@@ -104,7 +104,7 @@ return packer.startup(function(use)
 	}
 	use {
 		"nvim-telescope/telescope-dap.nvim",
-		require = "nvim-lua/dap.nvim"
+		requires = "mfussenegger/nvim-dap"
 	}
 	use 'nvim-telescope/telescope-hop.nvim'
 	use 'nvim-telescope/telescope-packer.nvim'
@@ -134,6 +134,29 @@ return packer.startup(function(use)
 	use "ray-x/lsp_signature.nvim" -- show function signature when typing
 	use "j-hui/fidget.nvim" -- show lsp progress
 	use 'glepnir/lspsaga.nvim'
+	-- Debugger
+	--use "ravenxrz/DAPInstall.nvim" -- help us install several debuggers
+	use {
+		"theHamsta/nvim-dap-virtual-text",
+		config = function ()
+			require('nvim-dap-virtual-text').setup()
+		end
+	}
+	use {
+		"rcarriga/nvim-dap-ui",
+		requires = {"mfussenegger/nvim-dap"},
+		config = function()
+			require('dapui').setup()
+		end
+	}
+	use { "jbyuki/one-small-step-for-vimkind", module = "osv" } -- debug any Lua code running in a Neovim instance
+	use {
+		"williamboman/mason.nvim",
+		requires = {
+			"williamboman/mason-lspconfig.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
+		},
+	}
 
 	-- Editor enhance
 	-- use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
@@ -175,13 +198,6 @@ return packer.startup(function(use)
 	-- snippets
 	use "L3MON4D3/LuaSnip" -- snippet engine
 	use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-
-	-- Debugger
-	use "ravenxrz/DAPInstall.nvim" -- help us install several debuggers
-	use "mfussenegger/nvim-dap"
-	use "theHamsta/nvim-dap-virtual-text"
-	use "rcarriga/nvim-dap-ui"
-	use { "jbyuki/one-small-step-for-vimkind", module = "osv" } -- debug any Lua code running in a Neovim instance
 
 	-- Git
 	use { "lewis6991/gitsigns.nvim",
@@ -229,7 +245,6 @@ return packer.startup(function(use)
 	} -- NOTE:: glow required : https://github.com/charmbracelet/glow
 	use "voldikss/vim-translator"
 	use "mtdl9/vim-log-highlighting"
-	use "ravenxrz/vim-local-history"
 	use 'sindrets/diffview.nvim'
 
 	-- code test

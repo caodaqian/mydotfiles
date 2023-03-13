@@ -88,6 +88,9 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
+# z setting
+ZSHZ_TILDE=1
+
 source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 unsetopt correct

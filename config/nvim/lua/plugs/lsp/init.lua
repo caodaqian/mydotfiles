@@ -4,5 +4,6 @@ if not status_ok then
 end
 
 require("plugs.lsp.handlers").setup()
+require("plugs.lsp.mason") -- lsp install
 require("plugs.lsp.lspsaga")
-require("plugs.lsp.lsp-installer")
+require('plugs.lsp.dap-config').setup()

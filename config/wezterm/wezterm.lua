@@ -189,9 +189,86 @@ local mouse_bindings = {
 		event = {Up = {streak = 1, button = "Left"}},
 		mods = "CTRL",
 		action = "OpenLinkAtMouseCursor"
-	}
-
+	},
 }
+
+-- key bindings
+local keybind = {
+	{
+		key = "F11",
+		action = wezterm.action.ToggleFullScreen
+	},
+	{
+		key = "f",
+		mods = 'SUPER|CTRL',
+		action = wezterm.action.ToggleFullScreen
+	},
+	-- CTRL-SHIFT-l activates the debug overlay
+	{ key = 'L', mods = 'CTRL', action = wezterm.action.ShowDebugOverlay },
+	-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
+    {
+      key = 'a',
+      mods = 'LEADER|CTRL',
+      action = wezterm.action.SendString '\x01',
+    },
+	{
+		key = '|',
+		mods = 'LEADER|SHIFT',
+		action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+	},
+	{ key = '-',
+      mods = 'LEADER',
+      action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+    },
+	 -- Resize
+	{
+		key = 'LeftArrow',
+		mods = 'ALT|SHIFT',
+		action = wezterm.action {
+			AdjustPaneSize = {'Left', 5}
+		}
+	},
+	{
+		key = 'DownArrow',
+		mods = 'ALT|SHIFT',
+		action = wezterm.action {
+			AdjustPaneSize = {'Down', 5}
+		}
+	},
+	{
+		key = 'UpArrow',
+		mods = 'ALT|SHIFT',
+		action = wezterm.action {
+			AdjustPaneSize = {'Up', 5}
+		}
+	},
+	{
+		key = 'RightArrow',
+		mods = 'ALT|SHIFT',
+		action = wezterm.action {
+			AdjustPaneSize = {'Right', 5}
+		}
+	},
+	-- Copy/paste buffer
+    {
+        key = '[',
+        mods = 'CTRL',
+        action = 'ActivateCopyMode'
+    },
+	{
+        key = ']',
+        mods = 'CTRL',
+        action = 'QuickSelect'
+    }
+}
+
+-- set window mini maximize on startup
+--wezterm.on('gui-startup', function(cmd)
+--	local screen = wezterm.gui.screens().active
+--    local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+--    --window:gui_window():set_inner_size(math.modf(screen.width * 0.7), math.modf(screen.height * 0.7))
+--	--window:gui_window():set_position(math.modf(screen.width / 2), math.modf(screen.height /2 ))
+--end)
 
 return {
 	window_frame = {
@@ -199,25 +276,34 @@ return {
 	}, -- needed only if using fancy tab
 	launch_menu = launch_menu,
 	mouse_bindings = mouse_bindings,
+	native_macos_fullscreen_mode = true,
 	font = wezterm.font_with_fallback {
 		'CaskaydiaCove Nerd Font', 'CaskaydiaCove Nerd Font Mono', 'Cascadia Code PL', 'CaskaydiaCove Nerd Font Mono', 'Hack Nerd Font Mono', 'Cascadia Mono PL', 'Microsoft Yahei UI', 'Microsoft YaHei Mono, DejaVu Sans Mono', 'Consolas'
 	},
-	font_size = 18.0,
+	font_size = 16.0,
 	line_height = 1.2,
 	--font = wezterm.font 'CaskaydiaCove Nerd Font',
 	inactive_pane_hsb = {
+		hue = 1.0,
 		saturation = 0.9,
 		brightness = 0.8,
 	},
-	color_scheme = "Dracula",
+	--color_scheme = "Dracula",
+	color_scheme = "Catppuccin Macchiato",
 	hide_tab_bar_if_only_one_tab = true,
 	tab_max_width = 50,
 	window_padding = {
 		left = 2,
 		right = 2,
-		top = 0,
-		bottom = 0,
+		top = 3,
+		bottom = 1,
 	},
 	window_background_opacity = 0.9,
 	text_background_opacity = 0.9,
+	initial_cols = 120,
+	initial_rows = 30,
+	harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
+	-- timeout_milliseconds defaults to 1000 and can be omitted
+	--leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
+	keys = keybind,
 }

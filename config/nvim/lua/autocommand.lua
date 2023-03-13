@@ -35,11 +35,11 @@ vim.cmd [[
     autocmd!
     autocmd BufRead * autocmd BufWinEnter * ++once normal! zx
   augroup end
-  augroup _load_break_points
-  	autocmd!
-  	autocmd FileType c,cpp,go,python,php,lua :lua require('plugs.dap.dap-util').load_breakpoints()
-  augroup end
 ]]
+--  augroup _load_break_points
+--  	autocmd!
+--  	autocmd FileType c,cpp,go,python,php,lua :lua require('plugs.dap.dap-util').load_breakpoints()
+--  augroup end
 --  augroup _format
 --  	autocmd!
 --  	autocmd BufWritePre * :Format

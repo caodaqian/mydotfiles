@@ -26,10 +26,7 @@ if [ -z "$(zsh --version 2>/dev/null)" ]; then
 	echo "Can't find zsh, must install zsh firstly" >&2
 	exit 1
 elif [ ! -d "${HOME}/.oh-my-zsh" ]; then
-	# check oh-my-zsh
-	echo "Can't find .oh-my-zsh, must install omz firstly" >&2
-	exit 1
-else
+	# check oh-my-zsh echo "Can't find .oh-my-zsh, must install omz firstly" >&2 exit 1 else
 	# install omz plugins
 	echo "install ohmyzsh plugins"
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

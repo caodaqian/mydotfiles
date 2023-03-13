@@ -1,10 +1,18 @@
+local status_ok, mdap = pcall(require, "mason-nvim-dap")
+if not status_ok then
+    vim.notify("mason_nvim_dap not found!")
+    return
+end
+mdap.setup({
+	automatic_setup = true
+})
+require 'mason-nvim-dap'.setup_handlers {}
+
 local M = {}
 
 local function config_dapi_and_sign()
-  local dap_install = require "dap-install"
-  dap_install.setup {
-    installation_path = vim.fn.stdpath "data" .. "/dapinstall/",
-  }
+  local dap_install = require "mason-nvim-dap"
+  dap_install.setup()
 
   local dap_breakpoint = {
     error = {
@@ -70,17 +78,13 @@ local function config_debuggers()
   -- load from json file
   require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'cpp' } })
   -- config per launage
-  -- require("plugs.dap.dap-cpp")
-  -- require("plugs.dap.di-go")
+end
 
-  require("plugs.dap.dap-cpp")
-  require("plugs.dap.dap-go")
-  require("plugs.dap.dap-python")
-  require("plugs.dap.dap-lua")
-  -- require("plugs.dap.dap-cpp")
-  -- require("plugs.dap.python").setup()
-  -- require("plugs.dap.rust").setup()
-  -- require("plugs.dap.go").setup()
+-- refresh config
+M.reload_continue = function()
+  --package.loaded['plugs.dap.dap-config'] = nil
+  M.setup()
+  require('dap').continue()
 end
 
 function M.setup()
