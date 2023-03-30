@@ -56,8 +56,7 @@ keymap("n", "E", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- nvim tree
---keymap("n", "ff", "<cmd>NvimTreeToggle<CR>", opts)
-keymap("n", "ff", "<cmd>RangerWorkingDirectory<cr>", opts)
+keymap("n", "ff", "<cmd>LfWorkingDirectory<cr>", opts)
 
 -- hop
 -- enhance f motion

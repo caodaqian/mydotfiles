@@ -176,10 +176,11 @@ return packer.startup(function(use)
 	use "folke/trouble.nvim" -- better quick fix
 	use "RRethy/vim-illuminate" -- highlight undercursor word
 	use {
-		'francoiscabrol/ranger.vim',
-		requires = 'rbgrouleff/bclose.vim',
+		'ptzz/lf.vim',
+		requires = 'voldikss/vim-floaterm',
 		config = function()
-			vim.g.ranger_replace_netrw = 1
+			vim.g.lf_replace_netrw = 1
+			vim.g.lf_command_override = 'lf -command "set hidden"'
 		end
 	}
 

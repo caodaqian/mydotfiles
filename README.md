@@ -7,7 +7,7 @@ Linux setting sync
 - [SyncBasicSettings](#syncbasicsettings)
   - [前置安装](#前置安装)
     - [zsh 自动安装的插件](#zsh-自动安装的插件)
-    - [ranger 自动安装](#ranger-自动安装)
+    - [lf 自动安装](#lf自动安装)
     - [tmux 自动安装](#tmux-自动安装)
   - [推荐应用](#推荐应用)
 
@@ -20,14 +20,14 @@ Linux setting sync
 - zsh
 - fzf
 - tmux
-- vim8.0+/neovim0.5+
+- neovim0.5+
 - wget
 - curl
 - intelephense
 - nodejs
 - python3
 - pip3
-- ranger, better file explorer
+- lf, better file explorer
 - dust，better du
 - duf，better df
 - bat，better cat
@@ -42,9 +42,10 @@ Linux setting sync
 - zsh-syntax_highlignting
 - git-open
 
-### ranger 自动安装
+### lf 自动安装
 
-- ranger_devicons
+- lf colors
+- lf icons
 
 ### tmux 自动安装
 

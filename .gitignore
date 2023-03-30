@@ -8,5 +8,7 @@ config/ranger/plugins/
 config/ranger/bookmarks
 config/ranger/history
 config/ranger/tagged
+config/lf/colors
+config/lf/icons
 config/nvim/plugin/packer_compiled.lua
 **/__pycache__/**

@@ -40,14 +40,20 @@ elif [ ! -d "${HOME}/.oh-my-zsh" ]; then
 	ln -svf "${WORKDIR}/config/zsh/zshenv" "${HOME}/.zshenv"
 fi
 
-# install ranger plugin
-if [ -n "$(ranger --version 2>/dev/null)" ]; then
-	if [ ! -d "${HOME}/.config/ranger/plugins/ranger_devicons" ]; then
-		echo "install ranger plugin"
-		git clone https://github.com/alexanderjeurissen/ranger_devicons "${HOME}/.config/ranger/plugins/ranger_devicons"
+# install lf plugin
+if [ -n "$(lf --version) 2>/dev/null" ];then
+	# install colors
+	if [ ! -d "${HOME}/.config/lf/colors" ];then
+		echo "install lf colors"
+		curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/colors.example -o ~/.config/lf/colors
+	fi
+	# install icons
+	if [ ! -d "${HOME}/.config/lf/icons" ];then
+		echo "install lf icons"
+		curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o ~/.config/lf/icons
 	fi
 else
-	echo "ranger not found, must install ranger firstly" >&2
+	echo "lf not found, must install lf firstly" >&2
 	exit 1
 fi
 
