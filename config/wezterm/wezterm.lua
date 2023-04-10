@@ -206,11 +206,12 @@ local keybind = {
 	-- CTRL-SHIFT-l activates the debug overlay
 	{ key = 'L', mods = 'CTRL', action = wezterm.action.ShowDebugOverlay },
 	-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
-    {
-      key = 'a',
-      mods = 'LEADER|CTRL',
-      action = wezterm.action.SendString '\x01',
-    },
+    --{
+    --  key = 'a',
+    --  mods = 'LEADER|CTRL',
+    --  action = wezterm.action.SendString '\x01',
+    --},
+	-- LEADER + | split panel
 	{
 		key = '|',
 		mods = 'LEADER|SHIFT',
@@ -304,6 +305,6 @@ return {
 	initial_rows = 30,
 	harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
 	-- timeout_milliseconds defaults to 1000 and can be omitted
-	--leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
+	leader = { key = 'a', mods = 'SUPER', timeout_milliseconds = 1000 },
 	keys = keybind,
 }

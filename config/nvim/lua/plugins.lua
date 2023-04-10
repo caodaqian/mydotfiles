@@ -129,7 +129,6 @@ return packer.startup(function(use)
 
 	-- LSP
 	use "neovim/nvim-lspconfig" -- enable LSP
-	use "williamboman/nvim-lsp-installer" -- simple to use language server installer
 	use "kosayoda/nvim-lightbulb" -- code action
 	use "ray-x/lsp_signature.nvim" -- show function signature when typing
 	use "j-hui/fidget.nvim" -- show lsp progress
