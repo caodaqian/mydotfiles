@@ -78,9 +78,6 @@ alias ts='tmux new-session -s'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-server -t'
 
-## ranger
-alias ra='ranger'
-
 ## bat
 alias cat='bat -p'
 
