@@ -83,8 +83,33 @@ return packer.startup(function(use)
 	use "lewis6991/impatient.nvim" -- Speed up loading Lua modules
 	use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 	use "nvim-lua/popup.nvim"
-	use "rcarriga/nvim-notify" -- notify
 	use "kyazdani42/nvim-web-devicons" -- icons
+
+	-- notice 
+	use({
+		"folke/noice.nvim",
+		config = function()
+			require("noice").setup({
+				require("noice").setup({
+					presets = {
+						bottom_search = true, -- use a classic bottom cmdline for search
+						command_palette = true, -- position the cmdline and popupmenu together
+						long_message_to_split = true, -- long messages will be sent to a split
+						inc_rename = false, -- enables an input dialog for inc-rename.nvim
+						lsp_doc_border = false, -- add a border to hover docs and signature help
+					},
+				})
+			})
+		end,
+		requires = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		}
+	})
 
 	-- Telescope
 	use {
@@ -109,7 +134,6 @@ return packer.startup(function(use)
 	use 'nvim-telescope/telescope-hop.nvim'
 	use 'nvim-telescope/telescope-packer.nvim'
 	use "LinArcX/telescope-env.nvim"
-	--use "nvim-telescope/telescope-file-browser.nvim"
 
 	-- Treesittetr
 	use {
@@ -134,7 +158,6 @@ return packer.startup(function(use)
 	use "j-hui/fidget.nvim" -- show lsp progress
 	use 'glepnir/lspsaga.nvim'
 	-- Debugger
-	--use "ravenxrz/DAPInstall.nvim" -- help us install several debuggers
 	use {
 		"theHamsta/nvim-dap-virtual-text",
 		config = function ()
@@ -158,7 +181,6 @@ return packer.startup(function(use)
 	}
 
 	-- Editor enhance
-	-- use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
 	use "simrat39/symbols-outline.nvim"
 	use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
 	use "folke/which-key.nvim" -- which key
@@ -226,7 +248,6 @@ return packer.startup(function(use)
 	use "haringsrob/nvim_context_vt" -- show if, for, function... end as virtual text
 
 	-- file explore
-	--use "kyazdani42/nvim-tree.lua" -- file explore
 	use "akinsho/bufferline.nvim" -- tab
 	use "nvim-lualine/lualine.nvim" -- status line
 
