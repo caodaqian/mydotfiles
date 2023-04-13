@@ -23,9 +23,8 @@ vim.g.maplocalleader = leader_key
 
 -- Normal --
 -- quick save or exit
-keymap("n", "S", ":w<CR>", opts)
+keymap("n", "<C-s>", ":w<CR>", opts)
 keymap("n", "Q", ":q<CR>", opts)
-keymap("n", "QQ", ":wqa<cr>", opts)
 keymap("n", "D", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
 keymap("n", "<C-q>", ":q!<CR>", opts)
 -- Better window navigation
@@ -40,15 +39,14 @@ keymap("n", "su", ":set nosplitbelow<CR>:split<CR>", opts)
 keymap("n", "sd", ":set splitbelow<CR>:split<CR>", opts)
 -- move cursor
 keymap("n", "H", "<home>", opts)
+keymap("o", "H", "<home>", opts)
 keymap("n", "L", "<end>", opts)
+keymap("o", "L", "<end>", opts)
 -- Resize with arrows
 keymap("n", "<C-S-Up>", ":resize -1<CR>", opts)
 keymap("n", "<C-S-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-S-Left>", ":vertical resize +2<CR>", opts)
 keymap("n", "<C-S-Right>", ":vertical resize -2<CR>", opts)
--- Navigate buffers
--- keymap("n", "R", ":bnext<CR>", opts)
--- keymap("n", "E", ":bprevious<CR>", opts)
 -- NOTE: E/R navigation needs  'bufferline' plugin
 keymap("n", "R", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "E", ":BufferLineCyclePrev<CR>", opts)
@@ -85,6 +83,9 @@ keymap("i", "<C-j>", "<down>", opts)
 keymap("i", "<C-k>", "<up>", opts)
 keymap("i", "<C-E>", "<C-right>", opts)
 keymap("i", "<C-B>", "<C-left>", opts)
+-- add undo break_points
+keymap("i", ",", ",<c-g>u", opts)
+keymap("i", ";", ";<c-g>u", opts)
 
 -- Visual --
 -- Stay in indent mode

@@ -31,7 +31,7 @@ local options = {
     numberwidth = 5, -- set number column width to 2 {default 4}
     backup = false, -- creates a backup file
     cmdheight = 1, -- keep status bar position close to bottom
-    completeopt = {"menuone", "noselect"}, -- mostly just for cmp
+    completeopt = {"menu", "menuone", "noselect"}, -- mostly just for cmp
     conceallevel = 0, -- so that `` is visible in markdown files
     hlsearch = true, -- highlight all matches on previous search pattern
     mouse = "a", -- allow the mouse to be used in neovim
@@ -59,7 +59,7 @@ local options = {
     updatetime = 700, -- faster completion (4000ms default)
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     spell = false, -- add spell support
-    spelllang = {'en_us'}, -- support which languages?
+    spelllang = {'en_us', "cjk", "en"}, -- support which languages?
     diffopt = "vertical,filler,internal,context:4", -- vertical diff split view
 	hidden = true,    -- Required to keep multiple buffers open multiple buffers
 }

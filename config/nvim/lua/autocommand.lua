@@ -1,50 +1,84 @@
-vim.cmd [[
-	" WSL yank support
-	let s:clip = '/mnt/c/Windows/System32/clip.exe'
-	if executable(s:clip)
-			augroup WSLYank
-					autocmd!
-					autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-			augroup END
-	endif
-  augroup _general_settings
-    autocmd!
-    autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
-    autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200}) 
-    autocmd BufWinEnter * set formatoptions-=cro
-  augroup end
-  augroup _git
-    autocmd!
-    autocmd FileType gitcommit setlocal wrap
-    autocmd FileType gitcommit setlocal spell
-  augroup end
-  augroup _markdown
-    autocmd!
-    autocmd FileType markdown setlocal wrap
-    autocmd FileType markdown setlocal spell
-  augroup end
-  augroup _auto_resize
-    autocmd!
-    autocmd VimResized * tabdo wincmd = 
-  augroup end
-  augroup _alpha
-    autocmd!
-    autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
-  augroup end
-  augroup _fold_bug_solution  " https://github.com/nvim-telescope/telescope.nvim/issues/559
-    autocmd!
-    autocmd BufRead * autocmd BufWinEnter * ++once normal! zx
-  augroup end
-]]
---  augroup _load_break_points
---  	autocmd!
---  	autocmd FileType c,cpp,go,python,php,lua :lua require('plugs.dap.dap-util').load_breakpoints()
---  augroup end
---  augroup _format
---  	autocmd!
---  	autocmd BufWritePre * :Format
---  augroup end
---  augroup _load_break_points
+local function augroup(name)
+	vim.api.nvim_create_augroup(name, {clear = true})
+end
+
+-- highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = augroup("highlight_yank"),
+	callback = function ()
+		vim.highlight.on_yank()
+	end,
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd("VimResized", {
+	group = augroup("resize_splits"),
+	callback = function ()
+		vim.cmd("tabdo wincmd =")
+	end
+})
+
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = augroup("last_doc"),
+	callback = function ()
+		local mark = vim.api.nvim_buf_get_mark(0, '"')
+		local lcount = vim.api.nvim_buf_line_count(0)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
+})
+
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("close_with_q"),
+	pattern = {
+		"PlenaryTestPopup",
+		"help",
+		"lspinfo",
+		"man",
+		"notify",
+		"qf",
+		"query",
+		"spectre_panel",
+		"startuptime",
+		"tsplayground",
+		"vim",
+	},
+	callback = function (event)
+		vim.bo[event.buf].buflisted = false
+		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+	end
+})
+
+-- do not auto comment new line
+--vim.api.nvim_create_autocmd("BufEnter", {
+--	pattern = "",
+--	command = "set fo-=c fo-=r fo-=o"
+--})
+
+-- check spell on gitcommit
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("check_spell_gitcommit"),
+	pattern = {"gitcommit", "markdown"},
+	callback = function ()
+		vim.opt_local.spell = true
+		vim.opt_local.wrap = true
+	end
+})
+
+--vim.cmd [[
+--  augroup _auto_resize
 --    autocmd!
---    autocmd FileType c,cpp,go,python,lua :lua require('plugs.dap.dap-util').load_breakpoints()
+--    autocmd VimResized * tabdo wincmd = 
 --  augroup end
+--  augroup _alpha
+--    autocmd!
+--    autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+--  augroup end
+--  augroup _fold_bug_solution  " https://github.com/nvim-telescope/telescope.nvim/issues/559
+--    autocmd!
+--    autocmd BufRead * autocmd BufWinEnter * ++once normal! zx
+--  augroup end
+--]]
