@@ -20,7 +20,7 @@ Linux setting sync
 - zsh
 - fzf
 - tmux
-- neovim0.5+
+- neovim0.7+
 - wget
 - curl
 - intelephense

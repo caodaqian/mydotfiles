@@ -1,0 +1,62 @@
+--- ./p10k.raw	2023-05-18 16:44:02
++++ ./.p10k.zsh	2023-05-18 16:56:12
+@@ -54,14 +54,14 @@
+     nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
+     nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
+     nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
+-    # node_version          # node.js version
+-    # go_version            # go version (https://golang.org)
+-    # rust_version          # rustc version (https://www.rust-lang.org)
+-    # dotnet_version        # .NET version (https://dotnet.microsoft.com)
+-    # php_version           # php version (https://www.php.net/)
+-    # laravel_version       # laravel php framework version (https://laravel.com/)
+-    # java_version          # java version (https://www.java.com/)
+-    # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
++    node_version          # node.js version
++    go_version            # go version (https://golang.org)
++    rust_version          # rustc version (https://www.rust-lang.org)
++    dotnet_version        # .NET version (https://dotnet.microsoft.com)
++    php_version           # php version (https://www.php.net/)
++    laravel_version       # laravel php framework version (https://laravel.com/)
++    java_version          # java version (https://www.java.com/)
++    package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
+     rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
+     rvm                     # ruby version from rvm (https://rvm.io)
+     fvm                     # flutter version management (https://github.com/leoafarias/fvm)
+@@ -91,10 +91,10 @@
+     midnight_commander      # midnight commander shell (https://midnight-commander.org/)
+     nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
+     vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
+-    # vpn_ip                # virtual private network indicator
+-    # load                  # CPU load
++    vpn_ip                # virtual private network indicator
++    load                  # CPU load
+     # disk_usage            # disk usage
+-    # ram                   # free RAM
++    ram                   # free RAM
+     # swap                  # used swap
+     todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
+     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
+@@ -103,10 +103,10 @@
+     # time                  # current time
+     # ip                    # ip address and bandwidth usage for a specified network interface
+     # public_ip             # public IP address
+-    # proxy                 # system-wide http/https/ftp proxy
+-    # battery               # internal battery
++    proxy                 # system-wide http/https/ftp proxy
++    battery               # internal battery
+     # wifi                  # wifi speed
+-    # example               # example user-defined segment (see prompt_example function below)
++    example               # example user-defined segment (see prompt_example function below)
+   )
+ 
+   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
+@@ -1697,7 +1697,7 @@
+   #
+   # Type `p10k help segment` for documentation and a more sophisticated example.
+   function prompt_example() {
+-    p10k segment -b 1 -f 3 -i '⭐' -t 'hello, %n'
++    p10k segment -b 1 -f 3 -i '⭐' -t 'hi,%n'
+   }
+ 
+   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job

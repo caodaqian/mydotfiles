@@ -3,10 +3,6 @@ local opts = {
 	silent = true
 }
 
-local term_opts = {
-	silent = true
-}
-
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 -- Modes normal_mode = "n",
@@ -40,38 +36,27 @@ keymap("n", "sd", ":set splitbelow<CR>:split<CR>", opts)
 -- move cursor
 keymap("n", "H", "<home>", opts)
 keymap("o", "H", "<home>", opts)
+keymap("v", "H", "^", opts)
 keymap("n", "L", "<end>", opts)
 keymap("o", "L", "<end>", opts)
+keymap("v", "L", "$", opts)
 -- Resize with arrows
-keymap("n", "<C-S-Up>", ":resize -1<CR>", opts)
-keymap("n", "<C-S-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-S-Left>", ":vertical resize +2<CR>", opts)
-keymap("n", "<C-S-Right>", ":vertical resize -2<CR>", opts)
+keymap("n", "<S-Up>", ":resize -1<CR>", opts)
+keymap("n", "<S-Down>", ":resize +2<CR>", opts)
+keymap("n", "<S-Left>", ":vertical resize +2<CR>", opts)
+keymap("n", "<S-Right>", ":vertical resize -2<CR>", opts)
 -- NOTE: E/R navigation needs  'bufferline' plugin
 keymap("n", "R", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "E", ":BufferLineCyclePrev<CR>", opts)
 -- Move text up and down
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
--- nvim tree
-keymap("n", "ff", "<cmd>LfWorkingDirectory<cr>", opts)
-
--- hop
--- enhance f motion
-vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", opts)
-vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", opts)
-vim.api.nvim_set_keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", opts)
-vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", opts)
-vim.api.nvim_set_keymap('n', '<leader><leader>w', "<cmd>HopWord<cr>", {})
-vim.api.nvim_set_keymap('n', '<leader><leader>j', "<cmd>HopLine<cr>", {})
-vim.api.nvim_set_keymap('n', '<leader><leader>k', "<cmd>HopLine<cr>", {})
--- dap debug keymap
-keymap("n", "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-keymap("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", opts)
-keymap('n', '<S-F5>', "<cmd>lua require'dap'.close()<cr>", opts)
-keymap("n", "<F10>", "<cmd>lua require'dap'.step_over()<cr>", opts)
-keymap("n", "<F11>", "<cmd>lua require'dap'.step_into()<cr>", opts)
-keymap("n", "<S-F11>", "<cmd>lua require'dap'.step_out()<cr>", opts)
+-- file browers
+keymap("n", "ff", "<cmd>Lf<cr>", opts)
+-- parse on next line
+keymap("n", '<C-p>', "<cmd>pu<cr>", opts)
+-- better format
+keymap("n", '=', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
 
 -- Insert --
 -- Press jj fast to enter
@@ -91,12 +76,9 @@ keymap("i", ";", ";<c-g>u", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
--- Navigate line
-keymap("v", "H", "^", opts)
-keymap("v", "L", "$", opts)
 -- Move text up and down
--- keymap("v", "<A-j>", ":m .+1<CR>==", opts)
--- keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- sudo then write ------------------------------------------------------------

@@ -64,24 +64,23 @@ export MANPATH="/usr/local/man:$MANPATH"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 plugins=(
-	z
-	command-not-found
-	common-aliases
+	#### from github
 	git-open
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	#### inner omz
+	z
+	common-aliases
 	sudo
-	vscode
-	zsh-interactive-cd
 	encode64
 	git
 	jsontools
 	tmux
 	urltools
+	shell-proxy
 	fzf
-	wd
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	supervisor
 	extract
+	catimg
 )
 
 ZSH_AUTOSUGGEST_USE_ASYNC=1

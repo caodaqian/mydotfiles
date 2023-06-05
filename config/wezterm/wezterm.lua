@@ -1,4 +1,4 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 
 local function basename(s)
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
@@ -28,30 +28,65 @@ local NODE_ICON = utf8.char(0xe74e)
 local DENO_ICON = utf8.char(0xe628)
 local LAMBDA_ICON = utf8.char(0xfb26)
 
-local SUP_IDX = {"¹","²","³","⁴","⁵","⁶","⁷","⁸","⁹","¹⁰",
-	"¹¹","¹²","¹³","¹⁴","¹⁵","¹⁶","¹⁷","¹⁸","¹⁹","²⁰"}
-local SUB_IDX = {"₁","₂","₃","₄","₅","₆","₇","₈","₉","₁₀",
-	"₁₁","₁₂","₁₃","₁₄","₁₅","₁₆","₁₇","₁₈","₁₉","₂₀"}
+local SUP_IDX = {
+	"¹",
+	"²",
+	"³",
+	"⁴",
+	"⁵",
+	"⁶",
+	"⁷",
+	"⁸",
+	"⁹",
+	"¹⁰",
+	"¹¹",
+	"¹²",
+	"¹³",
+	"¹⁴",
+	"¹⁵",
+	"¹⁶",
+	"¹⁷",
+	"¹⁸",
+	"¹⁹",
+	"²⁰",
+}
+local SUB_IDX = {
+	"₁",
+	"₂",
+	"₃",
+	"₄",
+	"₅",
+	"₆",
+	"₇",
+	"₈",
+	"₉",
+	"₁₀",
+	"₁₁",
+	"₁₂",
+	"₁₃",
+	"₁₄",
+	"₁₅",
+	"₁₆",
+	"₁₇",
+	"₁₈",
+	"₁₉",
+	"₂₀",
+}
 
 local launch_menu = {}
 
-local ssh_cmd = {"ssh"}
+local ssh_cmd = { "ssh" }
 -- windows powershell
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	ssh_cmd = {"powershell.exe", "ssh"}
-	table.insert(launch_menu,
-		{
-			label = "PowerShell Core",
-			args = {"pwsh.exe", "-NoLogo"}
-		}
-	)
-	table.insert(launch_menu,
-		{
-			label = "NyaGOS",
-			args = {"nyagos.exe", "--glob"},
-		}
-
-	)
+	ssh_cmd = { "powershell.exe", "ssh" }
+	table.insert(launch_menu, {
+		label = "PowerShell Core",
+		args = { "pwsh.exe", "-NoLogo" },
+	})
+	table.insert(launch_menu, {
+		label = "NyaGOS",
+		args = { "nyagos.exe", "--glob" },
+	})
 end
 -- ssh config
 local ssh_config_file = wezterm.home_dir .. "/.ssh/config"
@@ -61,13 +96,10 @@ if f then
 	while line do
 		if line:find("Host ") == 1 then
 			local host = line:gsub("Host ", "")
-			table.insert(
-				launch_menu,
-				{
-					label = "SSH " .. host,
-					args = {"ssh", host}
-				}
-			)
+			table.insert(launch_menu, {
+				label = "SSH " .. host,
+				args = { "ssh", host },
+			})
 		end
 		line = f:read("*l")
 	end
@@ -134,61 +166,59 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	if tab.tab_index == 0 then
 		left_arrow = SOLID_LEFT_MOST
 	end
-	local id = SUB_IDX[tab.tab_index+1]
-	local pid = SUP_IDX[tab.active_pane.pane_index+1]
-	local title = " " .. wezterm.truncate_right(title_with_icon, max_width-6) .. " "
+	local id = SUB_IDX[tab.tab_index + 1]
+	local pid = SUP_IDX[tab.active_pane.pane_index + 1]
+	local title = " " .. wezterm.truncate_right(title_with_icon, max_width - 6) .. " "
 
 	return {
-		{Attribute={Intensity="Bold"}},
-		{Background={Color=edge_background}},
-		{Foreground={Color=edge_foreground}},
-		{Text=left_arrow},
-		{Background={Color=background}},
-		{Foreground={Color=foreground}},
-		{Text=id},
-		{Text=title},
-		{Foreground={Color=dim_foreground}},
-		{Text=pid},
-		{Background={Color=edge_background}},
-		{Foreground={Color=edge_foreground}},
-		{Text=SOLID_RIGHT_ARROW},
-		{Attribute={Intensity="Normal"}},
+		{ Attribute = { Intensity = "Bold" } },
+		{ Background = { Color = edge_background } },
+		{ Foreground = { Color = edge_foreground } },
+		{ Text = left_arrow },
+		{ Background = { Color = background } },
+		{ Foreground = { Color = foreground } },
+		{ Text = id },
+		{ Text = title },
+		{ Foreground = { Color = dim_foreground } },
+		{ Text = pid },
+		{ Background = { Color = edge_background } },
+		{ Foreground = { Color = edge_foreground } },
+		{ Text = SOLID_RIGHT_ARROW },
+		{ Attribute = { Intensity = "Normal" } },
 	}
 end)
 
-wezterm.on(
-	"update-right-status",
-	function(window)
-		local date = wezterm.strftime("%Y-%m-%d %H:%M:%S ")
-		window:set_right_status(
-			wezterm.format(
-				{
-					{Text = date}
-				}
-			)
-		)
+wezterm.on("update-right-status", function(window)
+	local hostname = wezterm.hostname()
+	local date = wezterm.strftime("%Y-%m-%d %H:%M:%S ")
+	local bat = ""
+	for _, b in ipairs(wezterm.battery_info()) do
+		bat = "🔋 " .. string.format("%.0f%%", b.state_of_charge * 100)
 	end
-)
+	window:set_right_status(wezterm.format({
+		{ Text = bat .. " | " .. hostname .. " | " .. date },
+	}))
+end)
 
 -- mouse bindings
 local mouse_bindings = {
 	{
-		event = {Down = {streak = 1, button = "Right"}},
+		event = { Down = { streak = 1, button = "Right" } },
 		mods = "NONE",
-		action = wezterm.action {PasteFrom = "Clipboard"}
+		action = wezterm.action({ PasteFrom = "Clipboard" }),
 	},
 	-- Change the default click behavior so that it only selects
 	-- text and doesn't open hyperlinks
 	{
-		event = {Up = {streak = 1, button = "Left"}},
+		event = { Up = { streak = 1, button = "Left" } },
 		mods = "NONE",
-		action = wezterm.action {CompleteSelection = "PrimarySelection"}
+		action = wezterm.action({ CompleteSelection = "PrimarySelection" }),
 	},
 	-- and make CTRL-Click open hyperlinks
 	{
-		event = {Up = {streak = 1, button = "Left"}},
+		event = { Up = { streak = 1, button = "Left" } },
 		mods = "CTRL",
-		action = "OpenLinkAtMouseCursor"
+		action = "OpenLinkAtMouseCursor",
 	},
 }
 
@@ -196,80 +226,85 @@ local mouse_bindings = {
 local keybind = {
 	{
 		key = "F11",
-		action = wezterm.action.ToggleFullScreen
+		action = wezterm.action.ToggleFullScreen,
 	},
 	{
 		key = "f",
-		mods = 'SUPER|CTRL',
-		action = wezterm.action.ToggleFullScreen
+		mods = "SUPER|CTRL",
+		action = wezterm.action.ToggleFullScreen,
 	},
 	-- CTRL-SHIFT-l activates the debug overlay
-	{ key = 'L', mods = 'CTRL', action = wezterm.action.ShowDebugOverlay },
+	{ key = "L", mods = "CTRL", action = wezterm.action.ShowDebugOverlay },
 	-- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
-    --{
-    --  key = 'a',
-    --  mods = 'LEADER|CTRL',
-    --  action = wezterm.action.SendString '\x01',
-    --},
+	--{
+	--  key = 'a',
+	--  mods = 'LEADER|CTRL',
+	--  action = wezterm.action.SendString '\x01',
+	--},
 	-- LEADER + | split panel
 	{
-		key = '|',
-		mods = 'LEADER|SHIFT',
-		action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
-	},
-	{ key = '-',
-      mods = 'LEADER',
-      action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-    },
-	 -- Resize
-	{
-		key = 'LeftArrow',
-		mods = 'ALT|SHIFT',
-		action = wezterm.action {
-			AdjustPaneSize = {'Left', 5}
-		}
+		key = "|",
+		mods = "LEADER|SHIFT",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		key = 'DownArrow',
-		mods = 'ALT|SHIFT',
-		action = wezterm.action {
-			AdjustPaneSize = {'Down', 5}
-		}
+		key = "-",
+		mods = "LEADER",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
+	-- Resize
+	{
+		key = "LeftArrow",
+		mods = "ALT|SHIFT",
+		action = wezterm.action({
+			AdjustPaneSize = { "Left", 5 },
+		}),
 	},
 	{
-		key = 'UpArrow',
-		mods = 'ALT|SHIFT',
-		action = wezterm.action {
-			AdjustPaneSize = {'Up', 5}
-		}
+		key = "DownArrow",
+		mods = "ALT|SHIFT",
+		action = wezterm.action({
+			AdjustPaneSize = { "Down", 5 },
+		}),
 	},
 	{
-		key = 'RightArrow',
-		mods = 'ALT|SHIFT',
-		action = wezterm.action {
-			AdjustPaneSize = {'Right', 5}
-		}
+		key = "UpArrow",
+		mods = "ALT|SHIFT",
+		action = wezterm.action({
+			AdjustPaneSize = { "Up", 5 },
+		}),
+	},
+	{
+		key = "RightArrow",
+		mods = "ALT|SHIFT",
+		action = wezterm.action({
+			AdjustPaneSize = { "Right", 5 },
+		}),
 	},
 	-- Copy/paste buffer
-    {
-        key = '[',
-        mods = 'CTRL',
-        action = 'ActivateCopyMode'
-    },
 	{
-        key = ']',
-        mods = 'CTRL',
-        action = 'QuickSelect'
-    }
+		key = "[",
+		mods = "CTRL",
+		action = "ActivateCopyMode",
+	},
+	{
+		key = "]",
+		mods = "CTRL",
+		action = "QuickSelect",
+	},
 }
 
 -- set window mini maximize on startup
---wezterm.on('gui-startup', function(cmd)
---	local screen = wezterm.gui.screens().active
---    local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
---    --window:gui_window():set_inner_size(math.modf(screen.width * 0.7), math.modf(screen.height * 0.7))
---	--window:gui_window():set_position(math.modf(screen.width / 2), math.modf(screen.height /2 ))
---end)
+wezterm.on("gui-startup", function(cmd)
+	local screen = wezterm.gui.screens().active
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+	local inner_x, inner_y = math.modf(screen.width * 0.8), math.modf(screen.height * 0.8)
+	window:gui_window():set_inner_size(inner_x, inner_y)
+	window:gui_window():set_position(
+		math.modf(screen.width / 2) - math.modf(inner_x / 2),
+		math.modf(screen.height / 2) - math.modf(inner_y / 2) + 50 -- is MacOS menus bar
+	)
+end)
 
 return {
 	window_frame = {
@@ -278,12 +313,19 @@ return {
 	launch_menu = launch_menu,
 	mouse_bindings = mouse_bindings,
 	native_macos_fullscreen_mode = true,
-	font = wezterm.font_with_fallback {
-		'CaskaydiaCove Nerd Font', 'CaskaydiaCove Nerd Font Mono', 'Cascadia Code PL', 'CaskaydiaCove Nerd Font Mono', 'Hack Nerd Font Mono', 'Cascadia Mono PL', 'Microsoft Yahei UI', 'Microsoft YaHei Mono, DejaVu Sans Mono', 'Consolas'
-	},
+	font = wezterm.font_with_fallback({
+		"CaskaydiaCove Nerd Font",
+		"CaskaydiaCove Nerd Font Mono",
+		"Cascadia Code PL",
+		"CaskaydiaCove Nerd Font Mono",
+		"Hack Nerd Font Mono",
+		"Cascadia Mono PL",
+		"Microsoft Yahei UI",
+		"Microsoft YaHei Mono, DejaVu Sans Mono",
+		"Consolas",
+	}),
 	font_size = 16.0,
 	line_height = 1.2,
-	--font = wezterm.font 'CaskaydiaCove Nerd Font',
 	inactive_pane_hsb = {
 		hue = 1.0,
 		saturation = 0.9,
@@ -299,12 +341,12 @@ return {
 		top = 3,
 		bottom = 1,
 	},
-	window_background_opacity = 0.9,
-	text_background_opacity = 0.9,
-	initial_cols = 120,
-	initial_rows = 30,
-	harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
+	initial_cols = 160,
+	initial_rows = 42,
+	window_background_opacity = 0.8,
+	text_background_opacity = 0.95,
+	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 	-- timeout_milliseconds defaults to 1000 and can be omitted
-	leader = { key = 'a', mods = 'SUPER', timeout_milliseconds = 1000 },
+	leader = { key = "a", mods = "SUPER", timeout_milliseconds = 1000 },
 	keys = keybind,
 }

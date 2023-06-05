@@ -38,6 +38,7 @@ elif [ ! -d "${HOME}/.oh-my-zsh" ]; then
 	echo "link zshrc to ~/.zshrc"
 	ln -svf "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
 	ln -svf "${WORKDIR}/config/zsh/zshenv" "${HOME}/.zshenv"
+	ln -svf "${WORKDIR}/config/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
 fi
 
 # install lf plugin
