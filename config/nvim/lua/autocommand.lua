@@ -1,11 +1,11 @@
 local function augroup(name)
-	vim.api.nvim_create_augroup(name, {clear = true})
+	vim.api.nvim_create_augroup(name, { clear = true })
 end
 
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = augroup("highlight_yank"),
-	callback = function ()
+	callback = function()
 		vim.highlight.on_yank()
 	end,
 })
@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd("VimResized", {
 	group = augroup("resize_splits"),
-	callback = function ()
+	callback = function()
 		vim.cmd("tabdo wincmd =")
 	end
 })
@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
 	group = augroup("last_doc"),
-	callback = function ()
+	callback = function()
 		local mark = vim.api.nvim_buf_get_mark(0, '"')
 		local lcount = vim.api.nvim_buf_line_count(0)
 		if mark[1] > 0 and mark[1] <= lcount then
@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"tsplayground",
 		"vim",
 	},
-	callback = function (event)
+	callback = function(event)
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end
@@ -61,17 +61,21 @@ vim.api.nvim_create_autocmd("FileType", {
 -- check spell on gitcommit
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("check_spell_gitcommit"),
-	pattern = {"gitcommit", "markdown"},
-	callback = function ()
+	pattern = { "gitcommit", "markdown" },
+	callback = function()
 		vim.opt_local.spell = true
 		vim.opt_local.wrap = true
 	end
 })
 
+vim.api.nvim_create_user_command("Format", function(input)
+	vim.lsp.buf.format()
+end, { desc = "format this buffer" })
+
 --vim.cmd [[
 --  augroup _auto_resize
 --    autocmd!
---    autocmd VimResized * tabdo wincmd = 
+--    autocmd VimResized * tabdo wincmd =
 --  augroup end
 --  augroup _alpha
 --    autocmd!
