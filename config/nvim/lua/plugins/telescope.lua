@@ -1,9 +1,9 @@
 return {
-	{ "tom-anders/telescope-vim-bookmarks.nvim", dependencies = {"MattesGroeger/vim-bookmarks"} },
-	{ "nvim-telescope/telescope-dap.nvim", dependencies = {"mfussenegger/nvim-dap"}, config = true },
+	{ "tom-anders/telescope-vim-bookmarks.nvim", dependencies = { "MattesGroeger/vim-bookmarks" } },
+	{ "nvim-telescope/telescope-dap.nvim",       dependencies = { "mfussenegger/nvim-dap" },      config = true },
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "make",
+		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 		},
@@ -16,7 +16,7 @@ return {
 				branch = "v2",
 				config = function()
 					-- you can configure Hop the way you like here; see :h hop-config
-					require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+					require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
 				end
 			},
 		},
@@ -34,7 +34,7 @@ return {
 		dependencies = {
 			"nvim-telescope/telescope-dap.nvim",
 			"tom-anders/telescope-vim-bookmarks.nvim",
-			"nvim-telescope/telescope-fzf-native.nvim",
+				"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-telescope/telescope-symbols.nvim",
@@ -75,7 +75,7 @@ return {
 				local cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
 				if vim.v.shell_error ~= 0 then
 					-- if not git then active lsp client root
-					-- will get the configured root directory of the first attached lsp. You will have problems if you are using multiple lsps 
+					-- will get the configured root directory of the first attached lsp. You will have problems if you are using multiple lsps
 					if #vim.lsp.get_active_clients() ~= 0 then
 						cwd = vim.lsp.get_active_clients()[1].config.root_dir
 					end
@@ -85,7 +85,6 @@ return {
 			require('telescope').setup {
 				defaults = {
 					buffer_previewer_maker = new_maker,
-
 					prompt_prefix = " ",
 					selection_caret = " ",
 					path_display = {

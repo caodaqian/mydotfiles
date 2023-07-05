@@ -44,24 +44,13 @@ return {
 				vim.api.nvim_buf_set_keymap(bufnr, "v", "=", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-				vim.api.nvim_buf_set_keymap(
-					bufnr,
-					"n",
-					"[e",
-					"<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>",
-					opts
-				)
-				vim.api.nvim_buf_set_keymap(
-					bufnr,
-					"n",
-					"]e",
-					"<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>",
-					opts
-				)
+				vim.api.nvim_buf_set_keymap(bufnr, "n", "[e",
+					"<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
+				vim.api.nvim_buf_set_keymap(bufnr, "n", "]e",
+					"<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>Q", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>E", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
 			end
@@ -78,21 +67,13 @@ return {
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
-				vim.api.nvim_buf_set_keymap(
-					bufnr,
-					"n",
-					"[E",
+				vim.api.nvim_buf_set_keymap(bufnr, "n", "[E",
 					'<cmd>lua require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>',
-					opts
-				)
+					opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-				vim.api.nvim_buf_set_keymap(
-					bufnr,
-					"n",
-					"]E",
+				vim.api.nvim_buf_set_keymap(bufnr, "n", "]E",
 					'<cmd>lua require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })<CR>',
-					opts
-				)
+					opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", opts)
 				vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", opts)
@@ -159,47 +140,6 @@ return {
 						require("mason-nvim-dap").default_setup(config)
 					end,
 				},
-			})
-		end,
-	},
-	{
-		"jay-babu/mason-null-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			"williamboman/mason.nvim",
-			{
-				"jose-elias-alvarez/null-ls.nvim",
-				dependencies = {
-					"plenary.nvim",
-				},
-			},
-		},
-		config = function()
-			require("mason-null-ls").setup()
-			require("null-ls").setup({
-				sources = {
-					require("null-ls").builtins.formatting.stylua,
-					require("null-ls").builtins.diagnostics.eslint,
-					require("null-ls").builtins.completion.spell,
-					require("null-ls").builtins.formatting.gofumpt,
-					require("null-ls").builtins.formatting.goimports_reviser,
-					require("null-ls").builtins.formatting.golines,
-				},
-				on_attach = function(client, bufnr)
-					if client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({
-							group = vim.api.nvim_create_augroup("LspFormatting", {}),
-							buffer = bufnr,
-						})
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = vim.api.nvim_create_augroup("LspFormatting", {}),
-							buffer = bufnr,
-							callback = function()
-								vim.lsp.buf.format({ bufnr = bufnr })
-							end,
-						})
-					end
-				end,
 			})
 		end,
 	},
