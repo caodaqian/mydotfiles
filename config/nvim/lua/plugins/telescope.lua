@@ -3,22 +3,10 @@ return {
 	{ "nvim-telescope/telescope-dap.nvim",       dependencies = { "mfussenegger/nvim-dap" },      config = true },
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+		build =
+		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
-		},
-	},
-	{
-		'nvim-telescope/telescope-hop.nvim',
-		dependencies = {
-			{
-				"phaazon/hop.nvim",
-				branch = "v2",
-				config = function()
-					-- you can configure Hop the way you like here; see :h hop-config
-					require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-				end
-			},
 		},
 	},
 	{
@@ -34,20 +22,25 @@ return {
 		dependencies = {
 			"nvim-telescope/telescope-dap.nvim",
 			"tom-anders/telescope-vim-bookmarks.nvim",
-				"nvim-telescope/telescope-fzf-native.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-telescope/telescope-symbols.nvim",
 			"nvim-telescope/telescope-live-grep-raw.nvim",
-			'nvim-telescope/telescope-hop.nvim',
 			"LinArcX/telescope-env.nvim",
 			"folke/trouble.nvim", -- better quick fix
 		},
 		keys = {
-			{ "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
-			{ "<leader>f", '<cmd>Telescope find_files<cr>', desc = "find files" },
-			{ "<leader>F", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>", desc = "find text" },
-			{ "<leader>b", "<cmd>Telescope buffers<cr>", desc = "find buffers" },
+			{ "<leader>r", "<cmd>Telescope oldfiles<cr>",                                                                                       desc =
+			"Open Recent File" },
+			{ "<leader>f", '<cmd>Telescope find_files<cr>',                                                                                     desc =
+			"find files" },
+			{ "<leader>F",
+				               "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>",
+				                                                                                                                                    desc =
+				"find text" },
+			{ "<leader>b", "<cmd>Telescope buffers<cr>",                                                                                        desc =
+			"find buffers" },
 		},
 		config = function()
 			-- disable preview binaries
@@ -82,6 +75,24 @@ return {
 				end
 				return cwd
 			end
+			local function flash(prompt_bufnr)
+				require("flash").jump({
+					pattern = "^",
+					label = { after = { 0, 0 } },
+					search = {
+						mode = "search",
+						exclude = {
+							function(win)
+								return vim.bo[vim.api.nvim_win_get_buf(win)]
+							end,
+						},
+					},
+					action = function(match)
+						local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+						picker:set_selection(match.pos[1] - 1)
+					end,
+				})
+			end
 			require('telescope').setup {
 				defaults = {
 					buffer_previewer_maker = new_maker,
@@ -90,6 +101,10 @@ return {
 					path_display = {
 						smart = {},
 					},
+					mappings = {
+						n = { s = flash },
+						i = { ["<c-s>"] = flash },
+					}
 				},
 				pickers = {
 					find_files = {
@@ -114,21 +129,6 @@ return {
 						override_generic_sorter = true, -- override the generic sorter
 						override_file_sorter = true, -- override the file sorter
 						case_mode = "smart_case" -- or "ignore_case" or "respect_case"
-					},
-					hop = {
-						-- Highlight groups to link to signs and lines; the below configuration refers to demo
-						-- sign_hl typically only defines foreground to possibly be combined with line_hl
-						sign_hl = { "WarningMsg", "Title" },
-						-- optional, typically a table of two highlight groups that are alternated between
-						line_hl = { "CursorLine", "Normal" },
-						-- options specific to `hop_loop`
-						-- true temporarily disables Telescope selection highlighting
-						clear_selection_hl = false,
-						-- highlight hopped to entry with telescope selection highlight
-						-- note: mutually exclusive with `clear_selection_hl`
-						trace_entry = true,
-						-- jump to entry where hoop loop was started from
-						reset_selection = true,
 					},
 					["ui-select"] = { require("telescope.themes").get_dropdown {} },
 					live_grep_args = {
@@ -164,7 +164,6 @@ return {
 			require('telescope').load_extension("ui-select")
 			require('telescope').load_extension('dap')
 			require('telescope').load_extension('vim_bookmarks')
-			require('telescope').load_extension('hop')
 			require('telescope').load_extension('env')
 		end,
 	},

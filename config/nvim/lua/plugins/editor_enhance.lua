@@ -8,51 +8,12 @@ return {
 		},
 	},
 	"nvim-pack/nvim-spectre", -- search and replace pane
-	"tpope/vim-repeat", --  . command enhance
-	"tpope/vim-surround", -- vim surround
-	"romainl/vim-cool", -- auto nohighlight on search
+	"tpope/vim-repeat",    --  . command enhance
+	"tpope/vim-surround",  -- vim surround
+	"romainl/vim-cool",    -- auto nohighlight on search
 	{
 		"numToStr/Comment.nvim", -- quick comment code
 		event = "BufRead",
-		config = true,
-	},
-	{
-		"phaazon/hop.nvim", -- like easymotion, but more powerful
-		event = "BufRead",
-		init = function()
-			local opts = {
-				noremap = true,
-				silent = true,
-			}
-			-- enhance f motion
-			vim.api.nvim_set_keymap(
-				"n",
-				"f",
-				"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.AFTER_CURSOR, current_line_only = true })<cr>",
-				opts
-			)
-			vim.api.nvim_set_keymap(
-				"n",
-				"F",
-				"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.BEFORE_CURSOR, current_line_only = true })<cr>",
-				opts
-			)
-			vim.api.nvim_set_keymap(
-				"o",
-				"f",
-				"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
-				opts
-			)
-			vim.api.nvim_set_keymap(
-				"o",
-				"F",
-				"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",
-				opts
-			)
-			vim.api.nvim_set_keymap("n", "<leader><leader>w", "<cmd>HopWord<cr>", {})
-			vim.api.nvim_set_keymap("n", "<leader><leader>j", "<cmd>HopLine<cr>", {})
-			vim.api.nvim_set_keymap("n", "<leader><leader>k", "<cmd>HopLine<cr>", {})
-		end,
 		config = true,
 	},
 	{
@@ -80,7 +41,7 @@ return {
 		init = function()
 			vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
 			vim.g.indent_blankline_filetype_exclude =
-				{ "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble" }
+			{ "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble" }
 			vim.g.indentLine_enabled = 1
 			-- vim.g.indent_blankline_char = "│"
 			--vim.g.indent_blankline_char = "▏"
@@ -126,7 +87,7 @@ return {
 		end,
 	},
 	"norcalli/nvim-colorizer.lua", -- show color
-	"sindrets/winshift.nvim", -- rerange window layout
+	"sindrets/winshift.nvim",   -- rerange window layout
 	{
 		"RRethy/vim-illuminate", -- highlight undercursor word
 		init = function()
@@ -160,4 +121,42 @@ return {
 		end,
 		config = true,
 	},
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "o", "x" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter_search()
+				end,
+				desc = "Flash Treesitter Search",
+			},
+		},
+	}
 }
