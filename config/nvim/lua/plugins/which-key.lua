@@ -27,7 +27,6 @@ return {
 					b = { "<cmd>Telescope buffers<cr>", "find buffers" },
 					m = { "<cmd>Telescope vim_bookmarks all<cr>", "find bookmarks" },
 					e = { "<cmd>Telescope env<cr>", "find ENV" },
-					s = { "<cmd>Telescope symbol<cr>", "input emoji symbol" },
 					c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
 					h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
 					M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },

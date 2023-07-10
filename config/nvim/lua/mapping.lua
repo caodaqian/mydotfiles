@@ -1,15 +1,9 @@
+-- Shorten function name
+local keymap = vim.api.nvim_set_keymap
 local opts = {
 	noremap = true,
 	silent = true
 }
-
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
--- Modes normal_mode = "n",
--- insert_mode = "i",
--- visual_mode = "v",
--- visual_block_mode = "x",
--- term_mode = "t", command_mode = "c",
 
 -- Remap space as leader key
 local leader_key = " "
@@ -17,69 +11,81 @@ keymap("", leader_key, "<Nop>", opts)
 vim.g.mapleader = leader_key
 vim.g.maplocalleader = leader_key
 
--- Normal --
--- quick save or exit
-keymap("n", "<C-s>", ":w<CR>", opts)
-keymap("n", "Q", ":q<CR>", opts)
-keymap("n", "D", ":bp<bar>sp<bar>bn<bar>bd<CR>", opts)
-keymap("n", "<C-q>", ":q!<CR>", opts)
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
--- better split
-keymap("n", "sl", ":set nosplitright<CR>:vsplit<CR>", opts)
-keymap("n", "sr", ":set splitright<CR>:vsplit<CR>", opts)
-keymap("n", "su", ":set nosplitbelow<CR>:split<CR>", opts)
-keymap("n", "sd", ":set splitbelow<CR>:split<CR>", opts)
--- move cursor
-keymap("n", "H", "<home>", opts)
-keymap("o", "H", "<home>", opts)
-keymap("v", "H", "^", opts)
-keymap("n", "L", "<end>", opts)
-keymap("o", "L", "<end>", opts)
-keymap("v", "L", "$", opts)
--- Resize with arrows
-keymap("n", "<S-Up>", ":resize -1<CR>", opts)
-keymap("n", "<S-Down>", ":resize +2<CR>", opts)
-keymap("n", "<S-Left>", ":vertical resize +2<CR>", opts)
-keymap("n", "<S-Right>", ":vertical resize -2<CR>", opts)
--- NOTE: E/R navigation needs  'bufferline' plugin
-keymap("n", "R", ":BufferLineCycleNext<CR>", opts)
-keymap("n", "E", ":BufferLineCyclePrev<CR>", opts)
--- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
--- file browers
-keymap("n", "ff", "<cmd>Lf<cr>", opts)
--- parse on next line
-keymap("n", '<C-p>', "<cmd>pu<cr>", opts)
--- better format
-keymap("n", '=', '<cmd>lua vim.lsp.buf.format()<cr>', opts)
+-- Modes normal_mode = "n",
+-- insert_mode = "i",
+-- visual_mode = "v",
+-- visual_block_mode = "x",
+-- term_mode = "t", command_mode = "c",
+local mode_nv = { 'n', 'v' }
+local mode_ni = { 'n', 'i' }
+local mode_nvo = { 'n', 'v', 'o' }
+local mode_v = { "v" }
+local mode_i = { "i" }
+local mode_n = { 'n' }
 
--- Insert --
--- Press jj fast to enter
-keymap("i", "jj", "<ESC>", opts)
--- move cursor
-keymap("i", "<C-h>", "<left>", opts)
-keymap("i", "<C-l>", "<right>", opts)
-keymap("i", "<C-j>", "<down>", opts)
-keymap("i", "<C-k>", "<up>", opts)
-keymap("i", "<C-E>", "<C-right>", opts)
-keymap("i", "<C-B>", "<C-left>", opts)
--- add undo break_points
-keymap("i", ",", ",<c-g>u", opts)
-keymap("i", ";", ";<c-g>u", opts)
+local mappings = {
+	-- Normal --
+	-- quick save or exit
+	{ from = '<C-s>',     to = ':w<CR>',                            mode = mode_nvo },
+	{ from = 'Q',         to = ':q<CR>',                            mode = mode_n },
+	{ from = 'D',         to = ':bp<bar>sp<bar>bn<bar>bd<CR>',      mode = mode_n },
+	{ from = '<C-q>',     to = ':q!<CR>',                           mode = mode_n },
+	-- Better window navigation
+	{ from = '<C-h>',     to = '<C-w>h',                            mode = mode_n },
+	{ from = '<C-j>',     to = '<C-w>j',                            mode = mode_n },
+	{ from = '<C-k>',     to = '<C-w>k',                            mode = mode_n },
+	{ from = '<C-l>',     to = '<C-w>l',                            mode = mode_n },
+	-- better split
+	{ from = 'sl',        to = ':set nosplitright<CR>:vsplit<CR>',  mode = mode_n },
+	{ from = 'sr',        to = ':set splitright<CR>:vsplit<CR>',    mode = mode_n },
+	{ from = 'su',        to = ':set nosplitbelow<CR>:split<CR>',   mode = mode_n },
+	{ from = 'sd',        to = ':set splitbelow<CR>:split<CR>',     mode = mode_n },
+	-- move cursor
+	{ from = 'H',         to = '<home>',                            mode = mode_nvo },
+	{ from = 'L',         to = '<end>',                             mode = mode_nvo },
+	-- Resize with arrows
+	{ from = '<S-Up>',    to = ':resize -1<CR>',                    mode = mode_n },
+	{ from = '<S-Down>',  to = ':resize +2<CR>',                    mode = mode_n },
+	{ from = '<S-Left>',  to = ':vertical resize +2<CR>',           mode = mode_n },
+	{ from = '<S-Right>', to = ':vertical resize -2<CR>',           mode = mode_n },
+	-- NOTE: E/R navigation needs  'bufferline' plugin
+	{ from = 'R',         to = ':BufferLineCycleNext<CR>',          mode = mode_n },
+	{ from = 'E',         to = ':BufferLineCyclePrev<CR>',          mode = mode_n },
+	-- Move text up and down
+	{ from = '<A-j>',     to = '<Esc>:m .+1<CR>==gi',               mode = mode_nv },
+	{ from = '<A-k>',     to = '<Esc>:m .-2<CR>==gi',               mode = mode_nv },
+	-- file browers
+	{ from = 'ff',        to = '<cmd>Lf<cr>',                       mode = mode_n },
+	-- parse on next line
+	{ from = '<C-p>',     to = '<cmd>pu<cr>',                       mode = mode_ni },
+	-- better format
+	{ from = '=',         to = '<cmd>lua vim.lsp.buf.format()<cr>', mode = mode_n },
 
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
--- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
+	-- Insert --
+	-- Press jj fast to enter
+	{ from = 'jj',        to = '<ESC>',                             mode = mode_i },
+	-- move cursor
+	{ from = '<C-h>',     to = '<left>',                            mode = mode_i },
+	{ from = '<C-l>',     to = '<right>',                           mode = mode_i },
+	{ from = '<C-j>',     to = '<down>',                            mode = mode_i },
+	{ from = '<C-k>',     to = '<up>',                              mode = mode_i },
+	{ from = '<C-E>',     to = '<C-right>',                         mode = mode_i },
+	{ from = '<C-B>',     to = '<C-left>',                          mode = mode_i },
+	-- add undo break_points
+	{ from = ',',         to = ',<c-g>u',                           mode = mode_i },
+	{ from = ';',         to = ';<c-g>u',                           mode = mode_i },
+
+	-- Visual --
+	-- Stay in indent mode
+	{ from = '<',         to = '<gv',                               mode = mode_nv },
+	{ from = '>',         to = '>gv',                               mode = mode_nv },
+	-- Move text up and down
+	{ from = 'p',         to = '"_dP',                              mode = mode_v },
+}
+
+for _, mapping in ipairs(mappings) do
+	vim.keymap.set(mapping.mode, mapping.from, mapping.to, opts)
+end
 
 -- sudo then write ------------------------------------------------------------
 vim.cmd [[

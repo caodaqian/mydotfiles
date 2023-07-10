@@ -7,12 +7,12 @@ return {
 			lastplace_open_folds = false,
 		},
 	},
-	"nvim-pack/nvim-spectre", -- search and replace pane
-	"tpope/vim-repeat",    --  . command enhance
-	"tpope/vim-surround",  -- vim surround
-	"romainl/vim-cool",    -- auto nohighlight on search
+	"nvim-pack/nvim-spectre",                  -- search and replace pane
+	"tpope/vim-repeat",                        --  . command enhance
+	{ "tpope/vim-surround", event = 'VeryLazy' }, -- vim surround
+	"romainl/vim-cool",                        -- auto nohighlight on search
 	{
-		"numToStr/Comment.nvim", -- quick comment code
+		"numToStr/Comment.nvim",               -- quick comment code
 		event = "BufRead",
 		config = true,
 	},
@@ -37,54 +37,28 @@ return {
 		end,
 	},
 	{
-		"lukas-reineke/indent-blankline.nvim", -- indent blankline
-		init = function()
-			vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-			vim.g.indent_blankline_filetype_exclude =
-			{ "help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree", "Trouble" }
-			vim.g.indentLine_enabled = 1
-			-- vim.g.indent_blankline_char = "│"
-			--vim.g.indent_blankline_char = "▏"
-			-- vim.g.indent_blankline_char = "▎"
-			vim.g.indent_blankline_show_first_indent_level = false
-			vim.g.indent_blankline_show_trailing_blankline_indent = false
-			vim.g.indent_blankline_use_treesitter = true
-			vim.g.indent_blankline_show_current_context = true
-			vim.g.indent_blankline_context_patterns = {
-				"class",
-				"return",
-				"function",
-				"method",
-				"^if",
-				"^while",
-				"jsx_element",
-				"^for",
-				"^object",
-				"^table",
-				"block",
-				"arguments",
-				"if_statement",
-				"else_clause",
-				"jsx_element",
-				"jsx_self_closing_element",
-				"try_statement",
-				"catch_clause",
-				"import_statement",
-				"operation_type",
-			}
-
-			vim.g.indentLine_concealcursor = "inc"
-			vim.g.indentLine_conceallevel = 2
-			vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
-			vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
-			vim.cmd([[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]])
-			vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
-			vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
-			vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
-			--vim.opt.list = true
-			--vim.opt.listchars:append "space:⋅"
-			--vim.opt.listchars:append "eol:↴"
-		end,
+		"shellRaining/hlchunk.nvim",
+		event = { "UIEnter" },
+		config = function()
+			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { pattern = "*", command = "EnableHL", })
+			require('hlchunk').setup({
+				chunk = {
+					enable = true,
+					use_treesitter = true,
+				},
+				indent = {
+					chars = { "│", "¦", "┆", "┊", },
+					use_treesitter = true,
+				},
+				blank = {
+					enable = false,
+				},
+				line_num = {
+					enable = true,
+					use_treesitter = true,
+				},
+			})
+		end
 	},
 	"norcalli/nvim-colorizer.lua", -- show color
 	"sindrets/winshift.nvim",   -- rerange window layout
@@ -124,6 +98,7 @@ return {
 	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
+		opts = {},
 		keys = {
 			{
 				"s",

@@ -1,5 +1,9 @@
 return {
 	{
+		'weilbith/nvim-code-action-menu',
+		cmd = 'CodeActionMenu',
+	},
+	{
 		"neovim/nvim-lspconfig", -- enable LSP
 		lazy = false,
 		init = function()

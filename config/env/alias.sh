@@ -94,7 +94,7 @@ alias du='dust'
 alias man='tldr'
 
 ## exa
-alias ls='exa --icons -h -git'
+alias ls='exa --icons -h --git'
 
 ## fzf
 alias -g F='| fzf'

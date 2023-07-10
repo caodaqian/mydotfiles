@@ -1,14 +1,4 @@
 return {
-	{ "tom-anders/telescope-vim-bookmarks.nvim", dependencies = { "MattesGroeger/vim-bookmarks" } },
-	{ "nvim-telescope/telescope-dap.nvim",       dependencies = { "mfussenegger/nvim-dap" },      config = true },
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build =
-		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-		},
-	},
 	{
 		"folke/trouble.nvim",
 		opt = {
@@ -20,27 +10,47 @@ return {
 		"nvim-telescope/telescope.nvim",
 		lazy = false,
 		dependencies = {
-			"nvim-telescope/telescope-dap.nvim",
-			"tom-anders/telescope-vim-bookmarks.nvim",
-			"nvim-telescope/telescope-fzf-native.nvim",
+			{ "nvim-telescope/telescope-dap.nvim",       dependencies = { "mfussenegger/nvim-dap" },      config = true },
+			{ "tom-anders/telescope-vim-bookmarks.nvim", dependencies = { "MattesGroeger/vim-bookmarks" } },
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build =
+				'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+				dependencies = {
+					"nvim-telescope/telescope.nvim",
+				},
+			},
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
-			"nvim-telescope/telescope-symbols.nvim",
 			"nvim-telescope/telescope-live-grep-raw.nvim",
 			"LinArcX/telescope-env.nvim",
 			"folke/trouble.nvim", -- better quick fix
 		},
 		keys = {
-			{ "<leader>r", "<cmd>Telescope oldfiles<cr>",                                                                                       desc =
-			"Open Recent File" },
-			{ "<leader>f", '<cmd>Telescope find_files<cr>',                                                                                     desc =
-			"find files" },
-			{ "<leader>F",
-				               "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>",
-				                                                                                                                                    desc =
-				"find text" },
-			{ "<leader>b", "<cmd>Telescope buffers<cr>",                                                                                        desc =
-			"find buffers" },
+			{
+				"<leader>r",
+				"<cmd>Telescope oldfiles<cr>",
+				desc =
+				"Open Recent File"
+			},
+			{
+				"<leader>f",
+				'<cmd>Telescope find_files<cr>',
+				desc =
+				"find files"
+			},
+			{
+				"<leader>F",
+				"<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>",
+				desc =
+				"find text"
+			},
+			{
+				"<leader>b",
+				"<cmd>Telescope buffers<cr>",
+				desc =
+				"find buffers"
+			},
 		},
 		config = function()
 			-- disable preview binaries

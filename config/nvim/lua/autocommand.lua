@@ -53,10 +53,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- do not auto comment new line
---vim.api.nvim_create_autocmd("BufEnter", {
---	pattern = "",
---	command = "set fo-=c fo-=r fo-=o"
---})
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "",
+	command = "set fo-=c fo-=r fo-=o"
+})
 
 -- check spell on gitcommit
 vim.api.nvim_create_autocmd("FileType", {
@@ -72,17 +72,3 @@ vim.api.nvim_create_user_command("Format", function(input)
 	vim.lsp.buf.format()
 end, { desc = "format this buffer" })
 
---vim.cmd [[
---  augroup _auto_resize
---    autocmd!
---    autocmd VimResized * tabdo wincmd =
---  augroup end
---  augroup _alpha
---    autocmd!
---    autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
---  augroup end
---  augroup _fold_bug_solution  " https://github.com/nvim-telescope/telescope.nvim/issues/559
---    autocmd!
---    autocmd BufRead * autocmd BufWinEnter * ++once normal! zx
---  augroup end
---]]

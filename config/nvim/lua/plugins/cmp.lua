@@ -1,6 +1,6 @@
 return {
 	{
-		"hrsh7th/nvim-cmp", -- The completion plugin
+		"hrsh7th/nvim-cmp",    -- The completion plugin
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- buffer completions
 			"hrsh7th/cmp-path", -- path completions
@@ -9,14 +9,29 @@ return {
 			"saadparwaiz1/cmp_luasnip", -- snippet completions
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-calc",
 			"f3fora/cmp-spell", -- spell check
 			"ray-x/cmp-treesitter",
 			"L3MON4D3/LuaSnip", -- snippet engine
+			{
+				"onsails/lspkind.nvim",
+				lazy = false,
+				config = function()
+					require("lspkind").init()
+				end
+			},
 		},
 		config = function()
-			local check_backspace = function()
-				local col = vim.fn.col(".") - 1
-				return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+			local has_words_before = function()
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0 and
+					vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			end
+			local limitStr = function(str)
+				if #str > 25 then
+					str = string.sub(str, 1, 22) .. "..."
+				end
+				return str
 			end
 
 			---when inside a snippet, seeks to the nearest luasnip field if possible, and checks if it is jumpable
@@ -127,19 +142,6 @@ return {
 				end
 			end
 
-			---checks if emmet_ls is available and active in the buffer
-			---@return boolean true if available, false otherwise
-			local is_emmet_active = function()
-				local clients = vim.lsp.buf_get_clients()
-
-				for _, client in pairs(clients) do
-					if client.name == "emmet_ls" then
-						return true
-					end
-				end
-				return false
-			end
-
 			local status_cmp_ok, cmp = pcall(require, "cmp")
 			if not status_cmp_ok then
 				return
@@ -151,7 +153,7 @@ return {
 
 			require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
 			require("luasnip.loaders.from_vscode").load({
-				paths = { -- load custom snippets
+				paths = {                             -- load custom snippets
 					vim.fn.stdpath("config") .. "/my-snippets",
 				},
 			}) -- Load snippets from my-snippets folder
@@ -163,54 +165,10 @@ return {
 				},
 				completion = {
 					---@usage The minimum length of a word to complete on.
-					keyword_length = 1,
-				},
-				experimental = {
-					ghost_text = true,
-					native_menu = false,
+					keyword_length = 2,
 				},
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
-					max_width = 0,
-					kind_icons = {
-						Class = " ",
-						Color = " ",
-						Constant = "ﲀ ",
-						Constructor = " ",
-						Enum = "練",
-						EnumMember = " ",
-						Event = " ",
-						Field = " ",
-						File = "",
-						Folder = " ",
-						Function = " ",
-						Interface = "ﰮ ",
-						Keyword = " ",
-						Method = " ",
-						Module = " ",
-						Operator = "",
-						Property = " ",
-						Reference = " ",
-						Snippet = " ",
-						Struct = " ",
-						Text = " ",
-						TypeParameter = " ",
-						Unit = "塞",
-						Value = " ",
-						Variable = " ",
-					},
-					source_names = {
-						nvim_lsp = "(LSP)",
-						treesitter = "(TS)",
-						emoji = "(Emoji)",
-						path = "(Path)",
-						calc = "(Calc)",
-						cmp_tabnine = "(Tabnine)",
-						vsnip = "(Snippet)",
-						luasnip = "(Snippet)",
-						buffer = "(Buffer)",
-						spell = "(Spell)",
-					},
 					duplicates = {
 						buffer = 1,
 						path = 1,
@@ -219,15 +177,16 @@ return {
 					},
 					duplicates_default = 0,
 					format = function(entry, vim_item)
-						local max_width = cmp_config.formatting.max_width
-						if max_width ~= 0 and #vim_item.abbr > max_width then
-							vim_item.abbr = string.sub(vim_item.abbr, 1, max_width - 1) .. "…"
-						end
-						vim_item.kind = cmp_config.formatting.kind_icons[vim_item.kind]
-						vim_item.menu = cmp_config.formatting.source_names[entry.source.name]
-						vim_item.dup = cmp_config.formatting.duplicates[entry.source.name]
+						local kind = require('lspkind').cmp_format({
+							mode = "symbol_text",
+							symbol_map = { Codeium = "", },
+						})(entry, vim_item)
+						local strings = vim.split(kind.kind, "%s", { trimempty = true })
+						kind.kind = " " .. (strings[1] or "") .. " "
+						kind.menu = limitStr(entry:get_completion_item().detail or "")
+						kind.dup = cmp_config.formatting.duplicates[entry.source.name]
 							or cmp_config.formatting.duplicates_default
-						return vim_item
+						return kind
 					end,
 				},
 				snippet = {
@@ -258,31 +217,26 @@ return {
 					["<C-j>"] = cmp.mapping.select_next_item(),
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					-- TODO: potentially fix emmet nonsense
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expandable() then
-							luasnip.expand()
-						elseif jumpable(1) then
-							luasnip.jump(1)
-						elseif check_backspace() then
-							fallback()
-						elseif is_emmet_active() then
-							return vim.fn["cmp#complete"]()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
+					["<Tab>"] = cmp.mapping({
+						i = function(fallback)
+							if cmp.visible() then
+								cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+							elseif has_words_before() then
+								cmp.complete()
+							else
+								fallback()
+							end
+						end,
+					}),
+					["<S-Tab>"] = cmp.mapping({
+						i = function(fallback)
+							if cmp.visible() then
+								cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+							else
+								fallback()
+							end
+						end,
+					}),
 					["<C-p>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping(function(fallback)

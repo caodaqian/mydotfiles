@@ -1,22 +1,21 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
 		build = ":TSUpdate",
-		dependenies = {
-			"nvim-treesitter/nvim-treesitter-refactor",
-			"romgrk/nvim-treesitter-context", -- show class/function at the top
-			"andymass/vim-matchup", -- highlight, navigate, and operate on sets of matching text
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-refactor", -- Highlight definitions, navigation and rename powered by nvim-treesitter.
+			'nvim-treesitter/nvim-treesitter-context', -- show class/function at the top
+			"andymass/vim-matchup",  -- highlight, navigate, and operate on sets of matching text
 			"nvim-treesitter/playground", -- View treesitter information directly in Neovim
 			"windwp/nvim-autopairs", -- Autopairs, integrates with both cmp and treesitter
 		},
 		opts = {
+			ensure_installed = { "query", "typescript", "dart", "java", "python", "prisma", "bash", "go", "lua", "html",
+				"vim", "markdown", "markdown_inline" },
 			highlight = {
 				enable = true, -- false will disable the whole extension
 				additional_vim_regex_highlighting = false,
-				disable = {},
-			},
-			indent = {
-				enable = true,
 				disable = {},
 			},
 			incremental_selection = {
@@ -41,13 +40,6 @@ return {
 					json = "",
 				},
 			},
-			textsubjects = {
-				enable = true,
-				keymaps = {
-					["."] = "textsubjects-smart",
-					[";"] = "textsubjects-big",
-				},
-			},
 			playground = {
 				enable = true,
 				disable = {},
@@ -66,16 +58,7 @@ return {
 					show_help = "?",
 				},
 			},
-			rainbow = {
-				enable = true,
-				extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-				max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-			},
-			autotag = {
-				enable = true,
-			},
-			-- matchup plugin
-			-- https://github.com/andymass/vim-matchup
+			-- matchup plugin https://github.com/andymass/vim-matchup
 			matchup = {
 				enable = true, -- mandatory, false will disable the whole extension
 				-- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
@@ -91,22 +74,6 @@ return {
 					clear_on_cursor_move = true,
 				},
 				highlight_current_scope = { enable = true },
-				smart_rename = {
-					enable = true,
-					keymaps = {
-						smart_rename = "grr",
-					},
-				},
-				navigation = {
-					enable = true,
-					keymaps = {
-						goto_definition = "gnd",
-						list_definitions = "gnD",
-						list_definitions_toc = "gO",
-						goto_next_usage = "<a-*>",
-						goto_previous_usage = "<a-#>",
-					},
-				},
 			},
 		},
 	},

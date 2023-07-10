@@ -71,6 +71,8 @@ end
 
 vim.opt.shortmess:append "c"
 vim.opt.iskeyword:append("-")
+vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
+vim.o.termguicolors = true
 
 vim.cmd "syntax enable"
 vim.cmd "set whichwrap+=<,>,[,],h,l"
