@@ -48,15 +48,6 @@ return {
 					r = { "<cmd>RunTest<cr>", "run test" },
 					t = { "<cmd>UltestSummary<CR>", "Unit Test" },
 				},
-				Q = {
-					name = "Question",
-					t = { "<cmd>Trouble<cr>", "ToggleTrouble" },
-					d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
-					w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-					q = { "<cmd>Trouble quickfix<cr>", "Quick Fix" },
-					r = { "<cmd>Trouble lsp_references<cr>", "references of word" },
-					f = { "<cmd>Trouble lsp_definitions<cr>", "references of word" },
-				},
 				D = {
 					name = "Debug",
 					c = { "<cmd>Telescope dap commands<cr>", "Dap command" },

@@ -4,7 +4,7 @@ return  {
 		name = "catppuccin",
 		lazy = false,
 	},
-	{ 
+	{
 		"Mofiqul/dracula.nvim",
 		lazy = false,
 		init = function()
@@ -12,7 +12,14 @@ return  {
 			vim.g.dracula_italic_comment = true
 		end
 	},
-	{ 
+	{
+		"ayu-theme/ayu-vim",
+		lazy = false,
+		init = function ()
+			vim.g.ayucolor="light"
+		end
+	},
+	{
 		"navarasu/onedark.nvim",
 		lazy = false,
 		init = function()

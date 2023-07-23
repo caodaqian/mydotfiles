@@ -1,12 +1,5 @@
 return {
 	{
-		"folke/trouble.nvim",
-		opt = {
-			auto_close = true,
-			use_diagnostic_signs = true,
-		},
-	},
-	{
 		"nvim-telescope/telescope.nvim",
 		lazy = false,
 		dependencies = {
