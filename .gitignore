@@ -12,3 +12,4 @@ config/lf/colors
 config/lf/icons
 config/nvim/plugin/packer_compiled.lua
 **/__pycache__/**
+.luarc.json

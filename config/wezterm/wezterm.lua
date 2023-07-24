@@ -314,7 +314,7 @@ return {
 	mouse_bindings = mouse_bindings,
 	native_macos_fullscreen_mode = true,
 	font = wezterm.font_with_fallback({
-		"CaskaydiaCove Nerd Font",
+		"CaskaydiaCove Nerd Font Propo",
 		"CaskaydiaCove Nerd Font Mono",
 		"Cascadia Code PL",
 		"CaskaydiaCove Nerd Font Mono",

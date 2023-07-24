@@ -21,8 +21,10 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig", -- enable LSP
+			{ "folke/neodev.nvim", ft = {"lua"} }
 		},
 		config = function()
+			require("neodev").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = { "lua_ls", },
 				automatic_installation = true,

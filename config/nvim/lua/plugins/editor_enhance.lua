@@ -45,17 +45,29 @@ return {
 				chunk = {
 					enable = true,
 					use_treesitter = true,
+					exclude_filetypes = {
+						sagaoutline = true,
+					}
 				},
 				indent = {
 					chars = { "│", "¦", "┆", "┊", },
 					use_treesitter = true,
+					exclude_filetypes = {
+						sagaoutline = true,
+					}
 				},
 				blank = {
 					enable = false,
+					exclude_filetypes = {
+						sagaoutline = true,
+					}
 				},
 				line_num = {
 					enable = true,
 					use_treesitter = true,
+					exclude_filetypes = {
+						sagaoutline = true,
+					}
 				},
 			})
 		end

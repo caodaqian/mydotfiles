@@ -120,7 +120,8 @@ return {
 			},
 			outline = {
 				win_width = 45,
-				auto_preview = true
+				auto_preview = true,
+				layout = 'float',
 			}
 		},
 	},
