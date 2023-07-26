@@ -67,6 +67,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 '
 
 ## python config
+export PYTHONUSERBASE=${HOME}/.local
 export PATH=${HOME}/.local/bin:${PATH}
 
 ## node config

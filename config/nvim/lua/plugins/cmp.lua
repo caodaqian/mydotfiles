@@ -256,6 +256,9 @@ return {
 						end
 					end),
 				}),
+				experimental = {
+					ghost_text = true,
+				},
 			}
 			-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 			cmp.setup.cmdline("/", {
@@ -279,7 +282,6 @@ return {
 					{ name = "path" },
 				}),
 			})
-
 			-- disable autocompletion for guihua
 			vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
 			vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")

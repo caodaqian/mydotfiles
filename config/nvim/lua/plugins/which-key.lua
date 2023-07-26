@@ -52,7 +52,6 @@ return {
 					name = "Debug",
 					c = { "<cmd>Telescope dap commands<cr>", "Dap command" },
 					l = { "<cmd>Telescope dap list_breakpoints<cr>", "list breakpoints" },
-					b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "add breakpoints" },
 					v = { "<cmd>Telescope dap variables<cr>", "list variables" },
 					C = { "<cmd>Telescope dap configurations<cr>", "list configurations" },
 					f = { "<cmd>Telescope dap frame<cr>", "frame" },
