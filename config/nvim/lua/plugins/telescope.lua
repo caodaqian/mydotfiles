@@ -17,7 +17,6 @@ return {
 			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-telescope/telescope-live-grep-raw.nvim",
 			"LinArcX/telescope-env.nvim",
-			"folke/trouble.nvim", -- better quick fix
 		},
 		keys = {
 			{
