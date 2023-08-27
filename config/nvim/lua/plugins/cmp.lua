@@ -1,6 +1,7 @@
 return {
 	{
-		"hrsh7th/nvim-cmp",    -- The completion plugin
+		"hrsh7th/nvim-cmp", -- The completion plugin
+		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- buffer completions
 			"hrsh7th/cmp-path", -- path completions
@@ -18,15 +19,16 @@ return {
 				lazy = false,
 				config = function()
 					require("lspkind").init()
-				end
+				end,
 			},
 		},
 		config = function()
-			local has_words_before = function()
-				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-				return col ~= 0 and
-					vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			local function has_words_before()
+				local line, col = (unpack or table.unpack)(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0
+					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 			end
+
 			local limitStr = function(str)
 				if #str > 25 then
 					str = string.sub(str, 1, 22) .. "..."
@@ -153,10 +155,15 @@ return {
 
 			require("luasnip.loaders.from_vscode").lazy_load() -- load freindly-snippets
 			require("luasnip.loaders.from_vscode").load({
-				paths = {                             -- load custom snippets
+				paths = { -- load custom snippets
 					vim.fn.stdpath("config") .. "/my-snippets",
 				},
 			}) -- Load snippets from my-snippets folder
+
+			local border_opts = {
+				border = "rounded",
+				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+			}
 
 			cmp_config = {
 				confirm_opts = {
@@ -177,9 +184,9 @@ return {
 					},
 					duplicates_default = 0,
 					format = function(entry, vim_item)
-						local kind = require('lspkind').cmp_format({
+						local kind = require("lspkind").cmp_format({
 							mode = "symbol_text",
-							symbol_map = { Codeium = "", },
+							symbol_map = { Codeium = "" },
 						})(entry, vim_item)
 						local strings = vim.split(kind.kind, "%s", { trimempty = true })
 						kind.kind = " " .. (strings[1] or "") .. " "
@@ -195,8 +202,8 @@ return {
 					end,
 				},
 				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
+					completion = cmp.config.window.bordered(border_opts),
+					documentation = cmp.config.window.bordered(border_opts),
 				},
 				sources = {
 					{ name = "nvim_lsp" },

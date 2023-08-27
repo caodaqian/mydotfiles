@@ -5,7 +5,6 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig", -- enable LSP
-		lazy = false,
 		init = function()
 			local signs = {
 				{ name = "DiagnosticSignError", text = "" },
@@ -68,7 +67,7 @@ return {
 		config = function()
 			require("neodev").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls" },
+				ensure_installed = { "lua_ls", "gopls", "jdtls", "jsonls", "pyright" },
 				automatic_installation = true,
 			})
 			-- Register a handler that will be called for all installed servers.
@@ -293,5 +292,17 @@ return {
 			},
 		},
 	},
-	"j-hui/fidget.nvim", -- UI show lsp progress
+	{
+		"j-hui/fidget.nvim", -- UI show lsp progress
+		event = "LspAttach",
+		config = function()
+			require('fidget').setup {
+				sources = {
+					["null-ls"] = {
+						ignore = true
+					}
+				}
+			}
+		end,
+	}
 }

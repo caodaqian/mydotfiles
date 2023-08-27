@@ -9,7 +9,7 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-null-ls").setup({
-				ensure_installed = { "black", "fixjson", "goimports_reviser", "golines", "isort", "jq", "pylint", "sql_formatter", "stylua" },
+				ensure_installed = { "black", "goimports_reviser", "golines", "isort", "jq", "sql_formatter", "stylua", "gofumpt", "mypy" },
 				automatic_installation = true,
 				handlers = {},
 			})
