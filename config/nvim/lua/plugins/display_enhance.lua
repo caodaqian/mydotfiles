@@ -1,50 +1,212 @@
 return {
-	"karb94/neoscroll.nvim",   -- smart scroll
-	"haringsrob/nvim_context_vt", -- show if, for, function... end as virtual text
 	{
 		"akinsho/bufferline.nvim", -- tab
+		dependencies = "nvim-tree/nvim-web-devicons",
 		lazy = false,
+		keys = {
+			{ "<leader>gb", "<cmd>BufferLinePick<CR>", desc = "switch buffer" },
+			{ "<leader>gx", "<cmd>BufferLinePickClose<CR>", desc = "close buffer" },
+		},
 		config = function()
-			require("bufferline").setup()
+			require("bufferline").setup({
+				options = {
+					numbers = "buffer_id",
+					max_name_length = 25,
+					max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
+					truncate_names = true, -- whether or not tab names should be truncated
+					diagnostics = "nvim_lsp",
+					enforce_regular_tabs = true,
+				},
+			})
 		end,
 	},
 	{
 		"nvim-lualine/lualine.nvim", -- status line
+		lazy = false,
 		dependencies = {
-			"SmiteshP/nvim-gps",
+			"lewis6991/gitsigns.nvim", -- git signs
 		},
 		config = function()
+			local hide_in_width = function()
+				return vim.fn.winwidth(0) > 80
+			end
+
+			local mode = {
+				"mode",
+				fmt = function(str)
+					return " " .. str
+				end,
+			}
+
+			local filetype = {
+				"filetype",
+				icons_enabled = true,
+				icon = nil,
+			}
+
+			local filename = {
+				"filename",
+				icons_enabled = true,
+				icon = " 󰈚 ",
+			}
+
+			local branch = {
+				"branch",
+				icons_enabled = true,
+				icon = " ",
+			}
+			local diff = {
+				"diff",
+				colored = true,
+				symbols = { added = "  ", modified = "  ", removed = "  " }, -- changes diff symbols
+				cond = hide_in_width,
+				source = function()
+					local gitsigns = vim.b.gitsigns_status_dict
+					if gitsigns then
+						return {
+							added = gitsigns.added,
+							modified = gitsigns.changed,
+							removed = gitsigns.removed,
+						}
+					end
+				end,
+			}
+
+			local diagnostics = {
+				"diagnostics",
+				sources = { "nvim_diagnostic" },
+				sections = { "error", "warn", "hints", "info" },
+				symbols = { error = "  ", warn = "  ", hints = "󰛩 ", info = "󰋼 " },
+				colored = true,
+				update_in_insert = false,
+				always_visible = false,
+			}
+
+			local location = {
+				function()
+					local current_line = vim.fn.line(".")
+					local total_lines = vim.fn.line("$")
+					-- local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
+					local chars =
+						{ "██", "▇▇", "▆▆", "▅▅", "▄▄", "▃▃", "▂▂", "▁▁", "__" }
+					local line_ratio = current_line / total_lines
+					local line_percentage = math.ceil(line_ratio * 100)
+					local index = math.ceil(line_ratio * #chars)
+					local line_progress = chars[index]
+					return current_line .. ":" .. vim.fn.col(".") .. " " .. line_percentage .. "%%" .. line_progress
+				end,
+				icons_enabled = true,
+				icon = " ",
+			}
+
+			local cwd = {
+				function()
+					return (vim.o.columns > 85 and (vim.fn.fnamemodify(vim.fn.getcwd(), ":t"))) or ""
+				end,
+				icons_enabled = true,
+				icon = "󰉋 ",
+			}
+
+			local spaces = function()
+				return "->|" .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+			end
+
+			local lsp_progress = {
+				function()
+					if not rawget(vim, "lsp") or vim.lsp.status then
+						return ""
+					end
+
+					local Lsp = vim.lsp.util.get_progress_messages()[1]
+
+					if vim.o.columns < 120 or not Lsp then
+						return ""
+					end
+
+					if Lsp.done then
+						vim.defer_fn(function()
+							vim.cmd.redrawstatus()
+						end, 1000)
+					end
+
+					local msg = Lsp.message or ""
+					local percentage = Lsp.percentage or 0
+					local title = Lsp.title or ""
+					local spinners = { "", "󰪞", "󰪟", "󰪠", "󰪢", "󰪣", "󰪤", "󰪥" }
+					local ms = vim.loop.hrtime() / 1000000
+					local frame = math.floor(ms / 120) % #spinners
+					local content = string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
+
+					return ("%#St_LspProgress#" .. content) or ""
+				end,
+			}
+
+			local lsp_status = {
+				function()
+					if rawget(vim, "lsp") then
+						for _, client in ipairs(vim.lsp.get_active_clients()) do
+							if client.attached_buffers[vim.api.nvim_get_current_buf()] and client.name ~= "null-ls" then
+								return "LSP~" .. client.name
+							end
+						end
+					end
+				end,
+				icons_enabled = true,
+				icon = "  ",
+			}
+
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
 					theme = "auto",
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "", right = "" },
-					disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+					section_separators = { left = "", right = "" },
+					component_separators = { left = "", right = "" },
+					disabled_filetypes = {
+						"alpha",
+						"dashboard",
+						"NvimTree",
+						"Outline",
+						"TelescopePrompt",
+						"packer",
+						"DressingInput",
+						"toggleterm",
+						"lazy",
+					},
 					always_divide_middle = true,
 					globalstatus = true,
 					refresh = {
 						statusline = 1000,
 						tabline = 1000,
 						winbar = 1000,
-					}
+					},
 				},
 				sections = {
-					lualine_a = { 'filename',
-						{ require("nvim-gps").get_location, cond = require("nvim-gps").is_available }, },
-					lualine_b = { 'branch', 'diff', 'diagnostics' },
-					lualine_c = { 'mode' },
-					lualine_x = { 'spaces' },
-					lualine_y = { 'filesize', 'fileformat', 'filetype' },
-					lualine_z = { 'location' }
+					lualine_a = {
+						mode,
+					},
+					lualine_b = {
+						filetype,
+						filename,
+					},
+					lualine_c = { branch, diff, "selectioncount" },
+					lualine_x = { lsp_progress, "encoding", spaces, diagnostics },
+					lualine_y = { lsp_status, cwd },
+					lualine_z = { location },
 				},
 				inactive_sections = {
 					lualine_a = {},
 					lualine_b = {},
-					lualine_c = { 'file_name' },
+					lualine_c = { "file_name" },
 					lualine_x = { "location" },
 					lualine_y = {},
 					lualine_z = {},
+				},
+				extensions = {
+					"fzf",
+					"lazy",
+					"nvim-dap-ui",
+					"nvim-tree",
+					"toggleterm",
 				},
 			})
 		end,
@@ -129,6 +291,7 @@ return {
 	-- },
 	{
 		"folke/todo-comments.nvim", -- highlight todo commments
+		event = "BufRead",
 		opts = {
 			keywords = {
 				-- alt ： 别名
@@ -145,7 +308,7 @@ return {
 			},
 		},
 	},
-	"mtdl9/vim-log-highlighting",
+	{ "mtdl9/vim-log-highlighting", event = "BufRead" },
 	{
 		"goolord/alpha-nvim", -- welcome page
 		lazy = false,

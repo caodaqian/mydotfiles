@@ -22,26 +22,37 @@ return {
 			{
 				"<leader>r",
 				"<cmd>Telescope oldfiles<cr>",
-				desc =
-				"Open Recent File"
+				desc = "Open Recent File"
 			},
 			{
 				"<leader>f",
-				'<cmd>Telescope find_files<cr>',
-				desc =
-				"find files"
+				'<cmd>Telescope find_files follow=true no_ignore=true hidden=true<cr>',
+				desc = "find files"
 			},
 			{
 				"<leader>F",
 				"<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>",
-				desc =
-				"find text"
+				desc = "find text"
 			},
 			{
 				"<leader>b",
 				"<cmd>Telescope buffers<cr>",
-				desc =
-				"find buffers"
+				desc = "find buffers",
+			},
+			{
+				"<leader>c",
+				"<cmd>Telescope current_buffer_fuzzy_find<cr>",
+				desc = "find in current buffer",
+			},
+			{
+				"<leader>t",
+				"<cmd>Telescope terms<cr>",
+				desc = "pick hidden term",
+			},
+			{
+				"<leader>ma",
+				"<cmd>Telescope marks<cr>",
+				desc = "find bookmarks",
 			},
 		},
 		config = function()
@@ -98,15 +109,41 @@ return {
 			require('telescope').setup {
 				defaults = {
 					buffer_previewer_maker = new_maker,
-					prompt_prefix = " ",
-					selection_caret = " ",
-					path_display = {
-						smart = {},
-					},
+					prompt_prefix = "   ",
+					selection_caret = "   ",
+					initial_mode = "insert",
+					selection_strategy = "reset",
+					sorting_strategy = "ascending",
+					layout_strategy = "horizontal",
 					mappings = {
-						n = { s = flash },
+						n = { s = flash, q = require("telescope.actions").close },
 						i = { ["<c-s>"] = flash },
-					}
+					},
+					layout_config = {
+						horizontal = {
+							prompt_position = "top",
+							preview_width = 0.55,
+							results_width = 0.8,
+						},
+						vertical = {
+							mirror = false,
+						},
+						width = 0.87,
+						height = 0.80,
+						preview_cutoff = 120,
+					},
+					file_sorter = require("telescope.sorters").get_fuzzy_file,
+					file_ignore_patterns = { "node_modules" },
+					generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+					path_display = { "truncate" },
+					winblend = 0,
+					border = {},
+					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+					color_devicons = true,
+					set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+					file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+					grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+					qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 				},
 				pickers = {
 					find_files = {

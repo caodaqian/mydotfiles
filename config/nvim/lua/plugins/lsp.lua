@@ -23,8 +23,8 @@ return {
 				signs = {
 					active = signs,
 				},
-				update_in_insert = false,
-				underline = true,
+				update_in_insert = true,
+				underline = false,
 				severity_sort = true,
 				float = {
 					focusable = true,
@@ -42,17 +42,28 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
-		lazy = false,
+		cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
 		build = ":MasonUpdate",
 		priority = 950,
 		opts = {
 			ui = {
 				icons = {
-					package_installed = "✓",
-					package_pending = "➜",
-					package_uninstalled = "✗",
+					package_pending = " ",
+					package_installed = "󰄳 ",
+					package_uninstalled = " 󰚌",
+				},
+				keymaps = {
+					toggle_server_expand = "<CR>",
+					install_server = "i",
+					update_server = "u",
+					check_server_version = "c",
+					update_all_servers = "U",
+					check_outdated_servers = "C",
+					uninstall_server = "X",
+					cancel_installation = "<C-c>",
 				},
 			},
+			max_concurrent_installers = 10,
 		},
 	},
 	{
@@ -76,6 +87,25 @@ return {
 			local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 			if status_ok then
 				capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+				capabilities.documentFormattingProvider = false
+				capabilities.documentRangeFormattingProvider = false
+				capabilities.textDocument.completion.completionItem = {
+					documentationFormat = { "markdown", "plaintext" },
+					snippetSupport = true,
+					preselectSupport = true,
+					insertReplaceSupport = true,
+					labelDetailsSupport = true,
+					deprecatedSupport = true,
+					commitCharactersSupport = true,
+					tagSupport = { valueSet = { 1 } },
+					resolveSupport = {
+						properties = {
+							"documentation",
+							"detail",
+							"additionalTextEdits",
+						},
+					},
+				}
 			end
 			require("mason-lspconfig").setup_handlers({
 				function(server_name) -- default handler (optional)
@@ -98,8 +128,12 @@ return {
 								workspace = {
 									library = {
 										[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+										[vim.fn.expand("$vimruntime/lua/vim/lsp")] = true,
+										[vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
 										[vim.fn.stdpath("config") .. "/lua"] = true,
 									},
+									maxpreload = 100000,
+									preloadfilesize = 10000,
 								},
 							},
 						},
@@ -291,17 +325,4 @@ return {
 			},
 		},
 	},
-	{
-		"j-hui/fidget.nvim", -- UI show lsp progress
-		event = "LspAttach",
-		config = function()
-			require('fidget').setup {
-				sources = {
-					["null-ls"] = {
-						ignore = true
-					}
-				}
-			}
-		end,
-	}
 }

@@ -13,7 +13,38 @@ return {
 			"hrsh7th/cmp-calc",
 			"f3fora/cmp-spell", -- spell check
 			"ray-x/cmp-treesitter",
-			"L3MON4D3/LuaSnip", -- snippet engine
+			{
+				-- snippet plugin
+				"L3MON4D3/LuaSnip",
+				dependencies = "rafamadriz/friendly-snippets",
+				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+				config = function(_, opts)
+					require("luasnip").config.set_config(opts)
+
+					-- vscode format
+					require("luasnip.loaders.from_vscode").lazy_load()
+					require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.vscode_snippets_path or "" })
+
+					-- snipmate format
+					require("luasnip.loaders.from_snipmate").load()
+					require("luasnip.loaders.from_snipmate").lazy_load({ paths = vim.g.snipmate_snippets_path or "" })
+
+					-- lua format
+					require("luasnip.loaders.from_lua").load()
+					require("luasnip.loaders.from_lua").lazy_load({ paths = vim.g.lua_snippets_path or "" })
+
+					vim.api.nvim_create_autocmd("InsertLeave", {
+						callback = function()
+							if
+								require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+								and not require("luasnip").session.jump_active
+							then
+								require("luasnip").unlink_current()
+							end
+						end,
+					})
+				end,
+			},
 			{
 				"onsails/lspkind.nvim",
 				lazy = false,
@@ -160,17 +191,13 @@ return {
 				},
 			}) -- Load snippets from my-snippets folder
 
-			local border_opts = {
-				border = "rounded",
-				winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-			}
-
 			cmp_config = {
 				confirm_opts = {
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = false,
 				},
 				completion = {
+					completeopt = "menu,menuone",
 					---@usage The minimum length of a word to complete on.
 					keyword_length = 2,
 				},
@@ -202,8 +229,13 @@ return {
 					end,
 				},
 				window = {
-					completion = cmp.config.window.bordered(border_opts),
-					documentation = cmp.config.window.bordered(border_opts),
+					completion = cmp.config.window.bordered({
+						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+						scrollbar = false,
+					}),
+					documentation = cmp.config.window.bordered({
+						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+					}),
 				},
 				sources = {
 					{ name = "nvim_lsp" },
@@ -309,6 +341,8 @@ return {
 			npairs.setup({
 				check_ts = true,
 				enable_check_bracket_line = false,
+				fast_wrap = {},
+				disable_filetype = { "telescopeprompt", "vim" },
 				ts_config = {
 					lua = { "string" }, -- it will not add a pair on that treesitter node
 					javascript = { "template_string" },
@@ -324,8 +358,7 @@ return {
 
 			-- If you want insert `(` after select function or method item
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			local cmp = require("cmp")
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 }

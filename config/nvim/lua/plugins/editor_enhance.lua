@@ -7,12 +7,12 @@ return {
 			lastplace_open_folds = false,
 		},
 	},
-	"nvim-pack/nvim-spectre",                  -- search and replace pane
-	"tpope/vim-repeat",                        --  . command enhance
-	{ "tpope/vim-surround", event = 'VeryLazy' }, -- vim surround
-	"romainl/vim-cool",                        -- auto nohighlight on search
+	"nvim-pack/nvim-spectre", -- search and replace pane
+	{ "tpope/vim-repeat", event = "VeryLazy" }, --  . command enhance
+	{ "tpope/vim-surround", event = "VeryLazy" }, -- vim surround
+	{ "romainl/vim-cool", event = "VeryLazy" }, -- auto nohighlight on search
 	{
-		"numToStr/Comment.nvim",               -- quick comment code
+		"numToStr/Comment.nvim", -- quick comment code
 		event = "BufRead",
 		config = true,
 	},
@@ -39,43 +39,31 @@ return {
 	{
 		"shellRaining/hlchunk.nvim",
 		event = { "UIEnter" },
+		init = function()
+			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { pattern = "*", command = "EnableHL" })
+		end,
 		config = function()
-			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { pattern = "*", command = "EnableHL", })
-			require('hlchunk').setup({
-				chunk = {
-					enable = true,
-					use_treesitter = true,
-					exclude_filetypes = {
-						sagaoutline = true,
-					}
-				},
+			require("hlchunk").setup({
 				indent = {
-					chars = { "│", "¦", "┆", "┊", },
+					enable = true,
+					chars = { "│", "¦", "┆", "┊" },
 					use_treesitter = true,
-					exclude_filetypes = {
-						sagaoutline = true,
-					}
 				},
 				blank = {
 					enable = false,
-					exclude_filetypes = {
-						sagaoutline = true,
-					}
 				},
 				line_num = {
 					enable = true,
 					use_treesitter = true,
-					exclude_filetypes = {
-						sagaoutline = true,
-					}
 				},
 			})
-		end
+		end,
 	},
 	"norcalli/nvim-colorizer.lua", -- show color
-	"sindrets/winshift.nvim",   -- rerange window layout
+	"sindrets/winshift.nvim", -- rerange window layout
 	{
 		"RRethy/vim-illuminate", -- highlight undercursor word
+		event = { "CursorMovedI", "CursorMoved" },
 		init = function()
 			vim.g.Illuminate_ftblacklist = {
 				"NvimTree",
@@ -86,13 +74,87 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim", -- git signs
-		event = { "CursorMoved", "CursorMovedI" },
-	},
-	{
-		"voldikss/vim-translator",
+		ft = { "gitcommit", "diff" },
+		keys = {
+			{
+				"]c",
+				function()
+					if vim.wo.diff then
+						return "]c"
+					end
+					vim.schedule(function()
+						require("gitsigns").next_hunk()
+					end)
+					return "<Ignore>"
+				end,
+				desc = "Jump to next hunk",
+			},
+			{
+				"[c",
+				function()
+					if vim.wo.diff then
+						return "[c"
+					end
+					vim.schedule(function()
+						require("gitsigns").prev_hunk()
+					end)
+					return "<Ignore>"
+				end,
+				desc = "Jump to prev hunk",
+			},
+			{
+				"<leader>rh",
+				function()
+					require("gitsigns").reset_hunk()
+				end,
+				desc = "Reset hunk",
+			},
+			{
+				"<leader>ph",
+				function()
+					require("gitsigns").preview_hunk()
+				end,
+				desc = "Preview hunk",
+			},
+			{
+				"<leader>td",
+				function()
+					require("gitsigns").toggle_deleted()
+				end,
+				desc = "Toggle deleted",
+			},
+		},
 		init = function()
-			vim.g.translator_target_lang = "zh"
-			vim.g.translator_default_engines = { "bing", "youdao" }
+			-- load gitsigns only when a git file is opened
+			vim.api.nvim_create_autocmd({ "BufRead" }, {
+				group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
+				callback = function()
+					vim.fn.system("git -C " .. '"' .. vim.fn.expand("%:p:h") .. '"' .. " rev-parse")
+					if vim.v.shell_error == 0 then
+						vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
+						vim.schedule(function()
+							require("lazy").load({ plugins = { "gitsigns.nvim" } })
+						end)
+					end
+				end,
+			})
+		end,
+		config = function()
+			require("gitsigns").setup({
+				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+				current_line_blame = true,
+				signs = {
+					add = { text = "│" },
+					change = { text = "│" },
+					delete = { text = "󰍵" },
+					topdelete = { text = "‾" },
+					changedelete = { text = "~" },
+					untracked = { text = "│" },
+				},
+			})
 		end,
 	},
 	{
@@ -145,5 +207,5 @@ return {
 				desc = "Flash Treesitter Search",
 			},
 		},
-	}
+	},
 }

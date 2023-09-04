@@ -2,7 +2,8 @@ return {
 	{
 		"folke/which-key.nvim",
 		lazy = true,
-		keys = { "<leader>" },
+		keys = { "<leader>", "<c-r>", '"', "'", "`", "c", "v", "g" },
+		cmd = "WhichKey",
 		config = function()
 			require("which-key").setup()
 
@@ -24,6 +25,8 @@ return {
 						"<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args(require('telescope.themes').get_ivy())<cr>",
 						"find text",
 					},
+					z = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
+					t = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
 					b = { "<cmd>Telescope buffers<cr>", "find buffers" },
 					m = { "<cmd>Telescope vim_bookmarks all<cr>", "find bookmarks" },
 					e = { "<cmd>Telescope env<cr>", "find ENV" },
@@ -77,7 +80,7 @@ return {
 					S = { "<cmd>lua require 'gitsigns'.stage_buffer()<cr>", "Stage Buffer" },
 					u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
 					U = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
-					o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+					t = { "<cmd>Telescope git_status<cr>", "Open changed file" },
 					b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
 					c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
 					d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff HEAD" },

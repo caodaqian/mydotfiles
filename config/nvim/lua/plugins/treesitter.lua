@@ -5,17 +5,35 @@ return {
 		build = ":TSUpdate",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-refactor", -- Highlight definitions, navigation and rename powered by nvim-treesitter.
-			'nvim-treesitter/nvim-treesitter-context', -- show class/function at the top
-			"andymass/vim-matchup",  -- highlight, navigate, and operate on sets of matching text
+			"nvim-treesitter/nvim-treesitter-context", -- show class/function at the top
+			"andymass/vim-matchup", -- highlight, navigate, and operate on sets of matching text
 			"nvim-treesitter/playground", -- View treesitter information directly in Neovim
 			"windwp/nvim-autopairs", -- Autopairs, integrates with both cmp and treesitter
 		},
-		config = function ()
+		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "query", "typescript", "dart", "java", "python", "prisma", "bash", "go", "lua", "html",
-				"vim", "markdown", "markdown_inline" },
+				ensure_installed = {
+					"query",
+					"typescript",
+					"dart",
+					"java",
+					"python",
+					"prisma",
+					"bash",
+					"go",
+					"lua",
+					"html",
+					"vim",
+					"markdown",
+					"markdown_inline",
+					"c",
+					"tsx",
+					"javascript",
+					"css",
+				},
 				highlight = {
 					enable = true, -- false will disable the whole extension
+					use_languagetree = true,
 					additional_vim_regex_highlighting = false,
 					disable = {},
 				},
