@@ -7,12 +7,12 @@ return {
 			lastplace_open_folds = false,
 		},
 	},
-	"nvim-pack/nvim-spectre", -- search and replace pane
-	{ "tpope/vim-repeat", event = "VeryLazy" }, --  . command enhance
+	"nvim-pack/nvim-spectre",                  -- search and replace pane
+	{ "tpope/vim-repeat",   event = "VeryLazy" }, --  . command enhance
 	{ "tpope/vim-surround", event = "VeryLazy" }, -- vim surround
-	{ "romainl/vim-cool", event = "VeryLazy" }, -- auto nohighlight on search
+	{ "romainl/vim-cool",   event = "VeryLazy" }, -- auto nohighlight on search
 	{
-		"numToStr/Comment.nvim", -- quick comment code
+		"numToStr/Comment.nvim",               -- quick comment code
 		event = "BufRead",
 		config = true,
 	},
@@ -59,7 +59,19 @@ return {
 			})
 		end,
 	},
-	"norcalli/nvim-colorizer.lua", -- show color
+	{
+		"norcalli/nvim-colorizer.lua", -- show color
+		event = "UIEnter",
+		config = function()
+			require("colorizer").setup {
+				filetypes = {
+					"*",      -- Highlight all files, but customize some others.
+					css = { rgb_fn = true }, -- Enable parsing rgb(...) functions in css.
+					html = { names = false }, -- Disable parsing "names" like Blue or Gray
+				},
+			}
+		end
+	},
 	"sindrets/winshift.nvim", -- rerange window layout
 	{
 		"RRethy/vim-illuminate", -- highlight undercursor word

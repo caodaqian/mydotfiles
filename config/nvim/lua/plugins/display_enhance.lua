@@ -47,13 +47,13 @@ return {
 			local filename = {
 				"filename",
 				icons_enabled = true,
-				icon = " 󰈚 ",
+				icon = "󰈚",
 			}
 
 			local branch = {
 				"branch",
 				icons_enabled = true,
-				icon = " ",
+				icon = "",
 			}
 			local diff = {
 				"diff",
@@ -76,7 +76,7 @@ return {
 				"diagnostics",
 				sources = { "nvim_diagnostic" },
 				sections = { "error", "warn", "hints", "info" },
-				symbols = { error = "  ", warn = "  ", hints = "󰛩 ", info = "󰋼 " },
+				symbols = { error = " ", warn = " ", hints = "󰛩 ", info = "󰋼 " },
 				colored = true,
 				update_in_insert = false,
 				always_visible = false,
@@ -104,7 +104,7 @@ return {
 					return (vim.o.columns > 85 and (vim.fn.fnamemodify(vim.fn.getcwd(), ":t"))) or ""
 				end,
 				icons_enabled = true,
-				icon = "󰉋 ",
+				icon = "󰉋",
 			}
 
 			local spaces = function()
@@ -121,12 +121,6 @@ return {
 
 					if vim.o.columns < 120 or not Lsp then
 						return ""
-					end
-
-					if Lsp.done then
-						vim.defer_fn(function()
-							vim.cmd.redrawstatus()
-						end, 1000)
 					end
 
 					local msg = Lsp.message or ""
@@ -152,7 +146,7 @@ return {
 					end
 				end,
 				icons_enabled = true,
-				icon = "  ",
+				icon = " ",
 			}
 
 			require("lualine").setup({
@@ -196,8 +190,8 @@ return {
 				inactive_sections = {
 					lualine_a = {},
 					lualine_b = {},
-					lualine_c = { "file_name" },
-					lualine_x = { "location" },
+					lualine_c = { filename },
+					lualine_x = { location },
 					lualine_y = {},
 					lualine_z = {},
 				},

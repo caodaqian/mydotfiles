@@ -1,9 +1,5 @@
 return {
 	{
-		"weilbith/nvim-code-action-menu",
-		cmd = "CodeActionMenu",
-	},
-	{
 		"neovim/nvim-lspconfig", -- enable LSP
 		init = function()
 			local signs = {
@@ -52,16 +48,6 @@ return {
 					package_installed = "󰄳 ",
 					package_uninstalled = " 󰚌",
 				},
-				keymaps = {
-					toggle_server_expand = "<CR>",
-					install_server = "i",
-					update_server = "u",
-					check_server_version = "c",
-					update_all_servers = "U",
-					check_outdated_servers = "C",
-					uninstall_server = "X",
-					cancel_installation = "<C-c>",
-				},
 			},
 			max_concurrent_installers = 10,
 		},
@@ -78,7 +64,7 @@ return {
 		config = function()
 			require("neodev").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "gopls", "jdtls", "jsonls", "pyright" },
+				ensure_installed = { "lua_ls", "gopls", "jdtls", "jsonls", "pyright", "html", "cssls", "clangd" },
 				automatic_installation = true,
 			})
 			-- Register a handler that will be called for all installed servers.
@@ -87,8 +73,8 @@ return {
 			local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 			if status_ok then
 				capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-				capabilities.documentFormattingProvider = false
-				capabilities.documentRangeFormattingProvider = false
+				-- capabilities.documentFormattingProvider = false
+				-- capabilities.documentRangeFormattingProvider = false
 				capabilities.textDocument.completion.completionItem = {
 					documentationFormat = { "markdown", "plaintext" },
 					snippetSupport = true,

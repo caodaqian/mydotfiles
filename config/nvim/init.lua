@@ -63,7 +63,7 @@ require("lazy").setup({
 
 -- set colorscheme
 local colorscheme_list = {}
-for _, config in pairs(require("plugins.themes")) do
+for idx, config in pairs(require("plugins.themes")) do
 	colorscheme_list[config.name] = config.config
 end
 for colorscheme, conf in pairs(colorscheme_list) do
