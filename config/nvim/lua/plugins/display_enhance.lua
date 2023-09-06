@@ -4,7 +4,7 @@ return {
 		dependencies = "nvim-tree/nvim-web-devicons",
 		lazy = false,
 		keys = {
-			{ "<leader>gb", "<cmd>BufferLinePick<CR>", desc = "switch buffer" },
+			{ "<leader>gb", "<cmd>BufferLinePick<CR>",      desc = "switch buffer" },
 			{ "<leader>gx", "<cmd>BufferLinePickClose<CR>", desc = "close buffer" },
 		},
 		config = function()
@@ -88,7 +88,7 @@ return {
 					local total_lines = vim.fn.line("$")
 					-- local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
 					local chars =
-						{ "██", "▇▇", "▆▆", "▅▅", "▄▄", "▃▃", "▂▂", "▁▁", "__" }
+					{ "██", "▇▇", "▆▆", "▅▅", "▄▄", "▃▃", "▂▂", "▁▁", "__" }
 					local line_ratio = current_line / total_lines
 					local line_percentage = math.ceil(line_ratio * 100)
 					local index = math.ceil(line_ratio * #chars)
@@ -212,12 +212,17 @@ return {
 	},
 	-- {
 	-- 	"Bekaboo/dropbar.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- 	event = { "BufRead" },
+	-- 	keys = {
+	-- 		{ "<leader>;", "<cmd>lua require('dropbar.api').pick()<cr>", desc = "enter interactive pick mode" },
+	-- 		{ "[c", "<cmd>lua require('dropbar.api').goto_context_start()<cr>", desc = "goto context start" },
+	-- 		{ "]c", "<cmd>lua require('dropbar.api').select_next_context()<cr>", desc = "goto context next" },
+	-- 	},
 	-- 	config = function()
 	-- 		local api = require("dropbar.api")
-	-- 		vim.keymap.set('n', '<Leader>;', api.pick)
-	-- 		vim.keymap.set('n', '[c', api.goto_context_start)
-	-- 		vim.keymap.set('n', ']c', api.select_next_context)
-	--
 	-- 		local confirm = function()
 	-- 			local menu = api.get_current_dropbar_menu()
 	-- 			if not menu then
@@ -239,12 +244,12 @@ return {
 	--
 	-- 		require("dropbar").setup({
 	-- 			menu = {
-	-- 				-- When on, automatically set the cursor to the closest previous/next
-	-- 				-- clickable component in the direction of cursor movement on CursorMoved
+	-- 				-- when on, automatically set the cursor to the closest previous/next
+	-- 				-- clickable component in the direction of cursor movement on cursormoved
 	-- 				quick_navigation = true,
 	-- 				---@type table<string, string|function|table<string, string|function>>
 	-- 				keymaps = {
-	-- 					['<LeftMouse>'] = function()
+	-- 					['<leftmouse>'] = function()
 	-- 						local menu = api.get_current_dropbar_menu()
 	-- 						if not menu then
 	-- 							return
@@ -262,12 +267,12 @@ return {
 	-- 						end
 	-- 						menu:click_at({ mouse.line, mouse.column }, nil, 1, 'l')
 	-- 					end,
-	-- 					['<CR>'] = confirm,
+	-- 					['<cr>'] = confirm,
 	-- 					['i'] = confirm,
 	-- 					['<esc>'] = quit_curr,
 	-- 					['q'] = quit_curr,
 	-- 					['n'] = quit_curr,
-	-- 					['<MouseMove>'] = function()
+	-- 					['<mousemove>'] = function()
 	-- 						local menu = api.get_current_dropbar_menu()
 	-- 						if not menu then
 	-- 							return
