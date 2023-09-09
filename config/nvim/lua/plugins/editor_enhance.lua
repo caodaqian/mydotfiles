@@ -47,7 +47,7 @@ return {
 				indent = {
 					enable = true,
 					chars = { "│", "¦", "┆", "┊" },
-					use_treesitter = true,
+					use_treesitter = false,
 				},
 				blank = {
 					enable = false,
@@ -63,16 +63,19 @@ return {
 		"norcalli/nvim-colorizer.lua", -- show color
 		event = "UIEnter",
 		config = function()
-			require("colorizer").setup {
+			require("colorizer").setup({
 				filetypes = {
-					"*",      -- Highlight all files, but customize some others.
+					"*",       -- Highlight all files, but customize some others.
 					css = { rgb_fn = true }, -- Enable parsing rgb(...) functions in css.
 					html = { names = false }, -- Disable parsing "names" like Blue or Gray
 				},
-			}
-		end
+			})
+		end,
 	},
-	"sindrets/winshift.nvim", -- rerange window layout
+	{
+		"sindrets/winshift.nvim", -- rerange window layout
+		event = "WinNew",
+	},
 	{
 		"RRethy/vim-illuminate", -- highlight undercursor word
 		event = { "CursorMovedI", "CursorMoved" },
@@ -219,5 +222,33 @@ return {
 				desc = "Flash Treesitter Search",
 			},
 		},
+	},
+	{
+		"nyngwang/NeoZoom.lua",
+		event = "WinNew",
+		keys = {
+			{
+				"<leader>z",
+				function()
+					vim.cmd("NeoZoomToggle")
+				end,
+				desc = "open zoom window",
+			},
+		},
+		config = function()
+			require("neo-zoom").setup({
+				exclude_buftypes = { "terminal" },
+				exclude_filetypes = { "lspinfo", "mason", "lazy", "fzf", "qf" },
+				winopts = {
+					offset = {
+						-- NOTE: omit `top`/`left` to center the floating window vertically/horizontally.
+						-- top = 0,
+						-- left = 0.17,
+						width = 0.9,
+						height = 0.85,
+					},
+				},
+			})
+		end,
 	},
 }

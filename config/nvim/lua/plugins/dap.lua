@@ -18,6 +18,7 @@ return {
 			require("nvim-dap-virtual-text").setup({
 				commented = true,
 			})
+			require("dap.ext.vscode").load_launchjs()
 			local dap_breakpoint = {
 				error = {
 					text = "🔴",
@@ -41,6 +42,33 @@ return {
 			vim.fn.sign_define("DapBreakpoint", dap_breakpoint.error)
 			vim.fn.sign_define("DapStopped", dap_breakpoint.stopped)
 			vim.fn.sign_define("DapBreakpointRejected", dap_breakpoint.rejected)
+
+			-- map K to hover while session is active
+			local keymap_restore = {}
+			require("dap").listeners.after["event_initialized"]["me"] = function()
+				for _, buf in pairs(vim.api.nvim_list_bufs()) do
+					local keymaps = vim.api.nvim_buf_get_keymap(buf, "n")
+					for _, keymap in pairs(keymaps) do
+						if keymap.lhs == "K" then
+							table.insert(keymap_restore, keymap)
+							vim.api.nvim_buf_del_keymap(buf, "n", "K")
+						end
+					end
+				end
+				vim.api.nvim_set_keymap("n", "K", '<Cmd>lua require("dap.ui.widgets").hover()<CR>', { silent = true })
+			end
+			require("dap").listeners.after["event_terminated"]["me"] = function()
+				for _, keymap in pairs(keymap_restore) do
+					vim.api.nvim_buf_set_keymap(
+						keymap.buffer,
+						keymap.mode,
+						keymap.lhs,
+						keymap.rhs,
+						{ silent = keymap.silent == 1 }
+					)
+				end
+				keymap_restore = {}
+			end
 
 			-- set dap ui
 			local dap, dapui = require("dap"), require("dapui")

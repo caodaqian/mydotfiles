@@ -60,6 +60,10 @@ local mappings = {
 	{ from = "<C-p>", to = "<cmd>pu<cr>", mode = mode_ni },
 	-- better format
 	{ from = "=", to = "<cmd>lua vim.lsp.buf.format()<cr>", mode = mode_n },
+	-- Zoom one pane
+	{ from = "<leader>-", to = "<C-W><C-\\|><C-W><C-_>", mode = mode_nvo },
+	-- Restore panes
+	--nnoremap <leader>= <C-w><C-=>
 
 	-- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 	-- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
