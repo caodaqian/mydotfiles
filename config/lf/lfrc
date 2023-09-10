@@ -41,6 +41,9 @@ cmd open &{{
 # open with custom application
 cmd openwith %"$@" "$fx"
 
+# create file
+cmd create_file $touch "$(echo $@)"
+
 # create direactory
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
@@ -243,6 +246,7 @@ map d delete
 map M push :mkdir<space>
 map U :diskmount
 map R reload
+map C push :create_file<space>
 # move
 map <c-j> push 10j
 map <c-k> push 10k
