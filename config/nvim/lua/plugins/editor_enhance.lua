@@ -43,7 +43,18 @@ return {
 			vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, { pattern = "*", command = "EnableHL" })
 		end,
 		config = function()
+			local support_filetypes = vim.tbl_deep_extend("force", require('hlchunk.utils.filetype').support_filetypes, {})
+			local exclude_filetypes = vim.tbl_deep_extend("force", require('hlchunk.utils.filetype').exclude_filetypes, {
+				['dap-repl'] = true,
+				dapui_scopes = true,
+				dapui_breakpoints = true,
+				dapui_stacks = true,
+			})
 			require("hlchunk").setup({
+				chunk = {
+					support_filetypes = support_filetypes,
+					exclude_filetypes = exclude_filetypes,
+				},
 				indent = {
 					enable = true,
 					chars = { "│", "¦", "┆", "┊" },

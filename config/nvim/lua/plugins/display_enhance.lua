@@ -4,7 +4,7 @@ return {
 		dependencies = "nvim-tree/nvim-web-devicons",
 		lazy = false,
 		keys = {
-			{ "<leader>gb", "<cmd>BufferLinePick<CR>",      desc = "switch buffer" },
+			{ "<leader>gb", "<cmd>BufferLinePick<CR>", desc = "switch buffer" },
 			{ "<leader>gx", "<cmd>BufferLinePickClose<CR>", desc = "close buffer" },
 		},
 		config = function()
@@ -32,10 +32,12 @@ return {
 			end
 
 			local mode = {
-				"mode",
+				require("noice").api.status.mode.get,
+				cond = require("noice").api.status.mode.has,
 				fmt = function(str)
 					return " " .. str
 				end,
+				colored = true,
 			}
 
 			local filetype = {
@@ -88,7 +90,7 @@ return {
 					local total_lines = vim.fn.line("$")
 					-- local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
 					local chars =
-					{ "██", "▇▇", "▆▆", "▅▅", "▄▄", "▃▃", "▂▂", "▁▁", "__" }
+						{ "██", "▇▇", "▆▆", "▅▅", "▄▄", "▃▃", "▂▂", "▁▁", "__" }
 					local line_ratio = current_line / total_lines
 					local line_percentage = math.ceil(line_ratio * 100)
 					local index = math.ceil(line_ratio * #chars)
@@ -149,6 +151,18 @@ return {
 				icon = " ",
 			}
 
+			local msg = {
+				require("noice").api.status.message.get_hl,
+				cond = require("noice").api.status.message.has,
+				colored = true,
+			}
+
+			local search_count = {
+				require("noice").api.status.search.get,
+				cond = require("noice").api.status.search.has,
+				colored = true,
+			}
+
 			require("lualine").setup({
 				options = {
 					icons_enabled = true,
@@ -183,8 +197,8 @@ return {
 						filename,
 					},
 					lualine_c = { branch, diff, "selectioncount" },
-					lualine_x = { lsp_progress, "encoding", spaces, diagnostics },
-					lualine_y = { lsp_status, cwd },
+					lualine_x = { msg, lsp_progress, "encoding", spaces, diagnostics },
+					lualine_y = { lsp_status, cwd, search_count, },
 					lualine_z = { location },
 				},
 				inactive_sections = {

@@ -12,7 +12,12 @@ return {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-calc",
 			"f3fora/cmp-spell", -- spell check
+			"rcarriga/cmp-dap", -- dap complete
 			"ray-x/cmp-treesitter",
+			{
+				"LiadOz/nvim-dap-repl-highlights",
+				config = true,
+			},
 			{
 				-- snippet plugin
 				"L3MON4D3/LuaSnip",
@@ -53,11 +58,11 @@ return {
 			},
 		},
 		config = function()
-			local function has_words_before()
+			--[[ local function has_words_before()
 				local line, col = (unpack or table.unpack)(vim.api.nvim_win_get_cursor(0))
 				return col ~= 0
 					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-			end
+			end ]]
 
 			local limitStr = function(str)
 				if #str > 25 then
@@ -184,7 +189,6 @@ return {
 				mapping = cmp_config.mapping,
 				sources = { { name = "buffer" } },
 			})
-
 			cmp.setup.cmdline("?", {
 				mapping = cmp_config.mapping,
 				sources = { { name = "buffer" } },
@@ -200,6 +204,19 @@ return {
 					{ name = "spell" },
 				},
 			})
+
+			-- add dap source on cmp
+			cmp.setup({
+				enabled = function()
+					return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or require("cmp_dap").is_dap_buffer()
+				end,
+			})
+			cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+				sources = {
+					{ name = "dap" },
+				},
+			})
+
 			-- disable autocompletion for guihua
 			vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
 			vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")

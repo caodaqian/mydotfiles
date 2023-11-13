@@ -11,11 +11,18 @@ keymap("", leader_key, "<Nop>", opts)
 vim.g.mapleader = leader_key
 vim.g.maplocalleader = leader_key
 
--- Modes normal_mode = "n",
--- insert_mode = "i",
--- visual_mode = "v",
--- visual_block_mode = "x",
--- term_mode = "t", command_mode = "c",
+--[[ String value 字符串值	Help page 帮助页面	Affected modes 受影响的模式	Vimscript equivalent Vimscript 等效
+'' (an empty string)'' （空字符串）	mapmode-nvo	Normal, Visual, Select, Operator-pending 正常、可视、选择、操作员挂起	:map
+'n'	mapmode-n	Normal 正常	:nmap
+'v'	mapmode-v	Visual and Select 视觉并选择	:vmap
+'s'	mapmode-s	Select 选择	:smap
+'x'	mapmode-x	Visual 视觉	:xmap
+'o'	mapmode-o	Operator-pending 运算符挂起	:omap
+'!'	mapmode-ic	Insert and Command-line 插入和命令行	:map!
+'i'	mapmode-i	Insert 插入	:imap
+'l'	mapmode-l	Insert, Command-line, Lang-Arg 插入、命令行、语言参数	:lmap
+'c'	mapmode-c	Command-line 命令行	:cmap
+'t'	mapmode-t	Terminal 终端	:tmap ]]
 local mode_nv = { "n", "v" }
 local mode_ni = { "n", "i" }
 local mode_nvo = { "n", "v", "o" }
@@ -57,7 +64,7 @@ local mappings = {
 	-- file browers
 	{ from = "ff", to = "<cmd>Lf<cr>", mode = mode_n },
 	-- parse on next line
-	{ from = "<C-p>", to = "<cmd>pu<cr>", mode = mode_ni },
+	{ from = "<A-P>", to = "<cmd>pu<cr>", mode = mode_ni },
 	-- better format
 	{ from = "=", to = "<cmd>lua vim.lsp.buf.format()<cr>", mode = mode_n },
 	-- Zoom one pane
