@@ -230,7 +230,6 @@ return {
 				desc = "prev diagnostic",
 			},
 			{
-				"n",
 				"[E",
 				'<cmd>lua require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })<CR>',
 				desc = "prev error diagnostic",
