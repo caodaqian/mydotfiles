@@ -99,6 +99,12 @@ alias ls='exa --icons -h --git'
 ## fzf
 alias -g F='| fzf'
 
+## gping
+alias ping='gping'
+
+## dog
+alias dig='dog'
+
 ## backup
 function backup() {
 	if [ ! $# -eq 1 ]; then
