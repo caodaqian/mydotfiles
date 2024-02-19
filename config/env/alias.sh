@@ -93,11 +93,12 @@ alias du='dust'
 ## tldr
 alias man='tldr'
 
-## exa
-alias ls='exa --icons -h --git'
+## eza
+alias ls='eza --icons -h --git'
 
 ## fzf
 alias -g F='| fzf'
+alias copypath='fzf --multi --bind="ctrl-a:select-all"| tr -d "\n" | tee >(pbcopy)'
 
 ## gping
 alias ping='gping'
