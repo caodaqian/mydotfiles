@@ -2,6 +2,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		opts = function(_, opts)
+			-- better humanful keymapping
 			local has_words_before = function()
 				unpack = unpack or table.unpack
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -38,31 +39,10 @@ return {
 					end
 				end, { "i", "s" }),
 			})
-		end,
-	},
-	{
-		"hrsh7th/cmp-cmdline", -- cmdline completions
-		dependencies = {
-			"hrsh7th/nvim-cmp",
-		},
-		config = function(_, opts)
-			local cmp = require("cmp")
-			-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline("/", {
-				sources = { { name = "buffer" } },
-			})
-			cmp.setup.cmdline("?", {
-				sources = { { name = "buffer" } },
-			})
 
-			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline(":", {
-				sources = {
-					{ name = "cmdline" },
-					{ name = "path" },
-					{ name = "buffer" },
-				},
-			})
+			-- fix cmp select
+			opts.preselect = cmp.PreselectMode.None
+			opts.completion = { completeopt = "menu,menuone,noselect" }
 		end,
 	},
 }

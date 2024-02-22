@@ -10,6 +10,7 @@ Linux setting sync
 - fzf
 - tmux
 - neovim0.7+
+- lua，目前的 neovim 主要配置语言
 - wget
 - curl
 - intelephense
@@ -76,6 +77,7 @@ Linux setting sync
 - potplayer，视频播放器
 - QuickLook，快速查看
 - TranslucentTB，任务栏透明
+- HiBit Uninstaller，卸载器以及其他的一些维护工具
 
 ### mac 下
 
