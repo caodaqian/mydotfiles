@@ -34,7 +34,7 @@ function main() {
 
 # install dependences software
 function brew_install() {
-	sofrware_list=(rg gnu-sed git curl gcc cmake node lf curl tmux dust duf btop tldr exa)
+	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop bat tldr eza lazygit gping dog fzf)
 	brew install ${sofrware_list[*]}
 }
 

@@ -10,6 +10,7 @@ Linux setting sync
 - fzf
 - tmux
 - neovim0.7+
+- lazygit
 - lua，目前的 neovim 主要配置语言
 - wget
 - curl
@@ -42,13 +43,13 @@ Linux setting sync
 ### tmux 自动安装
 
 - ohmytmux
-- tmux-resurrect，保存/恢复 tmux 打开的会话
-- tmux-continum，自动定时保存和自动恢复会话
 
 ## 推荐应用
 
 ### 一些通用的软件
 
+- tmux-resurrect，保存/恢复 tmux 打开的会话
+- tmux-continum，自动定时保存和自动恢复会话
 - tmate，多人协同会话
 - when-changed，文件监控执行
 - supervisor，进程监控拉起
