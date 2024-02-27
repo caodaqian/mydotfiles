@@ -16,6 +16,22 @@ return {
 			opts.mapping = vim.tbl_extend("force", opts.mapping, {
 				["<C-k>"] = cmp.mapping.select_prev_item(),
 				["<C-j>"] = cmp.mapping.select_next_item(),
+				["<C-e>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.abort()
+					elseif has_words_before() then
+						cmp.complete()
+					else
+						fallback()
+					end
+				end, { "i" }),
+				["<C-g>"] = function()
+					if cmp.visible_docs() then
+						cmp.close_docs()
+					else
+						cmp.open_docs()
+					end
+				end,
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
