@@ -11,5 +11,7 @@ config/ranger/tagged
 config/lf/colors
 config/lf/icons
 config/nvim/plugin/packer_compiled.lua
+config/tmux/tmux.conf
+config/tmux/plugins
 **/__pycache__/**
 .luarc.json

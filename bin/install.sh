@@ -10,7 +10,9 @@
 
 set -eu
 WORKDIR=$(dirname $(dirname $(readlink -f "$0")))
-echo "workdir is $WORKDIR"
+SUB_MODULE="$1"
+echo "workdir is $WORKDIR, sub_module is $SUB_MODULE"
+
 source ${WORKDIR}/bin/common.sh
 
 function main() {
@@ -26,6 +28,9 @@ function main() {
 	)
 
 	for install_func in ${install_list[*]};do
+		if [ -n "$SUB_MODULE" -a "$install_func" != "$SUB_MODULE" ]; then
+			continue
+		fi
 		echo $(format "NOTE" "exec ${install_func} *************")
 		$install_func
 		echo $(format "NOTE" "****************************************")
@@ -70,8 +75,11 @@ function install_zsh_config() {
 		[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 		[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 		[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open" ] && git clone https://github.com/paulirish/git-open.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open"
-		[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ] && git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-
+		if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ];then
+			git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+		else
+			git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
+		fi
 	# get zshrc
 	echo "link zshrc to ~/.zshrc"
 	[ ! -L "${HOME}/.zshrc" ] && ln -svf "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
@@ -107,11 +115,15 @@ function install_tmux_config() {
 		warn "must install tmux firstly"
 		exit 1
 	elif [ ! -d ${HOME}/.tmux ]; then
+		TMUX_INSATLL_PATH="${HOME}/Github"
+		if [ ! -d ${TMUX_INSATLL_PATH} ];then
+			mkdir -p ${TMUX_INSATLL_PATH}
+		fi
+		TMUX_INSATLL_PATH="${TMUX_INSATLL_PATH}/ohmytmux"
 		# sync tmux.conf.local
-		echo "install oh-my-tmux"
-		git clone https://github.com/gpakosz/.tmux.git "${HOME}/.tmux"
-		ln -svf "${HOME}/.tmux/.tmux.conf" "${HOME}/.tmux.conf"
-		ln -svf "${HOME}/.config/tmux/tmux.conf.local" "${HOME}/.tmux.conf.local"
+		echo "install oh-my-tmux to ${TMUX_INSATLL_PATH}"
+		git clone https://github.com/gpakosz/.tmux.git ${TMUX_INSATLL_PATH}
+		ln -svf "${TMUX_INSATLL_PATH}/.tmux.conf" "${HOME}/.config/tmux/tmux.conf"
 		info "install oh-my-tmux success"
 	fi
 }

@@ -5,14 +5,29 @@
 #         Copyright 2012— Gregory Pakosz (@gpakosz).
 
 
-# -- navigation ----------------------------------------------------------------
+# -- bindings ------------------------------------------------------------------
 
-# if you're running tmux within iTerm2
-#   - and tmux is 1.9 or 1.9a
-#   - and iTerm2 is configured to let option key act as +Esc
-#   - and iTerm2 is configured to send [1;9A -> [1;9D for option + arrow keys
-# then uncomment the following line to make Meta + arrow keys mapping work
-#set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
+# preserve tmux stock bindings,
+# while adding bindings that don't conflict with these stock bindings
+# /!\ this disables some of Oh my tmux! bindings described in README.md
+#   - true
+#   - false (default)
+tmux_conf_preserve_stock_bindings=false
+
+
+# -- session creation ----------------------------------------------------------
+
+# prompt for session name when creating a new session, possible values are:
+#   - true
+#   - false (default)
+#   - disabled (do not modify new-session bindings)
+tmux_conf_new_session_prompt=true
+
+# new session retains current path, possible values are:
+#   - true
+#   - false (default)
+#   - disabled (do not modify new-session bindings)
+tmux_conf_new_session_retain_current_path=false
 
 
 # -- windows & pane creation ---------------------------------------------------
@@ -22,6 +37,12 @@
 #   - false (default)
 #   - disabled (do not modify new-window bindings)
 tmux_conf_new_window_retain_current_path=true
+
+# new window tries to reconnect ssh sessions, possible values are:
+#   - true
+#   - false (default)
+#   - disabled (do not modify new-window bindings)
+tmux_conf_new_window_reconnect_ssh=false
 
 # new pane retains current path, possible values are:
 #   - true (default)
@@ -35,87 +56,51 @@ tmux_conf_new_pane_retain_current_path=true
 #   - disabled (do not modify split-window bindings)
 tmux_conf_new_pane_reconnect_ssh=false
 
-# prompt for session name when creating a new session, possible values are:
-#   - true
-#   - false (default)
-#   - disabled (do not modify new-session bindings)
-tmux_conf_new_session_prompt=true
-
 
 # -- display -------------------------------------------------------------------
 
-# RGB 24-bit colour support (tmux >= 2.2), possible values are:
-#  - true
-#  - false
-#  - auto (default)
+# RGB 24-bit colour support, possible values are:
+#   - true
+#   - false
+#   - auto (default)
 #
 # automatic detection relies on the COLORTERM environment variable being defined
 # to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
 # see https://github.com/termstandard/colors
 tmux_conf_24b_colour=auto
 
+
+# -- theming -------------------------------------------------------------------
+
+# enable or disable theming:
+#   - enabled (default)
+#   - disabled
+# when disabled, all tmux_conf_theme_xxx variables are ignored except:
+#   - tmux_conf_theme_pairing
+#   - tmux_conf_theme_prefix
+#   - tmux_conf_theme_mouse
+#   - tmux_conf_theme_root
+#   - tmux_conf_theme_synchronized
+tmux_conf_theme=enabled
+
 # default theme
-#tmux_conf_theme_colour_1="#080808"    # dark gray
-#tmux_conf_theme_colour_2="#303030"    # gray
-#tmux_conf_theme_colour_3="#8a8a8a"    # light gray
-#tmux_conf_theme_colour_4="#00afff"    # light blue
-#tmux_conf_theme_colour_5="#ffff00"    # yellow
-#tmux_conf_theme_colour_6="#080808"    # dark gray
-#tmux_conf_theme_colour_7="#e4e4e4"    # white
-#tmux_conf_theme_colour_8="#080808"    # dark gray
-#tmux_conf_theme_colour_9="#ffff00"    # yellow
-#tmux_conf_theme_colour_10="#ff00af"   # pink
-#tmux_conf_theme_colour_11="#5fff00"   # green
-#tmux_conf_theme_colour_12="#8a8a8a"   # light gray
-#tmux_conf_theme_colour_13="#e4e4e4"   # white
-#tmux_conf_theme_colour_14="#080808"   # dark gray
-#tmux_conf_theme_colour_15="#080808"   # dark gray
-#tmux_conf_theme_colour_16="#d70000"   # red
-#tmux_conf_theme_colour_17="#e4e4e4"   # white
-# dracula theme
-tmux_conf_theme_colour_0="#1e1e28"    # background
-tmux_conf_theme_colour_1="#282a36"    # background
-tmux_conf_theme_colour_2="#3f3f3f"    # gray
-tmux_conf_theme_colour_3="#f8f8f2"    # foreground
-tmux_conf_theme_colour_4="#8be9fd"    # cyan
-tmux_conf_theme_colour_5="#f1fa8c"    # yellow
-tmux_conf_theme_colour_6="#282a36"    # background
-tmux_conf_theme_colour_7="#f8f8f2"    # foreground
-tmux_conf_theme_colour_8="#282a36"    # background
-tmux_conf_theme_colour_9="#bd93f9"    # purple
-tmux_conf_theme_colour_10="#6272a4"   # comment
-tmux_conf_theme_colour_11="#50fa7b"   # green
-tmux_conf_theme_colour_12="#f8f8f2"   # foreground
-tmux_conf_theme_colour_13="#f8f8f2"   # foreground
-tmux_conf_theme_colour_14="#282a36"   # background
-tmux_conf_theme_colour_15="#44475a"   # selection
-tmux_conf_theme_colour_16="#6272a4"   # comment
-tmux_conf_theme_colour_17="#bd93f9"   # purple
-tmux_conf_theme_colour_18="#ff5555"   # red
-tmux_conf_theme_colour_19="#ffb86c"   # orange
-tmux_conf_theme_colour_20="#ff79c6"   # pink
-# monokai soda theme
-#tmux_conf_theme_colour_0="#1a1a1a"
-#tmux_conf_theme_colour_1="#282a36"
-#tmux_conf_theme_colour_2="#303030"
-#tmux_conf_theme_colour_3="#f6f6ef"
-#tmux_conf_theme_colour_4="#58d1eb"
-#tmux_conf_theme_colour_5="#ffb86c"
-#tmux_conf_theme_colour_6="#282a36"
-#tmux_conf_theme_colour_7="#f6f6ef"
-#tmux_conf_theme_colour_8="#282a36"
-#tmux_conf_theme_colour_9="#98e024"
-#tmux_conf_theme_colour_10="#9d65ff"
-#tmux_conf_theme_colour_11="#98e024"
-#tmux_conf_theme_colour_12="#f6f6ef"
-#tmux_conf_theme_colour_13="#f6f6ef"
-#tmux_conf_theme_colour_14="#282a36"
-#tmux_conf_theme_colour_15="#44475a"
-#tmux_conf_theme_colour_16="#9d65ff"
-#tmux_conf_theme_colour_17="#98e024"
-#tmux_conf_theme_colour_18="#f4005f"
-#tmux_conf_theme_colour_19="#ffb86c"
-#tmux_conf_theme_colour_20="#f4005f"
+tmux_conf_theme_colour_1="#080808"    # dark gray
+tmux_conf_theme_colour_2="#303030"    # gray
+tmux_conf_theme_colour_3="#8a8a8a"    # light gray
+tmux_conf_theme_colour_4="#00afff"    # light blue
+tmux_conf_theme_colour_5="#ffff00"    # yellow
+tmux_conf_theme_colour_6="#080808"    # dark gray
+tmux_conf_theme_colour_7="#e4e4e4"    # white
+tmux_conf_theme_colour_8="#080808"    # dark gray
+tmux_conf_theme_colour_9="#ffff00"    # yellow
+tmux_conf_theme_colour_10="#ff00af"   # pink
+tmux_conf_theme_colour_11="#5fff00"   # green
+tmux_conf_theme_colour_12="#8a8a8a"   # light gray
+tmux_conf_theme_colour_13="#e4e4e4"   # white
+tmux_conf_theme_colour_14="#080808"   # dark gray
+tmux_conf_theme_colour_15="#080808"   # dark gray
+tmux_conf_theme_colour_16="#d70000"   # red
+tmux_conf_theme_colour_17="#e4e4e4"   # white
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -140,13 +125,13 @@ tmux_conf_theme_colour_20="#ff79c6"   # pink
 tmux_conf_theme_window_fg="default"
 tmux_conf_theme_window_bg="default"
 
-# highlight focused pane (tmux >= 2.1), possible values are:
+# highlight focused pane, possible values are:
 #   - true
 #   - false (default)
 tmux_conf_theme_highlight_focused_pane=true
 
 # focused pane colours:
-tmux_conf_theme_focused_pane_bg="default"
+tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -155,7 +140,10 @@ tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
 tmux_conf_theme_pane_border="$tmux_conf_theme_colour_2"
-tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_9"
+tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_4"
+%if #{>=:#{version},3.2}
+tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_9,#{?synchronize-panes,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_4}}"
+%endif
 
 # pane indicator colours (when you hit <prefix> + q)
 tmux_conf_theme_pane_indicator="$tmux_conf_theme_colour_4"
@@ -173,7 +161,7 @@ tmux_conf_theme_message_command_attr="bold"
 
 # window modes style
 tmux_conf_theme_mode_fg="$tmux_conf_theme_colour_1"
-tmux_conf_theme_mode_bg="default"
+tmux_conf_theme_mode_bg="$tmux_conf_theme_colour_5"
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
@@ -206,9 +194,9 @@ tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 tmux_conf_theme_window_status_fg="$tmux_conf_theme_colour_3"
 tmux_conf_theme_window_status_bg="$tmux_conf_theme_colour_1"
 tmux_conf_theme_window_status_attr="none"
-#tmux_conf_theme_window_status_format="#I #W"
-#tmux_conf_theme_window_status_format="#{circled_window_index} #W"
-tmux_conf_theme_window_status_format="#I #W#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
+#tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
+#tmux_conf_theme_window_status_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
+tmux_conf_theme_window_status_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
 
 # window current status style
 #   - built-in variables are:
@@ -223,9 +211,9 @@ tmux_conf_theme_window_status_format="#I #W#{?window_bell_flag,🔔,}#{?window_z
 tmux_conf_theme_window_status_current_fg="$tmux_conf_theme_colour_1"
 tmux_conf_theme_window_status_current_bg="$tmux_conf_theme_colour_4"
 tmux_conf_theme_window_status_current_attr="bold"
-#tmux_conf_theme_window_status_current_format="#I #W"
-tmux_conf_theme_window_status_current_format="#{circled_window_index} #W"
-#tmux_conf_theme_window_status_current_format="#I #W#{?window_zoomed_flag,🔍,}"
+#tmux_conf_theme_window_status_current_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
+#tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
+tmux_conf_theme_window_status_current_format="#{circled_window_index} #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,🔔,}#{?window_zoomed_flag,🔍,}"
 
 # window activity status style
 tmux_conf_theme_window_status_activity_fg="default"
@@ -323,6 +311,8 @@ tmux_conf_theme_synchronized_bg="none"
 tmux_conf_theme_synchronized_attr="none"
 
 # battery bar symbols
+# tmux_conf_battery_bar_symbol_full="◼"
+# tmux_conf_battery_bar_symbol_empty="◻"
 tmux_conf_battery_bar_symbol_full="♥"
 tmux_conf_battery_bar_symbol_empty="·"
 
@@ -353,6 +343,8 @@ tmux_conf_battery_vbar_palette="gradient"
 #tmux_conf_battery_vbar_palette="#d70000,#ff5f00,#5fff00"  # red, orange, green
 
 # symbols used to indicate whether battery is charging or discharging
+# tmux_conf_battery_status_charging="↑"       # U+2191
+# tmux_conf_battery_status_discharging="↓"    # U+2193
 tmux_conf_battery_status_charging="🔌"     # U+1F50C
 tmux_conf_battery_status_discharging="🔋"  # U+1F50B
 
@@ -368,8 +360,7 @@ tmux_conf_theme_clock_style="24"
 #   - true
 #   - false (default)
 #   - disabled
-# on macOS, this requires installing reattach-to-user-namespace, see README.md
-# on Linux, this requires xsel or xclip
+# on Linux, this requires xsel, xclip or wl-copy
 tmux_conf_copy_to_os_clipboard=true
 
 
@@ -382,11 +373,9 @@ bind -r S-right resize-pane -R 2
 bind -r | split-window -h
 
 # this is the place to override or undo settings
-set -g default-terminal tmux-256color
+#set -g default-terminal tmux
 set -g repeat-time 300
 set -g exit-empty on
-set -g terminal-overrides ",alacritty:RGB"
-bind r source-file ~/.tmux.conf \; display '~/.tmux.conf sourced'
 
 # navigation on tmux
 version_pat='s/^tmux[^0-9]*([.0-9]+).*/\1/p'
@@ -427,7 +416,7 @@ set -g prefix C-a
 bind C-a send-prefix
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
-# bind v new-window -c #{pane_current_path} #!important
+# bind c new-window -c '#{pane_current_path}' #!important
 
 # move status line to top
 set -g status-position top
@@ -467,31 +456,49 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
-#set -g @plugin 'tmux-plugins/tmux-copycat'
-set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+
+## theme
 #set -g @plugin 'jimeh/tmux-themepack'
 #set -g @themepack 'powerline/double/magenta'
 #set -g @plugin 'dracula/tmux'
 #set -g @dracula-plugins "cpu-usage gpu-usage ram-usage"
 #set -g @dracula-show-powerline true
+set -g @plugin 'catppuccin/tmux'
+set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'tmux-plugins/tmux-cpu'
 
-set -g @continum-restore 'off'
 set -g @continuum-restore 'on'
+set -g @continuum-save-interval '60'
+set -g @continuum-restore 'on'
+set -g @continuum-boot 'on'
+
 set -g @prefix_highlight_prefix_prompt 'Wait'
 set -g @prefix_highlight_copy_prompt 'Copy'
 set -g @prefix_highlight_sync_prompt 'Sync'
+
 set -g @resurrect-dir "${TMUX_TMPDIR}/resurrect"
 set -g @resurrect-strategy-vim 'session'
 set -g @resurrect-strategy-nvim 'session'
 set -g @resurrect-capture-pane-contents 'on'
-set -g @continuum-save-interval '60'
-set -g @continuum-restore 'on'
-set -g @continuum-boot 'on'
+
+set -g @catppuccin_flavour 'mocha'
+### link https://github.com/catppuccin/tmux?tab=readme-ov-file#configuration-options
+set -g @catppuccin_window_current_fill "all"
+set -g @catppuccin_window_left_separator " "
+set -g @catppuccin_window_right_separator ""
+set -g @catppuccin_status_left_separator  ""
+set -g @catppuccin_status_right_separator " "
+#set -g @catppuccin_window_middle_separator " █"
+set -g @catppuccin_window_middle_separator " | "
+set -g @catppuccin_window_default_fill "all"
+set -g @catppuccin_window_status_enable "no"
+set -g @catppuccin_status_fill "all"
+set -g @catppuccin_status_modules_right "application cpu battery host user date_time"
+set -g @catppuccin_status_modules_left 'session'
 
 
 # -- custom variables ----------------------------------------------------------
@@ -504,8 +511,9 @@ set -g @continuum-boot 'on'
 # then, use #{foo} in e.g. the 'tmux_conf_theme_status_left' or the
 # 'tmux_conf_theme_status_right' variables.
 
-# # /!\ do not remove the following line
-# EOF
+# ------------------------------------------------------------------------------
+
+# # /!\ do not remove the following line EOF
 #
 # # /!\ do not "uncomment" the functions: the leading "# " characters are needed
 #
@@ -518,5 +526,16 @@ set -g @continuum-boot 'on'
 #   ping -c 1 1.1.1.1 >/dev/null 2>&1 && printf '✔' || printf '✘'
 # }
 #
+# wan_ip_v4() {
+#   curl -f -s -m 2 -4 ifconfig.me
+#   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
+# }
+#
+# wan_ip_v6() {
+#   curl -f -s -m 2 -6 ifconfig.me
+#   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
+# }
+#
 # "$@"
 # # /!\ do not remove the previous line
+# #     do not write below this line
