@@ -114,8 +114,8 @@ function install_tmux_config() {
 	if [ -z "$(tmux -V 2>/dev/null)" ]; then
 		warn "must install tmux firstly"
 		exit 1
-	elif [ ! -d ${HOME}/.tmux ]; then
-		TMUX_INSATLL_PATH="${HOME}/Github"
+	elif [ ! -d "$HOME/.config/.tmux" ]; then
+		local TMUX_INSATLL_PATH="${HOME}/Github"
 		if [ ! -d ${TMUX_INSATLL_PATH} ];then
 			mkdir -p ${TMUX_INSATLL_PATH}
 		fi
@@ -124,6 +124,7 @@ function install_tmux_config() {
 		echo "install oh-my-tmux to ${TMUX_INSATLL_PATH}"
 		git clone https://github.com/gpakosz/.tmux.git ${TMUX_INSATLL_PATH}
 		ln -svf "${TMUX_INSATLL_PATH}/.tmux.conf" "${HOME}/.config/tmux/tmux.conf"
+		ln -svf "${WORKDIR}/config/tmux/tmux.conf.local" "${HOME}/.config/tmux/tmux.conf.local"
 		info "install oh-my-tmux success"
 	fi
 }
