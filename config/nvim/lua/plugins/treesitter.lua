@@ -9,6 +9,7 @@ return {
 				"diff",
 				"go",
 				"html",
+				"java",
 				"javascript",
 				"jsdoc",
 				"json",
@@ -27,6 +28,8 @@ return {
 				"vim",
 				"vimdoc",
 				"yaml",
+				"thrift",
+				"proto",
 			},
 			-- autopairs plugin
 			autopairs = {
