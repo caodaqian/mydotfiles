@@ -1,0 +1,144 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+######################################
+# @Author      : caodaqian
+# @since       : 2020-09-09 10:41:33
+# @LastEditors : caodaqian
+# @lastTime    : 2020-09-09 13:56:59
+# @Description : .zshrc
+######################################
+
+# init
+export TERM=xterm-256color
+export TERM_ITALICS=true
+autoload -U colors && colors
+export CLICOLOR=1
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# zsh features switch
+CASE_SENSITIVE="false"
+HYPHEN_INSENSITIVE="false"
+DISABLE_AUTO_UPDATE="false"
+export UPDATE_ZSH_DAYS=13
+DISABLE_LS_COLORS="false"
+DISABLE_AUTO_TITLE="false"
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
+DISABLE_UNTRACKED_FILES_DIRTY="false"
+HIST_STAMPS="yyyy-mm-dd"
+ZSH_CUSTOM=$ZSH/custom
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt EXTENDED_HISTORY
+setopt ALWAYS_TO_END
+setopt COMPLETE_IN_WORD
+setopt CDABLE_VARS
+setopt PROMPT_SUBST
+setopt AUTO_MENU
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=~/.zsh_history
+
+zle -N find-in-file
+export DEFAULT_USER=$USER
+export MANPATH="/usr/local/man:$MANPATH"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+
+plugins=(
+	#### from github
+	git-open
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	#### inner omz
+	z
+	common-aliases
+	sudo
+	encode64
+	git
+	jsontools
+	tmux
+	urltools
+	shell-proxy
+	fzf
+	extract
+	catimg
+	python
+	copybuffer
+	copyfile
+	copypath
+	eza
+	zsh-interactive-cd
+)
+
+# plugin settings
+
+## eza plugin
+zstyle ':omz:plugins:eza' 'dirs-first' yes
+zstyle ':omz:plugins:eza' 'git-status' yes
+zstyle ':omz:plugins:eza' 'header' yes
+zstyle ':omz:plugins:eza' 'show-group' yes
+
+## autosuggest plugin
+typeset -g ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=12'
+
+## zsh autosuggest plugin
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# z setting
+ZSHZ_TILDE=1
+
+source $ZSH/oh-my-zsh.sh
+unsetopt correct_all
+unsetopt correct
+# This speeds up pasting w/ autosuggest
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238
+pasteinit() {
+	OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+	zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+pastefinish() {
+	zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+
+# User configuration
+
+# User specific aliases and functions
+[ -f ${HOME}/.config/env/alias.sh ] && . ${HOME}/.config/env/alias.sh
+
+TRAPWINCH() {
+	zle && { zle reset-prompt; zle -R }
+}
+bindkey '^B' backward-word
+bindkey '^F' forward-word
+zle -N self-insert url-quote-magic
+
+
+# fzf config
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey '^R' fzf-history-widget
+bindkey '^T' fzf-file-widget
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH=/Users/caodaqian/.local/bin:$PATH
