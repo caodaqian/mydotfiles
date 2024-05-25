@@ -22,17 +22,33 @@ function format() {
 		bg=0
 		;;
 	esac
-	echo "\033[${bg};${fg}m${level^^}:${message}\033[0m"
+	echo "\033[${bg};${fg}m${level}:${message}\033[0m"
 }
 
 function info() {
-	echo $(format "info" "$1")
+	echo -e $(format "info" "$1")
 }
 
 function warn() {
-	echo $(format "warn" "$1")
+	echo -e $(format "warn" "$1")
 }
 
 function error() {
-	echo $(format "error" "$1")
+	echo -e $(format "error" "$1")
+}
+
+function clone_repo() {
+	local name=$1
+	local git_repo_url=$2
+	if [ -z "$name" ] || [ -z "${git_repo_url}" ]; then
+		return 255
+	fi
+
+	[ ! -d "${DOTFILE_CLONE_PATH:="${HOME}/Github"}" ] && mkdir -p "${DOTFILE_CLONE_PATH}"
+	local clone_dir="${DOTFILE_CLONE_PATH}/${name}"
+	if [ ! -d "${clone_dir}" ]; then
+		info "install $name to $clone_dir"
+		git clone "$git_repo_url" "$clone_dir"
+	fi
+	return 0
 }

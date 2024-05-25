@@ -24,6 +24,7 @@ function main() {
 		install_pacman_config \
 		install_top_config \
 		install_x_config \
+		install_fzf_git \
 	)
 
 	for install_func in ${install_list[*]};do
@@ -120,14 +121,7 @@ function install_tmux_config() {
 		warn "must install tmux firstly"
 		exit 1
 	elif [ ! -d "$HOME/.config/.tmux" ]; then
-		local TMUX_INSATLL_PATH="${HOME}/Github"
-		[ ! -d "${TMUX_INSATLL_PATH}" ] && mkdir -p "${TMUX_INSATLL_PATH}"
-		TMUX_INSATLL_PATH="${TMUX_INSATLL_PATH}/ohmytmux"
-		if [ ! -d ${TMUX_INSATLL_PATH} ];then
-			# sync tmux.conf.local
-			info "install oh-my-tmux to ${TMUX_INSATLL_PATH}"
-			git clone https://github.com/gpakosz/.tmux.git ${TMUX_INSATLL_PATH}
-		fi
+		clone_repo ohmytmux "https://github.com/gpakosz/.tmux.git"
 		ln -svf "${TMUX_INSATLL_PATH}/.tmux.conf" "${HOME}/.config/tmux/tmux.conf"
 		info "install oh-my-tmux success"
 	fi
@@ -152,6 +146,15 @@ function install_top_config() {
 		info "link toprc success"
 	else
 		warn "skip link toprc"
+	fi
+}
+
+# install fzf-git
+function install_fzf_git() {
+	if [ -z "$(fzf --version 2>/dev/null)" ]; then
+		warn "not find fzf"
+	else
+		clone_repo fzf_git https://github.com/junegunn/fzf-git.sh.git
 	fi
 }
 

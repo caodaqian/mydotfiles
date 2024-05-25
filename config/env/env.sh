@@ -45,7 +45,7 @@ export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export PATH=${JAVA_HOME}/bin:${PATH}
 
 ## fzf config
-export FZF_COMPLETION_TRIGGER='~~'
+#export FZF_COMPLETION_TRIGGER='**'
 if [[ -z "$(tmux --version 2>/dev/null)" ]]; then
 	export FZF_TMUX=1
 	export FZF_TMUX_HEIGHT='80%'
