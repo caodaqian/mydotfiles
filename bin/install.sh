@@ -122,7 +122,7 @@ function install_tmux_config() {
 		exit 1
 	elif [ ! -d "$HOME/.config/.tmux" ]; then
 		clone_repo ohmytmux "https://github.com/gpakosz/.tmux.git"
-		ln -svf "${TMUX_INSATLL_PATH}/.tmux.conf" "${HOME}/.config/tmux/tmux.conf"
+		ln -svf "${TMUX_INSATLL_PATH:=${HOME}/Github/ohmytmux}/.tmux.conf" "${HOME}/.config/tmux/tmux.conf"
 		info "install oh-my-tmux success"
 	fi
 }
