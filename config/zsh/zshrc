@@ -69,8 +69,7 @@ plugins=(
 	#### inner omz
 	z
 	common-aliases
-	#sudo
-	thefuck
+	sudo
 	encode64
 	git
 	jsontools

@@ -1,9 +1,7 @@
 PATH=/usr/local/bin:${PATH}
+# User locale config
+[ -f ${HOME}/.config/env/locale.sh ] && . ${HOME}/.config/env/locale.sh
 # env config
 [ -f ${HOME}/.config/env/env.sh ] && . ${HOME}/.config/env/env.sh
 # User local environment
 [ -f ${HOME}/.config/env/env.local.sh ] && . ${HOME}/.config/env/env.local.sh
-
-# User locale config
-[ -f ${HOME}/.config/env/locale.sh ] && . ${HOME}/.config/env/locale.sh
-
