@@ -44,7 +44,7 @@ function main() {
 
 # install dependences software
 function brew_install() {
-	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop bat tldr eza lazygit gping dog fzf)
+	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop bat tldr eza lazygit gping dog fzf neovim)
 	brew install ${sofrware_list[*]}
 }
 
@@ -86,13 +86,13 @@ function install_zsh_config() {
 		git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 	else
 		git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
+	fi
+	info "install omz plugins success"
 	# get zshrc
 	info "link zshrc to ~/.zshrc"
 	[ ! -L "${HOME}/.zshrc" ] && ln -svf "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
 	[ ! -L "${HOME}/.zshenv" ] && ln -svf "${WORKDIR}/config/zsh/zshenv" "${HOME}/.zshenv"
 	[ ! -L "${HOME}/.p10k.zsh" ] && ln -svf "${WORKDIR}/config/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
-	info "install omz plugins success"
-	fi
 }
 
 # install lf plugin
