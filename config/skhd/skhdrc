@@ -1,0 +1,91 @@
+# restart service
+ctrl + shift + alt - z : yabai --restart-service && skhd --restart-service
+
+# focus window
+shift + alt - j : yabai -m query --windows --space \
+  | jq -sre 'add | map(select(.["is-visible"] == true)) | sort_by(.display, .frame.x, .frame.y, .id) | reverse | nth(index(map(select(.["has-focus"] == true))) - 1).id' \
+  | xargs -I{} yabai -m window --focus {}
+shift + alt - k : yabai -m query --windows --space \
+  | jq -sre 'add | map(select(.["is-visible"] == true)) | sort_by(.display, .frame.x, .frame.y, .id) | nth(index(map(select(.["has-focus"] == true))) - 1).id' \
+  | xargs -I{} yabai -m window --focus {}
+
+# swap managed window
+ctrl + shift + alt - h : yabai -m window --swap west
+ctrl + shift + alt - j : yabai -m window --swap south
+ctrl + shift + alt - k : yabai -m window --swap north
+ctrl + shift + alt - l : yabai -m window --swap east
+
+# balance size of windows
+shift + alt - z : yabai -m space --balance
+
+# create desktop
+ctrl + shift + alt - c : yabai -m space --create && \
+    index=$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index') && \
+     yabai -m window --space "${index}" && \
+     yabai -m space --focus "${index}"
+
+# destroy desktop
+ctrl + shift + alt - x : yabai -m space --destroy
+
+# focus desktop
+shift + alt - 1 : yabai -m space --focus 1
+shift + alt - 2 : yabai -m space --focus 2
+shift + alt - 3 : yabai -m space --focus 3
+shift + alt - 4 : yabai -m space --focus 4
+shift + alt - 5 : yabai -m space --focus 5
+shift + alt - 6 : yabai -m space --focus 6
+shift + alt - 7 : yabai -m space --focus 7
+shift + alt - 8 : yabai -m space --focus 8
+shift + alt - 9 : yabai -m space --focus 9
+shift + alt - 0x21 : yabai -m space --focus prev || yabai -m space --focus last ## [
+shift + alt - 0x1E : yabai -m space --focus next || yabai -m space --focus first ## ]
+
+
+# move window to space
+ctrl + shift + alt - 1 : yabai -m window --space 1 --focus
+ctrl + shift + alt - 2 : yabai -m window --space 2 --focus
+ctrl + shift + alt - 3 : yabai -m window --space 3 --focus
+ctrl + shift + alt - 4 : yabai -m window --space 4 --focus
+ctrl + shift + alt - 5 : yabai -m window --space 5 --focus
+ctrl + shift + alt - 6 : yabai -m window --space 6 --focus
+ctrl + shift + alt - 7 : yabai -m window --space 7 --focus
+ctrl + shift + alt - 8 : yabai -m window --space 8 --focus
+ctrl + shift + alt - 9 : yabai -m window --space 9 --focus
+ctrl + shift + alt - 0x21 : yabai -m window --space prev --focus || yabai -m window --space last --focus
+ctrl + shift + alt - 0x1E : yabai -m window --space next --focus || yabai -m window --space first --focus
+
+# focus monitor
+shift + alt - q : yabai -m display --focus prev || yabai -m display --focus last
+shift + alt - e : yabai -m display --focus next || yabai -m display -- focus first
+shift + alt - w : yabai -m display --focus recent
+
+# send window to monitor and follow focus
+ctrl + shift + alt - q  : yabai -m window --display prev --focus; yabai -m display --focus prev
+ctrl + shift + alt - e  : yabai -m window --display next --focus; yabai -m display --focus next
+ctrl + shift + alt - w  : yabai -m window --display recent --focus; yabai -m display --focus recent
+
+# increase window size
+shift + alt - h : yabai -m window --resize bottom_right:-40:-40
+shift + alt - l : yabai -m window --resize bottom_right:40:40
+
+# toggle window zoom
+shift + alt - p : yabai -m window --toggle zoom-fullscreen
+shift + alt - 0x2A : yabai -m space --mirror x-axis
+shift + alt - 0x1B : yabai -m space --mirror y-axis
+
+
+# Rotate the window tree clock-wise (options: 90, 180, 270 degree)
+shift + alt - 0x31 : yabai -m space --rotate 90
+
+# toggle window split type
+ctrl + shift + alt - 0x31 : yabai -m window --toggle split ## space
+
+# float / unfloat window and center on screen
+ctrl + shift + alt - f : yabai -m window --toggle float --grid 10:10:2:1:6:8
+# make floating window left-half screen
+ctrl + shift + alt - 0x2B : yabai -m window --grid 1:2:0:0:1:1
+# make floating window right-half screen
+ctrl + shift + alt - 0x2F : yabai -m window --grid 1:2:0:1:1:1
+
+# toggle sticky(+float), picture-in-picture
+ctrl + shift + alt - s : yabai -m window --toggle sticky --toggle pip
