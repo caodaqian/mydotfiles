@@ -58,7 +58,7 @@ outer.right = 2
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 alt-1 = 'exec-and-forget open /Applications/WezTerm.app'
 alt-2 = 'exec-and-forget open /Applications/Visual\ Studio\ Code.app'
-alt-3 = 'exec-and-forget open /Applications/Microsoft\ Edge.app'
+alt-3 = 'exec-and-forget open -n /Applications/Microsoft\ Edge.app'
 alt-4 = 'exec-and-forget open /Applications/Notion.app'
 
 
@@ -89,12 +89,10 @@ alt-shift-7 = 'workspace 7'
 alt-shift-8 = 'workspace 8'
 alt-shift-9 = 'workspace 9'
 
+alt-shift-q = 'focus-monitor prev'
+alt-shift-e = 'focus-monitor next'
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-alt-tab = 'workspace-back-and-forth'
-
-alt-shift-q = 'focus-monitor left'
-alt-shift-e = 'focus-monitor right'
-alt-shift-w = 'focus-monitor prev'
+alt-shift-w = 'workspace-back-and-forth'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-ctrl-shift-1 = 'move-node-to-workspace 1'
