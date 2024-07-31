@@ -225,10 +225,6 @@ local mouse_bindings = {
 -- key bindings
 local keybind = {
 	{
-		key = "F11",
-		action = wezterm.action.ToggleFullScreen,
-	},
-	{
 		key = "f",
 		mods = "SUPER|CTRL",
 		action = wezterm.action.ToggleFullScreen,
