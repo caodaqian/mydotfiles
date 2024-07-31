@@ -80,6 +80,10 @@ local ssh_cmd = { "ssh" }
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	ssh_cmd = { "powershell.exe", "ssh" }
 	table.insert(launch_menu, {
+		label = "WSL:Debian",
+		args = { "wsl.exe" },
+	})
+	table.insert(launch_menu, {
 		label = "PowerShell Core",
 		args = { "pwsh.exe", "-NoLogo" },
 	})
@@ -302,7 +306,7 @@ wezterm.on("gui-startup", function(cmd)
 	)
 end)
 
-return {
+config = {
 	window_frame = {
 		font_size = 14.0,
 	}, -- needed only if using fancy tab
@@ -345,3 +349,16 @@ return {
 	leader = { key = "a", mods = "SUPER", timeout_milliseconds = 1000 },
 	keys = keybind,
 }
+
+-- domain config
+-- wsl domain
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	-- windows 下使用 WSL
+	local wsl_domains = wezterm.default_wsl_domains()
+	if #wsl_domains > 0 then
+		config.wsl_domains = wsl_domains
+		config.default_domain = wsl_domains[1].name
+	end
+end
+
+return config
