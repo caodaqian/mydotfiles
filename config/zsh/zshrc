@@ -85,6 +85,8 @@ plugins=(
 	copypath
 	eza
 	zsh-interactive-cd
+	kubectl
+	docker
 )
 
 # plugin settings
