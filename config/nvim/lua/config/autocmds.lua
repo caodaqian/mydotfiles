@@ -11,3 +11,13 @@ vim.cmd([[
 vim.api.nvim_create_user_command("Format", function(input)
 	vim.lsp.buf.format()
 end, { desc = "format this buffer" })
+
+-- Disable automatic commenting on newline
+vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
+	pattern = "*",
+	callback = function()
+		-- vim.opt_local.formatoptions:remove("c")
+		vim.opt_local.formatoptions:remove("r")
+		vim.opt_local.formatoptions:remove("o")
+	end,
+})
