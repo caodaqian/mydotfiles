@@ -44,8 +44,9 @@ function main() {
 
 # install dependences software
 function brew_install() {
-	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop bat tldr eza lazygit gping dog fzf neovim)
+	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop bat tldr eza lazygit gping dog fzf neovim pipx)
 	brew install ${sofrware_list[*]}
+	pipx install pynvim neovim
 }
 
 function link_config_dir() {

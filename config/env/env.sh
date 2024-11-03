@@ -18,12 +18,19 @@ else
 	export PATH=${PATH}:${HOME}/.local/share/nvim/lsp_servers/python
 fi
 export MYTMPDIR=${HOME}/.tmp && [ ! -d "${MYTMPDIR}" ] && mkdir -p "${MYTMPDIR}"
-if [[ $(uname -s) == "Linux" ]]; then
-	COLOR_OPTION='--color=auto'
-elif [[ $(uname -s) == "Darwin" ]]; then
+if [[ $(uname -s) == "Darwin" ]]; then
 	export LSCOLORS=Gxfxcxdxbxegedabagacad
 fi
 export LESSCHARSET=utf-8
+
+## homebrew
+test -d /usr/local/Homebrew && eval "$(/usr/local/Homebrew/bin/brew shellenv)"
+test -d /opt/homebrew && eval "$(/opt/homebrew/bin/brew shellenv)"
+## linuxbrew
+test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+## PATH add
+export PATH=/usr/local/bin:${HOME}/.local/bin:${PATH}
 
 ## tmux config
 export TMUX_TMPDIR=${MYTMPDIR}/tmux && [ ! -d "${TMUX_TMPDIR}" ] && mkdir -p "${TMUX_TMPDIR}"
@@ -39,10 +46,10 @@ export GOTMPDIR=${MYTMPDIR}/go && [ ! -d "${GOTMPDIR}" ] && mkdir -p "${GOTMPDIR
 export PATH=${GOBIN}:${PATH}
 
 ## JAVA env
-export JAVA_HOME=${JAVA_HOME:-'/usr/local/opt/openjdk'}
-export JRE_HOME=${JRE_HOME:-'/usr/local/opt/openjdk/jre'}
-export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
-export PATH=${JAVA_HOME}/bin:${PATH}
+export JAVA_HOME=${JAVA_HOME:-"$(brew --prefix openjdk)"}
+export JRE_HOME=${JRE_HOME:-"$JAVA_HOME/jre"}
+export CLASSPATH=.:$JAVA_HOME/lib:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
+export PATH=${PATH}:${JAVA_HOME}/bin
 
 ## fzf config
 #export FZF_COMPLETION_TRIGGER='**'
@@ -68,7 +75,7 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 
 ## python config
 export PYTHONUSERBASE=${HOME}/.local
-export PATH=${HOME}/.local/bin:${PATH}
+export PATH=${PYTHONUSERBASE}/bin:${PATH}
 ## python omz plugin
 export PYTHON_AUTO_VRUN=true
 
@@ -78,6 +85,3 @@ export PATH=${NODE_HOME}/bin:${PATH}
 
 ## ranger config
 export RANGER_LOAD_DEFAULT_RC=false
-
-## linuxbrew
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

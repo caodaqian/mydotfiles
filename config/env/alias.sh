@@ -1,11 +1,3 @@
-##########################################
-## @Author      : caodaqian
-## @CreateTime  : 2020-09-09 10:34:02
-## @LastEditors : caodaqian
-## @LastEditTime: 2022-05-06 11:43:37
-## @Description : alias config
-##########################################
-
 # User specific aliases and functions
 if [ -z "$(nvim --version 2>/dev/null)" ]; then
 	alias vi='vim'
@@ -13,6 +5,9 @@ else
 	alias vi='nvim'
 fi
 alias cls='clear'
+if [[ $(uname -s) == "Linux" ]]; then
+	export COLOR_OPTION='--color=auto'
+fi
 alias grep='grep $COLOR_OPTION'
 alias egrep='egrep $COLOR_OPTION'
 alias diff='diff -aNur'
