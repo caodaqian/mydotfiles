@@ -1,6 +1,9 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"supermaven-inc/supermaven-nvim",
+		},
 		opts = function(_, opts)
 			-- better humanful keymapping
 			local has_words_before = function()
@@ -12,6 +15,7 @@ return {
 
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
+			local suggestion = require("supermaven-nvim.completion_preview")
 
 			opts.mapping = vim.tbl_extend("force", opts.mapping, {
 				["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -41,6 +45,8 @@ return {
 						luasnip.expand_or_jump()
 					elseif has_words_before() then
 						cmp.complete()
+					elseif suggestion.has_suggestion() then
+						suggestion.on_accept_suggestion_word()
 					else
 						fallback()
 					end
@@ -50,6 +56,8 @@ return {
 						cmp.select_prev_item()
 					elseif luasnip.jumpable(-1) then
 						luasnip.jump(-1)
+					elseif suggestion.has_suggestion() then
+						suggestion.on_accept_suggestion_word()
 					else
 						fallback()
 					end
@@ -59,6 +67,9 @@ return {
 			-- fix cmp select
 			opts.preselect = cmp.PreselectMode.None
 			opts.completion = { completeopt = "menu,menuone,noselect" }
+
+			-- add ai supermaven cmp
+			opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "supermaven" } }))
 		end,
 	},
 }
