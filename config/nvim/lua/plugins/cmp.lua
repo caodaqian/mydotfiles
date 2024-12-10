@@ -67,9 +67,6 @@ return {
 			-- fix cmp select
 			opts.preselect = cmp.PreselectMode.None
 			opts.completion = { completeopt = "menu,menuone,noselect" }
-
-			-- add ai supermaven cmp
-			opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "supermaven" } }))
 		end,
 	},
 }
