@@ -456,50 +456,122 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
-set -g @plugin 'tmux-plugins/tmux-copycat'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-yank'
+set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
-## theme
-#set -g @plugin 'jimeh/tmux-themepack'
-#set -g @themepack 'powerline/double/magenta'
-#set -g @plugin 'dracula/tmux'
-#set -g @dracula-plugins "cpu-usage gpu-usage ram-usage"
-#set -g @dracula-show-powerline true
-set -g @plugin 'catppuccin/tmux'
-set -g @plugin 'tmux-plugins/tmux-battery'
-set -g @plugin 'tmux-plugins/tmux-cpu'
-
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @continuum-restore 'on'
 set -g @continuum-save-interval '60'
-set -g @continuum-restore 'on'
 set -g @continuum-boot 'on'
-
-set -g @prefix_highlight_prefix_prompt 'Wait'
-set -g @prefix_highlight_copy_prompt 'Copy'
-set -g @prefix_highlight_sync_prompt 'Sync'
-
 set -g @resurrect-dir "${TMUX_TMPDIR}/resurrect"
 set -g @resurrect-strategy-vim 'session'
 set -g @resurrect-strategy-nvim 'session'
 set -g @resurrect-capture-pane-contents 'on'
 
-set -g @catppuccin_flavour 'mocha'
-### link https://github.com/catppuccin/tmux?tab=readme-ov-file#configuration-options
-set -g @catppuccin_window_current_fill "all"
-set -g @catppuccin_window_left_separator " "
-set -g @catppuccin_window_right_separator ""
-set -g @catppuccin_status_left_separator  ""
-set -g @catppuccin_status_right_separator " "
-#set -g @catppuccin_window_middle_separator " █"
-set -g @catppuccin_window_middle_separator " | "
-set -g @catppuccin_window_default_fill "all"
-set -g @catppuccin_window_status_enable "no"
-set -g @catppuccin_status_fill "all"
-set -g @catppuccin_status_modules_right "application cpu battery host user date_time"
-set -g @catppuccin_status_modules_left 'session'
+## enhance
+set -g @plugin 'joshmedeski/tmux-nerd-font-window-name'
+set -g @plugin 'tmux-plugins/tmux-online-status'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @plugin 'tmux-plugins/tmux-battery'
 
+## magenta theme
+#set -g @plugin 'jimeh/tmux-themepack'
+#set -g @themepack 'powerline/double/magenta'
+
+## dracula theme
+#set -g @plugin 'dracula/tmux'
+#set -g @dracula-plugins "cpu-usage gpu-usage ram-usage"
+#set -g @dracula-show-powerline true
+
+## catppuccin theme
+set -g @plugin 'catppuccin/tmux'
+# set -g @catppuccin_flavor 'mocha'
+set -g @catppuccin_flavor "macchiato"
+# # --> Catppuccin (Macchiato)
+# set -ogq @thm_bg"#24273a"
+# set -ogq @thm_fg"#cad3f5""
+# #Colors
+# set -ogq @thm_rosewater"#f4dbd6""
+# set -ogq @thm_flamingo "#f0c6c6"
+# set -ogq @thm_rosewater "#f4dbd6""
+# set -ogq @thm_pink "#f5bde6"
+# set -ogq @thm_mauve "#c6a0f6"
+# set -ogq @thm_red "#ed8796"
+# set -ogq @thm_maroon "#ee99a0"
+# set -ogq @thm_peach "#f5a97f"
+# set -ogq @thm_yellow "#eed49f""
+# set -ogq @thm_green "#a6da95"
+# set -ogq @thm_teal "#8bd5ca"
+# set -ogq @thm_sky"#91d7e3"
+# set -ogq @thm_sapphire "#7dc4e4"
+# set -ogq @thm_blue“#8aadf4"
+# set -ogq @thm_lavender "#b7bdf8"
+# # Surfaces and overlays
+# set -ogq @thm_subtext_1 "#a5adcb""
+# set -ogq @thm_subtext_0 "#b8c0eo""
+# set -ogq @thm_overlay_2 “"#939ab7""
+# set -ogq @thm_overlay_1 “"#8087a2"
+# set -ogq @thm_overlay_0 "#6e738d""
+# set -ogq @thm_surface_2"#5b6078""
+# set -ogq @thm_surface_1 "#494d64"
+# set -ogq @thm_surface_0 "#363a4f""
+# set -ogq @thm_mantle "#1e2030"
+# set -ogq @thm_crust "#181926
+set -g @catppuccin_status_background "none"
+set -g @catppuccin_window_status_style "none"
+set -g @catppuccin_pane_status_enabled "off"
+set -g @catppuccin_pane_border_status "off"
+
+
+tmux_conf_theme=disabled ## close ohmytmux status bar
+# status left look and feel
+set -g status-left-length 100
+set -g status-left ""
+set -ga status-left "#{?client_prefix,#{#[bg=#{@thm_red},fg=#{@thm_bg},bold]  #S },#{#[bg=#{@thm_bg},fg=#{@thm_green}]  #S }}"
+set -ga status-left "#{?mouse, #{mouse},}"
+set -ga status-left "#{?pairing, #{pairing},}"
+set -ga status-left "#{?synchronized, #{synchronized},}"
+set -ga status-left "#{?#{==:#{pane_mode},copy-mode},#[fg=#{@thm_yellow} bold]COPY,}"
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]│"
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_mauve}] #{@catppuccin_host_icon}#{hostname} "
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]│"
+set -ga status-left "#{?#{==:#(whoami),root},#{#[bg=#{@thm_bg} fg=#{@thm_red}]  #(whoami)},#{#[bg=#{@thm_bg} fg=#{@thm_mauve}]  #(whoami)}} "
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]│"
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_maroon}]  #{pane_current_command} "
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]│"
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_blue}]  #{=/-32/...:#{s|$USER|~|:#{b:pane_current_path}}} "
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]#{?window_zoomed_flag,│,}"
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_yellow}]#{?window_zoomed_flag,  zoom ,}"
+set -ga status-left "#[bg=#{@thm_bg},fg=#{@thm_overlay_0},none]#{?window_zoomed_flag,│,}"
+# Configure Online
+set -g @online_icon "ok"
+set -g @offline_icon "nok"
+# status right look and feel
+set -g status-right-length 100
+set -g status-right ""
+set -ga status-right "#{?#{e|>=:10,#{battery_percentage}},#{#[bg=#{@thm_red},fg=#{@thm_mantle}]},#{#[bg=#{@thm_mantle},fg=#{@thm_pink}]}} #{battery_icon} #{battery_percentage} "
+set -ga status-right "#[bg=#{@thm_mantle},fg=#{@thm_overlay_0}, none]│"
+set -ga status-right "#[bg=#{@thm_mantle}]#{?#{==:#{online_status},ok},#[fg=#{@thm_mauve}] 󰖩 on ,#[fg=#{@thm_red},bold]#[reverse] 󰖪 off }"
+set -ga status-right "#[bg=#{@thm_mantle},fg=#{@thm_overlay_0}, none]│"
+set -agF status-right "#[bg=#{@thm_mantle}] #[fg=#{@thm_yellow}]#{@catppuccin_cpu_icon} #[fg=#{l:#{cpu_fg_color}}]C:#{l:#{cpu_percentage}}"
+set -ag status-right "#[fg=#{@thm_overlay}]/#[fg=#{@thm_lavender}]M:#{ram_percentage}"
+set -ga status-right "#[bg=#{@thm_mantle},fg=#{@thm_overlay}, none]│"
+set -ga status-right "#[bg=#{@thm_mantle},fg=#{@thm_blue}] 󰭦 %Y-%m-%d 󰅐 %H:%M "
+set -ag status-right "#[bg=#{@thm_bg},fg=#{@thm_overlay_0}, none]│"
+# window style
+set -wg automatic-rename on
+set -g automatic-rename-format ''
+set -g window-status-separator '|'
+set -g status-justify 'absolute-centre'
+set -g @catppuccin_window_status_style 'custom'
+set -g @catppuccin_window_flags "icon"
+set -g @catppuccin_window_number ""
+set -g @catppuccin_window_text "#[fg=#{@thm_rosewater},bg=#{@thm_mantle}] #I#{?#{!=:#{window_name},},: #W,}"
+set -g @catppuccin_window_current_number ""
+set -g @catppuccin_window_current_text "#[fg=#{@thm_mantle},bg=#{@thm_peach}] #I#{?#{!=:#{window_name},},: #W,}"
+# source the plugin here
+run '#{TMUX_PLUGIN_MANAGER_PATH}/tmux/catppuccin.tmux'
 
 # -- custom variables ----------------------------------------------------------
 

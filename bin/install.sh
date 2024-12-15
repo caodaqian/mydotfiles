@@ -126,6 +126,10 @@ function install_tmux_config() {
 		ln -svf "${TMUX_INSATLL_PATH:=${HOME}/Github/ohmytmux}/.tmux.conf" "${HOME}/.config/tmux/tmux.conf"
 		info "install oh-my-tmux success"
 	fi
+
+	## tmux plugin dependencies
+	brew install reattach-to-user-namespace ## @tmux-yank
+	brew install yq ## tmux status line window rename
 }
 
 # install pacman config
