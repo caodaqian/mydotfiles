@@ -61,11 +61,9 @@ Linux setting sync
 - curllie, 更易用的 httppie，有 curl 的强大功能和 httppie 的易用性
 - procs，更友好的 ps
 - hyperfine, 易用强大的压测工具
-- go，目前主要的编程语言
 - utools，快捷启动器
 - ApiFox，API 管理工具
 - WezTerm，目前在使用的终端
-- Alacrity，之前使用的终端，快但是不支持 Tab
 - MasterGo，流程、原型的设计工具
 - Motrix，下载器
 - RustDesk，远程桌面
@@ -86,16 +84,14 @@ Linux setting sync
 - Omi，录屏工具
 - OneThing，状态栏横幅
 - Stats，系统状态显示在状态栏
-- Hidden Bar，状态栏隐藏
-- 超级右键，扩展一下右键菜单
-- 我的壁纸，mac 端凑合用的壁纸软件
-- Amethyst，平铺式窗口管理器
+- ice，状态栏隐藏
+- AeroSpace，平铺式窗口管理器
 - Infuse，视频播放器
 - Itsycal，日历的状态栏扩展
 - MonitorControlLite，扩展屏显示亮度调节
-- Thor Launcher，快捷键启动器
-- Snipaste，截图工具
+- Thor Launcher，快捷键启动器(废弃，使用 AeroSpace 替代)
+- Pixpin，截图工具
 - Mos，鼠标滑动优化，更类似 windows 一点
-- OrbStack，虚拟机管理
-- VirtualBox，老一代虚拟机
+- VMware Fusion，虚拟机
 - QuicklookStephen，quick look 插件，可以看到无后缀名的文件
+- NestedDownloads，下载器
