@@ -459,11 +459,11 @@ tmux_conf_uninstall_plugins_on_reload=true
 set -g @plugin 'tmux-plugins/tmux-yank'
 set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
-set -g @plugin 'tmux-plugins/tmux-continuum'
+# set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @continuum-restore 'on'
-set -g @continuum-save-interval '60'
-set -g @continuum-boot 'on'
+# set -g @continuum-restore 'on'
+# set -g @continuum-save-interval '60'
+# set -g @continuum-boot 'on'
 set -g @resurrect-dir "${TMUX_TMPDIR}/resurrect"
 set -g @resurrect-strategy-vim 'session'
 set -g @resurrect-strategy-nvim 'session'
@@ -488,41 +488,10 @@ set -g @plugin 'tmux-plugins/tmux-battery'
 set -g @plugin 'catppuccin/tmux'
 # set -g @catppuccin_flavor 'mocha'
 set -g @catppuccin_flavor "macchiato"
-# # --> Catppuccin (Macchiato)
-# set -ogq @thm_bg"#24273a"
-# set -ogq @thm_fg"#cad3f5""
-# #Colors
-# set -ogq @thm_rosewater"#f4dbd6""
-# set -ogq @thm_flamingo "#f0c6c6"
-# set -ogq @thm_rosewater "#f4dbd6""
-# set -ogq @thm_pink "#f5bde6"
-# set -ogq @thm_mauve "#c6a0f6"
-# set -ogq @thm_red "#ed8796"
-# set -ogq @thm_maroon "#ee99a0"
-# set -ogq @thm_peach "#f5a97f"
-# set -ogq @thm_yellow "#eed49f""
-# set -ogq @thm_green "#a6da95"
-# set -ogq @thm_teal "#8bd5ca"
-# set -ogq @thm_sky"#91d7e3"
-# set -ogq @thm_sapphire "#7dc4e4"
-# set -ogq @thm_blue“#8aadf4"
-# set -ogq @thm_lavender "#b7bdf8"
-# # Surfaces and overlays
-# set -ogq @thm_subtext_1 "#a5adcb""
-# set -ogq @thm_subtext_0 "#b8c0eo""
-# set -ogq @thm_overlay_2 “"#939ab7""
-# set -ogq @thm_overlay_1 “"#8087a2"
-# set -ogq @thm_overlay_0 "#6e738d""
-# set -ogq @thm_surface_2"#5b6078""
-# set -ogq @thm_surface_1 "#494d64"
-# set -ogq @thm_surface_0 "#363a4f""
-# set -ogq @thm_mantle "#1e2030"
-# set -ogq @thm_crust "#181926
 set -g @catppuccin_status_background "none"
 set -g @catppuccin_window_status_style "none"
 set -g @catppuccin_pane_status_enabled "off"
 set -g @catppuccin_pane_border_status "off"
-
 
 tmux_conf_theme=disabled ## close ohmytmux status bar
 # status left look and feel
