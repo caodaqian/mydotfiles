@@ -9,7 +9,7 @@ Linux setting sync
 - zsh
 - fzf
 - tmux
-- neovim0.7+
+- neovim
 - lazygit
 - lua，目前的 neovim 主要配置语言
 - wget
@@ -18,7 +18,7 @@ Linux setting sync
 - nodejs
 - python3
 - pip3
-- lf, better file explorer
+- yazi, better file explorer
 - dust，better du
 - duf，better df
 - bat，better cat
@@ -34,11 +34,6 @@ Linux setting sync
 - zsh-autosuggestions
 - zsh-syntax_highlignting
 - git-open
-
-### lf 自动安装
-
-- lf colors
-- lf icons
 
 ### tmux 自动安装
 

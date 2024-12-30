@@ -1,13 +1,5 @@
 #!/usr/bin/env zsh
 
-##########################################
-# @Author      : caodaqian
-# @CreateTime  : 2020-11-07 23:43:07
-## @LastEditors : caodaqian
-## @LastEditTime: 2022-05-06 13:16:34
-# @Description : install my dotfiles
-##########################################
-
 WORKDIR=$(dirname $(dirname $(readlink -f "$0")))
 SUB_MODULE="$1"
 set -eu
@@ -17,14 +9,12 @@ info "workdir is $WORKDIR, sub_module is $SUB_MODULE"
 function main() {
 	install_list=( \
 		brew_install \
-		link_config_dir \
-		install_zsh_config \
-		install_lf_plugin \
-		install_tmux_config \
-		install_pacman_config \
-		install_top_config \
-		install_x_config \
-		install_fzf_git \
+		link_config \
+		zsh_plugin \
+		yazi_plugin \
+		tmux_plugin \
+		top_config \
+		x_config \
 	)
 
 	for install_func in ${install_list[*]};do
@@ -46,10 +36,19 @@ function main() {
 function brew_install() {
 	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop bat tldr eza lazygit gping dog fzf neovim pipx)
 	brew install ${sofrware_list[*]}
+
+	### install neovim plugin
 	pipx install pynvim neovim
+
+	### install fzf-git
+	if [ -z "$(fzf --version 2>/dev/null)" ]; then
+		warn "not find fzf"
+	else
+		clone_repo fzf_git https://github.com/junegunn/fzf-git.sh.git
+	fi
 }
 
-function link_config_dir() {
+function link_config() {
 	mkdir -p "${HOME}/.config"
 	for dir in "${WORKDIR}/config"/*; do
 		dir=$(basename "$dir")
@@ -66,8 +65,8 @@ function link_config_dir() {
 	done
 }
 
-# install zshrc and omz plugins
-function install_zsh_config() {
+# install oh-my-zsh and omz plugins
+function zsh_plugin() {
 	if [ -z "$(zsh --version 2>/dev/null)" ]; then
 		error "Can't find zsh, must install zsh firstly"
 		exit 1
@@ -96,28 +95,8 @@ function install_zsh_config() {
 	[ ! -L "${HOME}/.p10k.zsh" ] && ln -svf "${WORKDIR}/config/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
 }
 
-# install lf plugin
-function install_lf_plugin() {
-	if [ -n "$(lf --version) 2>/dev/null" ];then
-		# install colors
-		if [ ! -f "${HOME}/.config/lf/colors" ];then
-			info "install lf colors"
-			curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/colors.example -o ~/.config/lf/colors
-			info "install lf colors success"
-		fi
-		# install icons
-		if [ ! -f "${HOME}/.config/lf/icons" ];then
-			info "install lf icons"
-			curl https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example -o ~/.config/lf/icons
-			info "install lf icons success"
-		fi
-	else
-		warn "lf not found, must install lf firstly"
-	fi
-}
-
 # install tmux config
-function install_tmux_config() {
+function tmux_plugin() {
 	if [ -z "$(tmux -V 2>/dev/null)" ]; then
 		warn "must install tmux firstly"
 		exit 1
@@ -132,19 +111,8 @@ function install_tmux_config() {
 	brew install yq ## tmux status line window rename
 }
 
-# install pacman config
-function install_pacman_config() {
-	if [ -z "$(pacman -v 2>/dev/null)" ]; then
-		warn "not find pacman"
-	else
-		info "link pacman.conf to /etc/pacman.conf"
-		sudo ln -svf "${WORKDIR}/config/pacman/pacman.conf" "/etc/pacman.conf"
-		info "link pacman.conf success"
-	fi
-}
-
 # install top config
-function install_top_config() {
+function top_config() {
 	if [ ! -f "${HOME}/.toprc" ]; then
 		info "link toprc to ~/.toprc"
 		ln -svf "${HOME}/.config/top/toprc" "${HOME}/.toprc"
@@ -154,17 +122,8 @@ function install_top_config() {
 	fi
 }
 
-# install fzf-git
-function install_fzf_git() {
-	if [ -z "$(fzf --version 2>/dev/null)" ]; then
-		warn "not find fzf"
-	else
-		clone_repo fzf_git https://github.com/junegunn/fzf-git.sh.git
-	fi
-}
-
 # install xrc config
-function install_x_config() {
+function x_config() {
 	if [ ! -f "${HOME}/.Xresources" ]; then
 		info "link xrc to ~/.Xresources"
 		ln -svf "${HOME}/.config/X/Xresources" "${HOME}/.Xresources"
@@ -179,6 +138,32 @@ function install_x_config() {
 	else
 		warn "skip link xprofile"
 	fi
+}
+
+# install yazi config
+function yazi_plugin() {
+	brew install yazi ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick font-symbols-only-nerd-font
+	## install smart enter
+	ya pack -l | grep 'smart-enter' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:smart-enter
+	## install git plugin
+	ya pack -l | grep 'git' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:git
+	## install compress plugin
+	ya pack -l | grep 'compress' 2>&1 >/dev/null || ya pack -a KKV9/compress
+	## install yabm plugin
+	ya pack -l | grep 'yamb' 2>&1 >/dev/null || ya pack -a h-hg/yamb
+	## install diff plugin
+	ya pack -l | grep 'diff' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:diff
+	## install chmod plugin
+	ya pack -l | grep 'chmod' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:chmod
+	## install max-preview plugin
+	ya pack -l | grep 'max-preview' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:max-preview
+	## install theme
+	ya pack -l | grep 'catppuccin-mocha' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-mocha
+	ya pack -l | grep 'catppuccin-latte' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-latte
+	ya pack -l | grep 'catppuccin-frappe' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-frappe
+	ya pack -l | grep 'catppuccin-macchiato' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-macchiato
+	ya pack -l | grep 'gruvbox-dark' 2>&1 >/dev/null || ya pack -a bennyyip/gruvbox-dark
+	ya pack -l | grep 'everforest-medium' 2>&1 >/dev/null || ya pack -a Chromium-3-Oxide/everforest-medium
 }
 
 main

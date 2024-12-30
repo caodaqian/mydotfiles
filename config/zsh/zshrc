@@ -116,6 +116,15 @@ bindkey '^B' backward-word
 bindkey '^F' forward-word
 zle -N self-insert url-quote-magic
 
+# yazi shell wrapper
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 # fzf config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
