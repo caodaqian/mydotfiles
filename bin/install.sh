@@ -15,6 +15,7 @@ function main() {
 		tmux_plugin \
 		top_config \
 		x_config \
+		bat_config \
 	)
 
 	for install_func in ${install_list[*]};do
@@ -34,7 +35,7 @@ function main() {
 
 # install dependences software
 function brew_install() {
-	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop bat tldr eza lazygit gping dog fzf neovim pipx)
+	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop tldr eza lazygit gping dog fzf neovim pipx)
 	brew install ${sofrware_list[*]}
 
 	### install neovim plugin
@@ -46,6 +47,20 @@ function brew_install() {
 	else
 		clone_repo fzf_git https://github.com/junegunn/fzf-git.sh.git
 	fi
+}
+
+# install bat config
+function bat_config() {
+	brew install bat
+
+	## install catppuccin theme
+	mkdir -p "$(bat --config-dir)/themes"
+	wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
+	wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
+	wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
+	wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
+
+	bat cache --build
 }
 
 function link_config() {
@@ -157,6 +172,8 @@ function yazi_plugin() {
 	ya pack -l | grep 'chmod' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:chmod
 	## install max-preview plugin
 	ya pack -l | grep 'max-preview' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:max-preview
+	## install githead plugin
+	ya pack -l | grep 'githead' 2>&1 >/dev/null || ya pack -a llanosrocas/githead
 	## install theme
 	ya pack -l | grep 'catppuccin-mocha' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-mocha
 	ya pack -l | grep 'catppuccin-latte' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-latte

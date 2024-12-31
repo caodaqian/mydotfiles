@@ -1,6 +1,9 @@
 ------ git plugin config ------
 require("git"):setup()
 
+----- githead plugin config ------
+require("githead"):setup()
+
 ------ yamb plugin config ------
 local bookmarks = {}
 
@@ -38,3 +41,6 @@ require("yamb"):setup({
 	path = (ya.target_family() == "windows" and os.getenv("APPDATA") .. "\\yazi\\config\\bookmark")
 		or (os.getenv("HOME") .. "/.config/yazi/bookmark"),
 })
+
+------ eza-preview plugin config ------
+require("eza-preview"):setup()

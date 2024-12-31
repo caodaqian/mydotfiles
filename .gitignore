@@ -14,3 +14,4 @@ config/yazi/plugins/
 config/yazi/flavors/
 config/yazi/bookmark
 config/yazi/package.toml
+config/bat/themes/

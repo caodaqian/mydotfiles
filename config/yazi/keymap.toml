@@ -77,7 +77,7 @@ desc = "lazygit"
 
 ## open shell
 [[manager.prepend_keymap]]
-on = "s"
+on = "!"
 run = 'shell "$SHELL" --block --confirm'
 desc = "open shell on cwd"
 
@@ -91,4 +91,26 @@ desc = "Jump to a file/directory via fzf"
 [[manager.prepend_keymap]]
 on = "E"
 run = "plugin eza-preview"
-desc = "Toggle tree"
+desc = "Toggle tree/list dir preview"
+
+[[manager.prepend_keymap]]
+on = "-"
+run = "plugin eza-preview --args='--inc-level'"
+desc = "Increment tree level"
+
+[[manager.prepend_keymap]]
+on = "_"
+run = "plugin eza-preview --args='--dec-level'"
+desc = "Decrement tree level"
+
+[[manager.prepend_keymap]]
+on = "$"
+run = "plugin eza-preview --args='--toggle-follow-symlinks'"
+desc = "Toggle tree follow symlinks"
+
+## cd git root
+[[manager.prepend_keymap]]
+on = ["g", "r"]
+run = '''
+	shell 'ya emit cd "$(git rev-parse --show-toplevel)"'
+'''

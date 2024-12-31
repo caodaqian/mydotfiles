@@ -8,6 +8,6 @@ id = "git"
 name = "*/"
 run = "git"
 
-[[prepend_previewers]]
+[[plugin.prepend_previewers]]
 name = "*/"
 run = "eza-preview"
