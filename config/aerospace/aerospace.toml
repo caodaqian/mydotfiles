@@ -108,6 +108,7 @@ alt-shift-q = 'focus-monitor prev'
 alt-shift-e = 'focus-monitor next'
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-shift-w = 'workspace-back-and-forth'
+alt-tab = 'workspace-back-and-forth'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-ctrl-shift-1 = ['move-node-to-workspace 1', 'workspace 1']

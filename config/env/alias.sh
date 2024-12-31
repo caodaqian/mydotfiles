@@ -25,7 +25,8 @@ alias hkill='yarn application -kill'
 alias hrunning='mapred job -set-max-task-running'
 
 ## bat
-alias cat='bat -p'
+alias cat='bat'
+alias less='bat -p'
 
 ## btop
 alias top='btop'
