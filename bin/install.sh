@@ -174,6 +174,8 @@ function yazi_plugin() {
 	ya pack -l | grep 'max-preview' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:max-preview
 	## install githead plugin
 	ya pack -l | grep 'githead' 2>&1 >/dev/null || ya pack -a llanosrocas/githead
+	## install eza-preview plugin
+	ya pack -l | grep 'eza-preview' 2>&1 >/dev/null || ya pack -a ahkohd/eza-preview
 	## install theme
 	ya pack -l | grep 'catppuccin-mocha' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-mocha
 	ya pack -l | grep 'catppuccin-latte' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-latte
