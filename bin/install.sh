@@ -35,7 +35,7 @@ function main() {
 
 # install dependences software
 function brew_install() {
-	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs lf tmux dust duf btop tldr eza lazygit gping dog fzf neovim pipx)
+	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs tmux dust duf tldr eza lazygit gping dog fzf neovim pipx bottom)
 	brew install ${sofrware_list[*]}
 
 	### install neovim plugin
