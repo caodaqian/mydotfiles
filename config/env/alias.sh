@@ -28,8 +28,8 @@ alias hrunning='mapred job -set-max-task-running'
 alias cat='bat'
 alias less='bat -p'
 
-## btop
-alias top='btop'
+## bottom
+alias top='btm'
 
 ## duf
 unalias duf 2>/dev/null
