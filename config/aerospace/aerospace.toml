@@ -133,7 +133,7 @@ alt-shift-semicolon = 'mode service'
 r = ['reload-config', 'mode main']
 x = ['flatten-workspace-tree', 'mode main'] # reset layout
 s = [
-	'layout sticky tiling',
+	'layout tiling',
 	'mode main',
 ] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 z = ['fullscreen on', 'mode main']
