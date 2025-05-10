@@ -17,12 +17,12 @@ Linux setting sync
 - intelephense
 - nodejs
 - python3
-- pip3
+- uv, better pip
 - yazi, better file explorer
 - dust，better du
 - duf，better df
 - bat，better cat
-- btop，better top
+- bottom，better top
 - tldr，better man
 - eza, better ls
 - gping, better ping
