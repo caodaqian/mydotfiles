@@ -54,7 +54,6 @@ Linux setting sync
 - fd, 更易用的 find，rust 改写速度快 5 倍
 - ripgrep, 更易用的 grep， rust 改写
 - curllie, 更易用的 httppie，有 curl 的强大功能和 httppie 的易用性
-- procs，更友好的 ps
 - hyperfine, 易用强大的压测工具
 - utools，快捷启动器
 - ApiFox，API 管理工具
