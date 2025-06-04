@@ -159,30 +159,30 @@ function x_config() {
 function yazi_plugin() {
 	brew install yazi ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick font-symbols-only-nerd-font
 	## install smart enter
-	ya pack -l | grep 'smart-enter' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:smart-enter
+	ya pkg list | grep 'smart-enter' 2>&1 >/dev/null || ya pkg add yazi-rs/plugins:smart-enter
 	## install git plugin
-	ya pack -l | grep 'git' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:git
+	ya pkg list | grep 'git' 2>&1 >/dev/null || ya pkg add yazi-rs/plugins:git
 	## install compress plugin
-	ya pack -l | grep 'compress' 2>&1 >/dev/null || ya pack -a KKV9/compress
+	ya pkg list | grep 'compress' 2>&1 >/dev/null || ya pkg add KKV9/compress
 	## install yabm plugin
-	ya pack -l | grep 'yamb' 2>&1 >/dev/null || ya pack -a h-hg/yamb
+	ya pkg list | grep 'yamb' 2>&1 >/dev/null || ya pkg add h-hg/yamb
 	## install diff plugin
-	ya pack -l | grep 'diff' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:diff
+	ya pkg list | grep 'diff' 2>&1 >/dev/null || ya pkg add yazi-rs/plugins:diff
 	## install chmod plugin
-	ya pack -l | grep 'chmod' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:chmod
-	## install max-preview plugin
-	ya pack -l | grep 'max-preview' 2>&1 >/dev/null || ya pack -a yazi-rs/plugins:max-preview
+	ya pkg list | grep 'chmod' 2>&1 >/dev/null || ya pkg add yazi-rs/plugins:chmod
+	## install toggle-pane plugin
+	ya pkg list | grep 'toggle-pane' 2>&1 >/dev/null || ya pkg add yazi-rs/plugins:toggle-pane
 	## install githead plugin
-	ya pack -l | grep 'githead' 2>&1 >/dev/null || ya pack -a llanosrocas/githead
+	ya pkg list | grep 'githead' 2>&1 >/dev/null || ya pkg add llanosrocas/githead
 	## install eza-preview plugin
-	ya pack -l | grep 'eza-preview' 2>&1 >/dev/null || ya pack -a ahkohd/eza-preview
+	ya pkg list | grep 'eza-preview' 2>&1 >/dev/null || ya pkg add ahkohd/eza-preview
 	## install theme
-	ya pack -l | grep 'catppuccin-mocha' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-mocha
-	ya pack -l | grep 'catppuccin-latte' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-latte
-	ya pack -l | grep 'catppuccin-frappe' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-frappe
-	ya pack -l | grep 'catppuccin-macchiato' 2>&1 >/dev/null || ya pack -a yazi-rs/flavors:catppuccin-macchiato
-	ya pack -l | grep 'gruvbox-dark' 2>&1 >/dev/null || ya pack -a bennyyip/gruvbox-dark
-	ya pack -l | grep 'everforest-medium' 2>&1 >/dev/null || ya pack -a Chromium-3-Oxide/everforest-medium
+	ya pkg list | grep 'catppuccin-mocha' 2>&1 >/dev/null || ya pkg add yazi-rs/flavors:catppuccin-mocha
+	ya pkg list | grep 'catppuccin-latte' 2>&1 >/dev/null || ya pkg add yazi-rs/flavors:catppuccin-latte
+	ya pkg list | grep 'catppuccin-frappe' 2>&1 >/dev/null || ya pkg add yazi-rs/flavors:catppuccin-frappe
+	ya pkg list | grep 'catppuccin-macchiato' 2>&1 >/dev/null || ya pkg add yazi-rs/flavors:catppuccin-macchiato
+	ya pkg list | grep 'gruvbox-dark' 2>&1 >/dev/null || ya pkg add bennyyip/gruvbox-dark
+	ya pkg list | grep 'everforest-medium' 2>&1 >/dev/null || ya pkg add Chromium-3-Oxide/everforest-medium
 }
 
 main

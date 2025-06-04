@@ -1,115 +1,119 @@
 ## smart enter plugin config
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 ## compress plugin config
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["c", "a"]
 run = "plugin compress"
 desc = "Archive selected files"
 
 ## yamb plugin config
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["u", "a"]
 run = "plugin yamb --args=save"
 desc = "Add bookmark"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["u", "g"]
 run = "plugin yamb --args=jump_by_key"
 desc = "Jump bookmark by key"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["u", "G"]
 run = "plugin yamb --args=jump_by_fzf"
 desc = "Jump bookmark by fzf"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["u", "d"]
 run = "plugin yamb --args=delete_by_key"
 desc = "Delete bookmark by key"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["u", "D"]
 run = "plugin yamb --args=delete_by_fzf"
 desc = "Delete bookmark by fzf"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["u", "A"]
 run = "plugin yamb --args=delete_all"
 desc = "Delete all bookmarks"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["u", "r"]
 run = "plugin yamb --args=rename_by_key"
 desc = "Rename bookmark by key"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["u", "R"]
 run = "plugin yamb --args=rename_by_fzf"
 desc = "Rename bookmark by fzf"
 
 ## diff plugin config
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "<C-d>"
 run = "plugin diff"
 desc = "Diff the selected with the hovered file"
 
 ## chmod plugin config
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["c", "m"]
 run = "plugin chmod"
 desc = "Chmod on selected files"
 
-## max-preview plugin config
-[[manager.prepend_keymap]]
+## toggle-pane plugin config
+[[mgr.prepend_keymap]]
 on = "T"
-run = "plugin max-preview"
-desc = "Maximize or restore preview"
+run = "plugin toggle-pane min-preview"
+desc = "Show or hide the preview pane"
+[[mgr.prepend_keymap]]
+on = "Z"
+run = "plugin toggle-pane max-preview"
+desc = "Maximize or restore the preview pane"
 
 ## lazygit
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "<C-g>"
 run = "shell -confirm --bolck lazygit"
 desc = "lazygit"
 
 ## open shell
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "!"
 run = 'shell "$SHELL" --block --confirm'
 desc = "open shell on cwd"
 
 ## use fzf
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "<C-p>"
 run = "plugin fzf"
 desc = "Jump to a file/directory via fzf"
 
 ## eza-prevew plugin config
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "E"
 run = "plugin eza-preview"
 desc = "Toggle tree/list dir preview"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "-"
 run = "plugin eza-preview --args='--inc-level'"
 desc = "Increment tree level"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "_"
 run = "plugin eza-preview --args='--dec-level'"
 desc = "Decrement tree level"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = "$"
 run = "plugin eza-preview --args='--toggle-follow-symlinks'"
 desc = "Toggle tree follow symlinks"
 
 ## cd git root
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["g", "r"]
 run = '''
 	shell 'ya emit cd "$(git rev-parse --show-toplevel)"'

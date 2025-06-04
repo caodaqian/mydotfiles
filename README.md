@@ -84,8 +84,8 @@ Linux setting sync
 - Itsycal，日历的状态栏扩展
 - MonitorControlLite，扩展屏显示亮度调节
 - Thor Launcher，快捷键启动器(废弃，使用 AeroSpace 替代)
-- Pixpin，截图工具
 - Mos，鼠标滑动优化，更类似 windows 一点
 - VMware Fusion，虚拟机
 - QuicklookStephen，quick look 插件，可以看到无后缀名的文件
 - NestedDownloads，下载器
+- OrbStack, 轻量化 K8S 和 Docker
