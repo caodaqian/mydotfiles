@@ -22,26 +22,49 @@
 	#safecrlf = true
 	editor = $EDITOR
 	paper = cat
+	compress = 9
+	whilespace = errroir
+	preloadindex = true
+[init]
+	defaultBranch = dev
+[status]
+	branch = true
+	shwoStash = true
 [branch]
 	autosetupmerge = true
+	sort = -committerdate
+[tag]
+	sort = -taggerdate
+[pull]
+	default = current
+	rebase = true
+[rebase]
+	autoStash = true
+	missingCommitsCheck = warn
 [push]
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
-	default = simple
+	default = current
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
+	autoSetupRemote = true
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
+[diff]
+	renames = copies
+	interHunkContext = 10
 [gui]
 	encoding = utf-8
 [i18n]
 	logoutputencoding = utf-8
 [i18n "commit"]
 	encoding = utf-8
+[pager]
+	branch = false
+	tag = false
 [color]
 	ui=auto
 [credential]
-	helper = 
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
