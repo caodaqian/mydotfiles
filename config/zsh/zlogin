@@ -1,0 +1,6 @@
+if [ -n "$(fastfetch --version 2>/dev/null)" ]; then
+	fastfetch
+elif [ -n "$(cowsay --version 2>/dev/null)" ]; then
+	cowsay -b "Hi, ${USER}"
+fi
+

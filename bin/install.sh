@@ -35,7 +35,7 @@ function main() {
 
 # install dependences software
 function brew_install() {
-	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs tmux dust duf tldr eza lazygit gping dog fzf neovim pipx bottom uv)
+	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs tmux dust duf tldr eza lazygit gping dog fzf neovim pipx bottom uv cowsay fastfetch)
 	brew install ${sofrware_list[*]}
 
 	### install neovim plugin
@@ -107,6 +107,7 @@ function zsh_plugin() {
 	info "link zshrc to ~/.zshrc"
 	[ ! -L "${HOME}/.zshrc" ] && ln -svf "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
 	[ ! -L "${HOME}/.zshenv" ] && ln -svf "${WORKDIR}/config/zsh/zshenv" "${HOME}/.zshenv"
+	[ ! -L "${HOME}/.zlogin" ] && ln -svf "${WORKDIR}/config/zsh/zlogin" "${HOME}/.zlogin"
 	[ ! -L "${HOME}/.p10k.zsh" ] && ln -svf "${WORKDIR}/config/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
 }
 

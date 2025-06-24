@@ -76,10 +76,6 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 ## python config
 export PYTHONUSERBASE=${HOME}/.local
 export PATH=${PYTHONUSERBASE}/bin:${PATH}
-## python omz plugin
-export PYTHON_AUTO_VRUN=true
-export PYTHON_VENV_NAME='.venv'
-export PYTHON_VENV_NAMES='.venv venv'
 
 ## node config
 export NODE_HOME=${NODE_HOME:-"${HOME}/.local/shard/nodejs"}

@@ -61,6 +61,8 @@ Linux setting sync
 - MasterGo，流程、原型的设计工具
 - Motrix，下载器
 - RustDesk，远程桌面
+- fastfetch，用于在终端中展示系统配置和硬件信息
+- cowsay，shell 中的 ASCII 展示
 
 ### Windows 下
 
