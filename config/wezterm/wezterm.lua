@@ -342,8 +342,8 @@ config = {
 	},
 	initial_cols = 160,
 	initial_rows = 42,
-	window_background_opacity = 0.8,
-	text_background_opacity = 0.95,
+	window_background_opacity = 0.95,
+	text_background_opacity = 0.9,
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 	-- timeout_milliseconds defaults to 1000 and can be omitted
 	leader = { key = "a", mods = "SUPER", timeout_milliseconds = 1000 },

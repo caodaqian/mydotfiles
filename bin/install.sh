@@ -15,7 +15,6 @@ function main() {
 		tmux_plugin \
 		top_config \
 		x_config \
-		bat_config \
 	)
 
 	for install_func in ${install_list[*]};do
@@ -35,11 +34,8 @@ function main() {
 
 # install dependences software
 function brew_install() {
-	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs tmux dust duf tldr eza lazygit gping dog fzf neovim pipx bottom uv cowsay fastfetch)
+	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs tmux dust duf tldr eza lazygit gping fzf neovim pipx bottom uv cowsay fastfetch bat)
 	brew install ${sofrware_list[*]}
-
-	### install neovim plugin
-	pipx install pynvim neovim
 
 	### install fzf-git
 	if [ -z "$(fzf --version 2>/dev/null)" ]; then
@@ -47,20 +43,6 @@ function brew_install() {
 	else
 		clone_repo fzf_git https://github.com/junegunn/fzf-git.sh.git
 	fi
-}
-
-# install bat config
-function bat_config() {
-	brew install bat
-
-	## install catppuccin theme
-	mkdir -p "$(bat --config-dir)/themes"
-	wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Latte.tmTheme
-	wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
-	wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
-	wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme
-
-	bat cache --build
 }
 
 function link_config() {
@@ -87,7 +69,7 @@ function zsh_plugin() {
 		exit 1
 	fi
 	
-	if [ ! -d "${HOME}/.oh-my-zsh" ]; then
+	if [ -z "$(omz version 2>/dev/null)" ]; then
 		# check oh-my-zsh
 		warn "Can't find .oh-my-zsh, install omz firstly"
 		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -104,12 +86,12 @@ function zsh_plugin() {
 	fi
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/autoupdate" ] && git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/autoupdate"
 	info "install omz plugins success"
-	# get zshrc
-	info "link zshrc to ~/.zshrc"
+	# link zshrc
 	[ ! -L "${HOME}/.zshrc" ] && ln -svf "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
 	[ ! -L "${HOME}/.zshenv" ] && ln -svf "${WORKDIR}/config/zsh/zshenv" "${HOME}/.zshenv"
 	[ ! -L "${HOME}/.zlogin" ] && ln -svf "${WORKDIR}/config/zsh/zlogin" "${HOME}/.zlogin"
 	[ ! -L "${HOME}/.p10k.zsh" ] && ln -svf "${WORKDIR}/config/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
+	info "link zshrc to ~/.zshrc"
 }
 
 # install tmux config
@@ -124,7 +106,6 @@ function tmux_plugin() {
 	fi
 
 	## tmux plugin dependencies
-	brew install reattach-to-user-namespace ## @tmux-yank
 	brew install yq ## tmux status line window rename
 }
 
@@ -159,7 +140,7 @@ function x_config() {
 
 # install yazi config
 function yazi_plugin() {
-	brew install yazi ffmpeg sevenzip jq poppler fd ripgrep fzf zoxide imagemagick font-symbols-only-nerd-font
+	brew install yazi
 	## install smart enter
 	ya pkg list | grep 'smart-enter' 2>&1 >/dev/null || ya pkg add yazi-rs/plugins:smart-enter
 	## install git plugin

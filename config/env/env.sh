@@ -51,6 +51,14 @@ export JRE_HOME=${JRE_HOME:-"$JAVA_HOME/jre"}
 export CLASSPATH=.:$JAVA_HOME/lib:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
 export PATH=${PATH}:${JAVA_HOME}/bin
 
+## python config
+export PYTHONUSERBASE=${HOME}/.local
+export PATH=${PYTHONUSERBASE}/bin:${PATH}
+
+## node config
+export NODE_HOME=${NODE_HOME:-"${HOME}/.local/shard/nodejs"}
+export PATH=${NODE_HOME}/bin:${PATH}
+
 ## fzf config
 #export FZF_COMPLETION_TRIGGER='**'
 if [[ -z "$(tmux --version 2>/dev/null)" ]]; then
@@ -73,13 +81,5 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
 '
 
-## python config
-export PYTHONUSERBASE=${HOME}/.local
-export PATH=${PYTHONUSERBASE}/bin:${PATH}
-
-## node config
-export NODE_HOME=${NODE_HOME:-"${HOME}/.local/shard/nodejs"}
-export PATH=${NODE_HOME}/bin:${PATH}
-
-## ranger config
-export RANGER_LOAD_DEFAULT_RC=false
+## bat config
+export BAT_THEME='Catppuccin Mocha'
