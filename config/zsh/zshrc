@@ -51,6 +51,7 @@ plugins=(
 	git-open
 	zsh-autosuggestions
 	zsh-syntax-highlighting
+	fzf-tab
 	autoupdate ## auto update custom plugin
 	#### inner omz
 	z
@@ -90,11 +91,20 @@ export PYTHON_VENV_NAMES=('.venv' 'venv')
 typeset -g ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=12,bold,underline"
 typeset -g ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-# z setting
+## z setting
 ZSHZ_TILDE=1
 
-# custom plugin auto update
+## custom plugin auto update
 export UPDATE_ZSH_DAYS=30
+
+## fzf-tab seetings
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# To make fzf-tab follow FZF_DEFAULT_OPTS.
+# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
 
 ######################### plugin settings ########################
 source $ZSH/oh-my-zsh.sh
