@@ -47,19 +47,12 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 
 plugins=(
-	#### from github
-	git-open
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	fzf-tab
-	autoupdate ## auto update custom plugin
 	#### inner omz
 	z
 	common-aliases
 	eza
 	git
 	sudo
-	zsh-interactive-cd
 	tmux
 	shell-proxy
 	fzf
@@ -71,6 +64,13 @@ plugins=(
 	uv
 	kubectl
 	docker
+	#### from github
+	git-open
+	fzf-tab
+	fzf-tab-source
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	autoupdate ## auto update custom plugin
 )
 
 ######################### plugin settings ########################
@@ -98,10 +98,13 @@ ZSHZ_TILDE=1
 export UPDATE_ZSH_DAYS=30
 
 ## fzf-tab seetings
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':fzf-tab:*' show-group
 # preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --git -hl --icons -1 --color=always $realpath'
 # To make fzf-tab follow FZF_DEFAULT_OPTS.
-# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
@@ -142,9 +145,6 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 ######################### User configuration #####################
 
 # fzf config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-bindkey '^R' fzf-history-widget
-bindkey '^T' fzf-file-widget
 [ -f "${DOTFILE_CLONE_PATH:-${HOME}/Github}/fzf_git/fzf-git.sh" ] && source "${DOTFILE_CLONE_PATH:-${HOME}/Github}/fzf_git/fzf-git.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

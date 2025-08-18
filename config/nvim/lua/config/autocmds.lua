@@ -21,3 +21,19 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
 		vim.opt_local.formatoptions:remove("o")
 	end,
 })
+
+-- Disable copilot upgrade message
+local _select = vim.ui.select
+function vim.ui.select(items, opts, on_choice)
+	if
+		opts
+		and opts.prompt
+		and type(opts.prompt) == "string"
+		and string.match(opts.prompt, [[^You've reached.*limit.*Upgrade.*$]]) -- ...
+	then
+		vim.notify("Copilot: " .. opts.prompt, vim.log.levels.ERROR) --you can also delete this notify
+		vim.cmd("Copilot disable")
+	else
+		return _select(items, opts, on_choice)
+	end
+end

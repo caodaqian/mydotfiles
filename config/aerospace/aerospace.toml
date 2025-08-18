@@ -24,7 +24,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
-accordion-padding = 30
+accordion-padding = 80
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -77,16 +77,19 @@ alt-4 = 'exec-and-forget open /Applications/Notion.app'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-shift-h = 'focus left'
-alt-shift-j = 'focus down'
-alt-shift-k = 'focus up'
-alt-shift-l = 'focus right'
+alt-shift-h = 'focus left --boundaries all-monitors-outer-frame'
+alt-shift-j = 'focus down --boundaries all-monitors-outer-frame'
+alt-shift-k = 'focus up --boundaries all-monitors-outer-frame'
+alt-shift-l = 'focus right --boundaries all-monitors-outer-frame'
+
+alt-shift-enter = ['swap --wrap-around dfs-next', 'focus dfs-prev']
+alt-ctrl-shift-enter = ['swap --wrap-around dfs-prev', 'focus dfs-next']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-alt-ctrl-shift-h = 'move left'
-alt-ctrl-shift-j = 'move down'
-alt-ctrl-shift-k = 'move up'
-alt-ctrl-shift-l = 'move right'
+alt-ctrl-shift-h = 'move left --boundaries all-monitors-outer-frame'
+alt-ctrl-shift-j = 'move down --boundaries all-monitors-outer-frame'
+alt-ctrl-shift-k = 'move up --boundaries all-monitors-outer-frame'
+alt-ctrl-shift-l = 'move right --boundaries all-monitors-outer-frame'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-shift-minus = 'resize smart -50'
@@ -145,10 +148,15 @@ backspace = ['close-all-windows-but-current', 'mode main']
 alt-shift-slash = ['layout accordion horizontal vertical', 'mode main']
 alt-shift-comma = ['layout tiles horizontal vertical', 'mode main']
 
-alt-shift-h = ['join-with left', 'mode main']
-alt-shift-j = ['join-with down', 'mode main']
-alt-shift-k = ['join-with up', 'mode main']
-alt-shift-l = ['join-with right', 'mode main']
+alt-shift-h = ['move left', 'mode main']
+alt-shift-j = ['move down', 'mode main']
+alt-shift-k = ['move up', 'mode main']
+alt-shift-l = ['move right', 'mode main']
+
+ctrl-h = ['join-with left', 'mode main']
+ctrl-j = ['join-with down', 'mode main']
+ctrl-k = ['join-with up', 'mode main']
+ctrl-l = ['join-with right', 'mode main']
 
 [workspace-to-monitor-force-assignment]
 Q = ['secondary', 'main']

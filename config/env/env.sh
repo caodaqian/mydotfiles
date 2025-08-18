@@ -65,8 +65,6 @@ if [[ -z "$(tmux --version 2>/dev/null)" ]]; then
 	export FZF_TMUX=1
 	export FZF_TMUX_HEIGHT='80%'
 fi
-export FZF_COMPLETION_OPTS='--border --info=inline'
-export FZF_DEFAULT_OPTS='--bind "ctrl-y:execute-silent(printf {} | cut -f 2- | wl-copy --trim-newline)" --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || bat --style=numbers --color=always --line-range :500 {}" --preview-window down:3:hidden:wrap --bind "?:toggle-preview" --height 50% --layout=reverse --border'
 ### fzf theme
 #### one dark
 #export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
@@ -75,11 +73,22 @@ export FZF_DEFAULT_OPTS='--bind "ctrl-y:execute-silent(printf {} | cut -f 2- | w
 #--color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
 #'
 #### dracula
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color=dark
+FZF_THEME_OPTS="--color=border:#aaaaaa,label:#cccccc
+--color=preview-border:#9999cc,preview-label:#ccccff
+--color=list-border:#669966,list-label:#99cc99
+--color=input-border:#996666,input-label:#ffcccc
+--color=header-border:#6699cc,header-label:#99ccff
 --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
---color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7
-'
+--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
+export FZF_DEFAULT_OPTS="--highlight-line --height ~40% --layout reverse --multi --info=inline-right --border --padding 0 --ansi
+--bind 'ctrl-h:top,change:top'
+--bind '?:change-preview-window(hidden|)'
+--preview 'fzf-preview.sh {}'
+--input-label ' Input '
+--header-label ' File Type '
+--bind 'focus:transform-preview-label:[[ -n {} ]] && printf \" Previewing [%s] \" {}'
+--bind 'focus:+transform-header:file --brief {} || echo \"No file selected\"'
+${FZF_THEME_OPTS}"
 
 ## bat config
-export BAT_THEME='Catppuccin Mocha'
+# export BAT_THEME='Catppuccin Mocha'
