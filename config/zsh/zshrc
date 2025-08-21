@@ -99,6 +99,7 @@ export UPDATE_ZSH_DAYS=30
 
 ## fzf-tab seetings
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' popup-pad 0 0
 zstyle ':fzf-tab:*' popup-min-size 120 0
 zstyle ':fzf-tab:*' fzf-bindings-default "tab:toggle,btab:ignore,ctrl-space:ignore"
 # set descriptions format to enable group support
