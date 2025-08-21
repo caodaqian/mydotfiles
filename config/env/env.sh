@@ -82,10 +82,12 @@ FZF_THEME_OPTS="--color=border:#aaaaaa,label:#cccccc
 --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
 export FZF_DEFAULT_OPTS="--highlight-line --height ~40% --layout reverse --multi --info=inline-right --border --padding 0 --ansi
 --bind 'ctrl-h:top,change:top'
---bind '?:change-preview-window(hidden|)'
+--bind '?:change-preview-window(right|down|up|hidden|)'
 --preview 'fzf-preview.sh {}'
 --input-label ' Input '
 --header-label ' File Type '
+--bind 'tab:toggle'
+--bind 'ctrl-a:toggle-all'
 --bind 'focus:transform-preview-label:[[ -n {} ]] && printf \" Previewing [%s] \" {}'
 --bind 'focus:+transform-header:file --brief {} || echo \"No file selected\"'
 ${FZF_THEME_OPTS}"
