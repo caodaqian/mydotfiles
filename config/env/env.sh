@@ -80,7 +80,7 @@ FZF_THEME_OPTS="--color=border:#aaaaaa,label:#cccccc
 --color=header-border:#6699cc,header-label:#99ccff
 --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
 --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
-export FZF_DEFAULT_OPTS="--highlight-line --height ~40% --layout reverse --multi --info=inline-right --border --padding 0 --ansi
+export FZF_DEFAULT_OPTS="--highlight-line --layout reverse --multi --info=inline-right --border --padding 0 --ansi
 --bind 'ctrl-h:top,change:top'
 --bind '?:change-preview-window(right|down|up|hidden|)'
 --preview 'fzf-preview.sh {}'

@@ -100,13 +100,11 @@ export UPDATE_ZSH_DAYS=30
 ## fzf-tab seetings
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' popup-pad 0 0
-zstyle ':fzf-tab:*' popup-min-size 120 0
+zstyle ':fzf-tab:*' popup-min-size 80 20
 zstyle ':fzf-tab:*' fzf-bindings-default "tab:toggle,btab:ignore,ctrl-space:ignore"
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' show-group
-# preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --git -hl --icons -1 --color=always $realpath'
 # To make fzf-tab follow FZF_DEFAULT_OPTS.
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
