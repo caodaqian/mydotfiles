@@ -8,13 +8,13 @@ info "workdir is $WORKDIR, sub_module is $SUB_MODULE"
 
 function main() {
 	install_list=( \
-		brew_install \
-		link_config \
-		zsh_plugin \
-		yazi_plugin \
-		tmux_plugin \
-		top_config \
-		x_config \
+		brew \
+		link \
+		zsh \
+		yazi \
+		tmux \
+		top \
+		xrc \
 	)
 
 	for install_func in ${install_list[*]};do
@@ -33,7 +33,7 @@ function main() {
 }
 
 # install dependences software
-function brew_install() {
+function brew() {
 	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs tmux dust duf tldr eza lazygit gping fzf neovim pipx bottom uv cowsay fastfetch bat)
 	brew install ${sofrware_list[*]}
 
@@ -45,7 +45,7 @@ function brew_install() {
 	fi
 }
 
-function link_config() {
+function link() {
 	mkdir -p "${HOME}/.config"
 	for dir in "${WORKDIR}/config"/*; do
 		dir=$(basename "$dir")
@@ -63,20 +63,18 @@ function link_config() {
 }
 
 # install oh-my-zsh and omz plugins
-function zsh_plugin() {
-	if [ -z "$(zsh --version 2>/dev/null)" ]; then
+function zsh() {
+	if [ -z "$(zsh --version 2>/dev/null)"]; then
 		error "Can't find zsh, must install zsh firstly"
+		exit 1
+	elif [ -z "$(omz version 2>/dev/null)" ];then
+		error "Can't find ohmyzsh, must install omz firstly"
 		exit 1
 	fi
 	
-	if [ -z "$(omz version 2>/dev/null)" ]; then
-		# check oh-my-zsh
-		warn "Can't find .oh-my-zsh, install omz firstly"
-		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	fi
 	# install omz plugins
 	info "install ohmyzsh plugins"
-	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ] && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open" ] && git clone https://github.com/paulirish/git-open.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/git-open"
 	if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ];then
@@ -85,8 +83,8 @@ function zsh_plugin() {
 		git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
 	fi
 	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/autoupdate" ] && git clone https://github.com/TamCore/autoupdate-oh-my-zsh-plugins "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/autoupdate"
-	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/fzf-tab" ] && git clone https://github.com/Aloxaf/fzf-tab "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab"
-	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/fzf-tab-source" ] && git clone https://github.com/Freed-Wu/fzf-tab-source "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab-source"
+	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/fzf-tab" ] && git clone https://github.com/Aloxaf/fzf-tab "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/fzf-tab"
+	[ ! -d "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/fzf-tab-source" ] && git clone https://github.com/Freed-Wu/fzf-tab-source "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/fzf-tab-source"
 	info "install omz plugins success"
 	# link zshrc
 	[ ! -L "${HOME}/.zshrc" ] && ln -svf "${WORKDIR}/config/zsh/zshrc" "${HOME}/.zshrc"
@@ -97,7 +95,7 @@ function zsh_plugin() {
 }
 
 # install tmux config
-function tmux_plugin() {
+function tmux() {
 	if [ -z "$(tmux -V 2>/dev/null)" ]; then
 		warn "must install tmux firstly"
 		exit 1
@@ -112,7 +110,7 @@ function tmux_plugin() {
 }
 
 # install top config
-function top_config() {
+function top() {
 	if [ ! -f "${HOME}/.toprc" ]; then
 		info "link toprc to ~/.toprc"
 		ln -svf "${HOME}/.config/top/toprc" "${HOME}/.toprc"
@@ -123,7 +121,7 @@ function top_config() {
 }
 
 # install xrc config
-function x_config() {
+function xrc() {
 	if [ ! -f "${HOME}/.Xresources" ]; then
 		info "link xrc to ~/.Xresources"
 		ln -svf "${HOME}/.config/X/Xresources" "${HOME}/.Xresources"
@@ -141,7 +139,7 @@ function x_config() {
 }
 
 # install yazi config
-function yazi_plugin() {
+function yazi() {
 	brew install yazi
 	## install smart enter
 	ya pkg list | grep 'smart-enter' 2>&1 >/dev/null || ya pkg add yazi-rs/plugins:smart-enter
