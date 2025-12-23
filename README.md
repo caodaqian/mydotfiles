@@ -48,7 +48,7 @@ Linux setting sync
 - tmate，多人协同会话
 - when-changed，文件监控执行
 - supervisor，进程监控拉起
-- jq，json 格式化以及查询
+- fx，json 格式化以及查询
 - iftop，流量监测
 - cloc，代码统计工具
 - fd, 更易用的 find，rust 改写速度快 5 倍
@@ -81,11 +81,9 @@ Linux setting sync
 - OneThing，状态栏横幅
 - Stats，系统状态显示在状态栏
 - ice，状态栏隐藏
-- AeroSpace，平铺式窗口管理器
+- rift，平铺式窗口管理器
 - Infuse，视频播放器
-- Itsycal，日历的状态栏扩展
 - MonitorControlLite，扩展屏显示亮度调节
-- Thor Launcher，快捷键启动器(废弃，使用 AeroSpace 替代)
 - Mos，鼠标滑动优化，更类似 windows 一点
 - VMware Fusion，虚拟机
 - QuicklookStephen，quick look 插件，可以看到无后缀名的文件
