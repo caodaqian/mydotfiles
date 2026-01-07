@@ -89,3 +89,10 @@ Linux setting sync
 - QuicklookStephen，quick look 插件，可以看到无后缀名的文件
 - NestedDownloads，下载器
 - OrbStack, 轻量化 K8S 和 Docker
+- Boring Notch，优化异形屏
+
+## 字体推荐
+
+1. "Maple Mono NF CN"
+2. "CaskaydiaCove Nerd Font Propo"
+3. "JetBrainsMono Nerd Font Propo"

@@ -314,6 +314,7 @@ config = {
 	mouse_bindings = mouse_bindings,
 	native_macos_fullscreen_mode = true,
 	font = wezterm.font_with_fallback({
+		"Maple Mono NF CN",
 		"CaskaydiaCove Nerd Font Propo",
 		"CaskaydiaCove Nerd Font",
 		"JetBrainsMono Nerd Font Propo",
