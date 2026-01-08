@@ -42,8 +42,8 @@ alias du='dust'
 alias man='tldr'
 
 ## eza
-alias l='eza'
-alias eza='eza --icons'
+## other alias by omz-eza plugin
+alias l='ls'
 
 ## fzf
 alias -g F='| fzf'

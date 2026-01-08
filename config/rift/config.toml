@@ -17,9 +17,9 @@
 #   ease_in_expo, ease_out_expo, ease_in_out_expo,
 #   ease_in_circ, ease_out_circ, ease_in_out_circ
 animate = true
-animation_duration = 0.3
-animation_fps = 90.0
-animation_easing = "ease_in_out"
+animation_duration = 0.2
+animation_fps = 100.0
+animation_easing = "linear"
 
 # Space activation behavior
 # - If true, spaces start inactive (rift does not manage windows there)
@@ -32,12 +32,12 @@ default_disable = false
 # - focus_follows_mouse: moving the mouse into a window focuses it
 # - mouse_follows_focus: when focus changes, move the mouse to the focused window
 # - mouse_hides_on_focus: hide the mouse cursor after focusing a window
-focus_follows_mouse = false
+focus_follows_mouse = true
 mouse_follows_focus = true
 mouse_hides_on_focus = true
 # focus_follows_mouse_disable_hotkey temporarily suspends focus-follows-mouse while held
 # e.g. "Fn"; omit or set to null to keep focus-follows-mouse always active
-#focus_follows_mouse_disable_hotkey = "Fn"
+focus_follows_mouse_disable_hotkey = "Ctrl"
 
 # Prevent certain apps from stealing focus/causing workspace switches
 # Provide bundle identifiers (e.g., "com.apple.Spotlight")
@@ -158,7 +158,7 @@ enabled = true
 # enable fade animation when entering/exiting mission control
 fade_enabled = true
 # native macos mission control fade is about 180ms
-fade_duration_ms = 120.0
+fade_duration_ms = 90.0
 
 # Trackpad gestures
 [settings.gestures]
@@ -201,7 +201,7 @@ enabled = true
 default_workspace_count = 8
 auto_assign_windows = true
 preserve_focus_per_workspace = true
-workspace_auto_back_and_forth = true
+workspace_auto_back_and_forth = false
 reapply_app_rules_on_title_change = false
 
 
