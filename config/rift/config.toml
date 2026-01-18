@@ -32,9 +32,9 @@ default_disable = false
 # - focus_follows_mouse: moving the mouse into a window focuses it
 # - mouse_follows_focus: when focus changes, move the mouse to the focused window
 # - mouse_hides_on_focus: hide the mouse cursor after focusing a window
-focus_follows_mouse = true
+focus_follows_mouse = false
 mouse_follows_focus = true
-mouse_hides_on_focus = true
+mouse_hides_on_focus = false
 # focus_follows_mouse_disable_hotkey temporarily suspends focus-follows-mouse while held
 # e.g. "Fn"; omit or set to null to keep focus-follows-mouse always active
 focus_follows_mouse_disable_hotkey = "Ctrl"
@@ -371,8 +371,8 @@ comb2 = "Alt + Ctrl + Shift"
 # Examples:
 "comb1 + A" = { move_mouse_to_display = 0 }
 "comb1 + D" = { move_mouse_to_display = 1 }
-"comb2 + A" = { move_window_to_display = { selector = "left" } }
-"comb2 + D" = { move_window_to_display = { selector = "right" } }
+"comb2 + A" = { move_window_to_display = { selector = 0 } }
+"comb2 + D" = { move_window_to_display = { selector = 1 } }
 
 # if mission control is enabled
 # this will show an exploded view of the windows in the active workspace
