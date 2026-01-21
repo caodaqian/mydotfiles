@@ -83,8 +83,8 @@ Linux setting sync
 - ice，状态栏隐藏
 - rift，平铺式窗口管理器
 - Infuse，视频播放器
-- MonitorControlLite，扩展屏显示亮度调节
-- Mos，鼠标滑动优化，更类似 windows 一点
+- betterdisplay，扩展屏显示亮度调节
+- mac-mouse-fix，鼠标滑动优化，更类似 windows 一点
 - VMware Fusion，虚拟机
 - QuicklookStephen，quick look 插件，可以看到无后缀名的文件
 - NestedDownloads，下载器

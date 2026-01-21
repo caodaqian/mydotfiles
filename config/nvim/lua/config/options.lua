@@ -41,3 +41,6 @@ local options = {
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
+
+-- Native inline completions don't support being shown as regular completions
+vim.g.ai_cmp = false

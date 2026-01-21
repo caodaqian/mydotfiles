@@ -22,7 +22,7 @@ function main() {
 			continue
 		fi
 		info "exec ${install_func} *************"
-		$install_func
+		${install_func}_install # exec install function
 		local ret=$?
 		if [ $ret -eq 0 ]; then
 			info "****************************************"
@@ -33,7 +33,7 @@ function main() {
 }
 
 # install dependences software
-function brew() {
+function brew_install() {
 	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs tmux dust duf tldr eza lazygit gping fzf neovim pipx bottom uv cowsay fastfetch bat)
 	brew install ${sofrware_list[*]}
 
@@ -45,7 +45,7 @@ function brew() {
 	fi
 }
 
-function link() {
+function link_install() {
 	mkdir -p "${HOME}/.config"
 	for dir in "${WORKDIR}/config"/*; do
 		dir=$(basename "$dir")
@@ -63,7 +63,7 @@ function link() {
 }
 
 # install oh-my-zsh and omz plugins
-function zsh() {
+function zsh_install() {
 	if [ -z "$(zsh --version 2>/dev/null)"]; then
 		error "Can't find zsh, must install zsh firstly"
 		exit 1
@@ -95,7 +95,7 @@ function zsh() {
 }
 
 # install tmux config
-function tmux() {
+function tmux_install() {
 	if [ -z "$(tmux -V 2>/dev/null)" ]; then
 		warn "must install tmux firstly"
 		exit 1
@@ -110,7 +110,7 @@ function tmux() {
 }
 
 # install top config
-function top() {
+function top_install() {
 	if [ ! -f "${HOME}/.toprc" ]; then
 		info "link toprc to ~/.toprc"
 		ln -svf "${HOME}/.config/top/toprc" "${HOME}/.toprc"
@@ -121,7 +121,7 @@ function top() {
 }
 
 # install xrc config
-function xrc() {
+function xrc_install() {
 	if [ ! -f "${HOME}/.Xresources" ]; then
 		info "link xrc to ~/.Xresources"
 		ln -svf "${HOME}/.config/X/Xresources" "${HOME}/.Xresources"
@@ -139,7 +139,7 @@ function xrc() {
 }
 
 # install yazi config
-function yazi() {
+function yazi_install() {
 	brew install yazi
 	## install smart enter
 	ya pkg list | grep 'smart-enter' 2>&1 >/dev/null || ya pkg add yazi-rs/plugins:smart-enter
