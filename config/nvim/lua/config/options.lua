@@ -44,3 +44,6 @@ end
 
 -- Native inline completions don't support being shown as regular completions
 vim.g.ai_cmp = false
+
+-- add spell check lang
+vim.opt.spelllang:append("cjk")
