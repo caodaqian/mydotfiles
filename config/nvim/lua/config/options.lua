@@ -47,3 +47,6 @@ vim.g.ai_cmp = false
 
 -- add spell check lang
 vim.opt.spelllang:append("cjk")
+
+-- close spell check
+vim.opt.spell = false
