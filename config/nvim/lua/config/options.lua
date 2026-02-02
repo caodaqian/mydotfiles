@@ -18,7 +18,7 @@ local options = {
 	smarttab = true,
 	softtabstop = 8,
 	synmaxcol = 240, -- scroll lines that are too long just slow when a line is too long
-	tabstop = 8, -- insert 2 spaces for a tab
+	tabstop = 8, -- insert 8 spaces for a tab
 	ttyfast = true,
 	wildignorecase = true,
 	wildmenu = true, -- enable tab completion menu
@@ -36,17 +36,20 @@ local options = {
 	title = true, -- change the terminal title
 	wrap = true, -- display lines as one long line
 	wrapscan = true, -- wrap around when searching
+	spell = false, -- disable spell checking
 }
 
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 
+-- pyright lsp settings
+-- Set to "basedpyright" to use basedpyright instead of pyright.
+-- vim.g.lazyvim_python_lsp = "basedpyright"
+-- Set to "ruff_lsp" to use the old LSP implementation version.
+vim.g.lazyvim_python_ruff = "ruff"
+-- Disable recommended python style settings
+vim.g.python_recommended_style = 0
+
 -- Native inline completions don't support being shown as regular completions
 vim.g.ai_cmp = false
-
--- add spell check lang
-vim.opt.spelllang:append("cjk")
-
--- close spell check
-vim.opt.spell = false

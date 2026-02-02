@@ -3,7 +3,7 @@ return {
 		"folke/sidekick.nvim",
 		keys = {
 			{
-				"<c-'>",
+				"<M-/>",
 				function()
 					require("sidekick.cli").toggle()
 				end,
