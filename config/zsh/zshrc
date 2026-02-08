@@ -100,9 +100,14 @@ ZSHZ_TILDE=1
 export UPDATE_ZSH_DAYS=30
 
 ## fzf-tab seetings
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:*' popup-pad 0 0
-zstyle ':fzf-tab:*' popup-min-size 80 20
+if [[ -n "${NVIM}" ]];then
+	zstyle ':fzf-tab:*' fzf-command fzf
+	zstyle ':fzf-tab:*' popup-min-size 0 0 # 禁用弹窗尺寸计算
+else
+	zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+	zstyle ':fzf-tab:*' popup-pad 0 0
+	zstyle ':fzf-tab:*' popup-min-size 80 20
+fi
 zstyle ':fzf-tab:*' fzf-bindings-default "tab:toggle,btab:ignore,ctrl-space:ignore"
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
