@@ -37,3 +37,6 @@ function vim.ui.select(items, opts, on_choice)
 		return _select(items, opts, on_choice)
 	end
 end
+
+-- start vim with copilot disabled by default
+vim.cmd("silent! Copilot disable")

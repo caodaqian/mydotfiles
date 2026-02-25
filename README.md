@@ -14,7 +14,6 @@ Linux setting sync
 - lua，目前的 neovim 主要配置语言
 - wget
 - curl
-- intelephense
 - nodejs
 - python3
 - uv, better pip
@@ -80,7 +79,7 @@ Linux setting sync
 - Omi，录屏工具
 - OneThing，状态栏横幅
 - Stats，系统状态显示在状态栏
-- ice，状态栏隐藏
+- [thaw](https://github.com/stonerl/Thaw) 菜单栏隐藏管理器，[ice](https://github.com/jordanbaird/Ice) 替代品
 - rift，平铺式窗口管理器
 - Infuse，视频播放器
 - betterdisplay，扩展屏显示亮度调节
