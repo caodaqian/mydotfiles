@@ -187,8 +187,11 @@ comb2 = "Alt + Ctrl + Shift"
 "comb1 + Space" = "toggle_window_floating"
 
 # smartly resize windows
-"comb1 + Equal" = "resize_window_grow"
-"comb1 + Minus" = "resize_window_shrink"
+# "comb1 + Equal" = "resize_window_grow"
+# "comb1 + Minus" = "resize_window_shrink"
+"comb1 + Equal" = { adjust_master_ratio = { delta = 0.05 } }
+"comb1 + Minus" = { adjust_master_ratio = { delta = -0.05 } }
+
 
 # Move mouse cursor to display by index (0-based) or UUID
 # Examples:

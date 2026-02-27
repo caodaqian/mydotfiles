@@ -40,3 +40,11 @@ end
 
 -- start vim with copilot disabled by default
 vim.cmd("silent! Copilot disable")
+
+-- 禁用特定文件类型的拼写检查
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown", "gitcommit", "text", "help" },
+	callback = function()
+		vim.opt_local.spell = false
+	end,
+})
