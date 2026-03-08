@@ -11,5 +11,12 @@ return {
 				mode = { "n", "t", "i", "x" },
 			},
 		},
+		opts = {
+			cli = {
+				tools = {
+					cline = { cmd = { "cline" } },
+				},
+			},
+		},
 	},
 }

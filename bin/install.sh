@@ -15,6 +15,7 @@ function main() {
 		tmux \
 		top \
 		xrc \
+		agents \
 	)
 
 	for install_func in ${install_list[*]};do
@@ -166,6 +167,74 @@ function yazi_install() {
 	ya pkg list | grep 'catppuccin-macchiato' 2>&1 >/dev/null || ya pkg add yazi-rs/flavors:catppuccin-macchiato
 	ya pkg list | grep 'gruvbox-dark' 2>&1 >/dev/null || ya pkg add bennyyip/gruvbox-dark
 	ya pkg list | grep 'everforest-medium' 2>&1 >/dev/null || ya pkg add Chromium-3-Oxide/everforest-medium
+}
+
+# private cline agents install
+function _cline_agents_install() {
+	readonly cline_rule_path="${HOME}/Documents/Cline/Rules"
+	readonly cline_skill_path="${HOME}/.cline/skills"
+	
+	local conf_dir="$1"
+	if [ ! -e "${conf_dir}" ];then
+		error "agents config dir ${conf_dir} not exists"
+		exit 1
+	fi
+	# link agent skills
+	[ ! -d "${cline_skill_path}" ] && mkdir -p "${cline_skill_path}"
+	[ ! -L "${cline_skill_path}" ] && ln -svf "${conf_dir}/skills" "${cline_skill_path}"
+	# link agent rules
+	[ ! -d "${cline_rule_path}" ] && mkdir -p "$(dirname ${cline_rule_path})"
+	[ ! -L "${cline_rule_path}" ] && ln -svf "${conf_dir}/rules" "${cline_rule_path}"
+}
+
+# private claude agents install (also supprt opencode)
+function _claude_agents_install() {
+	readonly claude_path="${HOME}/.claude"
+	readonly claude_rule_path="${HOME}/.claude/CLAUDE.md"
+	readonly claude_skill_path="${HOME}/.claude/skills"
+
+	local conf_dir="$1"
+	if [ ! -e "${conf_dir}" ];then
+		error "agents config dir ${conf_dir} not exists"
+		exit 1
+	fi
+
+	# link agent skills
+	[ ! -d "${claude_path}" ] && mkdir -p "${claude_path}"
+	[ ! -L "${claude_skill_path}" ] && ln -svf "${agents_path}/skills" "${claude_skill_path}"
+	# link agent rules
+	if [ -f "${claude_rule_path}" ]; then
+		warn "claude rules file already exists, skip link rules"
+	else
+		# Read the contents of all md files in the agents rules directory and merge them into one CLAUDE.md file
+		cat "${agents_path}/rules"/*.md > "${claude_rule_path}"
+	fi
+}
+
+# install agents config
+function agents_install() {
+	readonly agent_cli=(cline claude)
+	
+	# link agents config dir to ~/.agents, support multiple agent clis use the same config
+	ln -svF "${WORKDIR}/config/agents" "${HOME}/.agents"
+	readonly agents_path="${HOME}/.agents"
+	if [ ! -e "${agents_path}" ];then
+		error "must install link firstly"
+		exit 1
+	fi
+
+
+	for cli in ${agent_cli[*]}; do
+		local cli_path="${HOME}/.${cli}"
+		# check dir exists
+		if [ ! -d "${cli_path}" ];then
+			warn "skip agent ${cli}"
+			continue
+		fi
+
+		# do cli rulesync
+		_${cli}_agents_install "${agents_path}"
+	done
 }
 
 main
