@@ -7,15 +7,15 @@
 ##########################################
 
 ## base environment config
-if [[ -z "$(nvim --version 2>/dev/null)" ]]; then
-	export EDITOR=vim
-	export MYVIMRC=${HOME}/.vim/vimrc
-	export VIMDIR=${HOME}/.vim
-else
+if command -v nvim &>/dev/null; then
 	export EDITOR=nvim
 	export MYVIMRC=${HOME}/.config/nvim/init.lua
 	export VIMDIR=${HOME}/.config/nvim
 	export PATH=${PATH}:${HOME}/.local/share/nvim/lsp_servers/python
+else
+	export EDITOR=vim
+	export MYVIMRC=${HOME}/.vim/vimrc
+	export VIMDIR=${HOME}/.vim
 fi
 export MYTMPDIR=${HOME}/.tmp && [ ! -d "${MYTMPDIR}" ] && mkdir -p "${MYTMPDIR}"
 if [[ $(uname -s) == "Darwin" ]]; then
@@ -24,10 +24,14 @@ fi
 export LESSCHARSET=utf-8
 
 ## homebrew
-test -d /usr/local/Homebrew && eval "$(/usr/local/Homebrew/bin/brew shellenv)"
-test -d /opt/homebrew && eval "$(/opt/homebrew/bin/brew shellenv)"
-## linuxbrew
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [[ -d "/usr/local/Homebrew" ]]; then
+	eval "$(/usr/local/Homebrew/bin/brew shellenv)"
+elif [[ -d "/opt/homebrew" ]]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
+	## linuxbrew
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 ## PATH add
 export PATH=/usr/local/bin:${HOME}/.local/bin:${PATH}
@@ -61,7 +65,7 @@ export PATH=${NODE_HOME}/bin:${PATH}
 
 ## fzf config
 #export FZF_COMPLETION_TRIGGER='**'
-if [[ -z "$(tmux --version 2>/dev/null)" ]]; then
+if ! command -v tmux &>/dev/null; then
 	export FZF_TMUX=1
 	export FZF_TMUX_HEIGHT='80%'
 fi

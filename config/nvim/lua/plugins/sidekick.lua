@@ -14,7 +14,7 @@ return {
 		opts = {
 			cli = {
 				tools = {
-					cline = { cmd = { "cline" } },
+					cline = { cmd = { "cline", "--tui" } },
 				},
 			},
 		},

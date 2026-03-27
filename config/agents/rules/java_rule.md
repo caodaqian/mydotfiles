@@ -17,6 +17,7 @@ paths:
 - 注意避免使用魔法数字，使用常量代替
 - 注意避免使用魔法布尔值，使用常量代替
 - 注意避免使用魔法列表，使用常量代替
+- 善用常见的工具类，例如 `CollectionUtils`,`StringUtils`,`NumberUtils`,`MapUtils`,`DateUtils`,`ObjectUtils`等，避免重复造轮子
 
 ## Java 代码规范
 - 避免单行多余的空格；
@@ -26,3 +27,4 @@ paths:
 - 注意 Restricted Identifiers should not be used as Identifiers (java:S6213)；
 - 注意 "Stream.toList()" method should be used instead of "collectors" when unmodifiable list needed (java:S6204);
 - 如果是新建文件，偏好使用 hard tab 的方式进行缩进。已有文件则根据当前缩进格式进行缩进；
+- 编写单测文件时注意，JUilt5 test classes and methods should have default pacakge visibility(java:S5786)

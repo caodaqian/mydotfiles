@@ -33,6 +33,8 @@ Linux setting sync
 - zsh-autosuggestions
 - zsh-syntax_highlignting
 - git-open
+- autoupdate
+- fzf-tab
 
 ### tmux 自动安装
 
