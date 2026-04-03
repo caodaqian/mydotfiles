@@ -24,10 +24,10 @@ fi
 export LESSCHARSET=utf-8
 
 ## homebrew
-if [[ -d "/usr/local/Homebrew" ]]; then
-	eval "$(/usr/local/Homebrew/bin/brew shellenv)"
-elif [[ -d "/opt/homebrew" ]]; then
+if [[ -d "/opt/homebrew" ]]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -d "/usr/local/Homebrew" ]]; then
+	eval "$(/usr/local/Homebrew/bin/brew shellenv)"
 elif [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
 	## linuxbrew
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -84,16 +84,48 @@ FZF_THEME_OPTS="--color=border:#aaaaaa,label:#cccccc
 --color=header-border:#6699cc,header-label:#99ccff
 --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
 --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
-export FZF_DEFAULT_OPTS="--highlight-line --layout reverse --multi --info=inline-right --border --padding 0 --ansi
+export FZF_DEFAULT_OPTS="--height 60% --highlight-line --layout reverse --multi --info=inline-right --border --padding 0 --ansi
+--preview='bat --color=always --highlight-line={2} {1} 2> /dev/null || less {1}'
+-m
+-d:
+--ansi
+--reverse
+--prompt='❯ '
+--pointer=❯
+--marker=✓
+--bind=ctrl-j:jump
+--bind=ctrl-k:kill-line
+--bind=ctrl-n:down
+--bind=ctrl-p:up
+--bind=alt-j:previous-history
+--bind=alt-k:next-history
+--bind=ctrl-q:clear-query
+--bind=alt-a:first
+--bind=alt-e:last
+--bind=alt-N:toggle-out
+--bind=alt-P:toggle-in
+--bind=ctrl-space:toggle
+--bind=ctrl-o:toggle-all
+--bind=ctrl-g:deselect-all
+--bind=alt-g:select-all
+--bind=ctrl-s:toggle-search
+--bind='ctrl-\\:toggle-sort'
+--bind=ctrl-^:toggle-preview-wrap
+--bind=ctrl-x:toggle-preview
+--bind=alt-p:preview-up
+--bind=alt-n:preview-down
+--bind=ctrl-v:preview-page-down
+--bind=alt-v:preview-page-up
+--bind=ctrl-r:preview-half-page-down
+--bind=alt-r:preview-half-page-up
+--bind='alt-<:preview-top'
+--bind='alt->:preview-bottom'
+--bind='ctrl-]:change-preview-window(bottom|right)'
+--bind='alt-space:change-preview-window(+{2}+3/3,~3|+{2}+3/3,~1|)'
 --bind 'ctrl-h:top,change:top'
 --bind '?:change-preview-window(right|down|up|hidden|)'
---preview 'fzf-preview.sh {}'
---input-label ' Input '
---header-label ' File Type '
 --bind 'tab:toggle'
 --bind 'ctrl-a:toggle-all'
---bind 'focus:transform-preview-label:[[ -n {} ]] && printf \" Previewing [%s] \" {}'
---bind 'focus:+transform-header:file --brief {} || echo \"No file selected\"'
 ${FZF_THEME_OPTS}"
 
 ## bat config

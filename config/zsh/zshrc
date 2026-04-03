@@ -61,6 +61,7 @@ plugins=(
 	#### from github
 	git-open
 	fzf-tab
+	fzf-tab-source
 	zsh-autosuggestions
 	zsh-syntax-highlighting
 	autoupdate ## auto update custom plugin
@@ -92,12 +93,15 @@ ZSHZ_TILDE=1
 ## custom plugin auto update
 export UPDATE_ZSH_DAYS=30
 
-## fzf-tab seetings
-if [[ -n "${NVIM}" ]];then
+## fzf-tab setings
+if [[ -n "${TMUX}" ]];then
+	# zstyle ':fzf-tab:*' fzf-flags --height=60
 	zstyle ':fzf-tab:*' fzf-command fzf
-	zstyle ':fzf-tab:*' popup-min-size 0 0 # 禁用弹窗尺寸计算
+	zstyle ':fzf-tab:*' fzf-min-height 20
+	
 else
 	zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+	zstyle ':fzf-tab:*' fzf-min-height 20
 	zstyle ':fzf-tab:*' popup-pad 0 0
 	zstyle ':fzf-tab:*' popup-min-size 80 20
 fi

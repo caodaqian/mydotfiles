@@ -39,7 +39,7 @@ function vim.ui.select(items, opts, on_choice)
 end
 
 -- start vim with copilot disabled by default
-vim.cmd("silent! Copilot disable")
+-- vim.cmd("silent! Copilot disable")
 
 -- 禁用特定文件类型的拼写检查
 vim.api.nvim_create_autocmd("FileType", {
