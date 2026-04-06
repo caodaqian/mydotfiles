@@ -146,6 +146,15 @@
       "skillFolderHash": "ceb2f1f67f4cadb29b32a06e54d3d0be832071f5",
       "installedAt": "2026-04-06T08:22:01.211Z",
       "updatedAt": "2026-04-06T08:22:01.211Z"
+    },
+    "data-analysis": {
+      "source": "claude-office-skills/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/claude-office-skills/skills.git",
+      "skillPath": "data-analysis/SKILL.md",
+      "skillFolderHash": "92c68c1621fd29332f4c42f18e106dd2bafc1ce1",
+      "installedAt": "2026-04-06T14:46:34.385Z",
+      "updatedAt": "2026-04-06T14:46:34.385Z"
     }
   },
   "dismissed": {
