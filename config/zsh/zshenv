@@ -1,4 +1,3 @@
-PATH=/usr/local/bin:${PATH}
 # User locale config
 [ -f ${HOME}/.config/env/locale.sh ] && . ${HOME}/.config/env/locale.sh
 # env config

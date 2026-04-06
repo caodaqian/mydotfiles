@@ -6,23 +6,6 @@
 ## @Description : environment config
 ##########################################
 
-## base environment config
-if command -v nvim &>/dev/null; then
-	export EDITOR=nvim
-	export MYVIMRC=${HOME}/.config/nvim/init.lua
-	export VIMDIR=${HOME}/.config/nvim
-	export PATH=${PATH}:${HOME}/.local/share/nvim/lsp_servers/python
-else
-	export EDITOR=vim
-	export MYVIMRC=${HOME}/.vim/vimrc
-	export VIMDIR=${HOME}/.vim
-fi
-export MYTMPDIR=${HOME}/.tmp && [ ! -d "${MYTMPDIR}" ] && mkdir -p "${MYTMPDIR}"
-if [[ $(uname -s) == "Darwin" ]]; then
-	export LSCOLORS=Gxfxcxdxbxegedabagacad
-fi
-export LESSCHARSET=utf-8
-
 ## homebrew
 if [[ -d "/opt/homebrew" ]]; then
 	eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -34,7 +17,24 @@ elif [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
 fi
 
 ## PATH add
-export PATH=/usr/local/bin:${HOME}/.local/bin:${PATH}
+export PATH=${HOME}/.local/bin:/usr/local/bin:${PATH}
+
+## base environment config
+if command -v nvim &>/dev/null; then
+	export EDITOR=nvim
+	export MYVIMRC=${HOME}/.config/nvim/init.lua
+	export VIMDIR=${HOME}/.config/nvim
+	export PATH=${HOME}/.local/share/nvim/mason/bin:${PATH}
+else
+	export EDITOR=vim
+	export MYVIMRC=${HOME}/.vim/vimrc
+	export VIMDIR=${HOME}/.vim
+fi
+export MYTMPDIR=${HOME}/.tmp && [ ! -d "${MYTMPDIR}" ] && mkdir -p "${MYTMPDIR}"
+if [[ $(uname -s) == "Darwin" ]]; then
+	export LSCOLORS=Gxfxcxdxbxegedabagacad
+fi
+export LESSCHARSET=utf-8
 
 ## tmux config
 export TMUX_TMPDIR=${MYTMPDIR}/tmux && [ ! -d "${TMUX_TMPDIR}" ] && mkdir -p "${TMUX_TMPDIR}"
@@ -53,11 +53,7 @@ export PATH=${GOBIN}:${PATH}
 export JAVA_HOME=${JAVA_HOME:-"$(brew --prefix openjdk)"}
 export JRE_HOME=${JRE_HOME:-"$JAVA_HOME/jre"}
 export CLASSPATH=.:$JAVA_HOME/lib:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
-export PATH=${PATH}:${JAVA_HOME}/bin
-
-## python config
-export PYTHONUSERBASE=${HOME}/.local
-export PATH=${PYTHONUSERBASE}/bin:${PATH}
+export PATH=${JAVA_HOME}/bin:${PATH}
 
 ## node config
 export NODE_HOME=${NODE_HOME:-"${HOME}/.local/shard/nodejs"}
@@ -127,6 +123,3 @@ export FZF_DEFAULT_OPTS="--height 60% --highlight-line --layout reverse --multi 
 --bind 'tab:toggle'
 --bind 'ctrl-a:toggle-all'
 ${FZF_THEME_OPTS}"
-
-## bat config
-# export BAT_THEME='Catppuccin Mocha'
