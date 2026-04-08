@@ -16,3 +16,5 @@ config/yazi/bookmark
 config/yazi/package.toml
 config/bat/themes/
 **/.DS_Store
+config/kilo/*
+!config/kilo/kilo.jsonc

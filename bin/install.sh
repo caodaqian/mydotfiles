@@ -15,7 +15,6 @@ function main() {
 		tmux \
 		top \
 		xrc \
-		agents \
 	)
 
 	for install_func in ${install_list[*]};do

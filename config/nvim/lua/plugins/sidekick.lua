@@ -15,6 +15,7 @@ return {
 			cli = {
 				tools = {
 					cline = { cmd = { "cline", "--tui" } },
+					kilo = { cmd = { "kilo" } },
 				},
 			},
 		},

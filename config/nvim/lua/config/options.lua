@@ -53,3 +53,6 @@ vim.g.python_recommended_style = 0
 
 -- Native inline completions don't support being shown as regular completions
 vim.g.ai_cmp = false
+
+-- enable snacks picker for all pickers
+vim.g.lazyvim_picker = "snacks"
