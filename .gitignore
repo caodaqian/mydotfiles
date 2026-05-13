@@ -18,3 +18,5 @@ config/bat/themes/
 **/.DS_Store
 config/kilo/*
 !config/kilo/kilo.jsonc
+
+config/omniwm/runtime-state.json

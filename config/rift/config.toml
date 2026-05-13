@@ -4,7 +4,7 @@
 # - animation_duration: seconds per animation (>= 0.0, typical 0.15–0.35)
 # - animation_fps: frames per second (0.0 = display refresh rate). 60–120 recommended.
 #   ease_in_circ, ease_out_circ, ease_in_out_circ
-animate = false
+animate = true
 animation_duration = 0.3
 animation_fps = 100.0
 
@@ -47,7 +47,7 @@ auto_focus_blacklist = [
 # This is the default layout mode if there is nothing else configured
 # in the `workspace_rules` section below.
 # You can set different layouts per workspace using `workspace_rules`.
-mode = "master_stack"
+mode = "scrolling"
 
 [settings.layout.master_stack]
 # Fraction of space reserved for the master area (0.05..0.95)
@@ -58,6 +58,24 @@ master_count = 1
 master_side = "left"
 # Where new windows go when the master area is already full (master | stack | focused)
 new_window_placement = "focused"
+
+# these settings only apply when layout mode == "scrolling"
+[settings.layout.scrolling]
+# width of the active column (0..1 of screen width)
+column_width_ratio = 0.7
+# min_column_width_ratio / max_column_width_ratio: clamp bounds used by resize commands
+min_column_width_ratio = 0.3
+max_column_width_ratio = 0.9
+# Alignment for the focused column: "left", "center", or "right"
+alignment = "center"
+# Horizontal focus behavior:
+# - "niri": reveal columns only when needed based on navigation direction
+# 			(disrespects alignment setting above)
+# - "anchored": always align focused column according to `alignment`
+focus_navigation_style = "niri"
+# the scrolling layout tends to function better without animations,
+# so you can disable them if you like
+# animate = false
 
 [settings.layout.gaps.outer]
 top = 1
