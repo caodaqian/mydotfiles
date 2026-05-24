@@ -82,7 +82,7 @@ Linux setting sync
 - OneThing，状态栏横幅
 - Stats，系统状态显示在状态栏
 - [thaw](https://github.com/stonerl/Thaw) 菜单栏隐藏管理器，[ice](https://github.com/jordanbaird/Ice) 替代品
-- rift，平铺式窗口管理器
+- Omniwm，平铺式窗口管理器
 - Infuse，视频播放器
 - betterdisplay，扩展屏显示亮度调节
 - mac-mouse-fix，鼠标滑动优化，更类似 windows 一点
