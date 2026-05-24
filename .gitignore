@@ -19,4 +19,5 @@ config/bat/themes/
 config/kilo/*
 !config/kilo/kilo.jsonc
 
-config/omniwm/runtime-state.json
+config/omniwm/
+!config/omniwm/settings.toml
