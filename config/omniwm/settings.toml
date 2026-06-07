@@ -47,8 +47,11 @@ top = 1.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
+hyperTrigger = "Option"
 ipcEnabled = true
+leaderKey = "Hyper+Space"
 preventSleepEnabled = false
+sequenceTimeoutMilliseconds = 800
 updateChecksEnabled = true
 
 [gestures]
@@ -60,18 +63,18 @@ scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
 
 [mouseWarp]
-axis = "vertical"
+axis = "horizontal"
 margin = 1
 monitorOrder = ["LS27A800U", "Built-in Retina Display"]
 
 [niri]
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "onOverflow"
-columnWidthPresets = [0.45, 0.66, 0.95, 1.0]
+columnWidthPresets = [0.66, 0.95, 1.0, 0.3]
+defaultColumnWidth = 0.7
 infiniteLoop = true
-maxVisibleColumns = 2
-maxWindowsPerColumn = 2
-singleWindowAspectRatio = "1:1"
+maxVisibleColumns = 1
+singleWindowAspectRatio = "none"
 
 [quakeTerminal]
 animationDuration = 0.2
@@ -81,11 +84,7 @@ heightPercent = 50.0
 monitorMode = "focusedWindow"
 opacity = 1.0
 position = "center"
-useCustomFrame = false
 widthPercent = 50.0
-
-[state]
-commandPaletteLastMode = "menu"
 
 [statusBar]
 showAppNames = false
@@ -93,19 +92,19 @@ showWorkspaceName = true
 useWorkspaceId = false
 
 [workspaceBar]
-backgroundOpacity = 0.1
+backgroundOpacity = 0.4
 deduplicateAppIcons = false
 enabled = true
-height = 24.0
+height = 30.0
 hideEmptyWorkspaces = true
 labelFontSize = 12.0
 notchAware = true
-position = "belowMenuBar"
+position = "overlappingMenuBar"
 reserveLayoutSpace = false
 showFloatingWindows = true
 showLabels = true
 windowLevel = "popup"
-xOffset = -500.0
+xOffset = 100.0
 yOffset = 0.0
 
 [[appRules]]
@@ -202,6 +201,7 @@ minWidth = 1080.0
 bundleId = "dd.work.exclusive4antding"
 id = "564FBD14-1E11-474B-BE74-B0F4DFBBBAF7"
 layout = "float"
+titleSubstring = "蚂蚁钉"
 
 [[hotkeys]]
 binding = "Option+Shift+1"
@@ -348,11 +348,11 @@ binding = "Unassigned"
 id = "centerVisibleColumns"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+["
+binding = "Control+Option+Shift+Left Bracket"
 id = "moveWindowToWorkspaceUp"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+]"
+binding = "Control+Option+Shift+Right Bracket"
 id = "moveWindowToWorkspaceDown"
 
 [[hotkeys]]
@@ -488,11 +488,11 @@ binding = "Unassigned"
 id = "toggleColumnTabbed"
 
 [[hotkeys]]
-binding = "Option+Shift+="
+binding = "Option+Shift+Equal"
 id = "cycleColumnWidthForward"
 
 [[hotkeys]]
-binding = "Option+Shift+-"
+binding = "Option+Shift+Minus"
 id = "cycleColumnWidthBackward"
 
 [[hotkeys]]
@@ -500,19 +500,19 @@ binding = "Option+Shift+Return"
 id = "moveToRoot"
 
 [[hotkeys]]
-binding = "Option+Shift+/"
+binding = "Option+Shift+Slash"
 id = "toggleSplit"
 
 [[hotkeys]]
-binding = "Option+Shift+'"
+binding = "Option+Shift+Quote"
 id = "resizeGrow.right"
 
 [[hotkeys]]
-binding = "Option+Shift+;"
+binding = "Option+Shift+Semicolon"
 id = "resizeGrow.down"
 
 [[hotkeys]]
-binding = "Option+Shift+`"
+binding = "Option+Shift+Grave"
 id = "openCommandPalette"
 
 [[hotkeys]]
@@ -540,20 +540,18 @@ binding = "Option+Shift+M"
 id = "toggleOverview"
 
 [[monitorBarOverrides]]
-backgroundOpacity = 0.0
 deduplicateAppIcons = true
-enabled = true
-height = 20.0
-hideEmptyWorkspaces = true
 id = "A91274F6-C713-4440-A2DC-2B65232BA9B2"
 monitorName = "Built-in Retina Display"
-notchAware = true
-position = "belowMenuBar"
-reserveLayoutSpace = false
-showLabels = true
-windowLevel = "status"
-xOffset = -300.0
+xOffset = 240.0
 yOffset = 40.0
+
+[[monitorBarOverrides]]
+id = "3FF0DF14-C1D8-4C5C-88FA-E427E6C6B792"
+monitorDisplayId = 2
+monitorName = "AG273QG3R3B"
+xOffset = 0.0
+yOffset = 30.0
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
