@@ -47,11 +47,10 @@ top = 1.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
-hyperTrigger = "Option"
+hyperKeyHoldThresholdMilliseconds = 150
+hyperTrigger = "Left Option"
 ipcEnabled = true
-leaderKey = "Hyper+Space"
 preventSleepEnabled = false
-sequenceTimeoutMilliseconds = 800
 updateChecksEnabled = true
 
 [gestures]
@@ -126,12 +125,6 @@ minHeight = 375.0
 minWidth = 500.0
 
 [[appRules]]
-bundleId = "com.microsoft.edgemac"
-id = "1D61E2B2-DACF-4697-8432-875FAEBD9B12"
-minHeight = 900.0
-minWidth = 1200.0
-
-[[appRules]]
 bundleId = "dev.zed.Zed"
 id = "979F05F4-FFA2-4EDD-B23F-08A9944C759F"
 minHeight = 240.0
@@ -190,18 +183,6 @@ bundleId = "com.apple.MobileSMS"
 id = "552FB77D-BF0E-4737-90A6-B5BC6986C579"
 minHeight = 320.0
 minWidth = 660.0
-
-[[appRules]]
-assignToWorkspace = "5"
-bundleId = "com.microsoft.VSCode"
-id = "BFE29514-EB0B-4F16-8865-4909F9FB02A3"
-minWidth = 1080.0
-
-[[appRules]]
-bundleId = "dd.work.exclusive4antding"
-id = "564FBD14-1E11-474B-BE74-B0F4DFBBBAF7"
-layout = "float"
-titleSubstring = "蚂蚁钉"
 
 [[hotkeys]]
 binding = "Option+Shift+1"

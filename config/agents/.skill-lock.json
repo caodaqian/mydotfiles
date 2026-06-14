@@ -107,18 +107,18 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/subagent-driven-development/SKILL.md",
-      "skillFolderHash": "fbcd94ffcf589754a8ecfa59861cc8843313590e",
+      "skillFolderHash": "73b43347c1bdc10f6ab81a5cdb036dd1c8098cc0",
       "installedAt": "2026-04-06T08:21:55.249Z",
-      "updatedAt": "2026-04-06T08:21:55.249Z"
+      "updatedAt": "2026-06-10T18:06:32.643Z"
     },
     "systematic-debugging": {
       "source": "obra/superpowers",
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/systematic-debugging/SKILL.md",
-      "skillFolderHash": "828c239ac986cc1fc7edd10292f66e4a3640e9c0",
+      "skillFolderHash": "e96f5f2620c17069d668be1880d5492e34c84ceb",
       "installedAt": "2026-04-06T08:21:56.297Z",
-      "updatedAt": "2026-04-06T08:21:56.297Z"
+      "updatedAt": "2026-06-10T18:06:38.058Z"
     },
     "test-driven-development": {
       "source": "obra/superpowers",
@@ -134,9 +134,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/using-git-worktrees/SKILL.md",
-      "skillFolderHash": "a5b3f5965f321175a7f07dcadff0bb79adb9e9f7",
+      "skillFolderHash": "13a9643fb9e4b236173f7d4b56b15dac10394f1b",
       "installedAt": "2026-04-06T08:21:59.884Z",
-      "updatedAt": "2026-04-06T08:21:59.884Z"
+      "updatedAt": "2026-06-10T18:06:43.559Z"
     },
     "verification-before-completion": {
       "source": "obra/superpowers",
