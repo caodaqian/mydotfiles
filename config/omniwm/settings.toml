@@ -1,6 +1,8 @@
 monitorDwindleOverrides = []
+monitorGapOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
+monitorRoutingOverrides = []
 
 [appearance]
 mode = "automatic"
@@ -30,8 +32,11 @@ splitWidthMultiplier = 0.5
 useGlobalGaps = true
 
 [focus]
+crossesMonitorAtEdge = true
 followsMouse = false
 followsWindowToMonitor = true
+lockModifier = "off"
+moveCrossesMonitorAtEdge = true
 moveMouseToFocusedWindow = false
 
 [gaps]
@@ -47,10 +52,10 @@ top = 1.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
-hyperKeyHoldThresholdMilliseconds = 150
-hyperTrigger = "Left Option"
 ipcEnabled = true
 preventSleepEnabled = false
+spacesTrackingEnabled = true
+systemHyperTrigger = "None"
 updateChecksEnabled = true
 
 [gestures]
@@ -60,11 +65,11 @@ mouseResizeModifierKey = "option"
 scrollEnabled = true
 scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
+trackpadScrollStyle = "snap"
 
 [mouseWarp]
-axis = "horizontal"
+enabled = true
 margin = 1
-monitorOrder = ["LS27A800U", "Built-in Retina Display"]
 
 [niri]
 alwaysCenterSingleColumn = true
@@ -72,8 +77,8 @@ centerFocusedColumn = "onOverflow"
 columnWidthPresets = [0.66, 0.95, 1.0, 0.3]
 defaultColumnWidth = 0.7
 infiniteLoop = true
-maxVisibleColumns = 1
-singleWindowAspectRatio = "none"
+maxVisibleColumns = 3
+singleWindowAspectRatio = "fill"
 
 [quakeTerminal]
 animationDuration = 0.2
@@ -85,16 +90,19 @@ opacity = 1.0
 position = "center"
 widthPercent = 50.0
 
+[routing]
+mode = "macOS"
+
 [statusBar]
 showAppNames = false
 showWorkspaceName = true
 useWorkspaceId = false
 
 [workspaceBar]
-backgroundOpacity = 0.4
-deduplicateAppIcons = false
+backgroundOpacity = 0.05
+deduplicateAppIcons = true
 enabled = true
-height = 30.0
+height = 32.0
 hideEmptyWorkspaces = true
 labelFontSize = 12.0
 notchAware = true
@@ -103,8 +111,8 @@ reserveLayoutSpace = false
 showFloatingWindows = true
 showLabels = true
 windowLevel = "popup"
-xOffset = 100.0
-yOffset = 0.0
+xOffset = -210.0
+yOffset = 40.0
 
 [[appRules]]
 bundleId = "com.openai.codex"
@@ -122,6 +130,12 @@ minWidth = 950.0
 bundleId = "com.google.Chrome"
 id = "486CEFA6-69AA-4A3C-AF27-BCD38F4F138B"
 minHeight = 375.0
+minWidth = 500.0
+
+[[appRules]]
+bundleId = "com.microsoft.edgemac"
+id = "72877CB9-C721-4940-89C9-E1C82ABD819C"
+minHeight = 400.0
 minWidth = 500.0
 
 [[appRules]]
@@ -183,6 +197,12 @@ bundleId = "com.apple.MobileSMS"
 id = "552FB77D-BF0E-4737-90A6-B5BC6986C579"
 minHeight = 320.0
 minWidth = 660.0
+
+[[appRules]]
+bundleId = "org.yuanli.utools"
+id = "2BC93E3C-B44C-4AAB-AC41-6965C098BB37"
+layout = "float"
+titleRegex = "(AI|JSON|Notion|Task)"
 
 [[hotkeys]]
 binding = "Option+Shift+1"
@@ -257,7 +277,7 @@ binding = "Unassigned"
 id = "moveToWorkspace.8"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+Tab"
 id = "workspaceBackAndForth"
 
 [[hotkeys]]
@@ -265,7 +285,7 @@ binding = "Unassigned"
 id = "switchWorkspace.next"
 
 [[hotkeys]]
-binding = "Option+Tab"
+binding = "Unassigned"
 id = "switchWorkspace.previous"
 
 [[hotkeys]]
@@ -337,11 +357,11 @@ binding = "Control+Option+Shift+Right Bracket"
 id = "moveWindowToWorkspaceDown"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Page Up"
+binding = "Unassigned"
 id = "moveColumnToWorkspaceUp"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Page Down"
+binding = "Unassigned"
 id = "moveColumnToWorkspaceDown"
 
 [[hotkeys]]
@@ -469,12 +489,184 @@ binding = "Unassigned"
 id = "toggleColumnTabbed"
 
 [[hotkeys]]
+binding = "Option+Home"
+id = "focusColumnFirst"
+
+[[hotkeys]]
+binding = "Option+End"
+id = "focusColumnLast"
+
+[[hotkeys]]
+binding = "Control+Option+1"
+id = "focusColumn.0"
+
+[[hotkeys]]
+binding = "Control+Option+2"
+id = "focusColumn.1"
+
+[[hotkeys]]
+binding = "Control+Option+3"
+id = "focusColumn.2"
+
+[[hotkeys]]
+binding = "Control+Option+4"
+id = "focusColumn.3"
+
+[[hotkeys]]
+binding = "Control+Option+5"
+id = "focusColumn.4"
+
+[[hotkeys]]
+binding = "Control+Option+6"
+id = "focusColumn.5"
+
+[[hotkeys]]
+binding = "Control+Option+7"
+id = "focusColumn.6"
+
+[[hotkeys]]
+binding = "Control+Option+8"
+id = "focusColumn.7"
+
+[[hotkeys]]
+binding = "Control+Option+9"
+id = "focusColumn.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.1"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.2"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.3"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.4"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.5"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.6"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.7"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "focusWindowInColumn.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.1"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.2"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.3"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.4"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.5"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.6"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.7"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumnToIndex.9"
+
+[[hotkeys]]
 binding = "Option+Shift+Equal"
 id = "cycleColumnWidthForward"
 
 [[hotkeys]]
 binding = "Option+Shift+Minus"
 id = "cycleColumnWidthBackward"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "cycleWindowWidthForward"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "cycleWindowWidthBackward"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "cycleWindowHeightForward"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "cycleWindowHeightBackward"
+
+[[hotkeys]]
+binding = "Option+Shift+F"
+id = "toggleColumnFullWidth"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "expandColumnToAvailableWidth"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "resetWindowHeight"
+
+[[hotkeys]]
+binding = "Option+Minus"
+id = "setColumnWidth.decrease10Percent"
+
+[[hotkeys]]
+binding = "Option+Equal"
+id = "setColumnWidth.increase10Percent"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "setWindowWidth.decrease10Percent"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "setWindowWidth.increase10Percent"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "setWindowHeight.decrease10Percent"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "setWindowHeight.increase10Percent"
+
+[[hotkeys]]
+binding = "Option+Shift+B"
+id = "balanceSizes"
 
 [[hotkeys]]
 binding = "Option+Shift+Return"
@@ -485,12 +677,68 @@ binding = "Option+Shift+Slash"
 id = "toggleSplit"
 
 [[hotkeys]]
+binding = "Unassigned"
+id = "swapSplit"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "resizeGrow.left"
+
+[[hotkeys]]
 binding = "Option+Shift+Quote"
 id = "resizeGrow.right"
 
 [[hotkeys]]
+binding = "Unassigned"
+id = "resizeGrow.up"
+
+[[hotkeys]]
 binding = "Option+Shift+Semicolon"
 id = "resizeGrow.down"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "resizeShrink.left"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "resizeShrink.right"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "resizeShrink.up"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "resizeShrink.down"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "resizeFocusedWindow.grow"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "resizeFocusedWindow.shrink"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "preselect.left"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "preselect.right"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "preselect.up"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "preselect.down"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "preselectClear"
 
 [[hotkeys]]
 binding = "Option+Shift+Grave"
@@ -501,12 +749,32 @@ binding = "Option+Shift+C"
 id = "raiseAllFloatingWindows"
 
 [[hotkeys]]
+binding = "Unassigned"
+id = "rescueOffscreenWindows"
+
+[[hotkeys]]
 binding = "Option+Shift+Space"
 id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]
 binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpadWindow"
+
+[[hotkeys]]
+binding = "Unassigned"
 id = "openMenuAnywhere"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleWorkspaceBarVisibility"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleHiddenBar"
 
 [[hotkeys]]
 binding = "Unassigned"
@@ -521,16 +789,10 @@ binding = "Option+Shift+M"
 id = "toggleOverview"
 
 [[monitorBarOverrides]]
-deduplicateAppIcons = true
-id = "A91274F6-C713-4440-A2DC-2B65232BA9B2"
-monitorName = "Built-in Retina Display"
-xOffset = 240.0
-yOffset = 40.0
-
-[[monitorBarOverrides]]
+deduplicateAppIcons = false
 id = "3FF0DF14-C1D8-4C5C-88FA-E427E6C6B792"
 monitorDisplayId = 2
-monitorName = "AG273QG3R3B"
+monitorName = "LS27A800U"
 xOffset = 0.0
 yOffset = 30.0
 

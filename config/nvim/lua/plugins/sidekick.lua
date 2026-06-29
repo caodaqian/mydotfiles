@@ -18,6 +18,11 @@ return {
 					kilo = { cmd = { "kilo" } },
 				},
 			},
+			copilot = {
+				status = {
+					level = vim.log.levels.OFF,
+				},
+			},
 		},
 	},
 }
