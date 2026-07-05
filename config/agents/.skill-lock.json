@@ -79,9 +79,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/obra/superpowers.git",
       "skillPath": "skills/brainstorming/SKILL.md",
-      "skillFolderHash": "27e73ef7b83994e913cba378081b587412d2e9cb",
+      "skillFolderHash": "b14f49a55a8387cfa12ac89794ab79698d7fddbb",
       "installedAt": "2026-04-06T08:21:52.343Z",
-      "updatedAt": "2026-06-30T16:58:32.919Z"
+      "updatedAt": "2026-07-05T10:25:32.998Z"
     },
     "subagent-driven-development": {
       "source": "obra/superpowers",
@@ -109,15 +109,6 @@
       "skillFolderHash": "61939b456845d75979423c855829d05cbf2c304d",
       "installedAt": "2026-04-06T08:21:58.382Z",
       "updatedAt": "2026-06-30T16:58:48.409Z"
-    },
-    "using-git-worktrees": {
-      "source": "obra/superpowers",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/obra/superpowers.git",
-      "skillPath": "skills/using-git-worktrees/SKILL.md",
-      "skillFolderHash": "069a24665c6ce34ca78da57727c84e3c05e65c76",
-      "installedAt": "2026-04-06T08:21:59.884Z",
-      "updatedAt": "2026-06-30T16:58:51.912Z"
     },
     "verification-before-completion": {
       "source": "obra/superpowers",
@@ -154,6 +145,70 @@
       "skillFolderHash": "ab2adb78b24572c2a80c18158ad699ab065c73df",
       "installedAt": "2026-06-30T17:32:52.425Z",
       "updatedAt": "2026-06-30T17:32:52.425Z"
+    },
+    "design-system": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skillPath": ".claude/skills/design-system/SKILL.md",
+      "skillFolderHash": "5d99b8b98eb93cc2641adc1a4d8c243a5e928ea0",
+      "installedAt": "2026-07-05T10:24:26.818Z",
+      "updatedAt": "2026-07-05T10:48:23.557Z"
+    },
+    "ui-styling": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skillPath": ".claude/skills/ui-styling/SKILL.md",
+      "skillFolderHash": "c198f4241c6ec9d890b5721beca86e8a08bdc85a",
+      "installedAt": "2026-07-05T10:25:13.743Z",
+      "updatedAt": "2026-07-05T10:48:57.787Z"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "skillFolderHash": "0d5b74a14bdf3ebcd64f352d06376a2ef05ed296",
+      "pluginName": "example-skills",
+      "installedAt": "2026-07-05T10:43:21.918Z",
+      "updatedAt": "2026-07-05T10:43:21.918Z"
+    },
+    "banner-design": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skillPath": ".claude/skills/banner-design/SKILL.md",
+      "skillFolderHash": "0179fd7d727a3d879c2ec7aa0f70bd1c185ecb6f",
+      "installedAt": "2026-07-05T10:46:53.788Z",
+      "updatedAt": "2026-07-05T10:46:53.788Z"
+    },
+    "brand": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skillPath": ".claude/skills/brand/SKILL.md",
+      "skillFolderHash": "0c2f743227597102bdf19ac5a1c00ba26e468b3a",
+      "installedAt": "2026-07-05T10:47:44.127Z",
+      "updatedAt": "2026-07-05T10:47:44.127Z"
+    },
+    "design": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skillPath": ".claude/skills/design/SKILL.md",
+      "skillFolderHash": "689cab29fd6da6519250c79568b725365d7027cb",
+      "installedAt": "2026-07-05T10:48:09.186Z",
+      "updatedAt": "2026-07-05T10:48:09.186Z"
+    },
+    "slides": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skillPath": ".claude/skills/slides/SKILL.md",
+      "skillFolderHash": "3180dd950c35d627d7f4e770cc96d6267d6cf257",
+      "installedAt": "2026-07-05T10:48:37.040Z",
+      "updatedAt": "2026-07-05T10:48:37.040Z"
     }
   },
   "dismissed": {
