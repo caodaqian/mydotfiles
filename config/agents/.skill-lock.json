@@ -209,6 +209,24 @@
       "skillFolderHash": "3180dd950c35d627d7f4e770cc96d6267d6cf257",
       "installedAt": "2026-07-05T10:48:37.040Z",
       "updatedAt": "2026-07-05T10:48:37.040Z"
+    },
+    "create-technical-spike": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/github/awesome-copilot.git",
+      "skillPath": "skills/create-technical-spike/SKILL.md",
+      "skillFolderHash": "65f850071712386064b40c0bddef0e06c922604d",
+      "installedAt": "2026-07-06T18:25:15.917Z",
+      "updatedAt": "2026-07-06T18:25:15.917Z"
+    },
+    "code-simplifier": {
+      "source": "pproenca/dot-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/pproenca/dot-skills.git",
+      "skillPath": "skills/.curated/code-simplifier/SKILL.md",
+      "skillFolderHash": "3cfb1fcf0d73f2e6fa95d33f0dd012274f2cae6b",
+      "installedAt": "2026-07-07T15:19:39.691Z",
+      "updatedAt": "2026-07-07T15:19:39.691Z"
     }
   },
   "dismissed": {

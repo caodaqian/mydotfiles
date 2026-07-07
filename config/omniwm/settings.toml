@@ -105,11 +105,14 @@ enabled = true
 height = 32.0
 hideEmptyWorkspaces = true
 labelFontSize = 12.0
+notchActiveZoneWidth = 180.0
 notchAware = true
+notchMode = "moveBelowMenuBar"
 position = "overlappingMenuBar"
 reserveLayoutSpace = false
 showFloatingWindows = true
 showLabels = true
+systemStatsButton = false
 windowLevel = "popup"
 xOffset = -210.0
 yOffset = 40.0
@@ -202,7 +205,6 @@ minWidth = 660.0
 bundleId = "org.yuanli.utools"
 id = "2BC93E3C-B44C-4AAB-AC41-6965C098BB37"
 layout = "float"
-titleRegex = "(AI|JSON|Notion|Task)"
 
 [[hotkeys]]
 binding = "Option+Shift+1"
@@ -629,7 +631,7 @@ binding = "Unassigned"
 id = "cycleWindowHeightBackward"
 
 [[hotkeys]]
-binding = "Option+Shift+F"
+binding = "Unassigned"
 id = "toggleColumnFullWidth"
 
 [[hotkeys]]
@@ -787,6 +789,10 @@ id = "toggleWorkspaceLayout"
 [[hotkeys]]
 binding = "Option+Shift+M"
 id = "toggleOverview"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleSystemStats"
 
 [[monitorBarOverrides]]
 deduplicateAppIcons = false
