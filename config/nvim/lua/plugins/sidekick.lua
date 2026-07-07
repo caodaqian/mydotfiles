@@ -12,12 +12,6 @@ return {
 			},
 		},
 		opts = {
-			cli = {
-				tools = {
-					cline = { cmd = { "cline", "--tui" } },
-					kilo = { cmd = { "kilo" } },
-				},
-			},
 			copilot = {
 				status = {
 					level = vim.log.levels.OFF,

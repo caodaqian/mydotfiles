@@ -50,10 +50,17 @@ export GOTMPDIR=${MYTMPDIR}/go && [ ! -d "${GOTMPDIR}" ] && mkdir -p "${GOTMPDIR
 export PATH=${GOBIN}:${PATH}
 
 ## JAVA env
-export JAVA_HOME=${JAVA_HOME:-"$(brew --prefix openjdk)"}
+if [[ -d "/opt/homebrew/opt/openjdk" ]]; then
+	export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+elif [[ -d "/usr/local/opt/openjdk" ]]; then
+	export JAVA_HOME="/usr/local/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+elif [[ -d "/home/linuxbrew/.linuxbrew/opt/openjdk" ]]; then
+	## linuxbrew
+	export JAVA_HOME="/home/linuxbrew/.linuxbrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+fi
 export JRE_HOME=${JRE_HOME:-"$JAVA_HOME/jre"}
 export CLASSPATH=.:$JAVA_HOME/lib:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
-export PATH=${JAVA_HOME}/bin:${PATH}
+[[ -n "${JAVA_HOME:-}" ]] && export PATH=${JAVA_HOME}/bin:${PATH}
 
 ## node config
 export NODE_HOME=${NODE_HOME:-"${HOME}/.local/shard/nodejs"}

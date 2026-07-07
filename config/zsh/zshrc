@@ -6,6 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 # p10k instant prompt
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+typeset -g POWERLEVEL9K_VCS_DISABLED_WORKDIRS="~" # 忽略主目录仓库
 
 ZSH_DISABLE_COMPFIX=true
 
@@ -22,7 +23,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # zsh features switch
-DISABLE_AUTO_UDPATE=true
+DISABLE_AUTO_UPDATE=true
 HIST_STAMPS="yyyy-mm-dd"
 setopt AUTO_CD
 setopt AUTO_PUSHD

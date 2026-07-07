@@ -1,5 +1,5 @@
 if [ -n "$(fastfetch --version 2>/dev/null)" ]; then
-	fastfetch
+	fastfetch --pipe false
 elif [ -n "$(cowsay --version 2>/dev/null)" ]; then
 	cowsay -b "Hi, ${USER}"
 fi
