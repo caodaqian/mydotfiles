@@ -16,9 +16,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "eb6a23305aea6e340d14b9de3766e721f9f4861b",
+      "skillFolderHash": "76a98a285cb0434f3d39e1a873823556330e398b",
       "installedAt": "2026-04-06T08:15:15.537Z",
-      "updatedAt": "2026-06-30T16:58:01.493Z"
+      "updatedAt": "2026-07-12T15:18:24.380Z"
     },
     "ckm:banner-design": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -153,7 +153,7 @@
       "skillPath": ".claude/skills/design-system/SKILL.md",
       "skillFolderHash": "5d99b8b98eb93cc2641adc1a4d8c243a5e928ea0",
       "installedAt": "2026-07-05T10:24:26.818Z",
-      "updatedAt": "2026-07-05T10:48:23.557Z"
+      "updatedAt": "2026-07-12T15:18:44.249Z"
     },
     "ui-styling": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -162,7 +162,7 @@
       "skillPath": ".claude/skills/ui-styling/SKILL.md",
       "skillFolderHash": "c198f4241c6ec9d890b5721beca86e8a08bdc85a",
       "installedAt": "2026-07-05T10:25:13.743Z",
-      "updatedAt": "2026-07-05T10:48:57.787Z"
+      "updatedAt": "2026-07-12T15:18:55.329Z"
     },
     "frontend-design": {
       "source": "anthropics/skills",
@@ -181,7 +181,7 @@
       "skillPath": ".claude/skills/banner-design/SKILL.md",
       "skillFolderHash": "0179fd7d727a3d879c2ec7aa0f70bd1c185ecb6f",
       "installedAt": "2026-07-05T10:46:53.788Z",
-      "updatedAt": "2026-07-05T10:46:53.788Z"
+      "updatedAt": "2026-07-12T15:18:29.552Z"
     },
     "brand": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -190,7 +190,7 @@
       "skillPath": ".claude/skills/brand/SKILL.md",
       "skillFolderHash": "0c2f743227597102bdf19ac5a1c00ba26e468b3a",
       "installedAt": "2026-07-05T10:47:44.127Z",
-      "updatedAt": "2026-07-05T10:47:44.127Z"
+      "updatedAt": "2026-07-12T15:18:34.354Z"
     },
     "design": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -199,7 +199,7 @@
       "skillPath": ".claude/skills/design/SKILL.md",
       "skillFolderHash": "689cab29fd6da6519250c79568b725365d7027cb",
       "installedAt": "2026-07-05T10:48:09.186Z",
-      "updatedAt": "2026-07-05T10:48:09.186Z"
+      "updatedAt": "2026-07-12T15:18:39.555Z"
     },
     "slides": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -208,7 +208,7 @@
       "skillPath": ".claude/skills/slides/SKILL.md",
       "skillFolderHash": "3180dd950c35d627d7f4e770cc96d6267d6cf257",
       "installedAt": "2026-07-05T10:48:37.040Z",
-      "updatedAt": "2026-07-05T10:48:37.040Z"
+      "updatedAt": "2026-07-12T15:18:48.952Z"
     },
     "create-technical-spike": {
       "source": "github/awesome-copilot",

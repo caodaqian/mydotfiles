@@ -1,3 +1,4 @@
+monitorBarOverrides = []
 monitorDwindleOverrides = []
 monitorGapOverrides = []
 monitorNiriOverrides = []
@@ -54,7 +55,6 @@ defaultLayoutType = "niri"
 hotkeysEnabled = true
 ipcEnabled = true
 preventSleepEnabled = false
-spacesTrackingEnabled = true
 systemHyperTrigger = "None"
 updateChecksEnabled = true
 
@@ -66,18 +66,27 @@ scrollEnabled = true
 scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
 trackpadScrollStyle = "snap"
+workspaceSwipeAxis = "vertical"
+workspaceSwipeEnabled = false
+workspaceSwipeFingerCount = 3
+
+[hiddenBar]
+enabled = false
+hiddenBundleIDs = []
+rehideIntervalSeconds = 5.0
 
 [mouseWarp]
+constrainToArrangement = false
 enabled = true
 margin = 1
 
 [niri]
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "onOverflow"
-columnWidthPresets = [0.66, 0.95, 1.0, 0.3]
+columnWidthPresets = [0.66, 0.88, 1.0]
 defaultColumnWidth = 0.7
 infiniteLoop = true
-maxVisibleColumns = 3
+maxVisibleColumns = 2
 singleWindowAspectRatio = "fill"
 
 [quakeTerminal]
@@ -99,23 +108,23 @@ showWorkspaceName = true
 useWorkspaceId = false
 
 [workspaceBar]
-backgroundOpacity = 0.05
-deduplicateAppIcons = true
+backgroundOpacity = 0.1
+deduplicateAppIcons = false
 enabled = true
-height = 32.0
+height = 38.0
 hideEmptyWorkspaces = true
-labelFontSize = 12.0
 notchActiveZoneWidth = 180.0
-notchAware = true
 notchMode = "moveBelowMenuBar"
 position = "overlappingMenuBar"
 reserveLayoutSpace = false
+revealHoldMilliseconds = 200.0
+revealModifier = "option"
 showFloatingWindows = true
 showLabels = true
-systemStatsButton = false
+systemStatsButton = true
 windowLevel = "popup"
-xOffset = -210.0
-yOffset = 40.0
+xOffset = 0.0
+yOffset = -100.0
 
 [[appRules]]
 bundleId = "com.openai.codex"
@@ -776,7 +785,7 @@ id = "toggleWorkspaceBarVisibility"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "toggleHiddenBar"
+id = "toggleHiddenBarPanel"
 
 [[hotkeys]]
 binding = "Unassigned"
@@ -793,14 +802,6 @@ id = "toggleOverview"
 [[hotkeys]]
 binding = "Unassigned"
 id = "toggleSystemStats"
-
-[[monitorBarOverrides]]
-deduplicateAppIcons = false
-id = "3FF0DF14-C1D8-4C5C-88FA-E427E6C6B792"
-monitorDisplayId = 2
-monitorName = "LS27A800U"
-xOffset = 0.0
-yOffset = 30.0
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
