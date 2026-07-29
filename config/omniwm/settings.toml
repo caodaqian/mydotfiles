@@ -25,15 +25,16 @@ maxItems = 200
 maxTotalBytes = 67108864
 
 [dwindle]
-defaultSplitRatio = 1.1
+defaultSplitRatio = 1.3
 moveToRootStable = true
 singleWindowAspectRatio = "fill"
-smartSplit = true
+singleWindowFit = "fill"
+smartSplit = false
 splitWidthMultiplier = 0.5
 useGlobalGaps = true
 
 [focus]
-crossesMonitorAtEdge = true
+crossesMonitorAtEdge = false
 followsMouse = false
 followsWindowToMonitor = true
 lockModifier = "off"
@@ -67,7 +68,7 @@ scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
 trackpadScrollStyle = "snap"
 workspaceSwipeAxis = "vertical"
-workspaceSwipeEnabled = false
+workspaceSwipeEnabled = true
 workspaceSwipeFingerCount = 3
 
 [hiddenBar]
@@ -84,10 +85,42 @@ margin = 1
 alwaysCenterSingleColumn = true
 centerFocusedColumn = "onOverflow"
 columnWidthPresets = [0.66, 0.88, 1.0]
+containerPrimarySpanPresets = [0.4, 0.6, 0.9, 1.0]
 defaultColumnWidth = 0.7
 infiniteLoop = true
 maxVisibleColumns = 2
 singleWindowAspectRatio = "fill"
+singleWindowFit = "fill"
+visibleContainerCount = 2
+
+[overview]
+zoom = 0.75
+
+[overview.backdrop]
+alpha = 1.0
+blue = 0.08
+green = 0.05
+red = 0.05
+
+[overview.windowBorders]
+
+[overview.windowBorders.hovered]
+alpha = 1.0
+blue = 1.0
+green = 0.6
+red = 0.4
+
+[overview.windowBorders.normal]
+alpha = 0.5
+blue = 0.35
+green = 0.3
+red = 0.3
+
+[overview.windowBorders.selected]
+alpha = 1.0
+blue = 0.4
+green = 0.8
+red = 0.3
 
 [quakeTerminal]
 animationDuration = 0.2
@@ -111,6 +144,7 @@ useWorkspaceId = false
 backgroundOpacity = 0.1
 deduplicateAppIcons = false
 enabled = true
+excludedBundleIDs = []
 height = 38.0
 hideEmptyWorkspaces = true
 notchActiveZoneWidth = 180.0
@@ -125,6 +159,8 @@ systemStatsButton = true
 windowLevel = "popup"
 xOffset = 0.0
 yOffset = -100.0
+
+[workspaceBar.iconOverrides]
 
 [[appRules]]
 bundleId = "com.openai.codex"
@@ -488,6 +524,14 @@ binding = "Control+Option+Shift+Right Arrow"
 id = "moveColumn.right"
 
 [[hotkeys]]
+binding = "Unassigned"
+id = "moveColumn.up"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "moveColumn.down"
+
+[[hotkeys]]
 binding = "Control+Option+Home"
 id = "moveColumnToFirst"
 
@@ -617,63 +661,63 @@ id = "moveColumnToIndex.9"
 
 [[hotkeys]]
 binding = "Option+Shift+Equal"
-id = "cycleColumnWidthForward"
+id = "cycleSizeForward"
 
 [[hotkeys]]
 binding = "Option+Shift+Minus"
-id = "cycleColumnWidthBackward"
+id = "cycleSizeBackward"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "cycleWindowWidthForward"
+id = "cycleWindowPrimarySpanForward"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "cycleWindowWidthBackward"
+id = "cycleWindowPrimarySpanBackward"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "cycleWindowHeightForward"
+id = "cycleWindowSecondarySpanForward"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "cycleWindowHeightBackward"
+id = "cycleWindowSecondarySpanBackward"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "toggleColumnFullWidth"
+binding = "Option+Shift+F"
+id = "toggleContainerFullPrimarySpan"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "expandColumnToAvailableWidth"
+binding = "Control+Option+F"
+id = "expandContainerToAvailablePrimarySpan"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "resetWindowHeight"
+binding = "Control+Option+R"
+id = "resetWindowSecondarySpan"
 
 [[hotkeys]]
 binding = "Option+Minus"
-id = "setColumnWidth.decrease10Percent"
+id = "setContainerPrimarySpan.decrease10Percent"
 
 [[hotkeys]]
 binding = "Option+Equal"
-id = "setColumnWidth.increase10Percent"
+id = "setContainerPrimarySpan.increase10Percent"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "setWindowWidth.decrease10Percent"
+id = "setWindowPrimarySpan.decrease10Percent"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "setWindowWidth.increase10Percent"
+id = "setWindowPrimarySpan.increase10Percent"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "setWindowHeight.decrease10Percent"
+id = "setWindowSecondarySpan.decrease10Percent"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "setWindowHeight.increase10Percent"
+id = "setWindowSecondarySpan.increase10Percent"
 
 [[hotkeys]]
 binding = "Option+Shift+B"
@@ -813,7 +857,7 @@ type = "main"
 
 [[workspaces]]
 id = "454CECD4-5E9D-4ED1-95D7-979D48817F5F"
-layoutType = "niri"
+layoutType = "default"
 name = "2"
 
 [workspaces.monitorAssignment]

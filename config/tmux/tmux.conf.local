@@ -470,11 +470,17 @@ tmux_conf_uninstall_plugins_on_reload=true
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
 
-# set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @continuum-save-interval '0'
 set -g @continuum-restore 'on'
-set -g @continuum-save-interval '90'
+# 覆盖 resurrect 默认的 Ctrl-s（全量保存）
+# 改为只保存当前 session
+bind-key C-s run-shell '~/.config/tmux/save-current-session.sh'
+
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-dir "${TMUX_TMPDIR}/resurrect"
+# 恢复时只重启这些安全的轻量程序
+set -g @resurrect-processes 'vim nvim less man tail ssh'
 set -g @resurrect-strategy-vim 'session'
 set -g @resurrect-strategy-nvim 'session'
 set -g @resurrect-capture-pane-contents 'on'
