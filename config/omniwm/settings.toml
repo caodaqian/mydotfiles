@@ -247,6 +247,14 @@ bundleId = "org.yuanli.utools"
 id = "2BC93E3C-B44C-4AAB-AC41-6965C098BB37"
 layout = "float"
 
+[[appRules]]
+assignToWorkspace = "4"
+axRole = "AXWindow"
+axSubrole = "AXStandardWindow"
+bundleId = "com.liguangming.Shadowrocket"
+id = "F2D86102-02A8-41AE-8650-DFF46954751A"
+layout = "float"
+
 [[hotkeys]]
 binding = "Option+Shift+1"
 id = "switchWorkspace.0"
