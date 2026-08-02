@@ -153,7 +153,7 @@
       "skillPath": ".claude/skills/design-system/SKILL.md",
       "skillFolderHash": "5d99b8b98eb93cc2641adc1a4d8c243a5e928ea0",
       "installedAt": "2026-07-05T10:24:26.818Z",
-      "updatedAt": "2026-07-29T16:44:54.895Z"
+      "updatedAt": "2026-08-02T16:05:28.946Z"
     },
     "ui-styling": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -162,7 +162,7 @@
       "skillPath": ".claude/skills/ui-styling/SKILL.md",
       "skillFolderHash": "15617234137a1eb459a3c752f6dbdf4227c2da8d",
       "installedAt": "2026-07-05T10:25:13.743Z",
-      "updatedAt": "2026-07-29T16:45:16.833Z"
+      "updatedAt": "2026-08-02T16:05:38.951Z"
     },
     "frontend-design": {
       "source": "anthropics/skills",
@@ -181,7 +181,7 @@
       "skillPath": ".claude/skills/banner-design/SKILL.md",
       "skillFolderHash": "0179fd7d727a3d879c2ec7aa0f70bd1c185ecb6f",
       "installedAt": "2026-07-05T10:46:53.788Z",
-      "updatedAt": "2026-07-29T16:44:32.414Z"
+      "updatedAt": "2026-08-02T16:05:13.740Z"
     },
     "brand": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -190,7 +190,7 @@
       "skillPath": ".claude/skills/brand/SKILL.md",
       "skillFolderHash": "0c2f743227597102bdf19ac5a1c00ba26e468b3a",
       "installedAt": "2026-07-05T10:47:44.127Z",
-      "updatedAt": "2026-07-29T16:44:40.644Z"
+      "updatedAt": "2026-08-02T16:05:20.151Z"
     },
     "design": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -199,7 +199,7 @@
       "skillPath": ".claude/skills/design/SKILL.md",
       "skillFolderHash": "689cab29fd6da6519250c79568b725365d7027cb",
       "installedAt": "2026-07-05T10:48:09.186Z",
-      "updatedAt": "2026-07-29T16:44:47.928Z"
+      "updatedAt": "2026-08-02T16:05:24.664Z"
     },
     "slides": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
@@ -208,7 +208,7 @@
       "skillPath": ".claude/skills/slides/SKILL.md",
       "skillFolderHash": "3180dd950c35d627d7f4e770cc96d6267d6cf257",
       "installedAt": "2026-07-05T10:48:37.040Z",
-      "updatedAt": "2026-07-29T16:45:02.085Z"
+      "updatedAt": "2026-08-02T16:05:34.141Z"
     },
     "create-technical-spike": {
       "source": "github/awesome-copilot",
