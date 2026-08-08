@@ -53,12 +53,12 @@ plugins=(
 	git
 	sudo
 	tmux
-	shell-proxy
 	fzf
-	copybuffer
 	copyfile
 	copypath
 	python
+	uv
+	alias-finder
 	#### from github
 	git-open
 	fzf-tab
@@ -114,6 +114,9 @@ zstyle ':fzf-tab:*' show-group
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# alias-finder: auto suggest shorter aliases when command runs
+zstyle ':omz:plugins:alias-finder' autoload yes
 
 ######################### plugin settings ########################
 source $ZSH/oh-my-zsh.sh

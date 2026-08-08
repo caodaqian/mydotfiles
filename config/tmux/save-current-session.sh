@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 # 保存当前 session 到独立快照目录
 # 用法：在 tmux 内 prefix + 自定义快捷键触发
+# 遵循 tmux-resurrect 的恢复目录优先级
 
-SAVE_DIR="${HOME}/.local/share/tmux/sessions"
+# 1) 优先使用 tmux-resurrect 的配置值
+SAVE_DIR="$(tmux show -gqv @resurrect-dir 2>/dev/null)"
+
+# 2) 回退到 tmux-resurrect 常见默认目录
+if [[ -z "$SAVE_DIR" ]]; then
+	SAVE_DIR="${TMUX_TMPDIR:-$HOME/.tmux}/resurrect"
+fi
+
 mkdir -p "$SAVE_DIR"
 
 CURRENT_SESSION="$(tmux display-message -p '#S')"
