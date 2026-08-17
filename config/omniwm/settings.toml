@@ -489,14 +489,6 @@ id = "moveWindowUpOrToWorkspaceUp"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "consumeOrExpelWindowLeft"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "consumeOrExpelWindowRight"
-
-[[hotkeys]]
-binding = "Unassigned"
 id = "consumeWindowIntoColumn"
 
 [[hotkeys]]
@@ -776,36 +768,20 @@ binding = "Unassigned"
 id = "swapSplit"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "resizeGrow.left"
-
-[[hotkeys]]
 binding = "Option+Shift+Quote"
-id = "resizeGrow.right"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "resizeGrow.up"
+id = "resizeGrow.horizontal"
 
 [[hotkeys]]
 binding = "Option+Shift+Semicolon"
-id = "resizeGrow.down"
+id = "resizeGrow.vertical"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "resizeShrink.left"
+id = "resizeShrink.horizontal"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "resizeShrink.right"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "resizeShrink.up"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "resizeShrink.down"
+id = "resizeShrink.vertical"
 
 [[hotkeys]]
 binding = "Unassigned"
