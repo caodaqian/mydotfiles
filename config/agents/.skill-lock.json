@@ -83,15 +83,6 @@
       "installedAt": "2026-04-06T08:21:52.343Z",
       "updatedAt": "2026-08-15T17:33:50.950Z"
     },
-    "subagent-driven-development": {
-      "source": "obra/superpowers",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/obra/superpowers.git",
-      "skillPath": "skills/subagent-driven-development/SKILL.md",
-      "skillFolderHash": "8133f2b10d4e71e73d867f2e2e365e0778ff0e4e",
-      "installedAt": "2026-04-06T08:21:55.249Z",
-      "updatedAt": "2026-08-15T17:33:58.810Z"
-    },
     "systematic-debugging": {
       "source": "obra/superpowers",
       "sourceType": "github",
@@ -136,15 +127,6 @@
       "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
       "installedAt": "2026-06-30T17:16:33.350Z",
       "updatedAt": "2026-06-30T17:16:33.350Z"
-    },
-    "writing-plans": {
-      "source": "obra/superpowers",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/obra/superpowers.git",
-      "skillPath": "skills/writing-plans/SKILL.md",
-      "skillFolderHash": "e4d3c3faf3853a453016cece5de2ca0581807742",
-      "installedAt": "2026-06-30T17:32:52.425Z",
-      "updatedAt": "2026-08-15T17:34:04.906Z"
     },
     "frontend-design": {
       "source": "anthropics/skills",
