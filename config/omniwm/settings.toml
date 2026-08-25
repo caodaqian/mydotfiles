@@ -33,6 +33,7 @@ splitWidthMultiplier = 0.5
 useGlobalGaps = true
 
 [focus]
+raiseOnMouseFocus = true
 crossesMonitorAtEdge = false
 followsMouse = false
 followsWindowToMonitor = true
@@ -42,6 +43,7 @@ moveMouseToFocusedWindow = false
 
 [gaps]
 size = 2.0
+fullscreenUsesOuterGaps = false
 
 [gaps.outer]
 bottom = 2.0
