@@ -4,6 +4,7 @@ monitorGapOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
 monitorRoutingOverrides = []
+schemaVersion = 1
 
 [appearance]
 mode = "automatic"
@@ -33,17 +34,17 @@ splitWidthMultiplier = 0.5
 useGlobalGaps = true
 
 [focus]
-raiseOnMouseFocus = true
 crossesMonitorAtEdge = false
 followsMouse = false
 followsWindowToMonitor = true
 lockModifier = "off"
 moveCrossesMonitorAtEdge = true
 moveMouseToFocusedWindow = false
+raiseOnMouseFocus = true
 
 [gaps]
-size = 2.0
 fullscreenUsesOuterGaps = false
+size = 2.0
 
 [gaps.outer]
 bottom = 2.0
@@ -137,6 +138,10 @@ widthPercent = 50.0
 [routing]
 mode = "macOS"
 
+[scratchpads]
+
+[scratchpads.labels]
+
 [statusBar]
 showAppNames = false
 showWorkspaceName = true
@@ -149,6 +154,7 @@ enabled = true
 excludedBundleIDs = []
 height = 38.0
 hideEmptyWorkspaces = true
+hideInNativeFullscreen = false
 notchActiveZoneWidth = 180.0
 notchMode = "moveBelowMenuBar"
 position = "overlappingMenuBar"
@@ -260,6 +266,86 @@ axSubrole = "AXStandardWindow"
 bundleId = "com.liguangming.Shadowrocket"
 id = "F2D86102-02A8-41AE-8650-DFF46954751A"
 layout = "float"
+
+[[hotkeys]]
+binding = "Option+Shift+S"
+id = "toggleScratchpad.1"
+
+[[hotkeys]]
+binding = "Control+Option+Shift+S"
+id = "assignFocusedWindowToScratchpad.1"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.2"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.2"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.3"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.3"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.4"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.4"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.5"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.5"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.6"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.6"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.7"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.7"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.10"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.10"
 
 [[hotkeys]]
 binding = "Option+Shift+1"
@@ -831,14 +917,6 @@ id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]
 binding = "Unassigned"
-id = "assignFocusedWindowToScratchpad"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "toggleScratchpadWindow"
-
-[[hotkeys]]
-binding = "Unassigned"
 id = "openMenuAnywhere"
 
 [[hotkeys]]
@@ -867,7 +945,7 @@ id = "toggleSystemStats"
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
-layoutType = "default"
+layoutType = "niri"
 name = "1"
 
 [workspaces.monitorAssignment]
