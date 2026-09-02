@@ -13,7 +13,7 @@ fi
 alias diff='diff -aNur'
 
 ## bat
-alias cat='bat --paging=never'
+alias cat='bat --paging=never -p'
 alias less='bat'
 
 ## bottom
