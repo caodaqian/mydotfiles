@@ -1,0 +1,77 @@
+# Herdr 0.9.x baseline migrated from ~/.config/tmux/tmux.conf.local.
+#
+# This is an additive trial configuration: it deliberately does not attempt
+# to import tmux sessions or reproduce the TPM/oh-my-tmux plugin ecosystem.
+# Copy this file to ~/.config/herdr/config.toml after backing up the current
+# file, then run: herdr config check
+
+onboarding = false
+
+[theme]
+# Herdr has Catppuccin and Catppuccin Latte presets, but no separate
+# Macchiato preset. Keep the native dark Catppuccin theme and carry over the
+# old Macchiato active-border accent.
+name = "catppuccin"
+
+[theme.custom]
+accent = "#8aadf4"
+
+[terminal]
+# Keep the host's login-shell behavior on macOS, and create tabs/panes in the
+# active pane or workspace directory, like the current tmux configuration.
+shell_mode = "auto"
+new_cwd = "follow"
+
+[keys]
+# Preserve the existing tmux muscle memory. Press Ctrl-A twice to send Ctrl-A
+# through to the current terminal, just as tmux does.
+prefix = "ctrl+a"
+
+[ui]
+# Match the top status line and slim tmux-style split separators. Herdr's
+# sidebar is intentionally retained: it is where agent state adds value.
+tab_bar_position = "top"
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "hostname" },
+  { type = "datetime", format = "%Y-%m-%d %H:%M" },
+]
+tab_bar_right_separator = " │ "
+window_title = "{hostname} ❐ {workspace} ● {tab}"
+status_indicators = "symbols"
+agent_panel_sort = "spaces"
+sidebar_width = 28
+mouse_capture = true
+copy_on_select = true
+pane_borders = "auto"
+pane_outer_borders = false
+pane_gaps = false
+pane_scrollbars = false
+show_agent_labels_on_pane_borders = true
+
+[ui.toast]
+# Retain the existing trial behavior; inactive Agent panes can notify the
+# terminal when they finish or need attention.
+delivery = "terminal"
+delay_seconds = 1
+
+[session]
+# Enables native conversation resume after server restart for Agent panes that
+# have an official Herdr integration, including Codex when installed.
+resume_agents_on_restore = true
+
+[experimental]
+# Do not persist pane screen contents by default. This avoids storing prompts,
+# command output, tokens, or secrets in ~/.config/herdr/session-history.json.
+pane_history = false
+
+# Optional macOS IME fixes. Enable only if you encounter either condition.
+# reveal_hidden_cursor_for_cjk_ime = true
+# cjk_ime_agents = ["codex"]
+# switch_ascii_input_source_in_prefix = true
+
+[advanced]
+# Herdr's retained per-pane history. The current tmux config uses 10,000 lines;
+# byte-based retention is the Herdr equivalent and its documented default.
+scrollback_limit_bytes = 10000000
+
