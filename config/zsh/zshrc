@@ -58,12 +58,12 @@ plugins=(
 	copypath
 	python
 	uv
+	zsh-autosuggestions
+	zsh-syntax-highlighting
 	#### from github
 	git-open
 	fzf-tab
 	fzf-tab-source
-	zsh-autosuggestions
-	zsh-syntax-highlighting
 	autoupdate ## auto update custom plugin
 )
 
