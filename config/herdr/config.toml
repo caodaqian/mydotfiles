@@ -12,9 +12,11 @@ onboarding = false
 # Macchiato preset. Keep the native dark Catppuccin theme and carry over the
 # old Macchiato active-border accent.
 name = "catppuccin"
-
+auto_switch = true
+light_name = "catppuccin-latte"
+dark_name = "catppuccin"
 [theme.custom]
-accent = "#8aadf4"
+sidebar_bg = "#181825"
 
 [terminal]
 # Keep the host's login-shell behavior on macOS, and create tabs/panes in the
@@ -26,15 +28,21 @@ new_cwd = "follow"
 # Preserve the existing tmux muscle memory. Press Ctrl-A twice to send Ctrl-A
 # through to the current terminal, just as tmux does.
 prefix = "ctrl+a"
+split_vertical = "prefix+|"
+split_horizontal = "prefix+-"
+resize_pane_left = "prefix+shift+left"
+resize_pane_right = "prefix+shift+right"
+resize_pane_up = "prefix+shift+up"
+resize_pane_down = "prefix+shift+down"
 
 [ui]
 # Match the top status line and slim tmux-style split separators. Herdr's
 # sidebar is intentionally retained: it is where agent state adds value.
 tab_bar_position = "top"
 tab_bar_right = [
-  { type = "zoom" },
-  { type = "hostname" },
-  { type = "datetime", format = "%Y-%m-%d %H:%M" },
+	{ type = "zoom" },
+	{ type = "hostname" },
+	{ type = "datetime", format = "%Y-%m-%d %H:%M" },
 ]
 tab_bar_right_separator = " │ "
 window_title = "{hostname} ❐ {workspace} ● {tab}"
@@ -74,4 +82,3 @@ pane_history = false
 # Herdr's retained per-pane history. The current tmux config uses 10,000 lines;
 # byte-based retention is the Herdr equivalent and its documented default.
 scrollback_limit_bytes = 10000000
-

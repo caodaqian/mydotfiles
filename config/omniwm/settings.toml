@@ -7,16 +7,38 @@ schemaVersion = 3
 
 [appearance]
 mode = "automatic"
+tabRailAppIcons = false
 
 [borders]
-enabled = false
-width = 1.5
+enabled = true
+width = 1.0
 
 [borders.color]
 alpha = 1.0
 blue = 0.0
 green = 0.9574088454246521
 red = 0.8668023943901062
+
+[borders.glow]
+enabled = true
+opacity = 0.4
+radius = 3.0
+
+[borders.gradient]
+direction = "topRightToBottomLeft"
+enabled = true
+
+[borders.gradient.end]
+alpha = 1.0
+blue = 0.7
+green = 1.0
+red = 0.0
+
+[borders.gradient.start]
+alpha = 1.0
+blue = 1.0
+green = 0.4
+red = 0.0
 
 [clipboard]
 historyEnabled = false
@@ -66,10 +88,17 @@ fingerCount = 3
 invertDirection = true
 mouseMoveModifierKey = "option"
 mouseResizeModifierKey = "option"
+overviewGestureEnabled = true
+overviewGestureFingerCount = 4
 scrollEnabled = true
 scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
 trackpadScrollStyle = "snap"
+windowGestureSensitivity = 1.0
+windowMoveEnabled = false
+windowMoveFingerCount = 3
+windowResizeEnabled = false
+windowResizeFingerCount = 3
 workspaceSwipeAxis = "vertical"
 workspaceSwipeEnabled = true
 workspaceSwipeFingerCount = 3
@@ -94,6 +123,9 @@ singleWindowFit = "fill"
 visibleContainerCount = 2
 
 [overview]
+invertScrollDirection = false
+matchFocusBorder = true
+mouseScrollSpeed = 1.0
 zoom = 0.75
 
 [overview.backdrop]
@@ -161,9 +193,13 @@ position = "overlappingMenuBar"
 reserveLayoutSpace = false
 revealHoldMilliseconds = 200.0
 revealModifier = "option"
+showAccentHighlights = true
 showFloatingWindows = true
+showItemBackgrounds = true
 showLabels = true
+solidBlackBackground = false
 systemStatsButton = true
+transparentBackground = false
 windowLevel = "popup"
 xOffset = 0.0
 yOffset = -100.0
