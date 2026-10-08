@@ -3,7 +3,7 @@ monitorDwindleOverrides = []
 monitorGapOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
-schemaVersion = 3
+schemaVersion = 4
 
 [appearance]
 mode = "automatic"
@@ -42,6 +42,7 @@ red = 0.0
 
 [clipboard]
 historyEnabled = false
+ignoredTypes = []
 maxItemBytes = 8388608
 maxItems = 200
 maxTotalBytes = 67108864
@@ -74,6 +75,7 @@ right = 1.0
 top = 1.0
 
 [general]
+animationSpeed = 1.0
 animationsEnabled = true
 defaultLayoutType = "niri"
 hotkeysEnabled = true
@@ -98,7 +100,7 @@ windowGestureSensitivity = 1.0
 windowMoveEnabled = false
 windowMoveFingerCount = 3
 windowResizeEnabled = false
-windowResizeFingerCount = 3
+windowResizeFingerCount = 4
 workspaceSwipeAxis = "vertical"
 workspaceSwipeEnabled = true
 workspaceSwipeFingerCount = 3
@@ -118,11 +120,14 @@ alwaysCenterSingleColumn = true
 centerFocusedColumn = "never"
 containerPrimarySpanPresets = [0.4, 0.6, 0.9, 1.0]
 defaultContainerPrimarySpan = 0.7
+edgeGaps = true
 infiniteLoop = true
+resizeStepPercent = 5
 singleWindowFit = "fill"
 visibleContainerCount = 2
 
 [overview]
+enabled = true
 invertScrollDirection = false
 matchFocusBorder = true
 mouseScrollSpeed = 1.0
@@ -176,10 +181,14 @@ mode = "macOS"
 
 [statusBar]
 showAppNames = false
+showIcon = true
 showWorkspaceName = true
 useWorkspaceId = false
 
 [workspaceBar]
+autoHide = false
+autoHideHideDelayMilliseconds = 0.0
+autoHideRevealDelayMilliseconds = 0.0
 backgroundOpacity = 0.1
 deduplicateAppIcons = false
 enabled = true
@@ -187,8 +196,11 @@ excludedBundleIDs = []
 height = 38.0
 hideEmptyWorkspaces = true
 hideInNativeFullscreen = false
+hoverPreviewsEnabled = true
 notchActiveZoneWidth = 180.0
 notchMode = "moveBelowMenuBar"
+notificationBadgeRefreshIntervalSeconds = 5.0
+notificationBadges = "off"
 position = "overlappingMenuBar"
 reserveLayoutSpace = false
 revealHoldMilliseconds = 200.0
@@ -1017,6 +1029,10 @@ id = "raiseAllFloatingWindows"
 
 [[hotkeys]]
 binding = "Unassigned"
+id = "toggleFloatingFocus"
+
+[[hotkeys]]
+binding = "Unassigned"
 id = "rescueOffscreenWindows"
 
 [[hotkeys]]
@@ -1030,6 +1046,14 @@ id = "closeFocusedWindow"
 [[hotkeys]]
 binding = "Unassigned"
 id = "openMenuAnywhere"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "setWindowMark"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "removeWindowMark"
 
 [[hotkeys]]
 binding = "Unassigned"
@@ -1065,7 +1089,7 @@ type = "main"
 
 [[workspaces]]
 id = "454CECD4-5E9D-4ED1-95D7-979D48817F5F"
-layoutType = "default"
+layoutType = "dwindle"
 name = "2"
 
 [workspaces.monitorAssignment]

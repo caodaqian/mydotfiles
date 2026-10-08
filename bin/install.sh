@@ -12,7 +12,7 @@ function main() {
 		link \
 		zsh \
 		yazi \
-		tmux \
+		herdr \
 		top \
 		xrc \
 	)
@@ -34,7 +34,7 @@ function main() {
 
 # install dependences software
 function brew_install() {
-	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs tmux dust duf tldr eza lazygit gping fzf neovim pipx bottom uv cowsay fastfetch bat)
+	sofrware_list=(rg gnu-sed git curl gcc cmake nodejs herdr dust duf tldr eza lazygit gping fzf neovim pipx bottom uv cowsay fastfetch bat)
 	brew install ${sofrware_list[*]}
 
 	### install fzf-git
@@ -92,19 +92,14 @@ function zsh_install() {
 	info "link zshrc to ~/.zshrc"
 }
 
-# install tmux config
-function tmux_install() {
-	if [ -z "$(tmux -V 2>/dev/null)" ]; then
-		warn "must install tmux firstly"
-		exit 1
-	elif [ ! -d "$HOME/.config/.tmux" ]; then
-		clone_repo ohmytmux "https://github.com/gpakosz/.tmux.git"
-		ln -svf "${TMUX_INSATLL_PATH:=${HOME}/Github/ohmytmux}/.tmux.conf" "${HOME}/.config/tmux/tmux.conf"
-		info "install oh-my-tmux success"
-	fi
+# install herdr config
+function herdr_install() {
+	# link config
+	[ ! -L "${HOME}/.config/herdr" ] && ln -svf "${WORKDIR}/config/herdr" "${HOME}/.config/herdr"
 
-	## tmux plugin dependencies
-	brew install yq ## tmux status line window rename
+	# install plugin
+	herdr plugin install hhdebb/herdr-radar
+	herdr plugin action invoke hhdebb.herdr-radar.state-start
 }
 
 # install top config

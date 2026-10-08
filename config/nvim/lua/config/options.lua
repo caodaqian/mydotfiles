@@ -4,13 +4,12 @@
 local options = {
 	-- basic config
 	autochdir = true,
-	backup = false, -- creates a backup file
+	backup = false, -- no backup file
 	clipboard = "unnamedplus", -- use system clipboard
 	cmdheight = 1, -- keep status bar position close to bottom
 	compatible = false, -- no compatible
 	encoding = "utf-8",
 	expandtab = false, -- disable convert tabs to spaces
-	fileencoding = "utf-8", -- the encoding written to a file
 	history = 88, -- history number
 	scrolloff = 8, -- keep 8 height offset from above and bottom
 	shiftwidth = 8, -- the number of spaces inserted for each indentation
