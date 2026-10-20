@@ -117,9 +117,8 @@ margin = 1
 
 [niri]
 alwaysCenterSingleColumn = true
-centerFocusedColumn = "never"
+centerFocusedColumn = "onOverflow"
 containerPrimarySpanPresets = [0.4, 0.6, 0.9, 1.0]
-defaultContainerPrimarySpan = 0.7
 edgeGaps = true
 infiniteLoop = true
 resizeStepPercent = 5
@@ -186,7 +185,7 @@ showWorkspaceName = true
 useWorkspaceId = false
 
 [workspaceBar]
-autoHide = false
+autoHide = true
 autoHideHideDelayMilliseconds = 0.0
 autoHideRevealDelayMilliseconds = 0.0
 backgroundOpacity = 0.1
@@ -1081,7 +1080,7 @@ id = "toggleSystemStats"
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
-layoutType = "niri"
+layoutType = "default"
 name = "1"
 
 [workspaces.monitorAssignment]
@@ -1089,7 +1088,7 @@ type = "main"
 
 [[workspaces]]
 id = "454CECD4-5E9D-4ED1-95D7-979D48817F5F"
-layoutType = "dwindle"
+layoutType = "default"
 name = "2"
 
 [workspaces.monitorAssignment]
