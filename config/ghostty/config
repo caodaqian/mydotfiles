@@ -1,0 +1,44 @@
+# Migrated from WezTerm on macOS. Existing Ghostty Herdr mappings preserved.
+
+# >>> herdr-radar font block
+font-codepoint-map = U+E1A0-U+E1B7=Herdr Agent Icons Max
+font-codepoint-map = U+E1C0-U+E1C5=Herdr Agent Icons Max
+# <<< herdr-radar font block
+
+# Fonts, appearance, and window size
+font-family = "Maple Mono NF CN"
+font-size = 16
+# Match WezTerm's line_height = 1.2.
+adjust-cell-height = 20%
+font-feature = -calt,-clig,-liga
+
+# Match WezTerm's selected theme and transparency.
+theme = Catppuccin Macchiato
+background-opacity = 0.95
+background-opacity-cells = true
+window-padding-x = 2
+window-padding-y = 2
+window-width = 160
+window-height = 42
+
+# macOS GUI launch behavior and the current login shell
+shell-integration = zsh
+working-directory = home
+macos-option-as-alt = left
+# Avoid automatic Secure Input interfering with OmniWM's global hotkeys.
+# Sensitive input can still use Ghostty > Secure Keyboard Entry manually.
+macos-auto-secure-input = false
+
+# WezTerm key bindings that have direct Ghostty equivalents
+keybind = super+ctrl+f=toggle_fullscreen
+# Keep the native Cmd+Option+I inspector binding; Ctrl+L belongs to shell/LazyVim.
+keybind = super+a>shift+backslash=new_split:right
+keybind = super+a>minus=new_split:down
+# Use Ghostty's native resize chords; Option+Shift+arrows are used by OmniWM.
+keybind = super+ctrl+left=resize_split:left,50
+keybind = super+ctrl+down=resize_split:down,50
+keybind = super+ctrl+up=resize_split:up,50
+keybind = super+ctrl+right=resize_split:right,50
+
+# WezTerm's right-click paste behavior
+right-click-action = paste
