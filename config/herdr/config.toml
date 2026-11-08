@@ -32,6 +32,10 @@ resize_pane_left = "prefix+shift+left"
 resize_pane_right = "prefix+shift+right"
 resize_pane_up = "prefix+shift+up"
 resize_pane_down = "prefix+shift+down"
+focus_pane_left = ["prefix+h", "ctrl+alt+h"]
+focus_pane_down = ["prefix+j", "ctrl+alt+j"]
+focus_pane_up = ["prefix+k", "ctrl+alt+k"]
+focus_pane_right = ["prefix+l", "ctrl+alt+l"]
 
 [ui]
 
@@ -41,7 +45,7 @@ tab_bar_right = [
 	{ type = "zoom" },
 	{ type = "hostname" },
 	{ type = "datetime", format = "%Y-%m-%d %H:%M" },
-	{ type = 'command', command = 'cat "/Users/caodaqian/.local/state/herdr/plugins/hhdebb.herdr-radar/tabbar.txt"', interval_seconds = 6, timeout_seconds = 2 },
+	{ type = 'command', command = 'cat "$HOME/.local/state/herdr/plugins/hhdebb.herdr-radar/tabbar.txt"', interval_seconds = 6, timeout_seconds = 2 },
 ]
 # <<< herdr-radar tab-bar block
 
