@@ -197,12 +197,12 @@ autoHide = false
 backgroundBlurRadius = 0
 backgroundEffect = "glassClear"
 enabled = true
-heightPercent = 60.0
+heightPercent = 70.0
 monitorMode = "focusedWindow"
 opacity = 0.75
 position = "center"
 provider = "ghostty"
-widthPercent = 60.0
+widthPercent = 50.0
 
 [routing]
 arrangements = []
@@ -372,6 +372,13 @@ axSubrole = "AXStandardWindow"
 bundleId = "com.liguangming.Shadowrocket"
 id = "F2D86102-02A8-41AE-8650-DFF46954751A"
 layout = "float"
+
+[[appRules]]
+axRole = "AXWindow"
+axSubrole = "AXStandardWindow"
+bundleId = "com.mitchellh.ghostty"
+id = "EB1CF533-50B7-41C8-B0C6-335946102A0D"
+initialContainerPrimarySpan = 0.6
 
 [[hotkeys]]
 binding = "Option+Shift+S"
